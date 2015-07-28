@@ -6,6 +6,18 @@ window.esdocSearchIndex = [
     "class"
   ],
   [
+    "template/src/lambdas/apples/index.js~handler",
+    "variable/index.html#static-variable-handler",
+    "<span>handler</span> <span class=\"search-result-import-path\">template/src/lambdas/apples/index.js</span>",
+    "variable"
+  ],
+  [
+    "template/src/lambdas/oranges/index.js~handler",
+    "variable/index.html#static-variable-handler",
+    "<span>handler</span> <span class=\"search-result-import-path\">template/src/lambdas/oranges/index.js</span>",
+    "variable"
+  ],
+  [
     "builtinexternal/ecmascriptexternal.js~array",
     "external/index.html",
     "BuiltinExternal/ECMAScriptExternal.js~Array",
@@ -330,6 +342,24 @@ window.esdocSearchIndex = [
     "external"
   ],
   [
+    "src/lambdas/apples/index.js",
+    "file/src/lambdas/apples/index.js.html",
+    "src/lambdas/apples/index.js",
+    "file"
+  ],
+  [
+    "src/lambdas/oranges/index.js",
+    "file/src/lambdas/oranges/index.js.html",
+    "src/lambdas/oranges/index.js",
+    "file"
+  ],
+  [
+    "src/lambdas/runner.js",
+    "file/src/lambdas/runner.js.html",
+    "src/lambdas/runner.js",
+    "file"
+  ],
+  [
     "src/lib/app.js",
     "file/src/lib/app.js.html",
     "src/lib/app.js",
@@ -342,9 +372,9 @@ window.esdocSearchIndex = [
     "method"
   ],
   [
-    "src/lib/app.js~app#test",
-    "class/src/lib/app.js~App.html#instance-method-test",
-    "src/lib/app.js~App#test",
+    "src/lib/app.js~app#runlambda",
+    "class/src/lib/app.js~App.html#instance-method-runLambda",
+    "src/lib/app.js~App#runLambda",
     "method"
   ],
   [

@@ -39,23 +39,52 @@
 
 
 
-
+<div data-ice="variableWrap">
+  <h2><a href="variable/">Variable</a></h2>
+  <ul>
+    
+  <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-handler">handler</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-handler">handler</a></span></li>
+</ul>
+</div>
 
 
 
 
 </nav>
 
-<div class="content" data-ice="content"><div data-ice="index"><h1 id="node-template-project">Node Template Project</h1>
-<p>A NodeJS template project built for ES2015 development.</p>
-<h2 id="components-">Components:</h2>
+<div class="content" data-ice="content"><div data-ice="index"><h1 id="gateway-lambda-dev-environment">Gateway + Lambda Dev Environment</h1>
+<p>This project establishes a mock of the workflow and components for creating
+projects utilizing API Gateway with Lambda functions.</p>
+<p>The core concept is to create a workflow which mimics any staging/production
+deploys while minimizing the need for any special flags or configurations. This
+is achieved by separating the Gateway as a (local) express service which triggers
+Lambdas to run as their own processes.</p>
+<h2 id="todo-s">TODO&apos;s</h2>
 <ul>
-<li><strong><a href="http://babeljs.io/">Babel</a></strong>: Code transpiler, see <code>/.babelrc</code> for config</li>
-<li><strong><a href="http://mochajs.org/">Mocha</a></strong>: Test runner</li>
-<li><strong><a href="http://chaijs.com/">Chai</a></strong>: Assertion library</li>
-<li><strong><a href="http://sinonjs.org/">Sinon</a></strong>: Stubbing and mocking, includes <code>sinon-chai</code> for assertions</li>
-<li><strong><a href="http://eslint.org/">ESLint</a></strong>: Linting, includes <code>babel-eslint</code> for ES2015 support</li>
-<li><strong><a href="https://esdoc.org/">ESDoc</a></strong>: JSDoc parser</li>
+<li>Expand console output to include memory for perf analysis</li>
+<li>Create Gateway config for mocking endpoints<ul>
+<li>Match Gateway conventions for consistency</li>
+<li>Modify express routing to respond to config</li>
+</ul>
+</li>
+<li>Mock integration tests</li>
+<li>Mock system tests</li>
+</ul>
+<h2 id="getting-started">Getting Started</h2>
+<p>Simply run <code>make</code> then <code>make dev</code>. To run interactive (auto-reload) run <code>make watch</code>.</p>
+<p>The repo comes with 2 lambdas which correspond to endpoints: <code>apples</code> and <code>oranges</code>.
+These can be tested by running <code>curl http://localhost:8181/api/apples</code> and will
+respond with the name of the lambda and the event object.</p>
+<p>Sending <code>POST</code> or <code>PUT</code> with <code>Content-Type: application/json</code> headers and a JSON
+body will include the params in the returned object.</p>
+<h2 id="testing">Testing</h2>
+<p>The workflow focuses on separation of testing into the three main components at
+distinct positions:</p>
+<ul>
+<li><strong>Unit</strong>: Testing of the individual Lambdas internal to the project</li>
+<li><strong>Integration</strong>: Testing the API with mock data and mock endpoints/lambdas</li>
+<li><strong>System</strong>: Testing the API via local DB and model endpoints</li>
 </ul>
 <h2 id="makefile-and-scripts">Makefile and Scripts</h2>
 <p>A <code>Makefile</code> is included for managing build and install tasks. The commands are
@@ -76,6 +105,7 @@ task method:</p>
 <li>the main script.</li>
 </ul>
 </li>
+<li><code>watch</code> will run the <code>dev</code> task and rerun on change of <code>/src</code> files</li>
 </ul>
 <p>Both <code>make {COMMAND}</code> and <code>npm run {COMMAND}</code> work for any of the above commands.</p>
 </div>
