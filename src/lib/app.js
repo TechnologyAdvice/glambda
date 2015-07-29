@@ -4,6 +4,7 @@ const bodyParser = require('body-parser')
 const fork = require('child_process').fork
 const path = require('path')
 const log = require('bristol')
+const _ = require('lodash')
 
 // Setup logs
 log.addTarget('console').withFormatter('human')
@@ -13,7 +14,13 @@ const runner = path.resolve('build/lib/runner')
 // Express setup
 const service = express()
 service.use(bodyParser.json())
-const port = process.env.PORT || 8181
+
+// Default config
+export let config = {
+  lambdas: './lambdas',
+  port: 8181,
+  log: true
+}
 
 /**
  * Handles response from forked lambda runner procs
@@ -23,7 +30,7 @@ const port = process.env.PORT || 8181
 export const procResponse = (msg, res) => {
   switch (msg.type) {
     case 'metric':
-      log.info(msg.output)
+      if (config.log) log.info(msg.output)
       break
     case 'success':
       res.status(200).send(msg.output)
@@ -57,13 +64,26 @@ const runLambda = (req, res, lambdas) => {
   proc.on('message', (msg) => procResponse(msg, res))
 }
 
+export const buildConfig = (cfg) => {
+  // Against defaults
+  _.extend(config, cfg)
+  // Against env vars
+  for (var prop in config) {
+    let envVar = process.env['GL_' + prop.toUpperCase()]
+    if (envVar) {
+      config[prop] = envVar
+    }
+  }
+}
+
 /**
  * Core app method, binds endpoints and starts listener
  * @param {Object} config Path to the lambdas directory
  */
-export const app = (config) => {
+export const app = (cfg) => {
+  buildConfig(cfg)
   service.all('/api/:endpoint', (req, res) => runLambda(req, res, config.lambdas))
-  service.listen(port, () => {
-    log.info(`Service running on ${config.port}`)
+  service.listen(config.port, () => {
+    if (config.log) log.info(`Service running on ${config.port}`)
   })
 }
