@@ -27,9 +27,8 @@
     "sinon-chai": "^2.8.0"
   },
   "dependencies": {
-    "bluebird": "^2.9.34",
     "body-parser": "^1.13.2",
-    "child-process-promise": "^1.1.0",
-    "express": "^4.13.1"
+    "bristol": "^0.3.2",
+    "express": "^4.13.1",
   }
 }
