@@ -2,6 +2,9 @@
 const express = require('express')
 const bodyParser = require('body-parser')
 const fork = require('child_process').fork
+const path = require('path')
+
+const runner = path.resolve('build/lib/runner')
 
 // Express setup
 const service = express()
@@ -35,7 +38,7 @@ export class App {
     // Custom stuff...
     evtBody.operation = req.method
     // Execute lambda
-    const proc = fork('build/lambdas/runner', [ lambda ], {
+    const proc = fork(runner, [ lambda ], {
       env: {
         mock: true,
         event: JSON.stringify(evtBody)
@@ -56,10 +59,6 @@ export class App {
           console.log(msg.output)
       }
     })
-  }
-
-  parseMessage () {
-    console.log('msg')
   }
 
 }
