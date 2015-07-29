@@ -36,17 +36,14 @@ const procResponse = (msg, res) => {
  * @param {String} lambdas Path to the lambdas directory
  */
 const runLambda = (req, res, lambdas) => {
-  const evtBody = req.body
+  const evt = req.body
   const lambda = req.params.endpoint
   // Custom stuff...
-  evtBody.operation = req.method
+  evt.operation = req.method
+  // Set event
+  const event = JSON.stringify(evt)
   // Execute lambda
-  const proc = fork(runner, [ lambda ], {
-    env: {
-      lambdas,
-      event: JSON.stringify(evtBody)
-    }
-  })
+  const proc = fork(runner, [ lambda ], { env: { lambdas, event } })
   // Print pid
   console.log(`PID ${proc.pid} running ${lambda}`)
   // Await proc
