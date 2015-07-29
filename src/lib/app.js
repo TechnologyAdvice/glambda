@@ -1,7 +1,7 @@
 // Deps
 const express = require('express')
 const bodyParser = require('body-parser')
-const exec = require('child_process').exec
+const fork = require('child_process').fork
 
 // Express setup
 const service = express()
@@ -35,7 +35,7 @@ export class App {
     // Custom stuff...
     evtBody.operation = req.method
     // Execute lambda
-    const proc = exec(`node build/lambdas/runner ${lambda}`, {
+    const proc = fork('build/lambdas/runner', [ lambda ], {
       env: {
         mock: true,
         event: JSON.stringify(evtBody)
@@ -44,8 +44,9 @@ export class App {
     // Print pid
     console.log(`PID ${proc.pid} running ${lambda}`)
     // Await proc
-    proc.stdout.on('data', (data) => res.status(200).send(data))
-    proc.stderr.on('data', (err) => res.status(500).send(err))
+    proc.on('message', (data) => {
+      res.status(200).send(data.output)
+    })
   }
 
 }
