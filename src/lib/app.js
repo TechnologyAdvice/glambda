@@ -31,6 +31,8 @@ export const procResponse = (msg, res) => {
     case 'error':
       res.status(500).send(msg.output)
       break
+    default:
+      log.error('Missing response type')
   }
 }
 
