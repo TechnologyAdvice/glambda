@@ -16,8 +16,8 @@ describe('app', () => {
     })
   })
 
-  describe('get', (done) => {
-    it('responds with the operation', () => {
+  describe('request', (done) => {
+    it('responds with the correct operation', () => {
       request(url)
         .get('test')
         .expect(200)
@@ -27,7 +27,22 @@ describe('app', () => {
           }
           res.body.should.have.property('operation')
           res.body.operation.should.equal('GET')
-          done()
+        })
+    })
+  })
+
+  describe('withPayload', (done) => {
+    it('responds with correct property value', () => {
+      request(url)
+        .post('test')
+        .send({ foo: 'bar' })
+        .expect(200)
+        .end((err, res) => {
+          if (err) {
+            throw err
+          }
+          res.body.should.have.property('foo')
+          res.body.foo.should.equal('bar')
         })
     })
   })
