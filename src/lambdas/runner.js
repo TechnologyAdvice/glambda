@@ -1,7 +1,7 @@
 /* eslint no-process-exit: 0 */
 const path = require('path')
 //const process = require('process')
-//const util = require('util')
+const util = require('util')
 const lambda = require(path.resolve(`./build/lambdas/${process.argv[2]}/index`))
 
 // Build context object for Lambda
@@ -15,13 +15,10 @@ const context = {
     context.done()
   },
   done: () => {
+    process.send({ output: util.inspect(process.memoryUsage()) })
     process.exit()
   }
 }
-
-//setInterval(() => process.send({ output: util.inspect(process.memoryUsage()) }), 1)
-
-//console.log(util.inspect(process.memoryUsage())
 
 // Call lambda's handler
 lambda.handler(JSON.parse(process.env.event), context)
