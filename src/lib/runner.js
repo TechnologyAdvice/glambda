@@ -1,8 +1,7 @@
 /* eslint no-process-exit: 0 */
-const path = require('path')
-//const process = require('process')
 const util = require('util')
-const lambda = require(path.resolve(`./build/lambdas/${process.argv[2]}/index`))
+const path = require('path')
+const lambda = require(path.resolve(`${process.env.lambdas}/${process.argv[2]}/index`))
 
 // Build context object for Lambda
 const context = {
