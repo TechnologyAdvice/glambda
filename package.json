@@ -29,6 +29,6 @@
   "dependencies": {
     "body-parser": "^1.13.2",
     "bristol": "^0.3.2",
-    "express": "^4.13.1",
+    "express": "^4.13.1"
   }
 }
