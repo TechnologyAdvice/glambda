@@ -1,0 +1,10 @@
+box: nodesource/trusty
+
+dev:
+  steps:
+    - make
+    - make start
+
+build:
+  steps:
+    - make
