@@ -59,12 +59,11 @@ const runLambda = (req, res, lambdas) => {
 
 /**
  * Core app method, binds endpoints and starts listener
- * @param {String} lambdas Path to the lambdas directory
- * @param {String} output Designates output type `console` or `response`
+ * @param {Object} config Path to the lambdas directory
  */
-export const app = (lambdas) => {
-  service.all('/api/:endpoint', (req, res) => runLambda(req, res, lambdas))
+export const app = (config) => {
+  service.all('/api/:endpoint', (req, res) => runLambda(req, res, config.lambdas))
   service.listen(port, () => {
-    log.info(`Service running on ${port}`)
+    log.info(`Service running on ${config.port}`)
   })
 }

@@ -1,3 +1,6 @@
 /*eslint no-unused-vars:0 */
 import { app } from './lib/app'
-app('./build/lambdas/')
+app({
+  port: 8181,
+  lambdas: './build/lambdas/'
+})
