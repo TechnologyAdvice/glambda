@@ -12,6 +12,24 @@ service.use(bodyParser.json())
 const port = process.env.PORT || 8181
 
 /**
+ * Handles response from forked lambda runner procs
+ * @param {Object} msg Message object from child proc
+ * @param {Object} res Express response object
+ */
+const procResponse = (msg, res) => {
+  switch (msg.type) {
+    case 'success':
+      res.status(200).send(msg.output)
+      break
+    case 'error':
+      res.status(500).send(msg.output)
+      break
+    case 'metric':
+      console.log(msg.output)
+  }
+}
+
+/**
  * Builds payload and execs lambda
  * @param {Object} req Express req object
  * @param {Object} res Express res object
@@ -32,23 +50,12 @@ const runLambda = (req, res, lambdas) => {
   // Print pid
   console.log(`PID ${proc.pid} running ${lambda}`)
   // Await proc
-  proc.on('message', (msg) => {
-    switch (msg.type) {
-      case 'success':
-        res.status(200).send(msg.output)
-        break
-      case 'error':
-        res.status(500).send(msg.output)
-        break
-      case 'metric':
-        console.log(msg.output)
-    }
-  })
+  proc.on('message', (msg) => procResponse(msg, res))
 }
 
 /**
  * Core app method, binds endpoints and starts listener
- * @param {string} lambdas Path to the lambdas directory
+ * @param {String} lambdas Path to the lambdas directory
  */
 export const app = (lambdas) => {
   service.all('/api/:endpoint', (req, res) => runLambda(req, res, lambdas))
