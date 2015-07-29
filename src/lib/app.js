@@ -44,16 +44,22 @@ export class App {
     // Print pid
     console.log(`PID ${proc.pid} running ${lambda}`)
     // Await proc
-    proc.on('message', (data) => {
-      if (data.type === 'error') {
-        res.status(500).send(data.output)
-        return
-      } else if (data.type === 'success') {
-        res.status(200).send(data.output)
-      } else {
-        console.log(data.output)
+    proc.on('message', (msg) => {
+      switch (msg.type) {
+        case 'success':
+          res.status(200).send(msg.output)
+          break
+        case 'error':
+          res.status(500).send(msg.output)
+          break
+        case 'metric':
+          console.log(msg.output)
       }
     })
+  }
+
+  parseMessage () {
+    console.log('msg')
   }
 
 }

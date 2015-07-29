@@ -15,7 +15,7 @@ const context = {
     context.done()
   },
   done: () => {
-    process.send({ output: util.inspect(process.memoryUsage()) })
+    process.send({ type: 'metric', output: util.inspect(process.memoryUsage()) })
     process.exit()
   }
 }
