@@ -1,2 +1,3 @@
-import chai from 'chai'
-global.expect = chai.expect
+global.request = require('supertest')
+global.assert = require('assert')
+global.should = require('should')

@@ -1,50 +1,37 @@
-/* global sinon, expect, describe, it, before */
+/* global request, describe, it, before */
 import '../../setup'
 import { app } from '../../../src/lib/app'
 
-const request = require('supertest')
-
-const url = 'http://localhost/api/'
+const url = 'http://localhost:8181/api/'
 
 describe('app', () => {
 
   before(() => {
     // Start app
     app({
-      port: 7777,
+      port: 8181,
       lambdas: './test/lambdas'
     })
   })
 
-  describe('request', (done) => {
-    it('responds with the correct operation', () => {
-      request(url)
-        .get('test')
-        .expect(200)
-        .end((err, res) => {
-          if (err) {
-            throw err
-          }
-          res.body.should.have.property('operation')
-          res.body.operation.should.equal('GET')
-        })
-    })
+  it('responds with the correct operation', (done) => {
+    request(url)
+      .get('test')
+      .expect(200, done)
   })
 
-  describe('withPayload', (done) => {
-    it('responds with correct property value', () => {
-      request(url)
-        .post('test')
-        .send({ foo: 'bar' })
-        .expect(200)
-        .end((err, res) => {
-          if (err) {
-            throw err
-          }
-          res.body.should.have.property('foo')
-          res.body.foo.should.equal('bar')
-        })
-    })
+  it('responds with correct property value', (done) => {
+    request(url)
+      .post('test')
+      .send({ foo: 'bar' })
+      .end((err, res) => {
+        if (err) {
+          throw err
+        }
+        res.body.should.have.property('foo')
+        res.body.foo.should.equal('bar')
+        done()
+      })
   })
 
 })
