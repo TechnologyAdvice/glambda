@@ -45,7 +45,14 @@ export class App {
     console.log(`PID ${proc.pid} running ${lambda}`)
     // Await proc
     proc.on('message', (data) => {
-      res.status(200).send(data.output)
+      if (data.type === 'error') {
+        res.status(500).send(data.output)
+        return
+      } else if (data.type === 'success') {
+        res.status(200).send(data.output)
+      } else {
+        console.log(data.output)
+      }
     })
   }
 
