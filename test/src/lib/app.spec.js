@@ -8,7 +8,7 @@ describe('app', () => {
 
   describe('config', () => {
 
-    it('properly overrides defaults with passed object', () => {
+    it('overrides defaults with passed object', () => {
       const testConfig = {
         lambdas: 'test-override',
         port: 1111,
@@ -18,7 +18,7 @@ describe('app', () => {
       expect(config).to.deep.equal(testConfig)
     })
 
-    it('properly overvides config with environment variables', () => {
+    it('overvides config with environment variables', () => {
       process.env.GL_LAMBDAS='test-env'
       process.env.GL_PORT='2222'
       buildConfig()
