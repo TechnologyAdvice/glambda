@@ -19,6 +19,7 @@ service.use(bodyParser.json())
 export let config = {
   lambdas: './lambdas',
   port: 8181,
+  apiPath: '/api',
   log: true
 }
 
@@ -82,7 +83,7 @@ export const buildConfig = (cfg) => {
  */
 export const app = (cfg) => {
   buildConfig(cfg)
-  service.all('/api/:endpoint', (req, res) => runLambda(req, res, config.lambdas))
+  service.all(`${config.apiPath}/:endpoint`, (req, res) => runLambda(req, res, config.lambdas))
   service.listen(config.port, () => {
     if (config.log) log.info(`Service running on ${config.port}`)
   })

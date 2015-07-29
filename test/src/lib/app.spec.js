@@ -1,4 +1,4 @@
-/* global expect, request, describe, it, before */
+/* global expect, request, describe, it, before, after */
 import '../../setup'
 import { app, buildConfig, config } from '../../../src/lib/app'
 
@@ -12,6 +12,7 @@ describe('app', () => {
       const testConfig = {
         lambdas: 'test-override',
         port: 1111,
+        apiPath: '/test-override',
         log: false
       }
       buildConfig(testConfig)
@@ -21,12 +22,20 @@ describe('app', () => {
     it('overvides config with environment variables', () => {
       process.env.GL_LAMBDAS='test-env'
       process.env.GL_PORT='2222'
+      process.env.GL_APIPATH='/test-env'
       buildConfig()
       expect(config).to.deep.equal({
         lambdas: 'test-env',
         port: '2222',
+        apiPath: '/test-env',
         log: false
       })
+    })
+
+    after(() => {
+      delete process.env.GL_LAMBDAS
+      delete process.env.GL_PORT
+      delete process.env.GL_APIPATH
     })
 
   })
@@ -34,12 +43,11 @@ describe('app', () => {
   describe('requests', () => {
 
     before(() => {
-      delete process.env.GL_LAMBDAS
-      delete process.env.GL_PORT
       // Start app
       app({
         port: 8181,
         lambdas: './test/lambdas',
+        apiPath: '/api',
         log: false
       })
     })
