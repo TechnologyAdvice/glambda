@@ -1,16 +1,35 @@
-/* global sinon, expect, describe, it, beforeEach, afterEach */
+/* global sinon, expect, describe, it, before */
 import '../../setup'
-import { App } from '../../../src/lib/app'
+import { app } from '../../../src/lib/app'
 
-describe('App', () => {
+const request = require('supertest')
 
-  //const app = new App()
+const url = 'http://localhost/api/'
 
-  // Just an example test...
-  /*describe('test', () => {
-    it('returns foo', () => {
-      expect(app.test()).to.equal('foo')
+describe('app', () => {
+
+  before(() => {
+    // Start app
+    app({
+      port: 7777,
+      lambdas: './test/lambdas'
     })
-  })*/
+  })
+
+  describe('get', (done) => {
+    it('responds with the operation', () => {
+      request(url)
+        .get('test')
+        .expect(200)
+        .end((err, res) => {
+          if (err) {
+            throw err
+          }
+          res.body.should.have.property('operation')
+          res.body.operation.should.equal('GET')
+          done()
+        })
+    })
+  })
 
 })
