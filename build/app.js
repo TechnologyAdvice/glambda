@@ -89,8 +89,10 @@ var runLambda = function runLambda(req, res) {
   var lambdas = config.lambdas;
   // Set event
   var event = JSON.stringify(evt);
+  // Pass correct $HOME (helps with ~/.aws credentials)
+  var HOME = process.env.HOME;
   // Execute lambda
-  var proc = fork(runner, [lambda], { env: { lambdas: lambdas, event: event } });
+  var proc = fork(runner, [lambda], { env: { lambdas: lambdas, event: event, HOME: HOME } });
   // Print pid
   procResponse({ type: 'metric', output: 'PID ' + proc.pid + ' running ' + lambda });
   // Await proc messaging
