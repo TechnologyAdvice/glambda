@@ -1,41 +1,37 @@
-# Gateway + Lambda Dev Environment
+# Gateway + Lambda Testing Module
 
-This project establishes a mock of the workflow and components for creating
-projects utilizing API Gateway with Lambda functions.
+A module for mocking and testing AWS [API Gateway](http://aws.amazon.com/api-gateway/) 
+in conjunction with [Lambda](http://aws.amazon.com/lambda/) functions.
 
-The core concept is to create a workflow which mimics any staging/production
-deploys while minimizing the need for any special flags or configurations. This
-is achieved by separating the Gateway as a (local) express service which triggers
-Lambdas to run as their own processes.
+## Setup
 
-## TODO's
+To see a fully functional demo, see the [/example](/example) directory.
 
-* Expand console output to include memory for perf analysis
-* Create Gateway config for mocking endpoints
-  * Match Gateway conventions for consistency
-  * Modify express routing to respond to config
-* Mock integration tests
-* Mock system tests
+After installing the npm module simply include it in a file where it will run and 
+set any config options on `init`:
 
-## Getting Started
+```javascript
+// Include the module
+var glmock = require('gateway-lambda')
+// Set options and init
+glmock.init({
+  lambdas: './lambdas',
+  port: 8181,
+  apiPath: '/api',
+  log: true
+})
+```
 
-Simply run `make` then `make dev`. To run interactive (auto-reload) run `make watch`.
+The above shows a standard set of config options:
 
-The repo comes with 2 lambdas which correspond to endpoints: `apples` and `oranges`.
-These can be tested by running `curl http://localhost:8181/api/apples` and will
-respond with the name of the lambda and the event object.
+* `lambdas`: Path to the directory containing lambdas
+* `port`: Port on which the HTTP server will run
+* `apiPath`: Any path (proceeding root) to include in HTTP requests mapping
+* `log`: Wether or not to log to console
 
-Sending `POST` or `PUT` with `Content-Type: application/json` headers and a JSON
-body will include the params in the returned object.
-
-## Testing
-
-The workflow focuses on separation of testing into the three main components at
-distinct positions:
-
-* **Unit**: Testing of the individual Lambdas internal to the project
-* **Integration**: Testing the API with mock data and mock endpoints/lambdas
-* **System**: Testing the API via local DB and model endpoints
+Simply running the file created above will spin up the service, then accessing 
+the endpoints via the corresponding lambda name will spawn the Lambda function 
+and return its results.
 
 ## Makefile and Scripts
 
