@@ -1,6 +1,6 @@
 /* global expect, request, describe, it, before, after */
 import '../../setup'
-import { app, buildConfig, config } from '../../../src/lib/app'
+import { init, buildConfig, config } from '../../../src/lib/app'
 
 const url = 'http://localhost:8181/api/'
 
@@ -44,7 +44,7 @@ describe('app', () => {
 
     before(() => {
       // Start app
-      app({
+      init({
         port: 8181,
         lambdas: './test/lambdas',
         apiPath: '/api',

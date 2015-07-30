@@ -81,7 +81,7 @@ export const buildConfig = (cfg) => {
  * Core app method, binds endpoints and starts listener
  * @param {Object} config Path to the lambdas directory
  */
-export const app = (cfg) => {
+export const init = (cfg) => {
   buildConfig(cfg)
   service.all(`${config.apiPath}/:endpoint`, (req, res) => runLambda(req, res, config.lambdas))
   service.listen(config.port, () => {
