@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2015 TechnologyAdvice
+ */
+
 /* eslint no-process-exit: 0 */
 'use strict';
 

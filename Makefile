@@ -40,6 +40,9 @@ lint:
 	$(BIN)/eslint $(SRC)
 
 test:
+	# Need to prebuild runner for integration tests
+	$(call colorecho, "Building runner for integration tests")
+	$(BIN)/babel $(SRC)/runner.js --out-file $(BUILD)/runner.js
 	$(call colorecho, "Testing $(TESTS)$(FILE)")
 	$(BIN)/mocha --compilers js:babel/register $(TESTS)$(FILE)
 
