@@ -19,7 +19,7 @@ var _ = require('lodash');
 log.addTarget('console').withFormatter('human');
 
 // Path to lambda runner
-var runner = path.resolve('build/runner');
+var runner = path.resolve(__dirname, './runner');
 
 // Express setup
 var service = express();

@@ -14,7 +14,7 @@ const _ = require('lodash')
 log.addTarget('console').withFormatter('human')
 
 // Path to lambda runner
-const runner = path.resolve('build/runner')
+const runner = path.resolve(__dirname, './runner')
 
 // Express setup
 const service = express()
