@@ -1,11 +1,11 @@
 {
-  "coverage": "60%",
-  "expectCount": 5,
-  "actualCount": 3,
+  "coverage": "33.33%",
+  "expectCount": 6,
+  "actualCount": 2,
   "files": {
     "src/lib/app.js": {
-      "expectCount": 3,
-      "actualCount": 3
+      "expectCount": 4,
+      "actualCount": 2
     },
     "src/lambdas/apples/index.js": {
       "expectCount": 1,

@@ -8,7 +8,7 @@
           "type": "ImportSpecifier",
           "local": {
             "type": "Identifier",
-            "name": "App",
+            "name": "app",
             "range": [
               38,
               41
@@ -26,7 +26,7 @@
           },
           "imported": {
             "type": "Identifier",
-            "name": "App",
+            "name": "app",
             "range": [
               38,
               41
@@ -113,84 +113,182 @@
       ]
     },
     {
-      "type": "VariableDeclaration",
-      "declarations": [
-        {
-          "type": "VariableDeclarator",
-          "id": {
-            "type": "Identifier",
-            "name": "app",
-            "range": [
-              67,
-              70
-            ],
-            "loc": {
-              "start": {
-                "line": 3,
-                "column": 6
-              },
-              "end": {
-                "line": 3,
-                "column": 9
-              }
-            }
-          },
-          "init": {
-            "type": "NewExpression",
-            "callee": {
-              "type": "Identifier",
-              "name": "App",
-              "range": [
-                77,
-                80
-              ],
-              "loc": {
-                "start": {
-                  "line": 3,
-                  "column": 16
-                },
-                "end": {
-                  "line": 3,
-                  "column": 19
-                }
-              }
-            },
-            "arguments": [],
-            "range": [
-              73,
-              82
-            ],
-            "loc": {
-              "start": {
-                "line": 3,
-                "column": 12
-              },
-              "end": {
-                "line": 3,
-                "column": 21
-              }
-            }
-          },
+      "type": "ExpressionStatement",
+      "expression": {
+        "type": "CallExpression",
+        "callee": {
+          "type": "Identifier",
+          "name": "app",
           "range": [
-            67,
-            82
+            61,
+            64
           ],
           "loc": {
             "start": {
               "line": 3,
-              "column": 6
+              "column": 0
             },
             "end": {
               "line": 3,
-              "column": 21
+              "column": 3
             }
           }
+        },
+        "arguments": [
+          {
+            "type": "ObjectExpression",
+            "properties": [
+              {
+                "type": "Property",
+                "key": {
+                  "type": "Identifier",
+                  "name": "port",
+                  "range": [
+                    69,
+                    73
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 4,
+                      "column": 2
+                    },
+                    "end": {
+                      "line": 4,
+                      "column": 6
+                    }
+                  }
+                },
+                "value": {
+                  "type": "Literal",
+                  "value": 8181,
+                  "raw": "8181",
+                  "range": [
+                    75,
+                    79
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 4,
+                      "column": 8
+                    },
+                    "end": {
+                      "line": 4,
+                      "column": 12
+                    }
+                  }
+                },
+                "kind": "init",
+                "method": false,
+                "shorthand": false,
+                "computed": false,
+                "range": [
+                  69,
+                  79
+                ],
+                "loc": {
+                  "start": {
+                    "line": 4,
+                    "column": 2
+                  },
+                  "end": {
+                    "line": 4,
+                    "column": 12
+                  }
+                }
+              },
+              {
+                "type": "Property",
+                "key": {
+                  "type": "Identifier",
+                  "name": "lambdas",
+                  "range": [
+                    83,
+                    90
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 5,
+                      "column": 2
+                    },
+                    "end": {
+                      "line": 5,
+                      "column": 9
+                    }
+                  }
+                },
+                "value": {
+                  "type": "Literal",
+                  "value": "./build/lambdas/",
+                  "raw": "'./build/lambdas/'",
+                  "range": [
+                    92,
+                    110
+                  ],
+                  "loc": {
+                    "start": {
+                      "line": 5,
+                      "column": 11
+                    },
+                    "end": {
+                      "line": 5,
+                      "column": 29
+                    }
+                  }
+                },
+                "kind": "init",
+                "method": false,
+                "shorthand": false,
+                "computed": false,
+                "range": [
+                  83,
+                  110
+                ],
+                "loc": {
+                  "start": {
+                    "line": 5,
+                    "column": 2
+                  },
+                  "end": {
+                    "line": 5,
+                    "column": 29
+                  }
+                }
+              }
+            ],
+            "range": [
+              65,
+              112
+            ],
+            "loc": {
+              "start": {
+                "line": 3,
+                "column": 4
+              },
+              "end": {
+                "line": 6,
+                "column": 1
+              }
+            }
+          }
+        ],
+        "range": [
+          61,
+          113
+        ],
+        "loc": {
+          "start": {
+            "line": 3,
+            "column": 0
+          },
+          "end": {
+            "line": 6,
+            "column": 2
+          }
         }
-      ],
-      "kind": "const",
+      },
       "range": [
         61,
-        82
+        114
       ],
       "loc": {
         "start": {
@@ -198,8 +296,8 @@
           "column": 0
         },
         "end": {
-          "line": 3,
-          "column": 21
+          "line": 7,
+          "column": 0
         }
       }
     }
@@ -207,7 +305,7 @@
   "sourceType": "module",
   "range": [
     29,
-    82
+    114
   ],
   "loc": {
     "start": {
@@ -215,8 +313,8 @@
       "column": 0
     },
     "end": {
-      "line": 3,
-      "column": 21
+      "line": 7,
+      "column": 0
     }
   },
   "comments": [

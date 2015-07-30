@@ -1,9 +1,21 @@
 window.esdocSearchIndex = [
   [
     "template/src/lib/app.js~app",
-    "class/src/lib/app.js~App.html",
-    "<span>App</span> <span class=\"search-result-import-path\">template/src/lib/app.js</span>",
-    "class"
+    "variable/index.html#static-variable-app",
+    "<span>app</span> <span class=\"search-result-import-path\">template/src/lib/app.js</span>",
+    "variable"
+  ],
+  [
+    "template/src/lib/app.js~buildconfig",
+    "variable/index.html#static-variable-buildConfig",
+    "<span>buildConfig</span> <span class=\"search-result-import-path\">template/src/lib/app.js</span>",
+    "variable"
+  ],
+  [
+    "template/src/lib/app.js~config",
+    "variable/index.html#static-variable-config",
+    "<span>config</span> <span class=\"search-result-import-path\">template/src/lib/app.js</span>",
+    "variable"
   ],
   [
     "template/src/lambdas/apples/index.js~handler",
@@ -15,6 +27,12 @@ window.esdocSearchIndex = [
     "template/src/lambdas/oranges/index.js~handler",
     "variable/index.html#static-variable-handler",
     "<span>handler</span> <span class=\"search-result-import-path\">template/src/lambdas/oranges/index.js</span>",
+    "variable"
+  ],
+  [
+    "template/src/lib/app.js~procresponse",
+    "variable/index.html#static-variable-procResponse",
+    "<span>procResponse</span> <span class=\"search-result-import-path\">template/src/lib/app.js</span>",
     "variable"
   ],
   [
@@ -354,28 +372,16 @@ window.esdocSearchIndex = [
     "file"
   ],
   [
-    "src/lambdas/runner.js",
-    "file/src/lambdas/runner.js.html",
-    "src/lambdas/runner.js",
-    "file"
-  ],
-  [
     "src/lib/app.js",
     "file/src/lib/app.js.html",
     "src/lib/app.js",
     "file"
   ],
   [
-    "src/lib/app.js~app#constructor",
-    "class/src/lib/app.js~App.html#instance-constructor-constructor",
-    "src/lib/app.js~App#constructor",
-    "method"
-  ],
-  [
-    "src/lib/app.js~app#runlambda",
-    "class/src/lib/app.js~App.html#instance-method-runLambda",
-    "src/lib/app.js~App#runLambda",
-    "method"
+    "src/lib/runner.js",
+    "file/src/lib/runner.js.html",
+    "src/lib/runner.js",
+    "file"
   ],
   [
     "src/server.js",

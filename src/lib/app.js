@@ -69,10 +69,10 @@ export const buildConfig = (cfg) => {
   // Against defaults
   _.extend(config, cfg)
   // Against env vars
-  for (var prop in config) {
-    let envVar = process.env['GL_' + prop.toUpperCase()]
-    if (envVar) {
-      config[prop] = envVar
+  for (let prop in config) {
+    if ({}.hasOwnProperty.call(config, prop)) {
+      let envVar = process.env['GL_' + prop.toUpperCase()]
+      if (envVar) config[prop] = envVar
     }
   }
 }

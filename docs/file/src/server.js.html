@@ -27,13 +27,7 @@
   </div>
 </header>
 
-<nav class="navigation" data-ice="nav"><div data-ice="classWrap">
-  <h2>Class</h2>
-  <ul>
-    
-  <li data-ice="classDoc"><span><a href="class/src/lib/app.js~App.html">App</a></span></li>
-</ul>
-</div>
+<nav class="navigation" data-ice="nav">
 
 
 
@@ -43,8 +37,12 @@
   <h2><a href="variable/">Variable</a></h2>
   <ul>
     
-  <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-handler">handler</a></span></li>
+  <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-app">app</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-buildConfig">buildConfig</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-config">config</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-handler">handler</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-handler">handler</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-procResponse">procResponse</a></span></li>
 </ul>
 </div>
 
@@ -55,8 +53,12 @@
 
 <div class="content" data-ice="content"><h1 data-ice="title">src/server.js</h1>
 <pre class="source-code line-number"><code class="prettyprint linenums" data-ice="content">/*eslint no-unused-vars:0 */
-import { App } from &apos;./lib/app&apos;
-const app = new App()</code></pre>
+import { app } from &apos;./lib/app&apos;
+app({
+  port: 8181,
+  lambdas: &apos;./build/lambdas/&apos;
+})
+</code></pre>
 </div>
 
 <footer class="footer">

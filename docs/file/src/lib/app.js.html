@@ -27,13 +27,7 @@
   </div>
 </header>
 
-<nav class="navigation" data-ice="nav"><div data-ice="classWrap">
-  <h2>Class</h2>
-  <ul>
-    
-  <li data-ice="classDoc"><span><a href="class/src/lib/app.js~App.html">App</a></span></li>
-</ul>
-</div>
+<nav class="navigation" data-ice="nav">
 
 
 
@@ -43,8 +37,12 @@
   <h2><a href="variable/">Variable</a></h2>
   <ul>
     
-  <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-handler">handler</a></span></li>
+  <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-app">app</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-buildConfig">buildConfig</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-config">config</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-handler">handler</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-handler">handler</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-procResponse">procResponse</a></span></li>
 </ul>
 </div>
 
@@ -57,54 +55,94 @@
 <pre class="source-code line-number"><code class="prettyprint linenums" data-ice="content">// Deps
 const express = require(&apos;express&apos;)
 const bodyParser = require(&apos;body-parser&apos;)
-const exec = require(&apos;child_process&apos;).exec
+const fork = require(&apos;child_process&apos;).fork
+const path = require(&apos;path&apos;)
+const log = require(&apos;bristol&apos;)
+const _ = require(&apos;lodash&apos;)
+
+// Setup logs
+log.addTarget(&apos;console&apos;).withFormatter(&apos;human&apos;)
+
+const runner = path.resolve(&apos;build/lib/runner&apos;)
 
 // Express setup
 const service = express()
 service.use(bodyParser.json())
-const port = process.env.PORT || 8181
+
+// Default config
+export let config = {
+  lambdas: &apos;./lambdas&apos;,
+  port: 8181,
+  apiPath: &apos;/api&apos;,
+  log: true
+}
 
 /**
- * Creates a new app instance
- * @class App
+ * Handles response from forked lambda runner procs
+ * @param {Object} msg Message object from child proc
+ * @param {Object} [res] Express response object
  */
-export class App {
-
-  /**
-   * @constructor
-   */
-  constructor () {
-    service.all(&apos;/api/:endpoint&apos;, this.runLambda)
-    service.listen(port, () =&gt; {
-      console.log(`Service running on ${port}`)
-    })
+export const procResponse = (msg, res) =&gt; {
+  switch (msg.type) {
+    case &apos;metric&apos;:
+      if (config.log) log.info(msg.output)
+      break
+    case &apos;success&apos;:
+      res.status(200).send(msg.output)
+      break
+    case &apos;error&apos;:
+      res.status(500).send(msg.output)
+      break
+    default:
+      log.error(&apos;Missing response type&apos;)
   }
+}
 
-  /**
-   * Builds payload and execs lambda
-   * @param {Object} req Express req object
-   * @param {Object} res Exptess res object
-   */
-  runLambda (req, res) {
-    const evtBody = req.body
-    const lambda = req.params.endpoint
-    // Custom stuff...
-    evtBody.operation = req.method
-    // Execute lambda
-    const proc = exec(`node build/lambdas/runner ${lambda}`, {
-      env: {
-        mock: true,
-        event: JSON.stringify(evtBody)
-      }
-    })
-    // Print pid
-    console.log(`PID ${proc.pid} running ${lambda}`)
-    // Await proc
-    proc.stdout.on(&apos;data&apos;, (data) =&gt; res.status(200).send(data))
-    proc.stderr.on(&apos;data&apos;, (err) =&gt; res.status(500).send(err))
+/**
+ * Builds payload and execs lambda
+ * @param {Object} req Express req object
+ * @param {Object} res Express res object
+ * @param {String} lambdas Path to the lambdas directory
+ */
+const runLambda = (req, res, lambdas) =&gt; {
+  const evt = req.body
+  const lambda = req.params.endpoint
+  // Custom stuff...
+  evt.operation = req.method
+  // Set event
+  const event = JSON.stringify(evt)
+  // Execute lambda
+  const proc = fork(runner, [ lambda ], { env: { lambdas, event } })
+  // Print pid
+  procResponse({ type: &apos;metric&apos;, output: `PID ${proc.pid} running ${lambda}` })
+  // Await proc
+  proc.on(&apos;message&apos;, (msg) =&gt; procResponse(msg, res))
+}
+
+export const buildConfig = (cfg) =&gt; {
+  // Against defaults
+  _.extend(config, cfg)
+  // Against env vars
+  for (let prop in config) {
+    if ({}.hasOwnProperty.call(config, prop)) {
+      let envVar = process.env[&apos;GL_&apos; + prop.toUpperCase()]
+      if (envVar) config[prop] = envVar
+    }
   }
+}
 
-}</code></pre>
+/**
+ * Core app method, binds endpoints and starts listener
+ * @param {Object} config Path to the lambdas directory
+ */
+export const app = (cfg) =&gt; {
+  buildConfig(cfg)
+  service.all(`${config.apiPath}/:endpoint`, (req, res) =&gt; runLambda(req, res, config.lambdas))
+  service.listen(config.port, () =&gt; {
+    if (config.log) log.info(`Service running on ${config.port}`)
+  })
+}
+</code></pre>
 </div>
 
 <footer class="footer">
