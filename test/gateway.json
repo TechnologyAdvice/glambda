@@ -1,13 +1,14 @@
 {
   "/": {
-    "/foo/{fooId}": {
-      "GET": {
-        "lambda": "foo",
-        "templates": {
-          "application/json": {
-            "id": "$input.params('fooId')",
-            "method": "get",
-            "body": "$input.json('$')"
+    "/foo": {
+      "/foo/{fooId}": {
+        "GET": {
+          "lambda": "foo",
+          "templates": {
+            "application/json": {
+              "id": "$input.params('fooId')",
+              "method": "get"
+            }
           }
         }
       }
