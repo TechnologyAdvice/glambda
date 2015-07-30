@@ -56,7 +56,7 @@ describe('app', () => {
 
     it('responds with the correct operation', (done) => {
       request(url)
-        .get('test')
+        .get('foo')
         .expect(200)
         .end((err, res) => {
           if (err) {
@@ -71,7 +71,7 @@ describe('app', () => {
 
     it('responds with correct property value', (done) => {
       request(url)
-        .post('test')
+        .post('foo')
         .send({ foo: 'bar' })
         .end((err, res) => {
           if (err) {
