@@ -37,11 +37,9 @@
   <h2><a href="variable/">Variable</a></h2>
   <ul>
     
-  <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-app">app</a></span></li>
-<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-buildConfig">buildConfig</a></span></li>
+  <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-buildConfig">buildConfig</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-config">config</a></span></li>
-<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-handler">handler</a></span></li>
-<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-handler">handler</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-init">init</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-procResponse">procResponse</a></span></li>
 </ul>
 </div>
@@ -67,39 +65,14 @@
     <td>
       <div>
         <p>
-           <span data-ice="name"><span><a href="variable/index.html#static-variable-app">app</a></span></span><span data-ice="signature">(config: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>): <span>*</span></span>
+           <span data-ice="name"><span><a href="variable/index.html#static-variable-buildConfig">buildConfig</a></span></span><span data-ice="signature">(cfg: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>): <span>*</span></span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p>Core app method, binds endpoints and starts listener</p>
-</div>
-      </div>
-    </td>
-    <td>
-      
-      
-    </td>
-  </tr>
-<tr data-ice="target">
-    <td>
-      <span class="access" data-ice="access">public</span>
-      
-      
-      
-      <span class="override" data-ice="override"></span>
-    </td>
-    <td>
-      <div>
-        <p>
-           <span data-ice="name"><span><a href="variable/index.html#static-variable-buildConfig">buildConfig</a></span></span><span data-ice="signature">: <span>*</span></span>
-        </p>
-      </div>
-      <div>
-        
-        
-        
+        <div data-ice="description"><p>Combines the default config with any passed to init and overrides (lastly)
+</p></div>
       </div>
     </td>
     <td>
@@ -124,7 +97,8 @@
       <div>
         
         
-        
+        <div data-ice="description"><p>Default config object</p>
+</div>
       </div>
     </td>
     <td>
@@ -143,38 +117,14 @@
     <td>
       <div>
         <p>
-           <span data-ice="name"><span><a href="variable/index.html#static-variable-handler">handler</a></span></span><span data-ice="signature">: <span>*</span></span>
+           <span data-ice="name"><span><a href="variable/index.html#static-variable-init">init</a></span></span><span data-ice="signature">(config: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>): <span>*</span></span>
         </p>
       </div>
       <div>
         
         
-        
-      </div>
-    </td>
-    <td>
-      
-      
-    </td>
-  </tr>
-<tr data-ice="target">
-    <td>
-      <span class="access" data-ice="access">public</span>
-      
-      
-      
-      <span class="override" data-ice="override"></span>
-    </td>
-    <td>
-      <div>
-        <p>
-           <span data-ice="name"><span><a href="variable/index.html#static-variable-handler">handler</a></span></span><span data-ice="signature">: <span>*</span></span>
-        </p>
-      </div>
-      <div>
-        
-        
-        
+        <div data-ice="description"><p>Initialize testing service, binds endpoints to apiPath, handles the action
+</p></div>
       </div>
     </td>
     <td>
@@ -214,65 +164,26 @@
 <div data-ice="details"><h2 data-ice="title">Static Public </h2>
 
 <div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="static-variable-app">
-    <span class="access" data-ice="access">public</span>
-    
-    
-    
-    
-    <span data-ice="name">app</span><span data-ice="signature">(config: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>): <span>*</span></span>
-    <span class="right-info">
-      
-      
-      <span data-ice="source"><span><a href="file/src/lib/app.js.html#lineNumber84">source</a></span></span>
-    </span>
-  </h3>
-
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {app} from &apos;<span><a href="file/src/lib/app.js.html#lineNumber84">template/src/lib/app.js</a></span>&apos;</code></pre></div>
-  
-  
-  <div data-ice="description"><p>Core app method, binds endpoints and starts listener</p>
-</div>
-
-  
-
-  <div data-ice="properties">
-</div>
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-  
-</div>
-<div class="detail" data-ice="detail">
   <h3 data-ice="anchor" id="static-variable-buildConfig">
     <span class="access" data-ice="access">public</span>
     
     
     
     
-    <span data-ice="name">buildConfig</span><span data-ice="signature">: <span>*</span></span>
+    <span data-ice="name">buildConfig</span><span data-ice="signature">(cfg: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>): <span>*</span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/lib/app.js.html#lineNumber68">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/lib/app.js.html#lineNumber85">source</a></span></span>
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {buildConfig} from &apos;<span><a href="file/src/lib/app.js.html#lineNumber68">template/src/lib/app.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {buildConfig} from &apos;<span><a href="file/src/lib/app.js.html#lineNumber85">template/src/lib/app.js</a></span>&apos;</code></pre></div>
   
   
-  
+  <div data-ice="description"><p>Combines the default config with any passed to init and overrides (lastly)
+if there are any environment variables set</p>
+</div>
 
   
 
@@ -305,18 +216,35 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/lib/app.js.html#lineNumber19">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/lib/app.js.html#lineNumber27">source</a></span></span>
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {config} from &apos;<span><a href="file/src/lib/app.js.html#lineNumber19">template/src/lib/app.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {config} from &apos;<span><a href="file/src/lib/app.js.html#lineNumber27">template/src/lib/app.js</a></span>&apos;</code></pre></div>
   
   
-  
+  <div data-ice="description"><p>Default config object</p>
+</div>
 
   
 
-  <div data-ice="properties">
+  <div data-ice="properties"><div data-ice="properties">
+  <h4 data-ice="title">Properties:</h4>
+  <table class="params">
+    <thead>
+    <tr><td>Name</td><td>Type</td><td>Attribute</td><td>Description</td></tr>
+    </thead>
+    <tbody>
+    
+    <tr data-ice="property" data-depth="0">
+      <td data-ice="name" data-depth="0">config</td>
+      <td data-ice="type"><span>*</span></td>
+      <td data-ice="appendix"></td>
+      <td data-ice="description"></td>
+    </tr>
+</tbody>
+  </table>
+</div>
 </div>
 
   
@@ -335,64 +263,26 @@
   
 </div>
 <div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="static-variable-handler">
+  <h3 data-ice="anchor" id="static-variable-init">
     <span class="access" data-ice="access">public</span>
     
     
     
     
-    <span data-ice="name">handler</span><span data-ice="signature">: <span>*</span></span>
+    <span data-ice="name">init</span><span data-ice="signature">(config: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>): <span>*</span></span>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/lambdas/apples/index.js.html#lineNumber1">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/lib/app.js.html#lineNumber102">source</a></span></span>
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {handler} from &apos;<span><a href="file/src/lambdas/apples/index.js.html#lineNumber1">template/src/lambdas/apples/index.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {init} from &apos;<span><a href="file/src/lib/app.js.html#lineNumber102">template/src/lib/app.js</a></span>&apos;</code></pre></div>
   
   
-  
-
-  
-
-  <div data-ice="properties">
+  <div data-ice="description"><p>Initialize testing service, binds endpoints to apiPath, handles the action
+(runLambda) on calls and starts listener</p>
 </div>
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-
-  
-  
-</div>
-<div class="detail" data-ice="detail">
-  <h3 data-ice="anchor" id="static-variable-handler">
-    <span class="access" data-ice="access">public</span>
-    
-    
-    
-    
-    <span data-ice="name">handler</span><span data-ice="signature">: <span>*</span></span>
-    <span class="right-info">
-      
-      
-      <span data-ice="source"><span><a href="file/src/lambdas/oranges/index.js.html#lineNumber1">source</a></span></span>
-    </span>
-  </h3>
-
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {handler} from &apos;<span><a href="file/src/lambdas/oranges/index.js.html#lineNumber1">template/src/lambdas/oranges/index.js</a></span>&apos;</code></pre></div>
-  
-  
-  
 
   
 
@@ -425,11 +315,11 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/lib/app.js.html#lineNumber31">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/lib/app.js.html#lineNumber39">source</a></span></span>
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {procResponse} from &apos;<span><a href="file/src/lib/app.js.html#lineNumber31">template/src/lib/app.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {procResponse} from &apos;<span><a href="file/src/lib/app.js.html#lineNumber39">template/src/lib/app.js</a></span>&apos;</code></pre></div>
   
   
   <div data-ice="description"><p>Handles response from forked lambda runner procs</p>

@@ -1,11 +1,5 @@
 window.esdocSearchIndex = [
   [
-    "template/src/lib/app.js~app",
-    "variable/index.html#static-variable-app",
-    "<span>app</span> <span class=\"search-result-import-path\">template/src/lib/app.js</span>",
-    "variable"
-  ],
-  [
     "template/src/lib/app.js~buildconfig",
     "variable/index.html#static-variable-buildConfig",
     "<span>buildConfig</span> <span class=\"search-result-import-path\">template/src/lib/app.js</span>",
@@ -18,15 +12,9 @@ window.esdocSearchIndex = [
     "variable"
   ],
   [
-    "template/src/lambdas/apples/index.js~handler",
-    "variable/index.html#static-variable-handler",
-    "<span>handler</span> <span class=\"search-result-import-path\">template/src/lambdas/apples/index.js</span>",
-    "variable"
-  ],
-  [
-    "template/src/lambdas/oranges/index.js~handler",
-    "variable/index.html#static-variable-handler",
-    "<span>handler</span> <span class=\"search-result-import-path\">template/src/lambdas/oranges/index.js</span>",
+    "template/src/lib/app.js~init",
+    "variable/index.html#static-variable-init",
+    "<span>init</span> <span class=\"search-result-import-path\">template/src/lib/app.js</span>",
     "variable"
   ],
   [
@@ -360,18 +348,6 @@ window.esdocSearchIndex = [
     "external"
   ],
   [
-    "src/lambdas/apples/index.js",
-    "file/src/lambdas/apples/index.js.html",
-    "src/lambdas/apples/index.js",
-    "file"
-  ],
-  [
-    "src/lambdas/oranges/index.js",
-    "file/src/lambdas/oranges/index.js.html",
-    "src/lambdas/oranges/index.js",
-    "file"
-  ],
-  [
     "src/lib/app.js",
     "file/src/lib/app.js.html",
     "src/lib/app.js",
@@ -381,12 +357,6 @@ window.esdocSearchIndex = [
     "src/lib/runner.js",
     "file/src/lib/runner.js.html",
     "src/lib/runner.js",
-    "file"
-  ],
-  [
-    "src/server.js",
-    "file/src/server.js.html",
-    "src/server.js",
     "file"
   ]
 ]

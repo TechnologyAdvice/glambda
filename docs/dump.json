@@ -3,77 +3,13 @@
     "kind": "file",
     "static": true,
     "variation": null,
-    "name": "src/lambdas/apples/index.js",
-    "memberof": null,
-    "longname": "src/lambdas/apples/index.js",
-    "access": null,
-    "description": null,
-    "lineNumber": 1,
-    "content": "export const handler = (event, context) => {\n  context.succeed(`Apples ${JSON.stringify(event)}`)\n}\n"
-  },
-  {
-    "kind": "variable",
-    "static": true,
-    "variation": null,
-    "name": "handler",
-    "memberof": "src/lambdas/apples/index.js",
-    "longname": "src/lambdas/apples/index.js~handler",
-    "access": null,
-    "export": true,
-    "importPath": "template/src/lambdas/apples/index.js",
-    "importStyle": "{handler}",
-    "description": null,
-    "lineNumber": 1,
-    "undocument": true,
-    "type": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "kind": "file",
-    "static": true,
-    "variation": null,
-    "name": "src/lambdas/oranges/index.js",
-    "memberof": null,
-    "longname": "src/lambdas/oranges/index.js",
-    "access": null,
-    "description": null,
-    "lineNumber": 1,
-    "content": "export const handler = (event, context) => {\n  context.succeed(`Oranges ${JSON.stringify(event)}`)\n}\n"
-  },
-  {
-    "kind": "variable",
-    "static": true,
-    "variation": null,
-    "name": "handler",
-    "memberof": "src/lambdas/oranges/index.js",
-    "longname": "src/lambdas/oranges/index.js~handler",
-    "access": null,
-    "export": true,
-    "importPath": "template/src/lambdas/oranges/index.js",
-    "importStyle": "{handler}",
-    "description": null,
-    "lineNumber": 1,
-    "undocument": true,
-    "type": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "kind": "file",
-    "static": true,
-    "variation": null,
     "name": "src/lib/app.js",
     "memberof": null,
     "longname": "src/lib/app.js",
     "access": null,
     "description": null,
     "lineNumber": 2,
-    "content": "// Deps\nconst express = require('express')\nconst bodyParser = require('body-parser')\nconst fork = require('child_process').fork\nconst path = require('path')\nconst log = require('bristol')\nconst _ = require('lodash')\n\n// Setup logs\nlog.addTarget('console').withFormatter('human')\n\nconst runner = path.resolve('build/lib/runner')\n\n// Express setup\nconst service = express()\nservice.use(bodyParser.json())\n\n// Default config\nexport let config = {\n  lambdas: './lambdas',\n  port: 8181,\n  apiPath: '/api',\n  log: true\n}\n\n/**\n * Handles response from forked lambda runner procs\n * @param {Object} msg Message object from child proc\n * @param {Object} [res] Express response object\n */\nexport const procResponse = (msg, res) => {\n  switch (msg.type) {\n    case 'metric':\n      if (config.log) log.info(msg.output)\n      break\n    case 'success':\n      res.status(200).send(msg.output)\n      break\n    case 'error':\n      res.status(500).send(msg.output)\n      break\n    default:\n      log.error('Missing response type')\n  }\n}\n\n/**\n * Builds payload and execs lambda\n * @param {Object} req Express req object\n * @param {Object} res Express res object\n * @param {String} lambdas Path to the lambdas directory\n */\nconst runLambda = (req, res, lambdas) => {\n  const evt = req.body\n  const lambda = req.params.endpoint\n  // Custom stuff...\n  evt.operation = req.method\n  // Set event\n  const event = JSON.stringify(evt)\n  // Execute lambda\n  const proc = fork(runner, [ lambda ], { env: { lambdas, event } })\n  // Print pid\n  procResponse({ type: 'metric', output: `PID ${proc.pid} running ${lambda}` })\n  // Await proc\n  proc.on('message', (msg) => procResponse(msg, res))\n}\n\nexport const buildConfig = (cfg) => {\n  // Against defaults\n  _.extend(config, cfg)\n  // Against env vars\n  for (let prop in config) {\n    if ({}.hasOwnProperty.call(config, prop)) {\n      let envVar = process.env['GL_' + prop.toUpperCase()]\n      if (envVar) config[prop] = envVar\n    }\n  }\n}\n\n/**\n * Core app method, binds endpoints and starts listener\n * @param {Object} config Path to the lambdas directory\n */\nexport const app = (cfg) => {\n  buildConfig(cfg)\n  service.all(`${config.apiPath}/:endpoint`, (req, res) => runLambda(req, res, config.lambdas))\n  service.listen(config.port, () => {\n    if (config.log) log.info(`Service running on ${config.port}`)\n  })\n}\n"
+    "content": "// Deps\nconst express = require('express')\nconst bodyParser = require('body-parser')\nconst fork = require('child_process').fork\nconst path = require('path')\nconst log = require('bristol')\nconst _ = require('lodash')\n\n// Setup logs\nlog.addTarget('console').withFormatter('human')\n\n// Path to lambda runner\nconst runner = path.resolve('build/lib/runner')\n\n// Express setup\nconst service = express()\nservice.use(bodyParser.json())\n\n/**\n * Default config object\n * @property config\n * @attribute {String} lambdas The path to the lambdas directory\n * @arrtibute {Number} port The port for the HTTP service\n * @attribute {String} apiPath The request path for the api\n * @attribute {Boolean} log Show or repress console output\n */\nexport let config = {\n  lambdas: './lambdas',\n  port: 8181,\n  apiPath: '/api',\n  log: true\n}\n\n/**\n * Handles response from forked lambda runner procs\n * @param {Object} msg Message object from child proc\n * @param {Object} [res] Express response object\n */\nexport const procResponse = (msg, res) => {\n  switch (msg.type) {\n    case 'metric':\n      if (config.log) log.info(msg.output)\n      break\n    case 'success':\n      res.status(200).send(msg.output)\n      break\n    case 'error':\n      res.status(500).send(msg.output)\n      break\n    default:\n      log.error('Missing response type')\n  }\n}\n\n/**\n * Builds the `event` payload with the request body and the method of the\n * call (`operation`). Forks a new runner process to the requested lambda\n * then awaits messaging from the lambda\n * @param {Object} req Express req object\n * @param {Object} res Express res object\n * @param {String} lambdas Path to the lambdas directory\n */\nconst runLambda = (req, res) => {\n  const evt = req.body\n  const lambda = req.params.endpoint\n  // Map method to operation param\n  evt.operation = req.method\n  // Set lambdas\n  const lambdas = config.lambdas\n  // Set event\n  const event = JSON.stringify(evt)\n  // Execute lambda\n  const proc = fork(runner, [ lambda ], { env: { lambdas, event } })\n  // Print pid\n  procResponse({ type: 'metric', output: `PID ${proc.pid} running ${lambda}` })\n  // Await proc messaging\n  proc.on('message', (msg) => procResponse(msg, res))\n}\n\n/**\n * Combines the default config with any passed to init and overrides (lastly)\n * if there are any environment variables set\n * @param {Object} [cfg] The config passed through init\n */\nexport const buildConfig = (cfg) => {\n  // Against defaults\n  _.extend(config, cfg)\n  // Against env vars\n  for (let prop in config) {\n    if ({}.hasOwnProperty.call(config, prop)) {\n      let envVar = process.env['GL_' + prop.toUpperCase()]\n      if (envVar) config[prop] = envVar\n    }\n  }\n}\n\n/**\n * Initialize testing service, binds endpoints to apiPath, handles the action\n * (runLambda) on calls and starts listener\n * @param {Object} [config] Path to the lambdas directory\n */\nexport const init = (cfg) => {\n  // Setup config\n  buildConfig(cfg)\n  // Binds to endpoint\n  service.all(`${config.apiPath}/:endpoint`, (req, res) => runLambda(req, res))\n  // Starts service\n  service.listen(config.port, () => {\n    if (config.log) log.info(`Service running on ${config.port}`)\n  })\n}\n"
   },
   {
     "kind": "variable",
@@ -207,7 +143,7 @@
     "importPath": "template/src/lib/app.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 12,
+    "lineNumber": 13,
     "undocument": true,
     "type": {
       "types": [
@@ -227,7 +163,7 @@
     "importPath": "template/src/lib/app.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 15,
+    "lineNumber": 16,
     "undocument": true,
     "type": {
       "types": [
@@ -246,9 +182,38 @@
     "export": true,
     "importPath": "template/src/lib/app.js",
     "importStyle": "{config}",
-    "description": null,
-    "lineNumber": 19,
-    "undocument": true,
+    "description": "Default config object",
+    "lineNumber": 27,
+    "unknown": [
+      {
+        "tagName": "@attribute",
+        "tagValue": "{String} lambdas The path to the lambdas directory"
+      },
+      {
+        "tagName": "@arrtibute",
+        "tagValue": "{Number} port The port for the HTTP service"
+      },
+      {
+        "tagName": "@attribute",
+        "tagValue": "{String} apiPath The request path for the api"
+      },
+      {
+        "tagName": "@attribute",
+        "tagValue": "{Boolean} log Show or repress console output"
+      }
+    ],
+    "properties": [
+      {
+        "nullable": null,
+        "types": [
+          "*"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "config",
+        "description": ""
+      }
+    ],
     "type": {
       "types": [
         "*"
@@ -267,7 +232,7 @@
     "importPath": "template/src/lib/app.js",
     "importStyle": "{procResponse}",
     "description": "Handles response from forked lambda runner procs",
-    "lineNumber": 31,
+    "lineNumber": 39,
     "params": [
       {
         "nullable": null,
@@ -307,8 +272,8 @@
     "export": false,
     "importPath": "template/src/lib/app.js",
     "importStyle": null,
-    "description": "Builds payload and execs lambda",
-    "lineNumber": 53,
+    "description": "Builds the `event` payload with the request body and the method of the\ncall (`operation`). Forks a new runner process to the requested lambda\nthen awaits messaging from the lambda",
+    "lineNumber": 63,
     "params": [
       {
         "nullable": null,
@@ -358,9 +323,20 @@
     "export": true,
     "importPath": "template/src/lib/app.js",
     "importStyle": "{buildConfig}",
-    "description": null,
-    "lineNumber": 68,
-    "undocument": true,
+    "description": "Combines the default config with any passed to init and overrides (lastly)\nif there are any environment variables set",
+    "lineNumber": 85,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Object"
+        ],
+        "spread": false,
+        "optional": true,
+        "name": "cfg",
+        "description": "The config passed through init"
+      }
+    ],
     "type": {
       "types": [
         "*"
@@ -371,15 +347,15 @@
     "kind": "variable",
     "static": true,
     "variation": null,
-    "name": "app",
+    "name": "init",
     "memberof": "src/lib/app.js",
-    "longname": "src/lib/app.js~app",
+    "longname": "src/lib/app.js~init",
     "access": null,
     "export": true,
     "importPath": "template/src/lib/app.js",
-    "importStyle": "{app}",
-    "description": "Core app method, binds endpoints and starts listener",
-    "lineNumber": 84,
+    "importStyle": "{init}",
+    "description": "Initialize testing service, binds endpoints to apiPath, handles the action\n(runLambda) on calls and starts listener",
+    "lineNumber": 102,
     "params": [
       {
         "nullable": null,
@@ -387,7 +363,7 @@
           "Object"
         ],
         "spread": false,
-        "optional": false,
+        "optional": true,
         "name": "config",
         "description": "Path to the lambdas directory"
       }
@@ -408,7 +384,7 @@
     "access": null,
     "description": null,
     "lineNumber": 2,
-    "content": "/* eslint no-process-exit: 0 */\nconst util = require('util')\nconst path = require('path')\nconst lambda = require(path.resolve(`${process.env.lambdas}/${process.argv[2]}/index`))\n\n// Build context object for Lambda\nconst context = {\n  succeed: (result) => {\n    process.send({ type: 'success', output: result })\n    context.done()\n  },\n  fail: (error) => {\n    process.send({ type: 'error', output: error })\n    context.done()\n  },\n  done: () => {\n    process.send({ type: 'metric', output: { memory: util.inspect(process.memoryUsage()) }})\n    process.send({ type: 'metric', output: { time: process.uptime() }})\n    process.exit()\n  }\n}\n\n// Call lambda's handler\nlambda.handler(JSON.parse(process.env.event), context)\n"
+    "content": "/* eslint no-process-exit: 0 */\nconst util = require('util')\nconst path = require('path')\n\n// Sets the lambda from its path\nconst lambda = require(path.resolve(`${process.env.lambdas}/${process.argv[2]}/index`))\n\n/**\n * Creates the context object passed to lambdas\n * @property context\n */\nconst context = {\n  /**\n   * Emit a success message with output\n   * @param {Object|String} result The contents of the result\n   */\n  succeed: (result) => {\n    process.send({ type: 'success', output: result })\n    context.done()\n  },\n  /**\n   * Emit an error message with output\n   * @param {Object|String} error The error object or message\n   */\n  fail: (error) => {\n    process.send({ type: 'error', output: error })\n    context.done()\n  },\n  /**\n   * Emit closing metrics and end the lambda process\n   */\n  done: () => {\n    process.send({ type: 'metric', output: { memory: util.inspect(process.memoryUsage()) }})\n    process.send({ type: 'metric', output: { time: process.uptime() }})\n    process.exit()\n  }\n}\n\n// Call lambda's handler\nlambda.handler(JSON.parse(process.env.event), context)\n"
   },
   {
     "kind": "variable",
@@ -462,7 +438,7 @@
     "importPath": "template/src/lib/runner.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 4,
+    "lineNumber": 6,
     "undocument": true,
     "type": {
       "types": [
@@ -481,26 +457,25 @@
     "export": false,
     "importPath": "template/src/lib/runner.js",
     "importStyle": null,
-    "description": null,
-    "lineNumber": 7,
-    "undocument": true,
+    "description": "Creates the context object passed to lambdas",
+    "lineNumber": 12,
+    "properties": [
+      {
+        "nullable": null,
+        "types": [
+          "*"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "context",
+        "description": ""
+      }
+    ],
     "type": {
       "types": [
         "*"
       ]
     }
-  },
-  {
-    "kind": "file",
-    "static": true,
-    "variation": null,
-    "name": "src/server.js",
-    "memberof": null,
-    "longname": "src/server.js",
-    "access": null,
-    "description": null,
-    "lineNumber": 2,
-    "content": "/*eslint no-unused-vars:0 */\nimport { app } from './lib/app'\napp({\n  port: 8181,\n  lambdas: './build/lambdas/'\n})\n"
   },
   {
     "kind": "external",

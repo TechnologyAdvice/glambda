@@ -9,13 +9,21 @@ const _ = require('lodash')
 // Setup logs
 log.addTarget('console').withFormatter('human')
 
+// Path to lambda runner
 const runner = path.resolve('build/lib/runner')
 
 // Express setup
 const service = express()
 service.use(bodyParser.json())
 
-// Default config
+/**
+ * Default config object
+ * @property config
+ * @attribute {String} lambdas The path to the lambdas directory
+ * @arrtibute {Number} port The port for the HTTP service
+ * @attribute {String} apiPath The request path for the api
+ * @attribute {Boolean} log Show or repress console output
+ */
 export let config = {
   lambdas: './lambdas',
   port: 8181,
@@ -45,26 +53,35 @@ export const procResponse = (msg, res) => {
 }
 
 /**
- * Builds payload and execs lambda
+ * Builds the `event` payload with the request body and the method of the
+ * call (`operation`). Forks a new runner process to the requested lambda
+ * then awaits messaging from the lambda
  * @param {Object} req Express req object
  * @param {Object} res Express res object
  * @param {String} lambdas Path to the lambdas directory
  */
-const runLambda = (req, res, lambdas) => {
+const runLambda = (req, res) => {
   const evt = req.body
   const lambda = req.params.endpoint
-  // Custom stuff...
+  // Map method to operation param
   evt.operation = req.method
+  // Set lambdas
+  const lambdas = config.lambdas
   // Set event
   const event = JSON.stringify(evt)
   // Execute lambda
   const proc = fork(runner, [ lambda ], { env: { lambdas, event } })
   // Print pid
   procResponse({ type: 'metric', output: `PID ${proc.pid} running ${lambda}` })
-  // Await proc
+  // Await proc messaging
   proc.on('message', (msg) => procResponse(msg, res))
 }
 
+/**
+ * Combines the default config with any passed to init and overrides (lastly)
+ * if there are any environment variables set
+ * @param {Object} [cfg] The config passed through init
+ */
 export const buildConfig = (cfg) => {
   // Against defaults
   _.extend(config, cfg)
@@ -78,12 +95,16 @@ export const buildConfig = (cfg) => {
 }
 
 /**
- * Core app method, binds endpoints and starts listener
- * @param {Object} config Path to the lambdas directory
+ * Initialize testing service, binds endpoints to apiPath, handles the action
+ * (runLambda) on calls and starts listener
+ * @param {Object} [config] Path to the lambdas directory
  */
 export const init = (cfg) => {
+  // Setup config
   buildConfig(cfg)
-  service.all(`${config.apiPath}/:endpoint`, (req, res) => runLambda(req, res, config.lambdas))
+  // Binds to endpoint
+  service.all(`${config.apiPath}/:endpoint`, (req, res) => runLambda(req, res))
+  // Starts service
   service.listen(config.port, () => {
     if (config.log) log.info(`Service running on ${config.port}`)
   })

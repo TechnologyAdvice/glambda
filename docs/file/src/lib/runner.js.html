@@ -37,11 +37,9 @@
   <h2><a href="variable/">Variable</a></h2>
   <ul>
     
-  <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-app">app</a></span></li>
-<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-buildConfig">buildConfig</a></span></li>
+  <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-buildConfig">buildConfig</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-config">config</a></span></li>
-<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-handler">handler</a></span></li>
-<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-handler">handler</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-init">init</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-procResponse">procResponse</a></span></li>
 </ul>
 </div>
@@ -55,18 +53,34 @@
 <pre class="source-code line-number"><code class="prettyprint linenums" data-ice="content">/* eslint no-process-exit: 0 */
 const util = require(&apos;util&apos;)
 const path = require(&apos;path&apos;)
+
+// Sets the lambda from its path
 const lambda = require(path.resolve(`${process.env.lambdas}/${process.argv[2]}/index`))
 
-// Build context object for Lambda
+/**
+ * Creates the context object passed to lambdas
+ * @property context
+ */
 const context = {
+  /**
+   * Emit a success message with output
+   * @param {Object|String} result The contents of the result
+   */
   succeed: (result) =&gt; {
     process.send({ type: &apos;success&apos;, output: result })
     context.done()
   },
+  /**
+   * Emit an error message with output
+   * @param {Object|String} error The error object or message
+   */
   fail: (error) =&gt; {
     process.send({ type: &apos;error&apos;, output: error })
     context.done()
   },
+  /**
+   * Emit closing metrics and end the lambda process
+   */
   done: () =&gt; {
     process.send({ type: &apos;metric&apos;, output: { memory: util.inspect(process.memoryUsage()) }})
     process.send({ type: &apos;metric&apos;, output: { time: process.uptime() }})
