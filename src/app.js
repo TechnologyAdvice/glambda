@@ -79,8 +79,10 @@ const runLambda = (req, res) => {
   const lambdas = config.lambdas
   // Set event
   const event = JSON.stringify(evt)
+  // Pass correct $HOME (helps with ~/.aws credentials)
+  const HOME = process.env.HOME
   // Execute lambda
-  const proc = fork(runner, [ lambda ], { env: { lambdas, event } })
+  const proc = fork(runner, [ lambda ], { env: { lambdas, event, HOME } })
   // Print pid
   procResponse({ type: 'metric', output: `PID ${proc.pid} running ${lambda}` })
   // Await proc messaging
