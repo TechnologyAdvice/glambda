@@ -1,10 +1,10 @@
 /* global expect, request, describe, it, before, after */
 import '../setup'
-import { schema, loadSchema } from '../../src/request'
+import { schema, loadSchema } from '../../src/router'
 
 const schemaPath = './test/gateway.yml'
 
-describe('request', () => {
+describe('router', () => {
 
   describe('setSchema', () => {
 
