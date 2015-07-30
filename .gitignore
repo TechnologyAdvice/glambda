@@ -2,8 +2,6 @@ node_modules/
 logs/
 **/*.log
 
-build/
-
 # Wercker
 _builds
 _projects
