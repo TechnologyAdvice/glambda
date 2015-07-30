@@ -1,4 +1,4 @@
-var glmock = require('../build/lib/app')
+var glmock = require('../build/app')
 
 // Run
 glmock.init({

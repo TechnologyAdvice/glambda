@@ -3,7 +3,7 @@
   "expectCount": 4,
   "actualCount": 4,
   "files": {
-    "src/lib/app.js": {
+    "src/app.js": {
       "expectCount": 4,
       "actualCount": 4
     }

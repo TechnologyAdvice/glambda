@@ -1,26 +1,26 @@
 window.esdocSearchIndex = [
   [
-    "template/src/lib/app.js~buildconfig",
+    "template/src/app.js~buildconfig",
     "variable/index.html#static-variable-buildConfig",
-    "<span>buildConfig</span> <span class=\"search-result-import-path\">template/src/lib/app.js</span>",
+    "<span>buildConfig</span> <span class=\"search-result-import-path\">template/src/app.js</span>",
     "variable"
   ],
   [
-    "template/src/lib/app.js~config",
+    "template/src/app.js~config",
     "variable/index.html#static-variable-config",
-    "<span>config</span> <span class=\"search-result-import-path\">template/src/lib/app.js</span>",
+    "<span>config</span> <span class=\"search-result-import-path\">template/src/app.js</span>",
     "variable"
   ],
   [
-    "template/src/lib/app.js~init",
+    "template/src/app.js~init",
     "variable/index.html#static-variable-init",
-    "<span>init</span> <span class=\"search-result-import-path\">template/src/lib/app.js</span>",
+    "<span>init</span> <span class=\"search-result-import-path\">template/src/app.js</span>",
     "variable"
   ],
   [
-    "template/src/lib/app.js~procresponse",
+    "template/src/app.js~procresponse",
     "variable/index.html#static-variable-procResponse",
-    "<span>procResponse</span> <span class=\"search-result-import-path\">template/src/lib/app.js</span>",
+    "<span>procResponse</span> <span class=\"search-result-import-path\">template/src/app.js</span>",
     "variable"
   ],
   [
@@ -348,15 +348,15 @@ window.esdocSearchIndex = [
     "external"
   ],
   [
-    "src/lib/app.js",
-    "file/src/lib/app.js.html",
-    "src/lib/app.js",
+    "src/app.js",
+    "file/src/app.js.html",
+    "src/app.js",
     "file"
   ],
   [
-    "src/lib/runner.js",
-    "file/src/lib/runner.js.html",
-    "src/lib/runner.js",
+    "src/runner.js",
+    "file/src/runner.js.html",
+    "src/runner.js",
     "file"
   ]
 ]

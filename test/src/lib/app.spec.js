@@ -1,6 +1,6 @@
 /* global expect, request, describe, it, before, after */
 import '../../setup'
-import { init, buildConfig, config } from '../../../src/lib/app'
+import { init, buildConfig, config } from '../../../src/app'
 
 const url = 'http://localhost:8181/api/'
 

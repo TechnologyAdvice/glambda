@@ -10,7 +10,7 @@ const _ = require('lodash')
 log.addTarget('console').withFormatter('human')
 
 // Path to lambda runner
-const runner = path.resolve('build/lib/runner')
+const runner = path.resolve('build/runner')
 
 // Express setup
 const service = express()
@@ -20,7 +20,7 @@ service.use(bodyParser.json())
  * Default config object
  * @property config
  * @attribute {String} lambdas The path to the lambdas directory
- * @arrtibute {Number} port The port for the HTTP service
+ * @attribute {Number} port The port for the HTTP service
  * @attribute {String} apiPath The request path for the api
  * @attribute {Boolean} log Show or repress console output
  */

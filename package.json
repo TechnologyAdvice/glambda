@@ -2,7 +2,7 @@
   "name": "template",
   "version": "1.0.0",
   "description": "",
-  "main": "build/server.js",
+  "main": "build/app.js",
   "scripts": {
     "all": "make",
     "start": "make start",
