@@ -16,6 +16,7 @@
     "test": "make test",
     "lint": "make lint",
     "doc": "make doc",
+    "report": "make report",
     "dev": "make dev"
   },
   "license": "MIT",
@@ -28,6 +29,7 @@
     "eslint": "^0.24.0",
     "mocha": "^2.2.5",
     "nodemon": "^1.4.0",
+    "plato": "^1.5.0",
     "should": "^7.0.2",
     "supertest": "^1.0.1"
   },

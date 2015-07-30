@@ -58,14 +58,18 @@ doc:
 	$(call colorecho, "Building Docs")
 	$(BIN)/esdoc -c esdoc.json
 
+report:
+	$(call colorecho, "Running Static Analysis")
+	$(BIN)/plato -r -d report $(BUILD)
+
 dev: lint test build start
 
 watch:
 	$(call colorecho, "Starting watch")
 	$(BIN)/nodemon --exec "make dev" --watch $(SRC)
 
-all: clean install lint test build doc
+all: clean install lint test build doc report
 
 
 # Phonies
-.PHONY: lint test doc build start
+.PHONY: lint test doc build start report
