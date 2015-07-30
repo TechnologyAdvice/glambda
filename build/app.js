@@ -18,10 +18,19 @@ var _ = require('lodash');
 // Setup logs
 log.addTarget('console').withFormatter('human');
 
-// Path to lambda runner
+// Default path to lambda runner
 var runner = path.resolve(__dirname, './runner');
 
+/**
+ * Allows overriding default runner script
+ * @param {String} runnerPath Path to the runner module
+ */
+var setRunner = function setRunner(runnerPath) {
+  return runner = path.resolve(runnerPath);
+};
+
 // Express setup
+exports.setRunner = setRunner;
 var service = express();
 service.use(bodyParser.json());
 

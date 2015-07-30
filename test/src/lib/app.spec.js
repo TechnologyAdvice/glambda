@@ -1,6 +1,6 @@
 /* global expect, request, describe, it, before, after */
 import '../../setup'
-import { init, buildConfig, config } from '../../../src/app'
+import { init, buildConfig, setRunner, config } from '../../../src/app'
 
 const url = 'http://localhost:8181/api/'
 
@@ -43,6 +43,8 @@ describe('app', () => {
   describe('requests', () => {
 
     before(() => {
+      // Set runner
+      setRunner('./build/runner')
       // Start app
       init({
         port: 8181,

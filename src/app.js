@@ -13,8 +13,14 @@ const _ = require('lodash')
 // Setup logs
 log.addTarget('console').withFormatter('human')
 
-// Path to lambda runner
-const runner = path.resolve(__dirname, './runner')
+// Default path to lambda runner
+let runner = path.resolve(__dirname, './runner')
+
+/**
+ * Allows overriding default runner script
+ * @param {String} runnerPath Path to the runner module
+ */
+export const setRunner = (runnerPath) => runner = path.resolve(runnerPath)
 
 // Express setup
 const service = express()
