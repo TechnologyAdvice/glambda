@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2015 TechnologyAdvice
+ */
+
 // Deps
 const express = require('express')
 const bodyParser = require('body-parser')
