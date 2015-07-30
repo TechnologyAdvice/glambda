@@ -1,0 +1,28 @@
+{
+  "/": {
+    "/apples/{appleId}": {
+      "GET": {
+        "lambda": "apples",
+        "templates": {
+          "application/json": {
+            "id": "$input.params('appleId')",
+            "method": "get",
+            "body": "$input.json('$')"
+          }
+        }
+      }
+    },
+    "/oranges/{orangeId}": {
+      "GET": {
+        "lambda": "oranges",
+        "templates": {
+          "application/json": {
+            "id": "$input.params('orangeId')",
+            "method": "get",
+            "body": "$input.json('$')"
+          }
+        }
+      }
+    }
+  }
+}
