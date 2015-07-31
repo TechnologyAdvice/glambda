@@ -1,3 +1,4 @@
+/* eslint no-param-reassign: 0 */
 const path = require('path')
 const yaml = require('yamljs')
 const log = require('bristol')
@@ -56,7 +57,7 @@ export const walkSchema = (node = schema, prevKey = null) => {
 
 /**
  * Maps template params to route params
- * @param {String} route The route to modify
+ * @param {String} rte The route to modify
  * @param {Object} template The template object to match against
  * @returns {String} The formatted route
  */
@@ -79,19 +80,25 @@ export const mapTemplateParams = (route, template) => {
 
 const buildRoutes = (apiPath, service, runLambda) => {
   // Itterate over routes
-  routes.forEach((route, i) => {
+  routes.forEach((rte) => {
     // Map template params
-    let mappedRoutes = mapTemplateParams(route.route, route.config.templates['application/json'])
-    let lambda = route.config.lambda
-    route.route = mappedRoutes.route
-    route.config.templates['application/json'] = mappedRoutes.template
+    let mappedRoutes = mapTemplateParams(rte.route, rte.config.templates['application/json'])
+    let lambda = rte.config.lambda
+    rte.route = mappedRoutes.route
+    rte.config.templates['application/json'] = mappedRoutes.template
     // Build service method
-    service[route.method.toLowerCase()](apiPath + route.route, (req, res) => {
-      runLambda(lambda, route.config.templates['application/json'], req, res)
+    service[rte.method.toLowerCase()](apiPath + rte.route, (req, res) => {
+      runLambda(lambda, rte.config.templates['application/json'], req, res)
     })
   })
 }
 
+/**
+ * Initializes the routes
+ * @param {String} apiPath Any special API pathing (preceeding route-specific)
+ * @param {Object} service The express service instance
+ * @param {Function} runLambda The lambda runner function
+ */
 export const initRoutes = (apiPath = '', service = {}, runLambda) => {
   // Walk the schema to build routes
   walkSchema(schema)

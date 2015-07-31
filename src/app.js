@@ -67,7 +67,7 @@ export const procResponse = (msg, res) => {
 }
 
 /**
- * Parses the template from gateway and merges in the req.body as it's 
+ * Parses the template from gateway and merges in the req.body as it's
  * intended property for the lambda
  * @param {Object} reqBody The req.body from express request
  * @param {Object} template The gateway template
@@ -137,10 +137,10 @@ export const buildConfig = (cfg) => {
 export const init = (cfg) => {
   // Setup config
   buildConfig(cfg)
+  // Load schema into router
   loadSchema(config.schema)
+  // Initialize all routes from gateway schema
   initRoutes(config.apiPath, service, runLambda)
-  // Binds to endpoint
-  //service.all(`${config.apiPath}/:endpoint`, (req, res) => runLambda(req, res))
   // Starts service
   service.listen(config.port, () => {
     if (config.log) log.info(`Service running on ${config.port}`)
