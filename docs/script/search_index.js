@@ -1,92 +1,92 @@
 window.esdocSearchIndex = [
   [
-    "gateway-lambda/src/app.js~buildconfig",
+    "glambda/src/app.js~buildconfig",
     "variable/index.html#static-variable-buildConfig",
-    "<span>buildConfig</span> <span class=\"search-result-import-path\">gateway-lambda/src/app.js</span>",
+    "<span>buildConfig</span> <span class=\"search-result-import-path\">glambda/src/app.js</span>",
     "variable"
   ],
   [
-    "gateway-lambda/src/app.js~config",
+    "glambda/src/app.js~config",
     "variable/index.html#static-variable-config",
-    "<span>config</span> <span class=\"search-result-import-path\">gateway-lambda/src/app.js</span>",
+    "<span>config</span> <span class=\"search-result-import-path\">glambda/src/app.js</span>",
     "variable"
   ],
   [
-    "gateway-lambda/src/app.js~init",
+    "glambda/src/app.js~init",
     "variable/index.html#static-variable-init",
-    "<span>init</span> <span class=\"search-result-import-path\">gateway-lambda/src/app.js</span>",
+    "<span>init</span> <span class=\"search-result-import-path\">glambda/src/app.js</span>",
     "variable"
   ],
   [
-    "gateway-lambda/src/router.js~initroutes",
+    "glambda/src/router.js~initroutes",
     "variable/index.html#static-variable-initRoutes",
-    "<span>initRoutes</span> <span class=\"search-result-import-path\">gateway-lambda/src/router.js</span>",
+    "<span>initRoutes</span> <span class=\"search-result-import-path\">glambda/src/router.js</span>",
     "variable"
   ],
   [
-    "gateway-lambda/src/router.js~loadschema",
+    "glambda/src/router.js~loadschema",
     "variable/index.html#static-variable-loadSchema",
-    "<span>loadSchema</span> <span class=\"search-result-import-path\">gateway-lambda/src/router.js</span>",
+    "<span>loadSchema</span> <span class=\"search-result-import-path\">glambda/src/router.js</span>",
     "variable"
   ],
   [
-    "gateway-lambda/src/app.js~log",
+    "glambda/src/app.js~log",
     "variable/index.html#static-variable-log",
-    "<span>log</span> <span class=\"search-result-import-path\">gateway-lambda/src/app.js</span>",
+    "<span>log</span> <span class=\"search-result-import-path\">glambda/src/app.js</span>",
     "variable"
   ],
   [
-    "gateway-lambda/src/router.js~maptemplateparams",
+    "glambda/src/router.js~maptemplateparams",
     "variable/index.html#static-variable-mapTemplateParams",
-    "<span>mapTemplateParams</span> <span class=\"search-result-import-path\">gateway-lambda/src/router.js</span>",
+    "<span>mapTemplateParams</span> <span class=\"search-result-import-path\">glambda/src/router.js</span>",
     "variable"
   ],
   [
-    "gateway-lambda/src/app.js~parsebody",
+    "glambda/src/app.js~parsebody",
     "variable/index.html#static-variable-parseBody",
-    "<span>parseBody</span> <span class=\"search-result-import-path\">gateway-lambda/src/app.js</span>",
+    "<span>parseBody</span> <span class=\"search-result-import-path\">glambda/src/app.js</span>",
     "variable"
   ],
   [
-    "gateway-lambda/src/app.js~procresponse",
+    "glambda/src/app.js~procresponse",
     "variable/index.html#static-variable-procResponse",
-    "<span>procResponse</span> <span class=\"search-result-import-path\">gateway-lambda/src/app.js</span>",
+    "<span>procResponse</span> <span class=\"search-result-import-path\">glambda/src/app.js</span>",
     "variable"
   ],
   [
-    "gateway-lambda/src/router.js~routes",
+    "glambda/src/router.js~routes",
     "variable/index.html#static-variable-routes",
-    "<span>routes</span> <span class=\"search-result-import-path\">gateway-lambda/src/router.js</span>",
+    "<span>routes</span> <span class=\"search-result-import-path\">glambda/src/router.js</span>",
     "variable"
   ],
   [
-    "gateway-lambda/src/app.js~runlambda",
+    "glambda/src/app.js~runlambda",
     "variable/index.html#static-variable-runLambda",
-    "<span>runLambda</span> <span class=\"search-result-import-path\">gateway-lambda/src/app.js</span>",
+    "<span>runLambda</span> <span class=\"search-result-import-path\">glambda/src/app.js</span>",
     "variable"
   ],
   [
-    "gateway-lambda/src/router.js~schema",
+    "glambda/src/router.js~schema",
     "variable/index.html#static-variable-schema",
-    "<span>schema</span> <span class=\"search-result-import-path\">gateway-lambda/src/router.js</span>",
+    "<span>schema</span> <span class=\"search-result-import-path\">glambda/src/router.js</span>",
     "variable"
   ],
   [
-    "gateway-lambda/src/app.js~service",
+    "glambda/src/app.js~service",
     "variable/index.html#static-variable-service",
-    "<span>service</span> <span class=\"search-result-import-path\">gateway-lambda/src/app.js</span>",
+    "<span>service</span> <span class=\"search-result-import-path\">glambda/src/app.js</span>",
     "variable"
   ],
   [
-    "gateway-lambda/src/app.js~setrunner",
+    "glambda/src/app.js~setrunner",
     "variable/index.html#static-variable-setRunner",
-    "<span>setRunner</span> <span class=\"search-result-import-path\">gateway-lambda/src/app.js</span>",
+    "<span>setRunner</span> <span class=\"search-result-import-path\">glambda/src/app.js</span>",
     "variable"
   ],
   [
-    "gateway-lambda/src/router.js~walkschema",
+    "glambda/src/router.js~walkschema",
     "variable/index.html#static-variable-walkSchema",
-    "<span>walkSchema</span> <span class=\"search-result-import-path\">gateway-lambda/src/router.js</span>",
+    "<span>walkSchema</span> <span class=\"search-result-import-path\">glambda/src/router.js</span>",
     "variable"
   ],
   [

@@ -60,7 +60,8 @@
 
 </nav>
 
-<div class="content" data-ice="content"><div data-ice="index"><h1 id="gateway-lambda-testing-module">Gateway + Lambda Testing Module</h1>
+<div class="content" data-ice="content"><div data-ice="index"><h1 id="glambda">GLambda</h1>
+<h3 id="aws-gateway-lambda-testing-module">AWS Gateway + Lambda Testing Module</h3>
 <p>A module for mocking and testing AWS <a href="http://aws.amazon.com/api-gateway/">API Gateway</a>
 in conjunction with <a href="http://aws.amazon.com/lambda/">Lambda</a> functions.</p>
 <h2 id="introduction">Introduction</h2>
@@ -71,7 +72,7 @@ file. The tests run against this configuration as well.</p>
 <p>After installing the npm module simply include it in a file where it will run and
 set any config options on <code>init</code>:</p>
 <pre><code class="lang-javascript"><pre class="source-code"><code class="prettyprint">// Include the module
-var glmock = require(&apos;gateway-lambda&apos;)
+var glmock = require(&apos;glambda&apos;)
 // Set options and init
 glmock.init({
   lambdas: &apos;./lambdas&apos;,
