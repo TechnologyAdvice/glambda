@@ -17,7 +17,7 @@
   <a href="identifiers.html">Identifier</a>
   <a href="source.html">Source</a>
   
-  
+  <a data-ice="repoURL" href="https://github.com/TechnologyAdvice/gateway-lambda" class="repo-url-github">Repository</a>
   <div class="search-box">
   <span>
     <img src="./image/search.png">
@@ -40,7 +40,18 @@
   <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-buildConfig">buildConfig</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-config">config</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-init">init</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-initRoutes">initRoutes</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-loadSchema">loadSchema</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-log">log</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-mapTemplateParams">mapTemplateParams</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-parseBody">parseBody</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-procResponse">procResponse</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-routes">routes</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-runLambda">runLambda</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-schema">schema</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-service">service</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-setRunner">setRunner</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-walkSchema">walkSchema</a></span></li>
 </ul>
 </div>
 
@@ -49,39 +60,117 @@
 
 </nav>
 
-<div class="content" data-ice="content"><div data-ice="index"><h1 id="gateway-lambda-dev-environment">Gateway + Lambda Dev Environment</h1>
-<p>This project establishes a mock of the workflow and components for creating
-projects utilizing API Gateway with Lambda functions.</p>
-<p>The core concept is to create a workflow which mimics any staging/production
-deploys while minimizing the need for any special flags or configurations. This
-is achieved by separating the Gateway as a (local) express service which triggers
-Lambdas to run as their own processes.</p>
-<h2 id="todo-s">TODO&apos;s</h2>
+<div class="content" data-ice="content"><div data-ice="index"><h1 id="gateway-lambda-testing-module">Gateway + Lambda Testing Module</h1>
+<p>A module for mocking and testing AWS <a href="http://aws.amazon.com/api-gateway/">API Gateway</a>
+in conjunction with <a href="http://aws.amazon.com/lambda/">Lambda</a> functions.</p>
+<h2 id="introduction">Introduction</h2>
+<h2 id="setup">Setup</h2>
+<p>To see a fully functional demo, see the <a href="/test"><code>/test</code></a> directory. The <code>index.js</code>
+file is setup to run using the <a href="/test/lambdas"><code>lambdas</code></a> and the <a href="/test/gateway.yml"><code>gateway.yml</code></a>
+file. The tests run against this configuration as well.</p>
+<p>After installing the npm module simply include it in a file where it will run and
+set any config options on <code>init</code>:</p>
+<pre><code class="lang-javascript"><pre class="source-code"><code class="prettyprint">// Include the module
+var glmock = require(&apos;gateway-lambda&apos;)
+// Set options and init
+glmock.init({
+  lambdas: &apos;./lambdas&apos;,
+  schema: &apos;./gateway.yml&apos;,
+  port: 8181,
+  apiPath: &apos;/api&apos;,
+  log: true
+})</code></pre>
+</code></pre>
+<p>The above shows a standard set of config options:</p>
 <ul>
-<li>Expand console output to include memory for perf analysis</li>
-<li>Create Gateway config for mocking endpoints<ul>
-<li>Match Gateway conventions for consistency</li>
-<li>Modify express routing to respond to config</li>
+<li><code>lambdas</code>: Path to the directory containing lambdas</li>
+<li><code>schema</code>: Path to the API gateway YAML config</li>
+<li><code>port</code>: Port on which the HTTP server will run</li>
+<li><code>apiPath</code>: Any path (proceeding root) to include in HTTP requests mapping</li>
+<li><code>log</code>: Wether or not to log to console</li>
 </ul>
-</li>
-<li>Mock integration tests</li>
-<li>Mock system tests</li>
-</ul>
-<h2 id="getting-started">Getting Started</h2>
-<p>Simply run <code>make</code> then <code>make dev</code>. To run interactive (auto-reload) run <code>make watch</code>.</p>
-<p>The repo comes with 2 lambdas which correspond to endpoints: <code>apples</code> and <code>oranges</code>.
-These can be tested by running <code>curl http://localhost:8181/api/apples</code> and will
-respond with the name of the lambda and the event object.</p>
-<p>Sending <code>POST</code> or <code>PUT</code> with <code>Content-Type: application/json</code> headers and a JSON
-body will include the params in the returned object.</p>
-<h2 id="testing">Testing</h2>
-<p>The workflow focuses on separation of testing into the three main components at
-distinct positions:</p>
-<ul>
-<li><strong>Unit</strong>: Testing of the individual Lambdas internal to the project</li>
-<li><strong>Integration</strong>: Testing the API with mock data and mock endpoints/lambdas</li>
-<li><strong>System</strong>: Testing the API via local DB and model endpoints</li>
-</ul>
+<p>Simply running the file created above will spin up the service, then accessing
+the endpoints via the corresponding lambda name will spawn the Lambda function
+and return its results.</p>
+<h2 id="the-gateway-yaml-configuration">The Gateway YAML Configuration</h2>
+<p>The <a href="/test/gateway.yml"><code>gateway.yml</code></a> format was designed to closely match the
+AWS <a href="http://aws.amazon.com/api-gateway/">API Gateway</a>. The structure is intended
+to appear similar to the Resource (left-hand) pane when editing an API in the
+web interface.</p>
+<pre><code class="lang-YAML"><pre class="source-code"><code class="prettyprint">---
+  /:
+    /foo:
+      GET:
+          lambda: &quot;foo&quot;
+          templates:
+            application/json:
+              method: &quot;get&quot;
+      POST:
+          lambda: &quot;foo&quot;
+          templates:
+            application/json:
+              method: &quot;post&quot;
+              body: &quot;$input.json(&apos;$&apos;)&quot;
+      /foo/{fooId}:
+        GET:
+          lambda: &quot;foo&quot;
+          templates:
+            application/json:
+              id: &quot;$input.params(&apos;fooId&apos;)&quot;
+              method: &quot;get&quot;
+        PUT:
+          lambda: &quot;foo&quot;
+          templates:
+            application/json:
+              id: &quot;$input.params(&apos;fooId&apos;)&quot;
+              baz: &quot;quz&quot;
+              body: &quot;$input.json(&apos;$&apos;)&quot;</code></pre>
+</code></pre>
+<p>It&apos;s simple to identify the core nodes of the tree, i.e. the paths of the requests
+and their associated methods. To explain, the following shows results of a number
+of requests made against the above configuration:</p>
+<table>
+<thead>
+<tr>
+<th>PATH</th>
+<th>METHOD</th>
+<th>BODY</th>
+<th>RESPONSE/EVENT</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td>/</td>
+<td>ANY</td>
+<td>N/A</td>
+<td><code>METHOD NOT ALLOWED</code></td>
+</tr>
+<tr>
+<td>/foo</td>
+<td>GET</td>
+<td>N/A</td>
+<td><code>{ method: &apos;get&apos; }</code></td>
+</tr>
+<tr>
+<td>/foo</td>
+<td>POST</td>
+<td><code>{ fizz: &apos;buzz&apos; }</code></td>
+<td><code>{ method: &apos;post&apos;, body: { fizz: &apos;buzz&apos; }</code></td>
+</tr>
+<tr>
+<td>/foo/123</td>
+<td>GET</td>
+<td>N/A</td>
+<td><code>{ method: &apos;get&apos;, fooId: 123 }</code></td>
+</tr>
+<tr>
+<td>/foo/123</td>
+<td>PUT</td>
+<td><code>{ baz: &apos;quz&apos; }</code></td>
+<td><code>{ method: &apos;put&apos;, fooId: 123, body: { baz: &apos;quz&apos; } }</code></td>
+</tr>
+</tbody>
+</table>
 <h2 id="makefile-and-scripts">Makefile and Scripts</h2>
 <p>A <code>Makefile</code> is included for managing build and install tasks. The commands are
 then referenced in the <code>package.json</code> <code>scripts</code> if that is the preferred
@@ -89,11 +178,12 @@ task method:</p>
 <ul>
 <li><code>all</code> (default) will run all build tasks</li>
 <li><code>start</code> will run the main script</li>
-<li><code>clean</code> will remove the <code>/dist</code> and <code>/node_modules</code> directories</li>
-<li><code>build</code> will transpile ES2015 code in <code>/src</code> to <code>/dist</code></li>
+<li><code>clean</code> will remove the <code>/build</code> and <code>/node_modules</code> directories</li>
+<li><code>build</code> will transpile ES2015 code in <code>/src</code> to <code>/build</code></li>
 <li><code>test</code> will run all spec files in <code>/test/src</code></li>
 <li><code>lint</code> will lint all files in <code>/src</code></li>
 <li><code>doc</code> will run ESDoc on all files in <code>/src</code> and output to <code>/docs</code></li>
+<li><code>report</code> will run Plato static analysis on <code>/build</code> and output to <code>/report</code></li>
 <li><code>dev</code> will run...<ul>
 <li>linting, then...</li>
 <li>tests, then...</li>

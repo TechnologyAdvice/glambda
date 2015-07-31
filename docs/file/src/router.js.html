@@ -1,0 +1,185 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <base data-ice="baseUrl" href="../../">
+  <title data-ice="title">src/router.js | API Document</title>
+  <link type="text/css" rel="stylesheet" href="css/style.css">
+  <link type="text/css" rel="stylesheet" href="css/prettify-tomorrow.css">
+  <script src="script/prettify/prettify.js"></script>
+  
+  
+</head>
+<body class="layout-container">
+
+<header>
+  <a href="./">Home</a>
+  <a href="identifiers.html">Identifier</a>
+  <a href="source.html">Source</a>
+  
+  <a data-ice="repoURL" href="https://github.com/TechnologyAdvice/gateway-lambda" class="repo-url-github">Repository</a>
+  <div class="search-box">
+  <span>
+    <img src="./image/search.png">
+    <span class="search-input-edge"></span><input class="search-input"><span class="search-input-edge"></span>
+  </span>
+    <ul class="search-result"></ul>
+  </div>
+</header>
+
+<nav class="navigation" data-ice="nav">
+
+
+
+
+
+<div data-ice="variableWrap">
+  <h2><a href="variable/">Variable</a></h2>
+  <ul>
+    
+  <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-buildConfig">buildConfig</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-config">config</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-init">init</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-initRoutes">initRoutes</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-loadSchema">loadSchema</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-log">log</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-mapTemplateParams">mapTemplateParams</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-parseBody">parseBody</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-procResponse">procResponse</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-routes">routes</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-runLambda">runLambda</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-schema">schema</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-service">service</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-setRunner">setRunner</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-walkSchema">walkSchema</a></span></li>
+</ul>
+</div>
+
+
+
+
+</nav>
+
+<div class="content" data-ice="content"><h1 data-ice="title">src/router.js</h1>
+<pre class="source-code line-number"><code class="prettyprint linenums" data-ice="content">/* eslint no-param-reassign: 0 */
+const path = require(&apos;path&apos;)
+const yaml = require(&apos;yamljs&apos;)
+const _ = require(&apos;lodash&apos;)
+
+import { config, log, service, runLambda } from &apos;./app&apos;
+
+/**
+ * Placeholder for schema object
+ * @parameter {Object} schema
+ */
+export let schema = null
+
+/**
+ * Placeholder for routes array
+ * @parameter {Array} routes
+ */
+export let routes = []
+
+
+/**
+ * Loads the schema from specified file
+ * @param {String} file The file path of the Gateway schema
+ */
+export const loadSchema = (file) =&gt; {
+  schema = yaml.load(path.resolve(file))
+}
+
+/**
+ * Walks schema to look for methods, when a method is found it creates a route
+ * with the parent node key (the path), the current method, and the properties
+ * of that method
+ * @param {Object} node The node to traverse
+ * @param {String} prevKey The key of the previous traversal for accessing parent/path
+ */
+export const walkSchema = (node = schema, prevKey = null) =&gt; {
+  // Methods indicate traversal stops
+  const methods = [ &apos;GET&apos;, &apos;POST&apos;, &apos;PUT&apos;, &apos;DELETE&apos;, &apos;HEAD&apos;, &apos;OPTIONS&apos;, &apos;PATCH&apos; ]
+  for (let prop in node) {
+    // Ensure prop
+    if ({}.hasOwnProperty.call(node, prop)) {
+      if (methods.indexOf(prop) &gt;= 0) {
+        // Node is a method, push to router
+        routes.push({ route: prevKey, method: prop, config: node[prop] })
+      } else if (_.isObject(node[prop])) {
+        // Route node, traverse
+        walkSchema(node[prop], prop)
+      } else {
+        log.error(&apos;Invalid property in gateway config&apos;, { property: prevKey + &apos;&gt; &apos; + prop })
+        return
+      }
+    }
+  }
+}
+
+/**
+ * Maps template params to route params
+ * @param {String} rte The route to modify
+ * @param {Object} template The template object to match against
+ * @returns {String} The formatted route
+ */
+export const mapTemplateParams = (route, template) =&gt; {
+  for (let prop in template) {
+    if ({}.hasOwnProperty.call(template, prop)) {
+      if (template[prop].indexOf(`$input.params(&apos;`) &gt;= 0) {
+        // Remove wrapper
+        let param = template[prop].replace(`$input.params(&apos;`, &apos;&apos;).replace(`&apos;)`, &apos;&apos;)
+        // Replace any occurences with express-param version of template param name
+        route = route.replace(`{${param}}`, `:${prop}`)
+        // Remove entry from template
+        delete template[prop]
+      }
+    }
+  }
+  // Return modified route and template
+  return { route, template }
+}
+
+/**
+ * Builds routes and adds to the express service by mapping template params to
+ * the path/route then binding to runLambda method
+ */
+const buildRoutes = () =&gt; {
+  // Itterate over routes
+  routes.forEach((rte) =&gt; {
+    // Map template params
+    let mappedRoutes = mapTemplateParams(rte.route, rte.config.templates[&apos;application/json&apos;])
+    let lambda = rte.config.lambda
+    rte.route = mappedRoutes.route
+    rte.config.templates[&apos;application/json&apos;] = mappedRoutes.template
+    // Build service method
+    service[rte.method.toLowerCase()](config.apiPath + rte.route, (req, res) =&gt; {
+      runLambda(lambda, rte.config.templates[&apos;application/json&apos;], req, res)
+    })
+  })
+}
+
+/**
+ * Initializes the routes
+ */
+export const initRoutes = () =&gt; {
+  // Walk the schema to build routes
+  walkSchema(schema)
+  // Map params and build express routes
+  buildRoutes()
+}
+</code></pre>
+</div>
+
+<footer class="footer">
+  Generated by <a href="https://esdoc.org">ESDoc<span data-ice="esdocVersion">(0.1.4)</span></a>
+</footer>
+
+<script src="script/search_index.js"></script>
+<script src="script/search.js"></script>
+<script src="script/pretty-print.js"></script>
+<script src="script/inherited-summary.js"></script>
+<script src="script/test-summary.js"></script>
+<script src="script/inner-link.js"></script>
+<script src="script/patch-for-local.js"></script>
+</body>
+</html>

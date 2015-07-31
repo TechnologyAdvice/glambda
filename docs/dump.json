@@ -8,8 +8,8 @@
     "longname": "src/app.js",
     "access": null,
     "description": null,
-    "lineNumber": 2,
-    "content": "// Deps\nconst express = require('express')\nconst bodyParser = require('body-parser')\nconst fork = require('child_process').fork\nconst path = require('path')\nconst log = require('bristol')\nconst _ = require('lodash')\n\n// Setup logs\nlog.addTarget('console').withFormatter('human')\n\n// Path to lambda runner\nconst runner = path.resolve('build/runner')\n\n// Express setup\nconst service = express()\nservice.use(bodyParser.json())\n\n/**\n * Default config object\n * @property config\n * @attribute {String} lambdas The path to the lambdas directory\n * @attribute {Number} port The port for the HTTP service\n * @attribute {String} apiPath The request path for the api\n * @attribute {Boolean} log Show or repress console output\n */\nexport let config = {\n  lambdas: './lambdas',\n  port: 8181,\n  apiPath: '/api',\n  log: true\n}\n\n/**\n * Handles response from forked lambda runner procs\n * @param {Object} msg Message object from child proc\n * @param {Object} [res] Express response object\n */\nexport const procResponse = (msg, res) => {\n  switch (msg.type) {\n    case 'metric':\n      if (config.log) log.info(msg.output)\n      break\n    case 'success':\n      res.status(200).send(msg.output)\n      break\n    case 'error':\n      res.status(500).send(msg.output)\n      break\n    default:\n      log.error('Missing response type')\n  }\n}\n\n/**\n * Builds the `event` payload with the request body and the method of the\n * call (`operation`). Forks a new runner process to the requested lambda\n * then awaits messaging from the lambda\n * @param {Object} req Express req object\n * @param {Object} res Express res object\n * @param {String} lambdas Path to the lambdas directory\n */\nconst runLambda = (req, res) => {\n  const evt = req.body\n  const lambda = req.params.endpoint\n  // Map method to operation param\n  evt.operation = req.method\n  // Set lambdas\n  const lambdas = config.lambdas\n  // Set event\n  const event = JSON.stringify(evt)\n  // Execute lambda\n  const proc = fork(runner, [ lambda ], { env: { lambdas, event } })\n  // Print pid\n  procResponse({ type: 'metric', output: `PID ${proc.pid} running ${lambda}` })\n  // Await proc messaging\n  proc.on('message', (msg) => procResponse(msg, res))\n}\n\n/**\n * Combines the default config with any passed to init and overrides (lastly)\n * if there are any environment variables set\n * @param {Object} [cfg] The config passed through init\n */\nexport const buildConfig = (cfg) => {\n  // Against defaults\n  _.extend(config, cfg)\n  // Against env vars\n  for (let prop in config) {\n    if ({}.hasOwnProperty.call(config, prop)) {\n      let envVar = process.env['GL_' + prop.toUpperCase()]\n      if (envVar) config[prop] = envVar\n    }\n  }\n}\n\n/**\n * Initialize testing service, binds endpoints to apiPath, handles the action\n * (runLambda) on calls and starts listener\n * @param {Object} [config] Path to the lambdas directory\n */\nexport const init = (cfg) => {\n  // Setup config\n  buildConfig(cfg)\n  // Binds to endpoint\n  service.all(`${config.apiPath}/:endpoint`, (req, res) => runLambda(req, res))\n  // Starts service\n  service.listen(config.port, () => {\n    if (config.log) log.info(`Service running on ${config.port}`)\n  })\n}\n"
+    "lineNumber": 6,
+    "content": "/*\n * Copyright (c) 2015 TechnologyAdvice\n */\n\n// Deps\nconst express = require('express')\nconst bodyParser = require('body-parser')\nconst fork = require('child_process').fork\nconst path = require('path')\nconst _ = require('lodash')\n\n// Setup logs\nexport const log = require('bristol')\nlog.addTarget('console').withFormatter('human')\n\n// Default path to lambda runner\nlet runner = path.resolve(__dirname, './runner')\n\n// Import router\nimport { loadSchema, initRoutes } from './router'\n\n/**\n * Allows overriding default runner script\n * @param {String} runnerPath Path to the runner module\n */\nexport const setRunner = (runnerPath) => runner = path.resolve(runnerPath)\n\n// Express setup\nexport const service = express()\nservice.use(bodyParser.json())\n\n/**\n * Default config object\n * @property config\n * @attribute {String} lambdas The path to the lambdas directory\n * @attribute {Number} port The port for the HTTP service\n * @attribute {String} apiPath The request path for the api\n * @attribute {Boolean} log Show or repress console output\n */\nexport let config = {\n  lambdas: './lambdas',\n  schema: './gateway.yml',\n  port: 8181,\n  apiPath: '/api',\n  log: true\n}\n\n/**\n * Handles response from forked lambda runner procs\n * @param {Object} msg Message object from child proc\n * @param {Object} [res] Express response object\n */\nexport const procResponse = (msg, res) => {\n  switch (msg.type) {\n    case 'metric':\n      if (config.log) log.info(msg.output)\n      break\n    case 'success':\n      res.status(200).send(msg.output)\n      break\n    case 'error':\n      res.status(500).send(msg.output)\n      break\n    default:\n      log.error('Missing response type')\n  }\n}\n\n/**\n * Parses the template from gateway and merges in the req.body as it's\n * intended property for the lambda\n * @param {Object} reqBody The req.body from express request\n * @param {Object} template The gateway template\n * @returns {Object} the full event to be passed to the Lambda\n */\nexport const parseBody = (reqBody = {}, template) => {\n  let tmpBody = {}\n  for (let prop in template) {\n    if ({}.hasOwnProperty.call(template, prop)) {\n      if (template[prop] === `$input.json('$')`) {\n        // Replace prop with req.body\n        tmpBody[prop] = reqBody\n      } else {\n        // Custom pass-throughs\n        tmpBody[prop] = template[prop]\n      }\n    }\n  }\n  return tmpBody\n}\n\n/**\n * Builds the `event` payload with the request body and the method of the\n * call (`operation`). Forks a new runner process to the requested lambda\n * then awaits messaging from the lambda\n * @param {Object} req Express req object\n * @param {Object} res Express res object\n * @param {String} lambdas Path to the lambdas directory\n */\nexport const runLambda = (lambda, template, req, res) => {\n  // Parse body against template\n  const body = parseBody(req.body, template)\n  // Build event by extending body with params\n  const event = JSON.stringify(_.extend(body, req.params))\n  // Set lambdas\n  const lambdas = config.lambdas\n  // Pass correct $HOME (helps with ~/.aws credentials)\n  const HOME = process.env.HOME\n  // Execute lambda\n  const proc = fork(runner, [ lambda ], { env: { lambdas, event, HOME } })\n  // Print pid\n  procResponse({ type: 'metric', output: `PID ${proc.pid} running ${lambda}` })\n  // Await proc messaging\n  proc.on('message', (msg) => procResponse(msg, res))\n}\n\n/**\n * Combines the default config with any passed to init and overrides (lastly)\n * if there are any environment variables set\n * @param {Object} [cfg] The config passed through init\n */\nexport const buildConfig = (cfg) => {\n  // Against defaults\n  _.extend(config, cfg)\n  // Against env vars\n  for (let prop in config) {\n    if ({}.hasOwnProperty.call(config, prop)) {\n      let envVar = process.env['GL_' + prop.toUpperCase()]\n      if (envVar) config[prop] = envVar\n    }\n  }\n}\n\n/**\n * Initialize testing service, binds endpoints to apiPath, handles the action\n * (runLambda) on calls and starts listener\n * @param {Object} [config] Path to the lambdas directory\n */\nexport const init = (cfg) => {\n  // Setup config\n  buildConfig(cfg)\n  // Load schema into router\n  loadSchema(config.schema)\n  // Initialize all routes from gateway schema\n  initRoutes()\n  // Starts service\n  service.listen(config.port, () => {\n    if (config.log) log.info(`Service running on ${config.port}`)\n  })\n}\n"
   },
   {
     "kind": "variable",
@@ -20,10 +20,10 @@
     "longname": "src/app.js~express",
     "access": null,
     "export": false,
-    "importPath": "template/src/app.js",
+    "importPath": "gateway-lambda/src/app.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 2,
+    "lineNumber": 6,
     "undocument": true,
     "type": {
       "types": [
@@ -40,10 +40,10 @@
     "longname": "src/app.js~bodyParser",
     "access": null,
     "export": false,
-    "importPath": "template/src/app.js",
+    "importPath": "gateway-lambda/src/app.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 3,
+    "lineNumber": 7,
     "undocument": true,
     "type": {
       "types": [
@@ -60,10 +60,10 @@
     "longname": "src/app.js~fork",
     "access": null,
     "export": false,
-    "importPath": "template/src/app.js",
+    "importPath": "gateway-lambda/src/app.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 4,
+    "lineNumber": 8,
     "undocument": true,
     "type": {
       "types": [
@@ -80,30 +80,10 @@
     "longname": "src/app.js~path",
     "access": null,
     "export": false,
-    "importPath": "template/src/app.js",
+    "importPath": "gateway-lambda/src/app.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 5,
-    "undocument": true,
-    "type": {
-      "types": [
-        "*"
-      ]
-    }
-  },
-  {
-    "kind": "variable",
-    "static": true,
-    "variation": null,
-    "name": "log",
-    "memberof": "src/app.js",
-    "longname": "src/app.js~log",
-    "access": null,
-    "export": false,
-    "importPath": "template/src/app.js",
-    "importStyle": null,
-    "description": null,
-    "lineNumber": 6,
+    "lineNumber": 9,
     "undocument": true,
     "type": {
       "types": [
@@ -120,10 +100,30 @@
     "longname": "src/app.js~_",
     "access": null,
     "export": false,
-    "importPath": "template/src/app.js",
+    "importPath": "gateway-lambda/src/app.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 7,
+    "lineNumber": 10,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "log",
+    "memberof": "src/app.js",
+    "longname": "src/app.js~log",
+    "access": null,
+    "export": true,
+    "importPath": "gateway-lambda/src/app.js",
+    "importStyle": "{log}",
+    "description": null,
+    "lineNumber": 13,
     "undocument": true,
     "type": {
       "types": [
@@ -140,11 +140,42 @@
     "longname": "src/app.js~runner",
     "access": null,
     "export": false,
-    "importPath": "template/src/app.js",
+    "importPath": "gateway-lambda/src/app.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 13,
+    "lineNumber": 17,
     "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "setRunner",
+    "memberof": "src/app.js",
+    "longname": "src/app.js~setRunner",
+    "access": null,
+    "export": true,
+    "importPath": "gateway-lambda/src/app.js",
+    "importStyle": "{setRunner}",
+    "description": "Allows overriding default runner script",
+    "lineNumber": 26,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "runnerPath",
+        "description": "Path to the runner module"
+      }
+    ],
     "type": {
       "types": [
         "*"
@@ -159,11 +190,11 @@
     "memberof": "src/app.js",
     "longname": "src/app.js~service",
     "access": null,
-    "export": false,
-    "importPath": "template/src/app.js",
-    "importStyle": null,
+    "export": true,
+    "importPath": "gateway-lambda/src/app.js",
+    "importStyle": "{service}",
     "description": null,
-    "lineNumber": 16,
+    "lineNumber": 29,
     "undocument": true,
     "type": {
       "types": [
@@ -180,10 +211,10 @@
     "longname": "src/app.js~config",
     "access": null,
     "export": true,
-    "importPath": "template/src/app.js",
+    "importPath": "gateway-lambda/src/app.js",
     "importStyle": "{config}",
     "description": "Default config object",
-    "lineNumber": 27,
+    "lineNumber": 40,
     "unknown": [
       {
         "tagName": "@attribute",
@@ -229,10 +260,10 @@
     "longname": "src/app.js~procResponse",
     "access": null,
     "export": true,
-    "importPath": "template/src/app.js",
+    "importPath": "gateway-lambda/src/app.js",
     "importStyle": "{procResponse}",
     "description": "Handles response from forked lambda runner procs",
-    "lineNumber": 39,
+    "lineNumber": 53,
     "params": [
       {
         "nullable": null,
@@ -265,15 +296,70 @@
     "kind": "variable",
     "static": true,
     "variation": null,
+    "name": "parseBody",
+    "memberof": "src/app.js",
+    "longname": "src/app.js~parseBody",
+    "access": null,
+    "export": true,
+    "importPath": "gateway-lambda/src/app.js",
+    "importStyle": "{parseBody}",
+    "description": "Parses the template from gateway and merges in the req.body as it's\nintended property for the lambda",
+    "lineNumber": 76,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{Object} the full event to be passed to the Lambda"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "reqBody",
+        "description": "The req.body from express request"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "template",
+        "description": "The gateway template"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "Object"
+      ],
+      "spread": false,
+      "description": "the full event to be passed to the Lambda"
+    },
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "kind": "variable",
+    "static": true,
+    "variation": null,
     "name": "runLambda",
     "memberof": "src/app.js",
     "longname": "src/app.js~runLambda",
     "access": null,
-    "export": false,
-    "importPath": "template/src/app.js",
-    "importStyle": null,
+    "export": true,
+    "importPath": "gateway-lambda/src/app.js",
+    "importStyle": "{runLambda}",
     "description": "Builds the `event` payload with the request body and the method of the\ncall (`operation`). Forks a new runner process to the requested lambda\nthen awaits messaging from the lambda",
-    "lineNumber": 63,
+    "lineNumber": 100,
     "params": [
       {
         "nullable": null,
@@ -321,10 +407,10 @@
     "longname": "src/app.js~buildConfig",
     "access": null,
     "export": true,
-    "importPath": "template/src/app.js",
+    "importPath": "gateway-lambda/src/app.js",
     "importStyle": "{buildConfig}",
     "description": "Combines the default config with any passed to init and overrides (lastly)\nif there are any environment variables set",
-    "lineNumber": 85,
+    "lineNumber": 122,
     "params": [
       {
         "nullable": null,
@@ -352,10 +438,10 @@
     "longname": "src/app.js~init",
     "access": null,
     "export": true,
-    "importPath": "template/src/app.js",
+    "importPath": "gateway-lambda/src/app.js",
     "importStyle": "{init}",
     "description": "Initialize testing service, binds endpoints to apiPath, handles the action\n(runLambda) on calls and starts listener",
-    "lineNumber": 102,
+    "lineNumber": 139,
     "params": [
       {
         "nullable": null,
@@ -378,13 +464,300 @@
     "kind": "file",
     "static": true,
     "variation": null,
+    "name": "src/router.js",
+    "memberof": null,
+    "longname": "src/router.js",
+    "access": null,
+    "description": null,
+    "lineNumber": 2,
+    "content": "/* eslint no-param-reassign: 0 */\nconst path = require('path')\nconst yaml = require('yamljs')\nconst _ = require('lodash')\n\nimport { config, log, service, runLambda } from './app'\n\n/**\n * Placeholder for schema object\n * @parameter {Object} schema\n */\nexport let schema = null\n\n/**\n * Placeholder for routes array\n * @parameter {Array} routes\n */\nexport let routes = []\n\n\n/**\n * Loads the schema from specified file\n * @param {String} file The file path of the Gateway schema\n */\nexport const loadSchema = (file) => {\n  schema = yaml.load(path.resolve(file))\n}\n\n/**\n * Walks schema to look for methods, when a method is found it creates a route\n * with the parent node key (the path), the current method, and the properties\n * of that method\n * @param {Object} node The node to traverse\n * @param {String} prevKey The key of the previous traversal for accessing parent/path\n */\nexport const walkSchema = (node = schema, prevKey = null) => {\n  // Methods indicate traversal stops\n  const methods = [ 'GET', 'POST', 'PUT', 'DELETE', 'HEAD', 'OPTIONS', 'PATCH' ]\n  for (let prop in node) {\n    // Ensure prop\n    if ({}.hasOwnProperty.call(node, prop)) {\n      if (methods.indexOf(prop) >= 0) {\n        // Node is a method, push to router\n        routes.push({ route: prevKey, method: prop, config: node[prop] })\n      } else if (_.isObject(node[prop])) {\n        // Route node, traverse\n        walkSchema(node[prop], prop)\n      } else {\n        log.error('Invalid property in gateway config', { property: prevKey + '> ' + prop })\n        return\n      }\n    }\n  }\n}\n\n/**\n * Maps template params to route params\n * @param {String} rte The route to modify\n * @param {Object} template The template object to match against\n * @returns {String} The formatted route\n */\nexport const mapTemplateParams = (route, template) => {\n  for (let prop in template) {\n    if ({}.hasOwnProperty.call(template, prop)) {\n      if (template[prop].indexOf(`$input.params('`) >= 0) {\n        // Remove wrapper\n        let param = template[prop].replace(`$input.params('`, '').replace(`')`, '')\n        // Replace any occurences with express-param version of template param name\n        route = route.replace(`{${param}}`, `:${prop}`)\n        // Remove entry from template\n        delete template[prop]\n      }\n    }\n  }\n  // Return modified route and template\n  return { route, template }\n}\n\n/**\n * Builds routes and adds to the express service by mapping template params to\n * the path/route then binding to runLambda method\n */\nconst buildRoutes = () => {\n  // Itterate over routes\n  routes.forEach((rte) => {\n    // Map template params\n    let mappedRoutes = mapTemplateParams(rte.route, rte.config.templates['application/json'])\n    let lambda = rte.config.lambda\n    rte.route = mappedRoutes.route\n    rte.config.templates['application/json'] = mappedRoutes.template\n    // Build service method\n    service[rte.method.toLowerCase()](config.apiPath + rte.route, (req, res) => {\n      runLambda(lambda, rte.config.templates['application/json'], req, res)\n    })\n  })\n}\n\n/**\n * Initializes the routes\n */\nexport const initRoutes = () => {\n  // Walk the schema to build routes\n  walkSchema(schema)\n  // Map params and build express routes\n  buildRoutes()\n}\n"
+  },
+  {
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "path",
+    "memberof": "src/router.js",
+    "longname": "src/router.js~path",
+    "access": null,
+    "export": false,
+    "importPath": "gateway-lambda/src/router.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 2,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "yaml",
+    "memberof": "src/router.js",
+    "longname": "src/router.js~yaml",
+    "access": null,
+    "export": false,
+    "importPath": "gateway-lambda/src/router.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 3,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "_",
+    "memberof": "src/router.js",
+    "longname": "src/router.js~_",
+    "access": null,
+    "export": false,
+    "importPath": "gateway-lambda/src/router.js",
+    "importStyle": null,
+    "description": null,
+    "lineNumber": 4,
+    "undocument": true,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "schema",
+    "memberof": "src/router.js",
+    "longname": "src/router.js~schema",
+    "access": null,
+    "export": true,
+    "importPath": "gateway-lambda/src/router.js",
+    "importStyle": "{schema}",
+    "description": "Placeholder for schema object",
+    "lineNumber": 12,
+    "unknown": [
+      {
+        "tagName": "@parameter",
+        "tagValue": "{Object} schema"
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "routes",
+    "memberof": "src/router.js",
+    "longname": "src/router.js~routes",
+    "access": null,
+    "export": true,
+    "importPath": "gateway-lambda/src/router.js",
+    "importStyle": "{routes}",
+    "description": "Placeholder for routes array",
+    "lineNumber": 18,
+    "unknown": [
+      {
+        "tagName": "@parameter",
+        "tagValue": "{Array} routes"
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "loadSchema",
+    "memberof": "src/router.js",
+    "longname": "src/router.js~loadSchema",
+    "access": null,
+    "export": true,
+    "importPath": "gateway-lambda/src/router.js",
+    "importStyle": "{loadSchema}",
+    "description": "Loads the schema from specified file",
+    "lineNumber": 25,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "file",
+        "description": "The file path of the Gateway schema"
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "walkSchema",
+    "memberof": "src/router.js",
+    "longname": "src/router.js~walkSchema",
+    "access": null,
+    "export": true,
+    "importPath": "gateway-lambda/src/router.js",
+    "importStyle": "{walkSchema}",
+    "description": "Walks schema to look for methods, when a method is found it creates a route\nwith the parent node key (the path), the current method, and the properties\nof that method",
+    "lineNumber": 36,
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "Object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "node",
+        "description": "The node to traverse"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "prevKey",
+        "description": "The key of the previous traversal for accessing parent/path"
+      }
+    ],
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "mapTemplateParams",
+    "memberof": "src/router.js",
+    "longname": "src/router.js~mapTemplateParams",
+    "access": null,
+    "export": true,
+    "importPath": "gateway-lambda/src/router.js",
+    "importStyle": "{mapTemplateParams}",
+    "description": "Maps template params to route params",
+    "lineNumber": 62,
+    "unknown": [
+      {
+        "tagName": "@returns",
+        "tagValue": "{String} The formatted route"
+      }
+    ],
+    "params": [
+      {
+        "nullable": null,
+        "types": [
+          "String"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "rte",
+        "description": "The route to modify"
+      },
+      {
+        "nullable": null,
+        "types": [
+          "Object"
+        ],
+        "spread": false,
+        "optional": false,
+        "name": "template",
+        "description": "The template object to match against"
+      }
+    ],
+    "return": {
+      "nullable": null,
+      "types": [
+        "String"
+      ],
+      "spread": false,
+      "description": "The formatted route"
+    },
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "buildRoutes",
+    "memberof": "src/router.js",
+    "longname": "src/router.js~buildRoutes",
+    "access": null,
+    "export": false,
+    "importPath": "gateway-lambda/src/router.js",
+    "importStyle": null,
+    "description": "Builds routes and adds to the express service by mapping template params to\nthe path/route then binding to runLambda method",
+    "lineNumber": 83,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "kind": "variable",
+    "static": true,
+    "variation": null,
+    "name": "initRoutes",
+    "memberof": "src/router.js",
+    "longname": "src/router.js~initRoutes",
+    "access": null,
+    "export": true,
+    "importPath": "gateway-lambda/src/router.js",
+    "importStyle": "{initRoutes}",
+    "description": "Initializes the routes",
+    "lineNumber": 101,
+    "type": {
+      "types": [
+        "*"
+      ]
+    }
+  },
+  {
+    "kind": "file",
+    "static": true,
+    "variation": null,
     "name": "src/runner.js",
     "memberof": null,
     "longname": "src/runner.js",
     "access": null,
     "description": null,
-    "lineNumber": 2,
-    "content": "/* eslint no-process-exit: 0 */\nconst util = require('util')\nconst path = require('path')\n\n// Sets the lambda from its path\nconst lambda = require(path.resolve(`${process.env.lambdas}/${process.argv[2]}/index`))\n\n/**\n * Creates the context object passed to lambdas\n * @property context\n */\nconst context = {\n  /**\n   * Emit a success message with output\n   * @param {Object|String} result The contents of the result\n   */\n  succeed: (result) => {\n    process.send({ type: 'success', output: result })\n    context.done()\n  },\n  /**\n   * Emit an error message with output\n   * @param {Object|String} error The error object or message\n   */\n  fail: (error) => {\n    process.send({ type: 'error', output: error })\n    context.done()\n  },\n  /**\n   * Emit closing metrics and end the lambda process\n   */\n  done: () => {\n    process.send({ type: 'metric', output: { memory: util.inspect(process.memoryUsage()) }})\n    process.send({ type: 'metric', output: { time: process.uptime() }})\n    process.exit()\n  }\n}\n\n// Call lambda's handler\nlambda.handler(JSON.parse(process.env.event), context)\n"
+    "lineNumber": 6,
+    "content": "/*\n * Copyright (c) 2015 TechnologyAdvice\n */\n\n/* eslint no-process-exit: 0 */\nconst util = require('util')\nconst path = require('path')\n\n// Sets the lambda from its path\nconst lambda = require(path.resolve(`${process.env.lambdas}/${process.argv[2]}/index`))\n\n/**\n * Creates the context object passed to lambdas\n * @property context\n */\nconst context = {\n  /**\n   * Emit a success message with output\n   * @param {Object|String} result The contents of the result\n   */\n  succeed: (result) => {\n    process.send({ type: 'success', output: result })\n    context.done()\n  },\n  /**\n   * Emit an error message with output\n   * @param {Object|String} error The error object or message\n   */\n  fail: (error) => {\n    process.send({ type: 'error', output: error })\n    context.done()\n  },\n  /**\n   * Emit closing metrics and end the lambda process\n   */\n  done: () => {\n    process.send({ type: 'metric', output: { memory: util.inspect(process.memoryUsage()) }})\n    process.send({ type: 'metric', output: { time: process.uptime() }})\n    process.exit()\n  }\n}\n\n// Call lambda's handler\nlambda.handler(JSON.parse(process.env.event), context)\n"
   },
   {
     "kind": "variable",
@@ -395,10 +768,10 @@
     "longname": "src/runner.js~util",
     "access": null,
     "export": false,
-    "importPath": "template/src/runner.js",
+    "importPath": "gateway-lambda/src/runner.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 2,
+    "lineNumber": 6,
     "undocument": true,
     "type": {
       "types": [
@@ -415,10 +788,10 @@
     "longname": "src/runner.js~path",
     "access": null,
     "export": false,
-    "importPath": "template/src/runner.js",
+    "importPath": "gateway-lambda/src/runner.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 3,
+    "lineNumber": 7,
     "undocument": true,
     "type": {
       "types": [
@@ -435,10 +808,10 @@
     "longname": "src/runner.js~lambda",
     "access": null,
     "export": false,
-    "importPath": "template/src/runner.js",
+    "importPath": "gateway-lambda/src/runner.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 6,
+    "lineNumber": 10,
     "undocument": true,
     "type": {
       "types": [
@@ -455,10 +828,10 @@
     "longname": "src/runner.js~context",
     "access": null,
     "export": false,
-    "importPath": "template/src/runner.js",
+    "importPath": "gateway-lambda/src/runner.js",
     "importStyle": null,
     "description": "Creates the context object passed to lambdas",
-    "lineNumber": 12,
+    "lineNumber": 16,
     "properties": [
       {
         "nullable": null,

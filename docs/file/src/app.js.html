@@ -17,7 +17,7 @@
   <a href="identifiers.html">Identifier</a>
   <a href="source.html">Source</a>
   
-  
+  <a data-ice="repoURL" href="https://github.com/TechnologyAdvice/gateway-lambda" class="repo-url-github">Repository</a>
   <div class="search-box">
   <span>
     <img src="./image/search.png">
@@ -40,7 +40,18 @@
   <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-buildConfig">buildConfig</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-config">config</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-init">init</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-initRoutes">initRoutes</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-loadSchema">loadSchema</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-log">log</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-mapTemplateParams">mapTemplateParams</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-parseBody">parseBody</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-procResponse">procResponse</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-routes">routes</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-runLambda">runLambda</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-schema">schema</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-service">service</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-setRunner">setRunner</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-walkSchema">walkSchema</a></span></li>
 </ul>
 </div>
 
@@ -50,22 +61,35 @@
 </nav>
 
 <div class="content" data-ice="content"><h1 data-ice="title">src/app.js</h1>
-<pre class="source-code line-number"><code class="prettyprint linenums" data-ice="content">// Deps
+<pre class="source-code line-number"><code class="prettyprint linenums" data-ice="content">/*
+ * Copyright (c) 2015 TechnologyAdvice
+ */
+
+// Deps
 const express = require(&apos;express&apos;)
 const bodyParser = require(&apos;body-parser&apos;)
 const fork = require(&apos;child_process&apos;).fork
 const path = require(&apos;path&apos;)
-const log = require(&apos;bristol&apos;)
 const _ = require(&apos;lodash&apos;)
 
 // Setup logs
+export const log = require(&apos;bristol&apos;)
 log.addTarget(&apos;console&apos;).withFormatter(&apos;human&apos;)
 
-// Path to lambda runner
-const runner = path.resolve(&apos;build/runner&apos;)
+// Default path to lambda runner
+let runner = path.resolve(__dirname, &apos;./runner&apos;)
+
+// Import router
+import { loadSchema, initRoutes } from &apos;./router&apos;
+
+/**
+ * Allows overriding default runner script
+ * @param {String} runnerPath Path to the runner module
+ */
+export const setRunner = (runnerPath) =&gt; runner = path.resolve(runnerPath)
 
 // Express setup
-const service = express()
+export const service = express()
 service.use(bodyParser.json())
 
 /**
@@ -78,6 +102,7 @@ service.use(bodyParser.json())
  */
 export let config = {
   lambdas: &apos;./lambdas&apos;,
+  schema: &apos;./gateway.yml&apos;,
   port: 8181,
   apiPath: &apos;/api&apos;,
   log: true
@@ -105,6 +130,29 @@ export const procResponse = (msg, res) =&gt; {
 }
 
 /**
+ * Parses the template from gateway and merges in the req.body as it&apos;s
+ * intended property for the lambda
+ * @param {Object} reqBody The req.body from express request
+ * @param {Object} template The gateway template
+ * @returns {Object} the full event to be passed to the Lambda
+ */
+export const parseBody = (reqBody = {}, template) =&gt; {
+  let tmpBody = {}
+  for (let prop in template) {
+    if ({}.hasOwnProperty.call(template, prop)) {
+      if (template[prop] === `$input.json(&apos;$&apos;)`) {
+        // Replace prop with req.body
+        tmpBody[prop] = reqBody
+      } else {
+        // Custom pass-throughs
+        tmpBody[prop] = template[prop]
+      }
+    }
+  }
+  return tmpBody
+}
+
+/**
  * Builds the `event` payload with the request body and the method of the
  * call (`operation`). Forks a new runner process to the requested lambda
  * then awaits messaging from the lambda
@@ -112,17 +160,17 @@ export const procResponse = (msg, res) =&gt; {
  * @param {Object} res Express res object
  * @param {String} lambdas Path to the lambdas directory
  */
-const runLambda = (req, res) =&gt; {
-  const evt = req.body
-  const lambda = req.params.endpoint
-  // Map method to operation param
-  evt.operation = req.method
+export const runLambda = (lambda, template, req, res) =&gt; {
+  // Parse body against template
+  const body = parseBody(req.body, template)
+  // Build event by extending body with params
+  const event = JSON.stringify(_.extend(body, req.params))
   // Set lambdas
   const lambdas = config.lambdas
-  // Set event
-  const event = JSON.stringify(evt)
+  // Pass correct $HOME (helps with ~/.aws credentials)
+  const HOME = process.env.HOME
   // Execute lambda
-  const proc = fork(runner, [ lambda ], { env: { lambdas, event } })
+  const proc = fork(runner, [ lambda ], { env: { lambdas, event, HOME } })
   // Print pid
   procResponse({ type: &apos;metric&apos;, output: `PID ${proc.pid} running ${lambda}` })
   // Await proc messaging
@@ -154,8 +202,10 @@ export const buildConfig = (cfg) =&gt; {
 export const init = (cfg) =&gt; {
   // Setup config
   buildConfig(cfg)
-  // Binds to endpoint
-  service.all(`${config.apiPath}/:endpoint`, (req, res) =&gt; runLambda(req, res))
+  // Load schema into router
+  loadSchema(config.schema)
+  // Initialize all routes from gateway schema
+  initRoutes()
   // Starts service
   service.listen(config.port, () =&gt; {
     if (config.log) log.info(`Service running on ${config.port}`)

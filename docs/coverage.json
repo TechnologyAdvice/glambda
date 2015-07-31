@@ -1,11 +1,15 @@
 {
-  "coverage": "100%",
-  "expectCount": 4,
-  "actualCount": 4,
+  "coverage": "86.66%",
+  "expectCount": 15,
+  "actualCount": 13,
   "files": {
     "src/app.js": {
-      "expectCount": 4,
-      "actualCount": 4
+      "expectCount": 9,
+      "actualCount": 7
+    },
+    "src/router.js": {
+      "expectCount": 6,
+      "actualCount": 6
     }
   }
 }

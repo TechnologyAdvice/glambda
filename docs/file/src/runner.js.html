@@ -17,7 +17,7 @@
   <a href="identifiers.html">Identifier</a>
   <a href="source.html">Source</a>
   
-  
+  <a data-ice="repoURL" href="https://github.com/TechnologyAdvice/gateway-lambda" class="repo-url-github">Repository</a>
   <div class="search-box">
   <span>
     <img src="./image/search.png">
@@ -40,7 +40,18 @@
   <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-buildConfig">buildConfig</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-config">config</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-init">init</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-initRoutes">initRoutes</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-loadSchema">loadSchema</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-log">log</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-mapTemplateParams">mapTemplateParams</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-parseBody">parseBody</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-procResponse">procResponse</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-routes">routes</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-runLambda">runLambda</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-schema">schema</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-service">service</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-setRunner">setRunner</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-walkSchema">walkSchema</a></span></li>
 </ul>
 </div>
 
@@ -50,7 +61,11 @@
 </nav>
 
 <div class="content" data-ice="content"><h1 data-ice="title">src/runner.js</h1>
-<pre class="source-code line-number"><code class="prettyprint linenums" data-ice="content">/* eslint no-process-exit: 0 */
+<pre class="source-code line-number"><code class="prettyprint linenums" data-ice="content">/*
+ * Copyright (c) 2015 TechnologyAdvice
+ */
+
+/* eslint no-process-exit: 0 */
 const util = require(&apos;util&apos;)
 const path = require(&apos;path&apos;)
 

@@ -1,26 +1,92 @@
 window.esdocSearchIndex = [
   [
-    "template/src/app.js~buildconfig",
+    "gateway-lambda/src/app.js~buildconfig",
     "variable/index.html#static-variable-buildConfig",
-    "<span>buildConfig</span> <span class=\"search-result-import-path\">template/src/app.js</span>",
+    "<span>buildConfig</span> <span class=\"search-result-import-path\">gateway-lambda/src/app.js</span>",
     "variable"
   ],
   [
-    "template/src/app.js~config",
+    "gateway-lambda/src/app.js~config",
     "variable/index.html#static-variable-config",
-    "<span>config</span> <span class=\"search-result-import-path\">template/src/app.js</span>",
+    "<span>config</span> <span class=\"search-result-import-path\">gateway-lambda/src/app.js</span>",
     "variable"
   ],
   [
-    "template/src/app.js~init",
+    "gateway-lambda/src/app.js~init",
     "variable/index.html#static-variable-init",
-    "<span>init</span> <span class=\"search-result-import-path\">template/src/app.js</span>",
+    "<span>init</span> <span class=\"search-result-import-path\">gateway-lambda/src/app.js</span>",
     "variable"
   ],
   [
-    "template/src/app.js~procresponse",
+    "gateway-lambda/src/router.js~initroutes",
+    "variable/index.html#static-variable-initRoutes",
+    "<span>initRoutes</span> <span class=\"search-result-import-path\">gateway-lambda/src/router.js</span>",
+    "variable"
+  ],
+  [
+    "gateway-lambda/src/router.js~loadschema",
+    "variable/index.html#static-variable-loadSchema",
+    "<span>loadSchema</span> <span class=\"search-result-import-path\">gateway-lambda/src/router.js</span>",
+    "variable"
+  ],
+  [
+    "gateway-lambda/src/app.js~log",
+    "variable/index.html#static-variable-log",
+    "<span>log</span> <span class=\"search-result-import-path\">gateway-lambda/src/app.js</span>",
+    "variable"
+  ],
+  [
+    "gateway-lambda/src/router.js~maptemplateparams",
+    "variable/index.html#static-variable-mapTemplateParams",
+    "<span>mapTemplateParams</span> <span class=\"search-result-import-path\">gateway-lambda/src/router.js</span>",
+    "variable"
+  ],
+  [
+    "gateway-lambda/src/app.js~parsebody",
+    "variable/index.html#static-variable-parseBody",
+    "<span>parseBody</span> <span class=\"search-result-import-path\">gateway-lambda/src/app.js</span>",
+    "variable"
+  ],
+  [
+    "gateway-lambda/src/app.js~procresponse",
     "variable/index.html#static-variable-procResponse",
-    "<span>procResponse</span> <span class=\"search-result-import-path\">template/src/app.js</span>",
+    "<span>procResponse</span> <span class=\"search-result-import-path\">gateway-lambda/src/app.js</span>",
+    "variable"
+  ],
+  [
+    "gateway-lambda/src/router.js~routes",
+    "variable/index.html#static-variable-routes",
+    "<span>routes</span> <span class=\"search-result-import-path\">gateway-lambda/src/router.js</span>",
+    "variable"
+  ],
+  [
+    "gateway-lambda/src/app.js~runlambda",
+    "variable/index.html#static-variable-runLambda",
+    "<span>runLambda</span> <span class=\"search-result-import-path\">gateway-lambda/src/app.js</span>",
+    "variable"
+  ],
+  [
+    "gateway-lambda/src/router.js~schema",
+    "variable/index.html#static-variable-schema",
+    "<span>schema</span> <span class=\"search-result-import-path\">gateway-lambda/src/router.js</span>",
+    "variable"
+  ],
+  [
+    "gateway-lambda/src/app.js~service",
+    "variable/index.html#static-variable-service",
+    "<span>service</span> <span class=\"search-result-import-path\">gateway-lambda/src/app.js</span>",
+    "variable"
+  ],
+  [
+    "gateway-lambda/src/app.js~setrunner",
+    "variable/index.html#static-variable-setRunner",
+    "<span>setRunner</span> <span class=\"search-result-import-path\">gateway-lambda/src/app.js</span>",
+    "variable"
+  ],
+  [
+    "gateway-lambda/src/router.js~walkschema",
+    "variable/index.html#static-variable-walkSchema",
+    "<span>walkSchema</span> <span class=\"search-result-import-path\">gateway-lambda/src/router.js</span>",
     "variable"
   ],
   [
@@ -351,6 +417,12 @@ window.esdocSearchIndex = [
     "src/app.js",
     "file/src/app.js.html",
     "src/app.js",
+    "file"
+  ],
+  [
+    "src/router.js",
+    "file/src/router.js.html",
+    "src/router.js",
     "file"
   ],
   [
