@@ -1,4 +1,6 @@
-# Gateway + Lambda Testing Module
+# GLambda
+
+### AWS Gateway + Lambda Testing Module
 
 A module for mocking and testing AWS [API Gateway](http://aws.amazon.com/api-gateway/)
 in conjunction with [Lambda](http://aws.amazon.com/lambda/) functions.
@@ -16,7 +18,7 @@ set any config options on `init`:
 
 ```javascript
 // Include the module
-var glmock = require('gateway-lambda')
+var glmock = require('glambda')
 // Set options and init
 glmock.init({
   lambdas: './lambdas',

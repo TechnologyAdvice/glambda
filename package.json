@@ -1,5 +1,5 @@
 {
-  "name": "gateway-lambda",
+  "name": "glambda",
   "version": "0.0.0",
   "description": "A module for mocking and testing AWS API Gateway in conjunction with Lambda functions.",
   "main": "build/app.js",
@@ -8,12 +8,15 @@
     "url": "https://github.com/TechnologyAdvice/gateway-lambda"
   },
   "keywords": [
+    "amazon",
     "aws",
     "api",
     "gateway",
     "lambda",
     "node",
-    "mock"
+    "mock",
+    "staging",
+    "testing"
   ],
   "author": "TechnologyAdvice <devteam@technologyadvice.com>",
   "scripts": {
