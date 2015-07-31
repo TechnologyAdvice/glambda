@@ -110,9 +110,6 @@ var buildRoutes = function buildRoutes() {
 
 /**
  * Initializes the routes
- * @param {String} apiPath Any special API pathing (preceeding route-specific)
- * @param {Object} service The express service instance
- * @param {Function} runLambda The lambda runner function
  */
 var initRoutes = function initRoutes() {
   // Walk the schema to build routes

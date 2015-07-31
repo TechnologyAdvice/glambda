@@ -142,7 +142,7 @@ export const init = (cfg) => {
   // Load schema into router
   loadSchema(config.schema)
   // Initialize all routes from gateway schema
-  initRoutes(config.apiPath, service)
+  initRoutes()
   // Starts service
   service.listen(config.port, () => {
     if (config.log) log.info(`Service running on ${config.port}`)

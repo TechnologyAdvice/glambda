@@ -161,7 +161,7 @@ var init = function init(cfg) {
   // Load schema into router
   (0, _router.loadSchema)(config.schema);
   // Initialize all routes from gateway schema
-  (0, _router.initRoutes)(config.apiPath, service);
+  (0, _router.initRoutes)();
   // Starts service
   service.listen(config.port, function () {
     if (config.log) log.info('Service running on ' + config.port);
