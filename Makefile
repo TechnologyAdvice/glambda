@@ -18,9 +18,6 @@ FILE    = $(SPACE)--recursive
 # Deploy
 TAG     = 0
 TAG_CMD = npm version $(TAG) && \
-	    git add --all && \
-	    git commit -m "Release $(TAG)" && \
-	    git tag $(TAG) && \
 	    git push origin master && \
 	    git push --tags
 
