@@ -31,9 +31,9 @@ describe('router', () => {
 
     it('identifies template params and replaces route param names', () => {
       let route = '/foo/{fooId}'
-      let template = { id: '$input.params(\'fooId\')' }
+      let template = { id: '$input.params(\'fooId\')', test: 'foo' }
       let output = mapTemplateParams(route, template)
-      expect(output).to.equal('/foo/:id')
+      expect(output).to.deep.equal({ route: '/foo/:id', template: { test: 'foo' } })
     })
 
   })

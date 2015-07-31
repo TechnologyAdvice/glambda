@@ -64,11 +64,16 @@ export const walkSchema = (node = schema, prevKey = null) => {
 export const mapTemplateParams = (route, template) => {
   for (let prop in template) {
     if ({}.hasOwnProperty.call(template, prop)) {
-      // Remove wrapper
-      let param = template[prop].replace(`$input.params('`, '').replace(`')`, '')
-      // Replace any occurences with express-param version of template param name
-      route = route.replace(`{${param}}`, `:${prop}`)
+      if (template[prop].indexOf(`$input.params('`) >= 0) {
+        // Remove wrapper
+        let param = template[prop].replace(`$input.params('`, '').replace(`')`, '')
+        // Replace any occurences with express-param version of template param name
+        route = route.replace(`{${param}}`, `:${prop}`)
+        // Remove entry from template
+        delete template[prop]
+      }
     }
   }
-  return route
+  // Return modified route and template
+  return { route, template }
 }
