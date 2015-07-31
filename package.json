@@ -1,6 +1,6 @@
 {
   "name": "gateway-lambda",
-  "version": "0.0.0",
+  "version": "1.0.0",
   "description": "Mocking util for locally testing AWS API Gateway with Lambdas",
   "main": "build/app.js",
   "repository": {
