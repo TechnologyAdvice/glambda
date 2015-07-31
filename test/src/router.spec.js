@@ -1,6 +1,6 @@
 /* global expect, request, describe, it, before, after */
 import '../setup'
-import { schema, loadSchema, walkSchema, routes } from '../../src/router'
+import { schema, loadSchema, walkSchema, routes, mapTemplateParams } from '../../src/router'
 
 const schemaPath = './test/gateway.yml'
 
@@ -13,6 +13,27 @@ describe('router', () => {
       expect(schema).to.be.an.object
       walkSchema()
       console.log(routes)
+    })
+
+  })
+
+  describe('walkSchema', () => {
+
+    it('creates array of route objects from the schema', () => {
+      walkSchema()
+      expect(routes).to.be.an.array
+      expect(routes[0]).to.be.an.object
+    })
+
+  })
+
+  describe('mapTemplateParams', () => {
+
+    it('identifies template params and replaces route param names', () => {
+      let route = '/foo/{fooId}'
+      let template = { id: '$input.params(\'fooId\')' }
+      let output = mapTemplateParams(route, template)
+      expect(output).to.equal('/foo/:id')
     })
 
   })

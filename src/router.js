@@ -24,8 +24,8 @@ export const loadSchema = (file) => {
 }
 
 /**
- * Walks schema to look for methods, when a method is found it creates a route 
- * with the parent node key (the path), the current method, and the properties 
+ * Walks schema to look for methods, when a method is found it creates a route
+ * with the parent node key (the path), the current method, and the properties
  * of that method
  * @param {Object} node The node to traverse
  * @param {String} prevKey The key of the previous traversal for accessing parent/path
@@ -45,4 +45,22 @@ export const walkSchema = (node = schema, prevKey = null) => {
       }
     }
   }
+}
+
+/**
+ * Maps template params to route params
+ * @param {String} route The route to modify
+ * @param {Object} template The template object to match against
+ * @returns {String} The formatted route
+ */
+export const mapTemplateParams = (route, template) => {
+  for (let prop in template) {
+    if ({}.hasOwnProperty.call(template, prop)) {
+      // Remove wrapper
+      let param = template[prop].replace(`$input.params('`, '').replace(`')`, '')
+      // Replace any occurences with express-param version of template param name
+      route = route.replace(`{${param}}`, `:${prop}`)
+    }
+  }
+  return route
 }
