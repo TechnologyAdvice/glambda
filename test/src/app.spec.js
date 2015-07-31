@@ -61,7 +61,7 @@ describe('app', () => {
 
     it('responds with the correct operation', (done) => {
       request(url)
-        .get('foo')
+        .get('foo/someId')
         .expect(200)
         .end((err, res) => {
           if (err) {

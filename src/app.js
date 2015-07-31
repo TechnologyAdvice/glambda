@@ -16,6 +16,9 @@ log.addTarget('console').withFormatter('human')
 // Default path to lambda runner
 let runner = path.resolve(__dirname, './runner')
 
+// Import router
+import { loadSchema, initRoutes } from './router'
+
 /**
  * Allows overriding default runner script
  * @param {String} runnerPath Path to the runner module
@@ -71,9 +74,9 @@ export const procResponse = (msg, res) => {
  * @param {Object} res Express res object
  * @param {String} lambdas Path to the lambdas directory
  */
-const runLambda = (req, res) => {
+const runLambda = (lambda, req, res) => {
+  console.log('LAMBDA',lambda)
   const evt = req.body
-  const lambda = req.params.endpoint
   // Map method to operation param
   evt.operation = req.method
   // Set lambdas
@@ -115,8 +118,10 @@ export const buildConfig = (cfg) => {
 export const init = (cfg) => {
   // Setup config
   buildConfig(cfg)
+  loadSchema(config.schema)
+  initRoutes(config.apiPath, service, runLambda)
   // Binds to endpoint
-  service.all(`${config.apiPath}/:endpoint`, (req, res) => runLambda(req, res))
+  //service.all(`${config.apiPath}/:endpoint`, (req, res) => runLambda(req, res))
   // Starts service
   service.listen(config.port, () => {
     if (config.log) log.info(`Service running on ${config.port}`)

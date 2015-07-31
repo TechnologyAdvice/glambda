@@ -48,7 +48,7 @@ export const walkSchema = (node = schema, prevKey = null) => {
         // Route node, traverse
         walkSchema(node[prop], prop)
       } else {
-        log.error('Invalid property in gateway config', { property: prop })
+        log.error('Invalid property in gateway config', { property: prevKey + '> ' + prop })
         return
       }
     }
@@ -76,4 +76,26 @@ export const mapTemplateParams = (route, template) => {
   }
   // Return modified route and template
   return { route, template }
+}
+
+const buildRoutes = (apiPath, service, runLambda) => {
+  // Itterate over routes
+  routes.forEach((route, i) => {
+    // Map template params
+    let mappedRoutes = mapTemplateParams(route.route, route.config.templates['application/json'])
+    let lambda = route.config.lambda
+    route.route = mappedRoutes.route
+    route.config.templates['application/json'] = mappedRoutes.template
+    // Build service method
+    service[route.method.toLowerCase()](apiPath + route.route, (req, res) => {
+      runLambda(lambda, req, res)
+    })
+  })
+}
+
+export const initRoutes = (apiPath = '', service = {}, runLambda) => {
+  // Walk the schema to build routes
+  walkSchema(schema)
+  // Map params and build express routes
+  buildRoutes(apiPath, service, runLambda)
 }
