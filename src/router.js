@@ -1,6 +1,10 @@
 const path = require('path')
 const yaml = require('yamljs')
+const log = require('bristol')
 const _ = require('lodash')
+
+// Setup logs
+log.addTarget('console').withFormatter('human')
 
 /**
  * Placeholder for schema object
@@ -37,13 +41,15 @@ export const walkSchema = (node = schema, prevKey = null) => {
   for (let prop in node) {
     // Ensure prop
     if ({}.hasOwnProperty.call(node, prop)) {
-      if (!_.isObject(node[prop])) return
       if (methods.indexOf(prop) >= 0) {
         // Node is a method, push to router
         routes.push({ route: prevKey, method: prop, config: node[prop] })
-      } else {
+      } else if (_.isObject(node[prop])) {
         // Route node, traverse
         walkSchema(node[prop], prop)
+      } else {
+        log.error('Invalid property in gateway config', { property: prop })
+        process.exit(1)
       }
     }
   }
