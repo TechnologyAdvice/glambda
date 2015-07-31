@@ -3,10 +3,12 @@
 A module for mocking and testing AWS [API Gateway](http://aws.amazon.com/api-gateway/)
 in conjunction with [Lambda](http://aws.amazon.com/lambda/) functions.
 
+## Introduction
+
 ## Setup
 
-To see a fully functional demo, see the [/test](/test) directory. The `index.js` 
-file is setup to run using the [lambdas`](/test/lambdas) and the [gateway.yml](/test/gateway.yml) 
+To see a fully functional demo, see the [`/test`](/test) directory. The `index.js`
+file is setup to run using the [`lambdas`](/test/lambdas) and the [`gateway.yml`](/test/gateway.yml)
 file. The tests run against this configuration as well.
 
 After installing the npm module simply include it in a file where it will run and
@@ -36,6 +38,56 @@ The above shows a standard set of config options:
 Simply running the file created above will spin up the service, then accessing
 the endpoints via the corresponding lambda name will spawn the Lambda function
 and return its results.
+
+## The Gateway YAML Configuration
+
+The [`gateway.yml`](/test/gateway.yml) format was designed to closely match the
+AWS [API Gateway](http://aws.amazon.com/api-gateway/). The structure is intended
+to appear similar to the Resource (left-hand) pane when editing an API in the
+web interface.
+
+```YAML
+---
+  /:
+    /foo:
+      GET:
+          lambda: "foo"
+          templates:
+            application/json:
+              method: "get"
+      POST:
+          lambda: "foo"
+          templates:
+            application/json:
+              method: "post"
+              body: "$input.json('$')"
+      /foo/{fooId}:
+        GET:
+          lambda: "foo"
+          templates:
+            application/json:
+              id: "$input.params('fooId')"
+              method: "get"
+        PUT:
+          lambda: "foo"
+          templates:
+            application/json:
+              id: "$input.params('fooId')"
+              baz: "quz"
+              body: "$input.json('$')"
+```
+
+It's simple to identify the core nodes of the tree, i.e. the paths of the requests
+and their associated methods. To explain, the following shows results of a number
+of requests made against the above configuration:
+
+| PATH     | METHOD | BODY                 | RESPONSE/EVENT                                            |
+| -------- | ------ | -------------------- | --------------------------------------------------------- |
+| /        | ANY    | N/A                  | `METHOD NOT ALLOWED`                                      |
+| /foo     | GET    | N/A                  | `{ method: 'get' }`                                       |
+| /foo     | POST   | `{ fizz: 'buzz' }`   | `{ method: 'post', body: { fizz: 'buzz' }`                |
+| /foo/123 | GET    | N/A                  | `{ method: 'get', fooId: 123 }`                           |
+| /foo/123 | PUT    | `{ baz: 'quz' }`     | `{ method: 'put', fooId: 123, body: { baz: 'quz' } }`     |
 
 ## Makefile and Scripts
 
