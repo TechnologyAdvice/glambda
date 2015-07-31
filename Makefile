@@ -29,7 +29,7 @@ endef
 
 clean:
 	$(call colorecho, "Cleaning $(BUILD) and $(DEPS)")
-	rm -rf $(BUILD) && rm -rf $(DEPS)
+	rm -rf $(DEPS)
 
 install: $(PKG)
 	$(call colorecho, "Installing")
