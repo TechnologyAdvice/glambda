@@ -1,6 +1,17 @@
 ---
   /:
     /foo:
+      GET:
+          lambda: "foo"
+          templates:
+            application/json:
+              method: "get"
+      POST:
+          lambda: "foo"
+          templates:
+            application/json:
+              method: "post"
+              body: "$input.json('$')"
       /foo/{fooId}:
         GET:
           lambda: "foo"
