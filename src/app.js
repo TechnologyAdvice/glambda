@@ -66,6 +66,13 @@ export const procResponse = (msg, res) => {
   }
 }
 
+/**
+ * Parses the template from gateway and merges in the req.body as it's 
+ * intended property for the lambda
+ * @param {Object} reqBody The req.body from express request
+ * @param {Object} template The gateway template
+ * @returns {Object} the full event to be passed to the Lambda
+ */
 export const parseBody = (reqBody = {}, template) => {
   let tmpBody = {}
   for (let prop in template) {
