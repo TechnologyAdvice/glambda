@@ -49,7 +49,7 @@ export const walkSchema = (node = schema, prevKey = null) => {
         walkSchema(node[prop], prop)
       } else {
         log.error('Invalid property in gateway config', { property: prop })
-        process.exit(1)
+        return
       }
     }
   }

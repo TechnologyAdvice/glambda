@@ -36,6 +36,7 @@ service.use(bodyParser.json())
  */
 export let config = {
   lambdas: './lambdas',
+  schema: './gateway.yml',
   port: 8181,
   apiPath: '/api',
   log: true

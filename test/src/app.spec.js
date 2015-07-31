@@ -11,6 +11,7 @@ describe('app', () => {
     it('overrides defaults with passed object', () => {
       const testConfig = {
         lambdas: 'test-override',
+        schema: 'gateway-override',
         port: 1111,
         apiPath: '/test-override',
         log: false
@@ -21,11 +22,13 @@ describe('app', () => {
 
     it('overvides config with environment variables', () => {
       process.env.GL_LAMBDAS='test-env'
+      process.env.GL_SCHEMA='gateway-env'
       process.env.GL_PORT='2222'
       process.env.GL_APIPATH='/test-env'
       buildConfig()
       expect(config).to.deep.equal({
         lambdas: 'test-env',
+        schema: 'gateway-env',
         port: '2222',
         apiPath: '/test-env',
         log: false
@@ -34,6 +37,7 @@ describe('app', () => {
 
     after(() => {
       delete process.env.GL_LAMBDAS
+      delete process.env.GL_SCHEMA
       delete process.env.GL_PORT
       delete process.env.GL_APIPATH
     })
@@ -49,6 +53,7 @@ describe('app', () => {
       init({
         port: 8181,
         lambdas: './test/lambdas',
+        schema: './test/gateway.yml',
         apiPath: '/api',
         log: false
       })
