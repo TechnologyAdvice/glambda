@@ -1,10 +1,17 @@
 ---
-  /: 
-    /foo: 
-      /foo/{fooId}: 
-        GET: 
+  /:
+    /foo:
+      /foo/{fooId}:
+        GET:
           lambda: "foo"
-          templates: 
-            application/json: 
+          templates:
+            application/json:
               id: "$input.params('fooId')"
               method: "get"
+        PUT:
+          lambda: "foo"
+          templates:
+            application/json:
+              id: "$input.params('fooId')"
+              baz: "quz"
+              body: "$input.json('$')"

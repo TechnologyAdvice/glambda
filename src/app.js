@@ -66,6 +66,22 @@ export const procResponse = (msg, res) => {
   }
 }
 
+export const parseBody = (reqBody = {}, template) => {
+  let tmpBody = {}
+  for (let prop in template) {
+    if ({}.hasOwnProperty.call(template, prop)) {
+      if (template[prop] === `$input.json('$')`) {
+        // Replace prop with req.body
+        tmpBody[prop] = reqBody
+      } else {
+        // Custom pass-throughs
+        tmpBody[prop] = template[prop]
+      }
+    }
+  }
+  return tmpBody
+}
+
 /**
  * Builds the `event` payload with the request body and the method of the
  * call (`operation`). Forks a new runner process to the requested lambda
@@ -74,15 +90,11 @@ export const procResponse = (msg, res) => {
  * @param {Object} res Express res object
  * @param {String} lambdas Path to the lambdas directory
  */
-const runLambda = (lambda, req, res) => {
-  console.log('LAMBDA',lambda)
-  const evt = req.body
-  // Map method to operation param
-  evt.operation = req.method
+const runLambda = (lambda, template, req, res) => {
+  // Build event
+  const event = JSON.stringify(parseBody(req.body, template))
   // Set lambdas
   const lambdas = config.lambdas
-  // Set event
-  const event = JSON.stringify(evt)
   // Pass correct $HOME (helps with ~/.aws credentials)
   const HOME = process.env.HOME
   // Execute lambda

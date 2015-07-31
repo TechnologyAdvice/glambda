@@ -12,7 +12,6 @@ describe('router', () => {
       loadSchema(schemaPath)
       expect(schema).to.be.an.object
       walkSchema()
-      console.log(routes)
     })
 
   })

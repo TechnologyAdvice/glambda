@@ -25,7 +25,6 @@ export let routes = []
  */
 export const loadSchema = (file) => {
   schema = yaml.load(path.resolve(file))
-  console.log(JSON.stringify(schema, null, 2))
 }
 
 /**
@@ -88,7 +87,7 @@ const buildRoutes = (apiPath, service, runLambda) => {
     route.config.templates['application/json'] = mappedRoutes.template
     // Build service method
     service[route.method.toLowerCase()](apiPath + route.route, (req, res) => {
-      runLambda(lambda, req, res)
+      runLambda(lambda, route.config.templates['application/json'], req, res)
     })
   })
 }

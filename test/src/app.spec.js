@@ -1,6 +1,6 @@
 /* global expect, request, describe, it, before, after */
 import '../setup'
-import { init, buildConfig, setRunner, config } from '../../src/app'
+import { init, config, buildConfig, setRunner, parseBody } from '../../src/app'
 
 const url = 'http://localhost:8181/api/'
 
@@ -43,6 +43,18 @@ describe('app', () => {
     })
 
   })
+  
+  describe('parseBody', () => {
+    
+    it('combines custom params and req.body to create event object', () => {
+      const reqBody = { foo: 'bar' }
+      const template = { baz: 'quz', body: `$input.json('$')` }
+      const event = parseBody(reqBody, template)
+      const shouldBe = { baz: 'quz', body: { foo: 'bar' } } 
+      expect(event).to.deep.equal(shouldBe)
+    })
+    
+  })
 
   describe('requests', () => {
 
@@ -59,7 +71,7 @@ describe('app', () => {
       })
     })
 
-    it('responds with the correct operation', (done) => {
+    it('responds with the correct method param', (done) => {
       request(url)
         .get('foo/someId')
         .expect(200)
@@ -68,23 +80,29 @@ describe('app', () => {
             done(err)
             return
           }
-          res.body.should.have.property('operation')
-          res.body.operation.should.equal('GET')
+          res.body.should.have.property('method')
+          res.body.method.should.equal('get')
           done()
         })
     })
 
-    it('responds with correct property value', (done) => {
+    it('responds with correct property values', (done) => {
       request(url)
-        .post('foo')
+        .put('foo/someId')
         .send({ foo: 'bar' })
         .end((err, res) => {
           if (err) {
             done(err)
             return
           }
-          res.body.should.have.property('foo')
-          res.body.foo.should.equal('bar')
+          let responseText = res.body
+          // Custom pass-through
+          responseText.should.have.property('baz')
+          responseText.baz.should.equal('quz')
+          // Body pass-through
+          responseText.should.have.property('body')
+          responseText.body.should.have.property('foo')
+          responseText.body.foo.should.equal('bar')
           done()
         })
     })
