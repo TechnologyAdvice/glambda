@@ -43,17 +43,17 @@ describe('app', () => {
     })
 
   })
-  
+
   describe('parseBody', () => {
-    
+
     it('combines custom params and req.body to create event object', () => {
       const reqBody = { foo: 'bar' }
       const template = { baz: 'quz', body: `$input.json('$')` }
       const event = parseBody(reqBody, template)
-      const shouldBe = { baz: 'quz', body: { foo: 'bar' } } 
+      const shouldBe = { baz: 'quz', body: { foo: 'bar' } }
       expect(event).to.deep.equal(shouldBe)
     })
-    
+
   })
 
   describe('requests', () => {
@@ -71,7 +71,7 @@ describe('app', () => {
       })
     })
 
-    it('responds with the correct method param', (done) => {
+    it('responds with the correct method and request params', (done) => {
       request(url)
         .get('foo/someId')
         .expect(200)
@@ -82,11 +82,13 @@ describe('app', () => {
           }
           res.body.should.have.property('method')
           res.body.method.should.equal('get')
+          res.body.should.have.property('id')
+          res.body.id.should.equal('someId')
           done()
         })
     })
 
-    it('responds with correct property values', (done) => {
+    it('responds with correct event property values', (done) => {
       request(url)
         .put('foo/someId')
         .send({ foo: 'bar' })

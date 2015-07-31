@@ -101,7 +101,7 @@ const buildRoutes = () => {
  * @param {Object} service The express service instance
  * @param {Function} runLambda The lambda runner function
  */
-export const initRoutes = (apiPath = '', service = {}, runLambda) => {
+export const initRoutes = () => {
   // Walk the schema to build routes
   walkSchema(schema)
   // Map params and build express routes

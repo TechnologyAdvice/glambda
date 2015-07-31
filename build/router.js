@@ -114,10 +114,7 @@ var buildRoutes = function buildRoutes() {
  * @param {Object} service The express service instance
  * @param {Function} runLambda The lambda runner function
  */
-var initRoutes = function initRoutes(apiPath, service, runLambda) {
-  if (apiPath === undefined) apiPath = '';
-  if (service === undefined) service = {};
-
+var initRoutes = function initRoutes() {
   // Walk the schema to build routes
   walkSchema(schema);
   // Map params and build express routes
