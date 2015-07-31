@@ -1,12 +1,20 @@
 {
   "name": "gateway-lambda",
   "version": "0.0.0",
-  "description": "Mocking util for locally testing AWS API Gateway with Lambdas",
+  "description": "A module for mocking and testing AWS API Gateway in conjunction with Lambda functions.",
   "main": "build/app.js",
   "repository": {
     "type": "git",
     "url": "https://github.com/TechnologyAdvice/gateway-lambda"
   },
+  "keywords": [
+    "aws",
+    "api",
+    "gateway",
+    "lambda",
+    "node",
+    "mock"
+  ],
   "author": "TechnologyAdvice <devteam@technologyadvice.com>",
   "scripts": {
     "all": "make",
