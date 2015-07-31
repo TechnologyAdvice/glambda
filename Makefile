@@ -15,6 +15,14 @@ SPACE   +=
 # Default to recursive, can override on run
 FILE    = $(SPACE)--recursive
 
+# Deploy
+TAG     = 0
+TAG_CMD = git add --all && \
+	    git commit -m "Release $(TAG)" && \
+	    git tag $(TAG) && \
+	    git push origin master && \
+	    git push --tags
+
 # Make things more readable
 define colorecho
       @tput setaf 2
@@ -62,6 +70,12 @@ report:
 	$(call colorecho, "Running Static Analysis")
 	$(BIN)/plato -r -d report $(BUILD)
 
+tag:
+	$(call colorecho, "Deploying to Git")
+	$(TAG_CMD)
+
+deploy: lint test build doc tag
+
 dev: lint test build start
 
 watch:
@@ -72,4 +86,4 @@ all: clean install lint test build doc report
 
 
 # Phonies
-.PHONY: lint test doc build start report
+.PHONY: lint test doc build start report deploy
