@@ -113,8 +113,10 @@ var parseBody = function parseBody(reqBody, template) {
  */
 exports.parseBody = parseBody;
 var runLambda = function runLambda(lambda, template, req, res) {
-  // Build event
-  var event = JSON.stringify(parseBody(req.body, template));
+  // Parse body against template
+  var body = parseBody(req.body, template);
+  // Build event by extending body with params
+  var event = JSON.stringify(_.extend(body, req.params));
   // Set lambdas
   var lambdas = config.lambdas;
   // Pass correct $HOME (helps with ~/.aws credentials)

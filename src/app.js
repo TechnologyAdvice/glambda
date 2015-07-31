@@ -98,8 +98,10 @@ export const parseBody = (reqBody = {}, template) => {
  * @param {String} lambdas Path to the lambdas directory
  */
 export const runLambda = (lambda, template, req, res) => {
-  // Build event
-  const event = JSON.stringify(parseBody(req.body, template))
+  // Parse body against template
+  const body = parseBody(req.body, template)
+  // Build event by extending body with params
+  const event = JSON.stringify(_.extend(body, req.params))
   // Set lambdas
   const lambdas = config.lambdas
   // Pass correct $HOME (helps with ~/.aws credentials)
