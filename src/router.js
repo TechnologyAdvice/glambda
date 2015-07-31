@@ -1,11 +1,9 @@
 /* eslint no-param-reassign: 0 */
 const path = require('path')
 const yaml = require('yamljs')
-const log = require('bristol')
 const _ = require('lodash')
 
-// Setup logs
-log.addTarget('console').withFormatter('human')
+import { config, log, service, runLambda } from './app'
 
 /**
  * Placeholder for schema object
@@ -78,7 +76,11 @@ export const mapTemplateParams = (route, template) => {
   return { route, template }
 }
 
-const buildRoutes = (apiPath, service, runLambda) => {
+/**
+ * Builds routes and adds to the express service by mapping template params to
+ * the path/route then binding to runLambda method
+ */
+const buildRoutes = () => {
   // Itterate over routes
   routes.forEach((rte) => {
     // Map template params
@@ -87,7 +89,7 @@ const buildRoutes = (apiPath, service, runLambda) => {
     rte.route = mappedRoutes.route
     rte.config.templates['application/json'] = mappedRoutes.template
     // Build service method
-    service[rte.method.toLowerCase()](apiPath + rte.route, (req, res) => {
+    service[rte.method.toLowerCase()](config.apiPath + rte.route, (req, res) => {
       runLambda(lambda, rte.config.templates['application/json'], req, res)
     })
   })
@@ -103,5 +105,5 @@ export const initRoutes = (apiPath = '', service = {}, runLambda) => {
   // Walk the schema to build routes
   walkSchema(schema)
   // Map params and build express routes
-  buildRoutes(apiPath, service, runLambda)
+  buildRoutes()
 }

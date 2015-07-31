@@ -7,10 +7,10 @@ const express = require('express')
 const bodyParser = require('body-parser')
 const fork = require('child_process').fork
 const path = require('path')
-const log = require('bristol')
 const _ = require('lodash')
 
 // Setup logs
+export const log = require('bristol')
 log.addTarget('console').withFormatter('human')
 
 // Default path to lambda runner
@@ -26,7 +26,7 @@ import { loadSchema, initRoutes } from './router'
 export const setRunner = (runnerPath) => runner = path.resolve(runnerPath)
 
 // Express setup
-const service = express()
+export const service = express()
 service.use(bodyParser.json())
 
 /**
@@ -97,7 +97,7 @@ export const parseBody = (reqBody = {}, template) => {
  * @param {Object} res Express res object
  * @param {String} lambdas Path to the lambdas directory
  */
-const runLambda = (lambda, template, req, res) => {
+export const runLambda = (lambda, template, req, res) => {
   // Build event
   const event = JSON.stringify(parseBody(req.body, template))
   // Set lambdas
@@ -140,7 +140,7 @@ export const init = (cfg) => {
   // Load schema into router
   loadSchema(config.schema)
   // Initialize all routes from gateway schema
-  initRoutes(config.apiPath, service, runLambda)
+  initRoutes(config.apiPath, service)
   // Starts service
   service.listen(config.port, () => {
     if (config.log) log.info(`Service running on ${config.port}`)

@@ -8,30 +8,35 @@
 Object.defineProperty(exports, '__esModule', {
   value: true
 });
-var express = require('express');
-var bodyParser = require('body-parser');
-var fork = require('child_process').fork;
-var path = require('path');
-var log = require('bristol');
-var _ = require('lodash');
 
-// Setup logs
-log.addTarget('console').withFormatter('human');
+// Import router
 
-// Default path to lambda runner
-var runner = path.resolve(__dirname, './runner');
+var _router = require('./router');
 
 /**
  * Allows overriding default runner script
  * @param {String} runnerPath Path to the runner module
  */
-var setRunner = function setRunner(runnerPath) {
+var express = require('express');
+var bodyParser = require('body-parser');
+var fork = require('child_process').fork;
+var path = require('path');
+var _ = require('lodash');
+
+// Setup logs
+var log = require('bristol');
+exports.log = log;
+log.addTarget('console').withFormatter('human');
+
+// Default path to lambda runner
+var runner = path.resolve(__dirname, './runner');var setRunner = function setRunner(runnerPath) {
   return runner = path.resolve(runnerPath);
 };
 
 // Express setup
 exports.setRunner = setRunner;
 var service = express();
+exports.service = service;
 service.use(bodyParser.json());
 
 /**
@@ -44,6 +49,7 @@ service.use(bodyParser.json());
  */
 var config = {
   lambdas: './lambdas',
+  schema: './gateway.yml',
   port: 8181,
   apiPath: '/api',
   log: true
@@ -72,6 +78,32 @@ var procResponse = function procResponse(msg, res) {
 };
 
 /**
+ * Parses the template from gateway and merges in the req.body as it's
+ * intended property for the lambda
+ * @param {Object} reqBody The req.body from express request
+ * @param {Object} template The gateway template
+ * @returns {Object} the full event to be passed to the Lambda
+ */
+exports.procResponse = procResponse;
+var parseBody = function parseBody(reqBody, template) {
+  if (reqBody === undefined) reqBody = {};
+
+  var tmpBody = {};
+  for (var prop in template) {
+    if (({}).hasOwnProperty.call(template, prop)) {
+      if (template[prop] === '$input.json(\'$\')') {
+        // Replace prop with req.body
+        tmpBody[prop] = reqBody;
+      } else {
+        // Custom pass-throughs
+        tmpBody[prop] = template[prop];
+      }
+    }
+  }
+  return tmpBody;
+};
+
+/**
  * Builds the `event` payload with the request body and the method of the
  * call (`operation`). Forks a new runner process to the requested lambda
  * then awaits messaging from the lambda
@@ -79,16 +111,12 @@ var procResponse = function procResponse(msg, res) {
  * @param {Object} res Express res object
  * @param {String} lambdas Path to the lambdas directory
  */
-exports.procResponse = procResponse;
-var runLambda = function runLambda(req, res) {
-  var evt = req.body;
-  var lambda = req.params.endpoint;
-  // Map method to operation param
-  evt.operation = req.method;
+exports.parseBody = parseBody;
+var runLambda = function runLambda(lambda, template, req, res) {
+  // Build event
+  var event = JSON.stringify(parseBody(req.body, template));
   // Set lambdas
   var lambdas = config.lambdas;
-  // Set event
-  var event = JSON.stringify(evt);
   // Pass correct $HOME (helps with ~/.aws credentials)
   var HOME = process.env.HOME;
   // Execute lambda
@@ -106,6 +134,7 @@ var runLambda = function runLambda(req, res) {
  * if there are any environment variables set
  * @param {Object} [cfg] The config passed through init
  */
+exports.runLambda = runLambda;
 var buildConfig = function buildConfig(cfg) {
   // Against defaults
   _.extend(config, cfg);
@@ -127,10 +156,10 @@ exports.buildConfig = buildConfig;
 var init = function init(cfg) {
   // Setup config
   buildConfig(cfg);
-  // Binds to endpoint
-  service.all(config.apiPath + '/:endpoint', function (req, res) {
-    return runLambda(req, res);
-  });
+  // Load schema into router
+  (0, _router.loadSchema)(config.schema);
+  // Initialize all routes from gateway schema
+  (0, _router.initRoutes)(config.apiPath, service);
   // Starts service
   service.listen(config.port, function () {
     if (config.log) log.info('Service running on ' + config.port);

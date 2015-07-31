@@ -5,7 +5,9 @@ in conjunction with [Lambda](http://aws.amazon.com/lambda/) functions.
 
 ## Setup
 
-To see a fully functional demo, see the [/example](/example) directory.
+To see a fully functional demo, see the [/test](/test) directory. The `index.js` 
+file is setup to run using the [lambdas`](/test/lambdas) and the [gateway.yml](/test/gateway.yml) 
+file. The tests run against this configuration as well.
 
 After installing the npm module simply include it in a file where it will run and
 set any config options on `init`:
@@ -16,6 +18,7 @@ var glmock = require('gateway-lambda')
 // Set options and init
 glmock.init({
   lambdas: './lambdas',
+  schema: './gateway.yml',
   port: 8181,
   apiPath: '/api',
   log: true
@@ -25,6 +28,7 @@ glmock.init({
 The above shows a standard set of config options:
 
 * `lambdas`: Path to the directory containing lambdas
+* `schema`: Path to the API gateway YAML config
 * `port`: Port on which the HTTP server will run
 * `apiPath`: Any path (proceeding root) to include in HTTP requests mapping
 * `log`: Wether or not to log to console
