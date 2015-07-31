@@ -16,6 +16,9 @@ log.addTarget('console').withFormatter('human')
 // Default path to lambda runner
 let runner = path.resolve(__dirname, './runner')
 
+// Import router
+import { loadSchema, initRoutes } from './router'
+
 /**
  * Allows overriding default runner script
  * @param {String} runnerPath Path to the runner module
@@ -36,6 +39,7 @@ service.use(bodyParser.json())
  */
 export let config = {
   lambdas: './lambdas',
+  schema: './gateway.yml',
   port: 8181,
   apiPath: '/api',
   log: true
@@ -63,6 +67,29 @@ export const procResponse = (msg, res) => {
 }
 
 /**
+ * Parses the template from gateway and merges in the req.body as it's
+ * intended property for the lambda
+ * @param {Object} reqBody The req.body from express request
+ * @param {Object} template The gateway template
+ * @returns {Object} the full event to be passed to the Lambda
+ */
+export const parseBody = (reqBody = {}, template) => {
+  let tmpBody = {}
+  for (let prop in template) {
+    if ({}.hasOwnProperty.call(template, prop)) {
+      if (template[prop] === `$input.json('$')`) {
+        // Replace prop with req.body
+        tmpBody[prop] = reqBody
+      } else {
+        // Custom pass-throughs
+        tmpBody[prop] = template[prop]
+      }
+    }
+  }
+  return tmpBody
+}
+
+/**
  * Builds the `event` payload with the request body and the method of the
  * call (`operation`). Forks a new runner process to the requested lambda
  * then awaits messaging from the lambda
@@ -70,15 +97,11 @@ export const procResponse = (msg, res) => {
  * @param {Object} res Express res object
  * @param {String} lambdas Path to the lambdas directory
  */
-const runLambda = (req, res) => {
-  const evt = req.body
-  const lambda = req.params.endpoint
-  // Map method to operation param
-  evt.operation = req.method
+const runLambda = (lambda, template, req, res) => {
+  // Build event
+  const event = JSON.stringify(parseBody(req.body, template))
   // Set lambdas
   const lambdas = config.lambdas
-  // Set event
-  const event = JSON.stringify(evt)
   // Pass correct $HOME (helps with ~/.aws credentials)
   const HOME = process.env.HOME
   // Execute lambda
@@ -114,8 +137,10 @@ export const buildConfig = (cfg) => {
 export const init = (cfg) => {
   // Setup config
   buildConfig(cfg)
-  // Binds to endpoint
-  service.all(`${config.apiPath}/:endpoint`, (req, res) => runLambda(req, res))
+  // Load schema into router
+  loadSchema(config.schema)
+  // Initialize all routes from gateway schema
+  initRoutes(config.apiPath, service, runLambda)
   // Starts service
   service.listen(config.port, () => {
     if (config.log) log.info(`Service running on ${config.port}`)

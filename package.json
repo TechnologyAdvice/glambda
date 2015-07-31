@@ -37,6 +37,7 @@
     "body-parser": "^1.13.2",
     "bristol": "^0.3.2",
     "express": "^4.13.1",
-    "lodash": "^3.10.0"
+    "lodash": "^3.10.0",
+    "yamljs": "^0.2.3"
   }
 }
