@@ -1,3 +1,6 @@
+[![Build Status](https://travis-ci.org/TechnologyAdvice/glambda.svg?branch=master)](https://travis-ci.org/TechnologyAdvice/glambda)
+[![Dependency Status](https://www.versioneye.com/user/projects/55bd0f716537620017001fa2/badge.svg?style=flat)](https://www.versioneye.com/user/projects/55bd0f716537620017001fa2)
+
 # GLambda
 
 ### AWS Gateway + Lambda Testing Module
