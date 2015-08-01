@@ -1,9 +1,8 @@
 /* eslint no-param-reassign: 0 */
 const path = require('path')
 const yaml = require('yamljs')
-const _ = require('lodash')
 
-import { config, service, procLog, runLambda } from './app'
+import { config, service, runLambda } from './app'
 
 /**
  * Placeholder for schema object
@@ -42,11 +41,9 @@ export const walkSchema = (node = schema, prevKey = null) => {
       if (methods.indexOf(prop) >= 0) {
         // Node is a method, push to router
         routes.push({ route: prevKey, method: prop, config: node[prop] })
-      } else if (_.isObject(node[prop])) {
+      } else {
         // Route node, traverse
         walkSchema(node[prop], prop)
-      } else {
-        procLog('error', 'Invalid property in gateway config')
       }
     }
   }
