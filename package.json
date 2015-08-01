@@ -25,6 +25,7 @@
     "clean": "make clean",
     "build": "make build",
     "test": "make test",
+    "cover": "make cover",
     "lint": "make lint",
     "doc": "make doc",
     "report": "make report",
@@ -51,6 +52,7 @@
   "dependencies": {
     "body-parser": "^1.13.2",
     "bristol": "^0.3.2",
+    "codecov.io": "^0.1.5",
     "express": "^4.13.1",
     "lodash": "^3.10.0",
     "yamljs": "^0.2.3"
