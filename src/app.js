@@ -46,23 +46,25 @@ export let config = {
 }
 
 /**
+ * Calls log output method
+ * @param {String} type Type of log message to write
+ * @param {String|Object} msg Message body of log
+ */
+export const procLog = (type, msg) => {
+  if (config.log) log[type](msg)
+}
+
+/**
  * Handles response from forked lambda runner procs
  * @param {Object} msg Message object from child proc
  * @param {Object} [res] Express response object
  */
 export const procResponse = (msg, res) => {
   switch (msg.type) {
-    case 'metric':
-      if (config.log) log.info(msg.output)
-      break
-    case 'success':
-      res.status(200).send(msg.output)
-      break
-    case 'error':
-      res.status(500).send(msg.output)
-      break
-    default:
-      log.error('Missing response type')
+    case 'metric': procLog('info', msg.output); break
+    case 'success': res.status(200).send(msg.output); break
+    case 'error': res.status(500).send(msg.output); break
+    default: procLog('error', 'Missing response type')
   }
 }
 
@@ -136,6 +138,7 @@ export const buildConfig = (cfg) => {
  * (runLambda) on calls and starts listener
  * @param {Object} [config] Path to the lambdas directory
  */
+
 export const init = (cfg) => {
   // Setup config
   buildConfig(cfg)
@@ -145,6 +148,6 @@ export const init = (cfg) => {
   initRoutes()
   // Starts service
   service.listen(config.port, () => {
-    if (config.log) log.info(`Service running on ${config.port}`)
+    procLog('info', `Service running on ${config.port}`)
   })
 }

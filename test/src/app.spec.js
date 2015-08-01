@@ -46,11 +46,6 @@ describe('app', () => {
 
   describe('procResponse', () => {
 
-    before(() => {
-      config.log = true
-    })
-
-    // Stub res
     let resStub = {
       status: function (code) {
         return {
@@ -60,19 +55,17 @@ describe('app', () => {
         }
       }
     }
-
+    
     let responseSpy = sinon.spy(resStub, 'status')
 
     it('logs info on metrics case', () => {
-      const logSpyInfo = sinon.spy(log, "info")
       procResponse({ type: 'metric', output: 'test' })
-      expect(logSpyInfo).to.have.been.calledOnce
+      sinon.mock(log).expects('info').once
     })
 
     it('logs error on default case', () => {
-      const logSpyError = sinon.spy(log, "error")
       procResponse({ type: null, output: 'no type'})
-      expect(logSpyError).to.have.been.calledOnce
+      sinon.mock(log).expects('error').once
     })
 
     it('responds on success case', () => {
@@ -83,10 +76,6 @@ describe('app', () => {
     it('responds on error case', () => {
       procResponse({ type: 'error', output: 'response' }, resStub)
       expect(responseSpy).to.have.been.called
-    })
-
-    after(() => {
-      config.log = false
     })
 
   })

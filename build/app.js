@@ -56,24 +56,31 @@ var config = {
 };
 
 /**
+ * Calls log output method
+ * @param {String} type Type of log message to write
+ * @param {String|Object} msg Message body of log
+ */
+exports.config = config;
+var procLog = function procLog(type, msg) {
+  if (config.log) log[type](msg);
+};
+
+/**
  * Handles response from forked lambda runner procs
  * @param {Object} msg Message object from child proc
  * @param {Object} [res] Express response object
  */
-exports.config = config;
+exports.procLog = procLog;
 var procResponse = function procResponse(msg, res) {
   switch (msg.type) {
     case 'metric':
-      if (config.log) log.info(msg.output);
-      break;
+      procLog('info', msg.output);break;
     case 'success':
-      res.status(200).send(msg.output);
-      break;
+      res.status(200).send(msg.output);break;
     case 'error':
-      res.status(500).send(msg.output);
-      break;
+      res.status(500).send(msg.output);break;
     default:
-      log.error('Missing response type');
+      procLog('error', 'Missing response type');
   }
 };
 
@@ -86,8 +93,6 @@ var procResponse = function procResponse(msg, res) {
  */
 exports.procResponse = procResponse;
 var parseBody = function parseBody(reqBody, template) {
-  if (reqBody === undefined) reqBody = {};
-
   var tmpBody = {};
   for (var prop in template) {
     if (({}).hasOwnProperty.call(template, prop)) {
@@ -154,6 +159,7 @@ var buildConfig = function buildConfig(cfg) {
  * (runLambda) on calls and starts listener
  * @param {Object} [config] Path to the lambdas directory
  */
+
 exports.buildConfig = buildConfig;
 var init = function init(cfg) {
   // Setup config
@@ -164,7 +170,7 @@ var init = function init(cfg) {
   (0, _router.initRoutes)();
   // Starts service
   service.listen(config.port, function () {
-    if (config.log) log.info('Service running on ' + config.port);
+    procLog('info', 'Service running on ' + config.port);
   });
 };
 exports.init = init;
