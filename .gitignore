@@ -2,6 +2,7 @@ node_modules/
 logs/
 **/*.log
 report
+coverage
 
 # Wercker
 _builds

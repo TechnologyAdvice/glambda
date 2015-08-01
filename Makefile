@@ -14,6 +14,8 @@ SPACE   :=
 SPACE   +=
 # Default to recursive, can override on run
 FILE    = $(SPACE)--recursive
+# ARGS
+T_ARGS  = --compilers js:babel/register $(TESTS)$(FILE)
 
 # Deploy
 TAG     = 0
@@ -50,7 +52,12 @@ test:
 	$(call colorecho, "Building runner for integration tests")
 	$(BIN)/babel $(SRC)/runner.js --out-file $(BUILD)/runner.js
 	$(call colorecho, "Testing $(TESTS)$(FILE)")
-	$(BIN)/mocha --compilers js:babel/register $(TESTS)$(FILE)
+	$(BIN)/mocha $(T_ARGS)
+	
+cover:
+	$(call colorecho, "Running coverage report")
+	$(BIN)/istanbul cover $(BIN)/_mocha -- $(T_ARGS)
+	
 
 build:
 	$(call colorecho, "Building $(SRC) to $(BUILD)")
