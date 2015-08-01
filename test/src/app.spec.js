@@ -1,6 +1,6 @@
-/* global expect, request, describe, it, before, after */
+/* global sinon, expect, request, describe, it, before, after */
 import '../setup'
-import { init, config, buildConfig, setRunner, parseBody } from '../../src/app'
+import { init, config, log, procResponse, buildConfig, setRunner, parseBody } from '../../src/app'
 
 const url = 'http://localhost:8181/api/'
 
@@ -40,6 +40,53 @@ describe('app', () => {
       delete process.env.GL_SCHEMA
       delete process.env.GL_PORT
       delete process.env.GL_APIPATH
+    })
+
+  })
+
+  describe('procResponse', () => {
+
+    before(() => {
+      config.log = true
+    })
+
+    // Stub res
+    let resStub = {
+      status: function (code) {
+        return {
+          send: function (msg) {
+            return { code: code, msg: msg }
+          }
+        }
+      }
+    }
+
+    let responseSpy = sinon.spy(resStub, 'status')
+
+    it('logs info on metrics case', () => {
+      const logSpyInfo = sinon.spy(log, "info")
+      procResponse({ type: 'metric', output: 'test' })
+      expect(logSpyInfo).to.have.been.calledOnce
+    })
+
+    it('logs error on default case', () => {
+      const logSpyError = sinon.spy(log, "error")
+      procResponse({ type: null, output: 'no type'})
+      expect(logSpyError).to.have.been.calledOnce
+    })
+
+    it('responds on success case', () => {
+      procResponse({ type: 'success', output: 'response' }, resStub)
+      expect(responseSpy).to.have.been.called
+    })
+
+    it('responds on error case', () => {
+      procResponse({ type: 'error', output: 'response' }, resStub)
+      expect(responseSpy).to.have.been.called
+    })
+
+    after(() => {
+      config.log = false
     })
 
   })
@@ -105,6 +152,16 @@ describe('app', () => {
           responseText.should.have.property('body')
           responseText.body.should.have.property('foo')
           responseText.body.foo.should.equal('bar')
+          done()
+        })
+    })
+
+    it('responds with a 500 on fail', (done) => {
+      request(url)
+        .put('foo/someId')
+        .send({ failTest: true })
+        .expect(500)
+        .end(() => {
           done()
         })
     })

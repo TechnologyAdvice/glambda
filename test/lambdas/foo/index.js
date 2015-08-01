@@ -1,3 +1,7 @@
 exports.handler = function (event, context) {
-  context.succeed(event)
+  if (event.failTest) {
+    context.fail('Fail test')
+  } else {
+    context.succeed(event)
+  }
 }

@@ -73,7 +73,7 @@ export const procResponse = (msg, res) => {
  * @param {Object} template The gateway template
  * @returns {Object} the full event to be passed to the Lambda
  */
-export const parseBody = (reqBody = {}, template) => {
+export const parseBody = (reqBody, template) => {
   let tmpBody = {}
   for (let prop in template) {
     if ({}.hasOwnProperty.call(template, prop)) {
