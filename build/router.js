@@ -57,8 +57,7 @@ var walkSchema = function walkSchema() {
         // Route node, traverse
         walkSchema(node[prop], prop);
       } else {
-        _app.log.error('Invalid property in gateway config', { property: prevKey + '> ' + prop });
-        return;
+        (0, _app.procLog)('error', 'Invalid property in gateway config');
       }
     }
   }
