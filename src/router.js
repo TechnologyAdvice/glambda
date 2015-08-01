@@ -3,7 +3,7 @@ const path = require('path')
 const yaml = require('yamljs')
 const _ = require('lodash')
 
-import { config, log, service, runLambda } from './app'
+import { config, service, procLog, runLambda } from './app'
 
 /**
  * Placeholder for schema object
@@ -46,8 +46,7 @@ export const walkSchema = (node = schema, prevKey = null) => {
         // Route node, traverse
         walkSchema(node[prop], prop)
       } else {
-        log.error('Invalid property in gateway config', { property: prevKey + '> ' + prop })
-        return
+        procLog('error', 'Invalid property in gateway config')
       }
     }
   }
