@@ -1,4 +1,5 @@
 [![Build Status](https://travis-ci.org/TechnologyAdvice/glambda.svg?branch=master)](https://travis-ci.org/TechnologyAdvice/glambda)
+[![codecov.io](http://codecov.io/github/TechnologyAdvice/glambda/coverage.svg?branch=master)](http://codecov.io/github/TechnologyAdvice/glambda?branch=master)
 [![Dependency Status](https://www.versioneye.com/user/projects/55bd0f716537620017001fa2/badge.svg?style=flat)](https://www.versioneye.com/user/projects/55bd0f716537620017001fa2)
 
 # GLambda
