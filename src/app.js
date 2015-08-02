@@ -95,9 +95,10 @@ export const parseBody = (reqBody, template) => {
  * Builds the `event` payload with the request body and the method of the
  * call (`operation`). Forks a new runner process to the requested lambda
  * then awaits messaging from the lambda
+ * @param {String} lambda The lambda to run
+ * @param {Object} template The gateway template
  * @param {Object} req Express req object
  * @param {Object} res Express res object
- * @param {String} lambdas Path to the lambdas directory
  */
 export const runLambda = (lambda, template, req, res) => {
   // Parse body against template
