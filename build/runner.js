@@ -42,5 +42,8 @@ var context = {
   }
 };
 
+// Emit initialization metric
+process.send({ type: 'metric', output: { lambda: process.argv[2], pid: process.pid } });
+
 // Call lambda's handler
 lambda.handler(JSON.parse(process.env.event), context);

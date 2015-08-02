@@ -105,16 +105,10 @@ export const runLambda = (lambda, template, req, res) => {
   const body = parseBody(req.body, template)
   // Build event by extending body with params
   const event = JSON.stringify(_.extend(body, req.params))
-  // Set lambdas
-  const lambdas = config.lambdas
-  // Pass correct $HOME (helps with ~/.aws credentials)
-  const HOME = process.env.HOME
   // Execute lambda
-  const proc = fork(runner, [ lambda ], { env: { lambdas, event, HOME } })
-  // Print pid
-  procResponse({ type: 'metric', output: `PID ${proc.pid} running ${lambda}` })
-  // Await proc messaging
-  proc.on('message', (msg) => procResponse(msg, res))
+  fork(runner, [ lambda ], {
+    env: { lambdas: config.lambdas, event, HOME: process.env.HOME }
+  }).on('message', (msg) => procResponse(msg, res))
 }
 
 /**

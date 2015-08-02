@@ -13,7 +13,6 @@ var _app = require('./app');
  */
 var path = require('path');
 var yaml = require('yamljs');
-var _ = require('lodash');
 
 var schema = null;
 
@@ -53,11 +52,9 @@ var walkSchema = function walkSchema() {
       if (methods.indexOf(prop) >= 0) {
         // Node is a method, push to router
         routes.push({ route: prevKey, method: prop, config: node[prop] });
-      } else if (_.isObject(node[prop])) {
+      } else {
         // Route node, traverse
         walkSchema(node[prop], prop);
-      } else {
-        (0, _app.procLog)('error', 'Invalid property in gateway config');
       }
     }
   }

@@ -112,9 +112,10 @@ var parseBody = function parseBody(reqBody, template) {
  * Builds the `event` payload with the request body and the method of the
  * call (`operation`). Forks a new runner process to the requested lambda
  * then awaits messaging from the lambda
+ * @param {String} lambda The lambda to run
+ * @param {Object} template The gateway template
  * @param {Object} req Express req object
  * @param {Object} res Express res object
- * @param {String} lambdas Path to the lambdas directory
  */
 exports.parseBody = parseBody;
 var runLambda = function runLambda(lambda, template, req, res) {
@@ -122,16 +123,10 @@ var runLambda = function runLambda(lambda, template, req, res) {
   var body = parseBody(req.body, template);
   // Build event by extending body with params
   var event = JSON.stringify(_.extend(body, req.params));
-  // Set lambdas
-  var lambdas = config.lambdas;
-  // Pass correct $HOME (helps with ~/.aws credentials)
-  var HOME = process.env.HOME;
   // Execute lambda
-  var proc = fork(runner, [lambda], { env: { lambdas: lambdas, event: event, HOME: HOME } });
-  // Print pid
-  procResponse({ type: 'metric', output: 'PID ' + proc.pid + ' running ' + lambda });
-  // Await proc messaging
-  proc.on('message', function (msg) {
+  fork(runner, [lambda], {
+    env: { lambdas: config.lambdas, event: event, HOME: process.env.HOME }
+  }).on('message', function (msg) {
     return procResponse(msg, res);
   });
 };
