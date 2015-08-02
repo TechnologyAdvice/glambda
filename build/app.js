@@ -74,7 +74,7 @@ exports.procLog = procLog;
 var procResponse = function procResponse(msg, res) {
   switch (msg.type) {
     case 'metric':
-      procLog('info', 'Process Message', msg.output);break;
+      procLog('info', 'Lambda Processed', msg.output);break;
     case 'success':
       res.status(200).send(msg.output);break;
     case 'error':

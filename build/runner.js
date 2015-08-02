@@ -36,14 +36,16 @@ var context = {
    * Emit closing metrics and end the lambda process
    */
   done: function done() {
-    process.send({ type: 'metric', output: { memory: util.inspect(process.memoryUsage()) } });
-    process.send({ type: 'metric', output: { time: process.uptime() } });
+    process.send({ type: 'metric', output: {
+        lambda: process.argv[2],
+        event: process.env.event,
+        pid: process.pid,
+        memory: util.inspect(process.memoryUsage()),
+        time: process.uptime()
+      } });
     process.exit();
   }
 };
-
-// Emit initialization metric
-process.send({ type: 'metric', output: { lambda: process.argv[2], pid: process.pid } });
 
 // Call lambda's handler
 lambda.handler(JSON.parse(process.env.event), context);

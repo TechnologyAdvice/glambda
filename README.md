@@ -97,21 +97,20 @@ of requests made against the above configuration:
 
 ## Logging
 
-GLambda will output information from both the service and the Lambdas. An example 
-of the Lambda-specific logs is below:
+GLambda will output information from both the service and the Lambdas. An example
+of the Lambda-specific log output is below:
 
 ```
-[2015-08-02 14:17:36] INFO: Process Message (...)
+[2015-08-02 14:26:46] INFO: Lambda Processed (...)
         lambda: foo
-        pid: 29848
-[2015-08-02 14:17:36] INFO: Process Message (...)
-        memory: { rss: 20054016, heapTotal: 9751808, heapUsed: 3992512 }
-[2015-08-02 14:17:36] INFO: Process Message (...)
-        time: 0.135
+        event: {"method":"get"}
+        pid: 30945
+        memory: { rss: 20062208, heapTotal: 9751808, heapUsed: 3989464 }
+        time: 0.124
 ```
 
-The above shows the complete chain of event for a lambda from initialization 
-through completion.
+The above shows the complete pertinant data associated with the Lambda for 
+evaluating the event, process, and perfromance.
 
 ## Notes
 
