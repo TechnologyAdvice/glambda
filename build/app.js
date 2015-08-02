@@ -61,8 +61,8 @@ var config = {
  * @param {String|Object} msg Message body of log
  */
 exports.config = config;
-var procLog = function procLog(type, msg) {
-  if (config.log) log[type](msg);
+var procLog = function procLog(type) {
+  if (config.log) log[type](arguments[1], arguments[2]);
 };
 
 /**
@@ -74,7 +74,7 @@ exports.procLog = procLog;
 var procResponse = function procResponse(msg, res) {
   switch (msg.type) {
     case 'metric':
-      procLog('info', msg.output);break;
+      procLog('info', 'Process Message', msg.output);break;
     case 'success':
       res.status(200).send(msg.output);break;
     case 'error':
@@ -165,7 +165,7 @@ var init = function init(cfg) {
   (0, _router.initRoutes)();
   // Starts service
   service.listen(config.port, function () {
-    procLog('info', 'Service running on ' + config.port);
+    procLog('info', 'Service running', { port: config.port });
   });
 };
 exports.init = init;

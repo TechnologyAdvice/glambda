@@ -45,6 +45,7 @@
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-log">log</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-mapTemplateParams">mapTemplateParams</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-parseBody">parseBody</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-procLog">procLog</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-procResponse">procResponse</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-routes">routes</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-runLambda">runLambda</a></span></li>
@@ -60,7 +61,10 @@
 
 </nav>
 
-<div class="content" data-ice="content"><div data-ice="index"><h1 id="glambda">GLambda</h1>
+<div class="content" data-ice="content"><div data-ice="index"><p><a href="https://travis-ci.org/TechnologyAdvice/glambda"><img src="https://travis-ci.org/TechnologyAdvice/glambda.svg?branch=master" alt="Build Status"></a>
+<a href="http://codecov.io/github/TechnologyAdvice/glambda?branch=master"><img src="http://codecov.io/github/TechnologyAdvice/glambda/coverage.svg?branch=master" alt="codecov.io"></a>
+<a href="https://www.versioneye.com/user/projects/55bd0f716537620017001fa2"><img src="https://www.versioneye.com/user/projects/55bd0f716537620017001fa2/badge.svg?style=flat" alt="Dependency Status"></a></p>
+<h1 id="glambda">GLambda</h1>
 <h3 id="aws-gateway-lambda-testing-module">AWS Gateway + Lambda Testing Module</h3>
 <p>A module for mocking and testing AWS <a href="http://aws.amazon.com/api-gateway/">API Gateway</a>
 in conjunction with <a href="http://aws.amazon.com/lambda/">Lambda</a> functions.</p>
@@ -72,9 +76,9 @@ file. The tests run against this configuration as well.</p>
 <p>After installing the npm module simply include it in a file where it will run and
 set any config options on <code>init</code>:</p>
 <pre><code class="lang-javascript"><pre class="source-code"><code class="prettyprint">// Include the module
-var glmock = require(&apos;glambda&apos;)
+var glambda = require(&apos;glambda&apos;)
 // Set options and init
-glmock.init({
+glambda.init({
   lambdas: &apos;./lambdas&apos;,
   schema: &apos;./gateway.yml&apos;,
   port: 8181,
@@ -172,6 +176,11 @@ of requests made against the above configuration:</p>
 </tr>
 </tbody>
 </table>
+<h2 id="notes">Notes</h2>
+<h3 id="gateway-templates">Gateway Templates</h3>
+<p>Currently Glambda only supports a single template which must be <code>application/json</code>.
+The plan is to expand on this, see [Support Multiple Templates)(<a href="https://github.com/TechnologyAdvice/glambda/issues/2">https://github.com/TechnologyAdvice/glambda/issues/2</a>)
+issue for more information.</p>
 <h2 id="makefile-and-scripts">Makefile and Scripts</h2>
 <p>A <code>Makefile</code> is included for managing build and install tasks. The commands are
 then referenced in the <code>package.json</code> <code>scripts</code> if that is the preferred
@@ -179,9 +188,10 @@ task method:</p>
 <ul>
 <li><code>all</code> (default) will run all build tasks</li>
 <li><code>start</code> will run the main script</li>
-<li><code>clean</code> will remove the <code>/build</code> and <code>/node_modules</code> directories</li>
+<li><code>clean</code> will remove the <code>/node_modules</code> directories</li>
 <li><code>build</code> will transpile ES2015 code in <code>/src</code> to <code>/build</code></li>
 <li><code>test</code> will run all spec files in <code>/test/src</code></li>
+<li><code>cover</code> will run code coverage on all tests</li>
 <li><code>lint</code> will lint all files in <code>/src</code></li>
 <li><code>doc</code> will run ESDoc on all files in <code>/src</code> and output to <code>/docs</code></li>
 <li><code>report</code> will run Plato static analysis on <code>/build</code> and output to <code>/report</code></li>
@@ -194,7 +204,18 @@ task method:</p>
 </li>
 <li><code>watch</code> will run the <code>dev</code> task and rerun on change of <code>/src</code> files</li>
 </ul>
-<p>Both <code>make {COMMAND}</code> and <code>npm run {COMMAND}</code> work for any of the above commands.</p>
+<p><strong>Test Inidividual File</strong></p>
+<p>An individual spec can be run by specifying the <code>FILE</code>:</p>
+<pre><code><pre class="source-code"><code class="prettyprint">make test FILE=some.spec.js</code></pre>
+</code></pre><p>The <code>FILE</code> is relative to the <code>test/src/</code> directory.</p>
+<p><strong>Deploys</strong></p>
+<p>For deploying releases, the <code>deploy TAG={VERSION}</code> can be used where <code>VERSION</code> can be:</p>
+<pre><code><pre class="source-code"><code class="prettyprint">&lt;newversion&gt; | major | minor | patch | premajor</code></pre>
+</code></pre><p>Both <code>make {COMMAND}</code> and <code>npm run {COMMAND}</code> work for any of the above commands.</p>
+<h2 id="license">License</h2>
+<p>Glambda is licensed under the MIT license. Please see <code>LICENSE.txt</code> for full details.</p>
+<p>Credits</p>
+<p>Glambda was designed and created at <a href="http://www.technologyadvice.com">TechnologyAdvice</a>.</p>
 </div>
 </div>
 

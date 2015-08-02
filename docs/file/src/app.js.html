@@ -45,6 +45,7 @@
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-log">log</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-mapTemplateParams">mapTemplateParams</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-parseBody">parseBody</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-procLog">procLog</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-procResponse">procResponse</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-routes">routes</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-runLambda">runLambda</a></span></li>
@@ -109,23 +110,25 @@ export let config = {
 }
 
 /**
+ * Calls log output method
+ * @param {String} type Type of log message to write
+ * @param {String|Object} msg Message body of log
+ */
+export const procLog = (type, ...msg) =&gt; {
+  if (config.log) log[type](msg[0], msg[1])
+}
+
+/**
  * Handles response from forked lambda runner procs
  * @param {Object} msg Message object from child proc
  * @param {Object} [res] Express response object
  */
 export const procResponse = (msg, res) =&gt; {
   switch (msg.type) {
-    case &apos;metric&apos;:
-      if (config.log) log.info(msg.output)
-      break
-    case &apos;success&apos;:
-      res.status(200).send(msg.output)
-      break
-    case &apos;error&apos;:
-      res.status(500).send(msg.output)
-      break
-    default:
-      log.error(&apos;Missing response type&apos;)
+    case &apos;metric&apos;: procLog(&apos;info&apos;, msg.type, msg.output); break
+    case &apos;success&apos;: res.status(200).send(msg.output); break
+    case &apos;error&apos;: res.status(500).send(msg.output); break
+    default: procLog(&apos;error&apos;, &apos;Missing response type&apos;)
   }
 }
 
@@ -136,7 +139,7 @@ export const procResponse = (msg, res) =&gt; {
  * @param {Object} template The gateway template
  * @returns {Object} the full event to be passed to the Lambda
  */
-export const parseBody = (reqBody = {}, template) =&gt; {
+export const parseBody = (reqBody, template) =&gt; {
   let tmpBody = {}
   for (let prop in template) {
     if ({}.hasOwnProperty.call(template, prop)) {
@@ -156,25 +159,20 @@ export const parseBody = (reqBody = {}, template) =&gt; {
  * Builds the `event` payload with the request body and the method of the
  * call (`operation`). Forks a new runner process to the requested lambda
  * then awaits messaging from the lambda
+ * @param {String} lambda The lambda to run
+ * @param {Object} template The gateway template
  * @param {Object} req Express req object
  * @param {Object} res Express res object
- * @param {String} lambdas Path to the lambdas directory
  */
 export const runLambda = (lambda, template, req, res) =&gt; {
   // Parse body against template
   const body = parseBody(req.body, template)
   // Build event by extending body with params
   const event = JSON.stringify(_.extend(body, req.params))
-  // Set lambdas
-  const lambdas = config.lambdas
-  // Pass correct $HOME (helps with ~/.aws credentials)
-  const HOME = process.env.HOME
   // Execute lambda
-  const proc = fork(runner, [ lambda ], { env: { lambdas, event, HOME } })
-  // Print pid
-  procResponse({ type: &apos;metric&apos;, output: `PID ${proc.pid} running ${lambda}` })
-  // Await proc messaging
-  proc.on(&apos;message&apos;, (msg) =&gt; procResponse(msg, res))
+  fork(runner, [ lambda ], {
+    env: { lambdas: config.lambdas, event, HOME: process.env.HOME }
+  }).on(&apos;message&apos;, (msg) =&gt; procResponse(msg, res))
 }
 
 /**
@@ -199,6 +197,7 @@ export const buildConfig = (cfg) =&gt; {
  * (runLambda) on calls and starts listener
  * @param {Object} [config] Path to the lambdas directory
  */
+
 export const init = (cfg) =&gt; {
   // Setup config
   buildConfig(cfg)
@@ -208,7 +207,7 @@ export const init = (cfg) =&gt; {
   initRoutes()
   // Starts service
   service.listen(config.port, () =&gt; {
-    if (config.log) log.info(`Service running on ${config.port}`)
+    procLog(&apos;info&apos;, &apos;Service running&apos;, { port: config.port })
   })
 }
 </code></pre>

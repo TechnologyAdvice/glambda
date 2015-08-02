@@ -65,7 +65,7 @@ build:
 
 start:
 	$(call colorecho, "Starting...")
-	node build/server.js
+	node test/index.js
 
 doc:
 	$(call colorecho, "Building Docs")

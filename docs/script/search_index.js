@@ -48,6 +48,12 @@ window.esdocSearchIndex = [
     "variable"
   ],
   [
+    "glambda/src/app.js~proclog",
+    "variable/index.html#static-variable-procLog",
+    "<span>procLog</span> <span class=\"search-result-import-path\">glambda/src/app.js</span>",
+    "variable"
+  ],
+  [
     "glambda/src/app.js~procresponse",
     "variable/index.html#static-variable-procResponse",
     "<span>procResponse</span> <span class=\"search-result-import-path\">glambda/src/app.js</span>",

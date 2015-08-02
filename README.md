@@ -95,6 +95,24 @@ of requests made against the above configuration:
 | /foo/123 | GET    | N/A                  | `{ method: 'get', fooId: 123 }`                           |
 | /foo/123 | PUT    | `{ baz: 'quz' }`     | `{ method: 'put', fooId: 123, body: { baz: 'quz' } }`     |
 
+## Logging
+
+GLambda will output information from both the service and the Lambdas. An example 
+of the Lambda-specific logs is below:
+
+```
+[2015-08-02 14:17:36] INFO: Process Message (...)
+        lambda: foo
+        pid: 29848
+[2015-08-02 14:17:36] INFO: Process Message (...)
+        memory: { rss: 20054016, heapTotal: 9751808, heapUsed: 3992512 }
+[2015-08-02 14:17:36] INFO: Process Message (...)
+        time: 0.135
+```
+
+The above shows the complete chain of event for a lambda from initialization 
+through completion.
+
 ## Notes
 
 ### Gateway Templates

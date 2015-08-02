@@ -45,6 +45,7 @@
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-log">log</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-mapTemplateParams">mapTemplateParams</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-parseBody">parseBody</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-procLog">procLog</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-procResponse">procResponse</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-routes">routes</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-runLambda">runLambda</a></span></li>
@@ -64,9 +65,8 @@
 <pre class="source-code line-number"><code class="prettyprint linenums" data-ice="content">/* eslint no-param-reassign: 0 */
 const path = require(&apos;path&apos;)
 const yaml = require(&apos;yamljs&apos;)
-const _ = require(&apos;lodash&apos;)
 
-import { config, log, service, runLambda } from &apos;./app&apos;
+import { config, service, runLambda } from &apos;./app&apos;
 
 /**
  * Placeholder for schema object
@@ -105,12 +105,9 @@ export const walkSchema = (node = schema, prevKey = null) =&gt; {
       if (methods.indexOf(prop) &gt;= 0) {
         // Node is a method, push to router
         routes.push({ route: prevKey, method: prop, config: node[prop] })
-      } else if (_.isObject(node[prop])) {
+      } else {
         // Route node, traverse
         walkSchema(node[prop], prop)
-      } else {
-        log.error(&apos;Invalid property in gateway config&apos;, { property: prevKey + &apos;&gt; &apos; + prop })
-        return
       }
     }
   }

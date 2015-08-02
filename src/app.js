@@ -50,8 +50,8 @@ export let config = {
  * @param {String} type Type of log message to write
  * @param {String|Object} msg Message body of log
  */
-export const procLog = (type, msg) => {
-  if (config.log) log[type](msg)
+export const procLog = (type, ...msg) => {
+  if (config.log) log[type](msg[0], msg[1])
 }
 
 /**
@@ -61,7 +61,7 @@ export const procLog = (type, msg) => {
  */
 export const procResponse = (msg, res) => {
   switch (msg.type) {
-    case 'metric': procLog('info', msg.output); break
+    case 'metric': procLog('info', 'Process Message', msg.output); break
     case 'success': res.status(200).send(msg.output); break
     case 'error': res.status(500).send(msg.output); break
     default: procLog('error', 'Missing response type')
@@ -143,6 +143,6 @@ export const init = (cfg) => {
   initRoutes()
   // Starts service
   service.listen(config.port, () => {
-    procLog('info', `Service running on ${config.port}`)
+    procLog('info', 'Service running', { port: config.port })
   })
 }

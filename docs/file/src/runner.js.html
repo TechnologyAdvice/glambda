@@ -45,6 +45,7 @@
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-log">log</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-mapTemplateParams">mapTemplateParams</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-parseBody">parseBody</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-procLog">procLog</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-procResponse">procResponse</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-routes">routes</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-runLambda">runLambda</a></span></li>
@@ -102,6 +103,9 @@ const context = {
     process.exit()
   }
 }
+
+// Emit initialization metric
+process.send({ type: &apos;metric&apos;, output: { lambda: process.argv[2], pid: process.pid }})
 
 // Call lambda&apos;s handler
 lambda.handler(JSON.parse(process.env.event), context)
