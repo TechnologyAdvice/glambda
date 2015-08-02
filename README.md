@@ -22,9 +22,9 @@ set any config options on `init`:
 
 ```javascript
 // Include the module
-var glmock = require('glambda')
+var glambda = require('glambda')
 // Set options and init
-glmock.init({
+glambda.init({
   lambdas: './lambdas',
   schema: './gateway.yml',
   port: 8181,
@@ -95,6 +95,14 @@ of requests made against the above configuration:
 | /foo/123 | GET    | N/A                  | `{ method: 'get', fooId: 123 }`                           |
 | /foo/123 | PUT    | `{ baz: 'quz' }`     | `{ method: 'put', fooId: 123, body: { baz: 'quz' } }`     |
 
+## Notes
+
+### Gateway Templates
+
+Currently Glambda only supports a single template which must be `application/json`.
+The plan is to expand on this, see [Support Multiple Templates)(https://github.com/TechnologyAdvice/glambda/issues/2)
+issue for more information.
+
 ## Makefile and Scripts
 
 A `Makefile` is included for managing build and install tasks. The commands are
@@ -136,3 +144,11 @@ For deploying releases, the `deploy TAG={VERSION}` can be used where `VERSION` c
 ```
 
 Both `make {COMMAND}` and `npm run {COMMAND}` work for any of the above commands.
+
+## License
+
+Glambda is licensed under the MIT license. Please see `LICENSE.txt` for full details.
+
+Credits
+
+Glambda was designed and created at [TechnologyAdvice](http://www.technologyadvice.com).

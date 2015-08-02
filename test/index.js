@@ -1,7 +1,7 @@
-var glmock = require('../build/app')
+var glambda = require('../build/app')
 
 // Run
-glmock.init({
+glambda.init({
   lambdas: './test/lambdas',
   schema: './test/gateway.yml',
   port: 8181,
