@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2015 TechnologyAdvice
+ */
+
 /* eslint no-param-reassign: 0 */
 const path = require('path')
 const yaml = require('yamljs')
