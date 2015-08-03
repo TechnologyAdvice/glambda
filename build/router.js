@@ -11,6 +11,8 @@ Object.defineProperty(exports, '__esModule', {
 
 var _app = require('./app');
 
+var _util = require('./util');
+
 /**
  * Placeholder for schema object
  * @parameter {Object} schema
@@ -33,6 +35,7 @@ var routes = [];
  */
 exports.routes = routes;
 var loadSchema = function loadSchema(file) {
+  // No checks, YAML error automagically
   exports.schema = schema = yaml.load(path.resolve(file));
 };
 
@@ -89,22 +92,35 @@ var mapTemplateParams = function mapTemplateParams(route, template) {
 };
 
 /**
+ * Adds a route based on the mapped route passed
+ * @param {Object} route The route to build
+ */
+exports.mapTemplateParams = mapTemplateParams;
+var addRoute = function addRoute(route) {
+  // Build ensure specified Lambda exists
+  (0, _util.fileExists)(_app.config.lambdas + '/' + route.config.lambda + '/index.js').then(function () {
+    // Add method route
+    _app.service[route.method.toLowerCase()](_app.config.apiPath + route.route, function (req, res) {
+      (0, _app.runLambda)(route.config.lambda, route.config.templates['application/json'], req, res);
+    });
+  })['catch'](function () {
+    _app.log.error('Missing Lambda', { name: route.config.lambda });
+  });
+};
+
+/**
  * Builds routes and adds to the express service by mapping template params to
  * the path/route then binding to runLambda method
  */
-exports.mapTemplateParams = mapTemplateParams;
+exports.addRoute = addRoute;
 var buildRoutes = function buildRoutes() {
   // Itterate over routes
   routes.forEach(function (rte) {
     // Map template params
     var mappedRoutes = mapTemplateParams(rte.route, rte.config.templates['application/json']);
-    var lambda = rte.config.lambda;
     rte.route = mappedRoutes.route;
     rte.config.templates['application/json'] = mappedRoutes.template;
-    // Build service method
-    _app.service[rte.method.toLowerCase()](_app.config.apiPath + rte.route, function (req, res) {
-      (0, _app.runLambda)(lambda, rte.config.templates['application/json'], req, res);
-    });
+    addRoute(rte);
   });
 };
 
