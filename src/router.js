@@ -77,7 +77,7 @@ export const mapTemplateParams = (route, template) => {
 
 /**
  * Adds a route based on the mapped route passed
- * @param {Object} route The route to build
+ * @param {Object} route The route to add
  */
 export const addRoute = (route) => {
   // Build ensure specified Lambda exists
