@@ -45,6 +45,7 @@ service.use(bodyParser.json());
  * Default config object
  * @property config
  * @attribute {String} lambdas The path to the lambdas directory
+ * @attribute {String} schema The path to the Gateway YAML config
  * @attribute {Number} port The port for the HTTP service
  * @attribute {String} apiPath The request path for the api
  * @attribute {Boolean} log Show or repress console output
@@ -88,8 +89,8 @@ var procResponse = function procResponse(msg, res) {
 };
 
 /**
- * Parses the template from gateway and merges in the req.body as it's
- * intended property for the lambda
+ * Parses the properties from the template and then calls `parseBodyParams`
+ * to align variable properties with their template keys
  * @param {Object} reqBody The req.body from express request
  * @param {Object} template The gateway template
  * @returns {Object} the full event to be passed to the Lambda
@@ -107,9 +108,9 @@ var parseBody = function parseBody(reqBody, template) {
 };
 
 /**
- * Builds the `event` payload with the request body and the method of the
- * call (`operation`). Forks a new runner process to the requested lambda
- * then awaits messaging from the lambda
+ * Builds the `event` payload with the request body and then forks a new 
+ * runner process to the requested lambda. Awaits messaging from the lambda
+ * to return response payload and display log information
  * @param {String} lambda The lambda to run
  * @param {Object} template The gateway template
  * @param {Object} req Express req object
@@ -149,9 +150,10 @@ var buildConfig = function buildConfig(cfg) {
 };
 
 /**
- * Initialize testing service, binds endpoints to apiPath, handles the action
- * (runLambda) on calls and starts listener
- * @param {Object} [config] Path to the lambdas directory
+ * Initialize the service by building the config, loading the (YAML) Gateway
+ * API configuration and then initializing routes on Express and finally 
+ * starting the service.
+ * @param {Object} [config] The main service configuration
  */
 
 exports.buildConfig = buildConfig;

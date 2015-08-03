@@ -90,8 +90,8 @@
       <div>
         
         
-        <div data-ice="description"><p>Adds a route based on the mapped route passed</p>
-</div>
+        <div data-ice="description"><p>Ensures that the lambda exists (on init/load) then creates and Express 
+</p></div>
       </div>
     </td>
     <td>
@@ -194,7 +194,7 @@
       <div>
         
         
-        <div data-ice="description"><p>Initialize testing service, binds endpoints to apiPath, handles the action
+        <div data-ice="description"><p>Initialize the service by building the config, loading the (YAML) Gateway
 </p></div>
       </div>
     </td>
@@ -220,8 +220,8 @@
       <div>
         
         
-        <div data-ice="description"><p>Initializes the routes</p>
-</div>
+        <div data-ice="description"><p>Initializes the routes by walking the Gateway schema then running <code>buildRoutes</code>
+</p></div>
       </div>
     </td>
     <td>
@@ -291,14 +291,14 @@
     <td>
       <div>
         <p>
-           <span data-ice="name"><span><a href="variable/index.html#static-variable-mapTemplateParams">mapTemplateParams</a></span></span><span data-ice="signature">(rte: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>, template: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>: <span>*</span></span>
+           <span data-ice="name"><span><a href="variable/index.html#static-variable-mapTemplateParams">mapTemplateParams</a></span></span><span data-ice="signature">(route: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>, template: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>: <span>*</span></span>
         </p>
       </div>
       <div>
         
         
-        <div data-ice="description"><p>Maps template params to route params</p>
-</div>
+        <div data-ice="description"><p>Iterates over the properties of the template and calls <code>parseRouteParams</code> to
+</p></div>
       </div>
     </td>
     <td>
@@ -323,7 +323,7 @@
       <div>
         
         
-        <div data-ice="description"><p>Parses the template from gateway and merges in the req.body as it&apos;s
+        <div data-ice="description"><p>Parses the properties from the template and then calls <code>parseBodyParams</code>
 </p></div>
       </div>
     </td>
@@ -479,7 +479,7 @@
       <div>
         
         
-        <div data-ice="description"><p>Builds the <code>event</code> payload with the request body and the method of the
+        <div data-ice="description"><p>Builds the <code>event</code> payload with the request body and then forks a new 
 </p></div>
       </div>
     </td>
@@ -582,7 +582,7 @@
       <div>
         
         
-        <div data-ice="description"><p>Walks schema to look for methods, when a method is found it creates a route
+        <div data-ice="description"><p>Walks schema to look for request methods (verbs), when a method is found it 
 </p></div>
       </div>
     </td>

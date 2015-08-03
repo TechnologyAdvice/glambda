@@ -40,9 +40,9 @@ var loadSchema = function loadSchema(file) {
 };
 
 /**
- * Walks schema to look for methods, when a method is found it creates a route
- * with the parent node key (the path), the current method, and the properties
- * of that method
+ * Walks schema to look for request methods (verbs), when a method is found it 
+ * creates a route with the parent node key (the path), the current method, 
+ * and the properties of that method (the template)
  * @param {Object} node The node to traverse
  * @param {String} prevKey The key of the previous traversal for accessing parent/path
  */
@@ -68,8 +68,10 @@ var walkSchema = function walkSchema() {
 };
 
 /**
- * Maps template params to route params
- * @param {String} rte The route to modify
+ * Iterates over the properties of the template and calls `parseRouteParams` to
+ * convert the bracket-delimited params with colon-lead (Express-style) route 
+ * params with the template-designated key/property name
+ * @param {String} route The route to modify
  * @param {Object} template The template object to match against
  * @returns {String} The formatted route
  */
@@ -89,7 +91,8 @@ var mapTemplateParams = function mapTemplateParams(route, template) {
 };
 
 /**
- * Adds a route based on the mapped route passed
+ * Ensures that the lambda exists (on init/load) then creates and Express 
+ * verb+route object for the specific request
  * @param {Object} route The route to add
  */
 exports.mapTemplateParams = mapTemplateParams;
@@ -106,8 +109,8 @@ var addRoute = function addRoute(route) {
 };
 
 /**
- * Builds routes and adds to the express service by mapping template params to
- * the path/route then binding to runLambda method
+ * Itterates over the routes array to map template parameters, set the route 
+ * property, config > templates and call `addRoute`
  */
 exports.addRoute = addRoute;
 var buildRoutes = function buildRoutes() {
@@ -122,7 +125,8 @@ var buildRoutes = function buildRoutes() {
 };
 
 /**
- * Initializes the routes
+ * Initializes the routes by walking the Gateway schema then running `buildRoutes`
+ * to load into Express object
  */
 var initRoutes = function initRoutes() {
   // Walk the schema to build routes

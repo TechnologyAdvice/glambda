@@ -45,6 +45,12 @@ Simply running the file created above will spin up the service, then accessing
 the endpoints via the corresponding lambda name will spawn the Lambda function
 and return its results.
 
+**Environment Variables**
+
+The system runs a configuration load process which uses the default values, 
+overrides with any initialized (passed) config properties and (lastly) checks 
+for environment variables following the convention `GL_{PROPERTY}`.
+
 ## The Gateway YAML Configuration
 
 The [`gateway.yml`](/test/gateway.yml) format was designed to closely match the
@@ -108,9 +114,6 @@ of the Lambda-specific log output is below:
         memory: { rss: 20062208, heapTotal: 9751808, heapUsed: 3989464 }
         time: 0.124
 ```
-
-The above shows the complete pertinant data associated with the Lambda for 
-evaluating the event, process, and perfromance.
 
 ## Notes
 

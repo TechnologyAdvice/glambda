@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2015 TechnologyAdvice
+ */
+
 'use strict';
 
 Object.defineProperty(exports, '__esModule', {

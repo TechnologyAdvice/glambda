@@ -9,7 +9,7 @@
     "access": null,
     "description": null,
     "lineNumber": 6,
-    "content": "/*\n * Copyright (c) 2015 TechnologyAdvice\n */\n\n// Deps\nconst express = require('express')\nconst bodyParser = require('body-parser')\nconst fork = require('child_process').fork\nconst path = require('path')\nconst _ = require('lodash')\n\n// Setup logs\nexport const log = require('bristol')\nlog.addTarget('console').withFormatter('human')\n\n// Default path to lambda runner\nlet runner = path.resolve(__dirname, './runner')\n\n// Import router\nimport { loadSchema, initRoutes } from './router'\nimport { parseBodyParams } from './util'\n\n/**\n * Allows overriding default runner script\n * @param {String} runnerPath Path to the runner module\n */\nexport const setRunner = (runnerPath) => runner = path.resolve(runnerPath)\n\n// Express setup\nexport const service = express()\nservice.use(bodyParser.json())\n\n/**\n * Default config object\n * @property config\n * @attribute {String} lambdas The path to the lambdas directory\n * @attribute {Number} port The port for the HTTP service\n * @attribute {String} apiPath The request path for the api\n * @attribute {Boolean} log Show or repress console output\n */\nexport let config = {\n  lambdas: './lambdas',\n  schema: './gateway.yml',\n  port: 8181,\n  apiPath: '/api',\n  log: true\n}\n\n/**\n * Calls log output method\n * @param {String} type Type of log message to write\n * @param {String|Object} msg Message body of log\n */\nexport const procLog = (type, ...msg) => {\n  /* istanbul ignore if  */\n  if (config.log) log[type](msg[0], msg[1])\n}\n\n/**\n * Handles response from forked lambda runner procs\n * @param {Object} msg Message object from child proc\n * @param {Object} [res] Express response object\n */\nexport const procResponse = (msg, res) => {\n  switch (msg.type) {\n    case 'metric': procLog('info', 'Lambda Processed', msg.output); break\n    case 'success': res.status(200).send(msg.output); break\n    case 'error': res.status(500).send(msg.output); break\n    default: procLog('error', 'Missing response type')\n  }\n}\n\n/**\n * Parses the template from gateway and merges in the req.body as it's\n * intended property for the lambda\n * @param {Object} reqBody The req.body from express request\n * @param {Object} template The gateway template\n * @returns {Object} the full event to be passed to the Lambda\n */\nexport const parseBody = (reqBody, template) => {\n  let tmpBody = {}\n  for (let prop in template) {\n    /* istanbul ignore else  */\n    if ({}.hasOwnProperty.call(template, prop)) {\n      tmpBody[prop] = parseBodyParams(template[prop], reqBody)\n    }\n  }\n  return tmpBody\n}\n\n/**\n * Builds the `event` payload with the request body and the method of the\n * call (`operation`). Forks a new runner process to the requested lambda\n * then awaits messaging from the lambda\n * @param {String} lambda The lambda to run\n * @param {Object} template The gateway template\n * @param {Object} req Express req object\n * @param {Object} res Express res object\n */\nexport const runLambda = (lambda, template, req, res) => {\n  // Parse body against template\n  const body = parseBody(req.body, template)\n  // Build event by extending body with params\n  const event = JSON.stringify(_.extend(body, req.params))\n  // Execute lambda\n  fork(runner, [ lambda ], {\n    env: { lambdas: config.lambdas, event, HOME: process.env.HOME }\n  }).on('message', (msg) => procResponse(msg, res))\n}\n\n/**\n * Combines the default config with any passed to init and overrides (lastly)\n * if there are any environment variables set\n * @param {Object} [cfg] The config passed through init\n */\nexport const buildConfig = (cfg) => {\n  // Against defaults\n  _.extend(config, cfg)\n  // Against env vars\n  for (let prop in config) {\n    /* istanbul ignore else  */\n    if ({}.hasOwnProperty.call(config, prop)) {\n      let envVar = process.env['GL_' + prop.toUpperCase()]\n      if (envVar) config[prop] = envVar\n    }\n  }\n}\n\n/**\n * Initialize testing service, binds endpoints to apiPath, handles the action\n * (runLambda) on calls and starts listener\n * @param {Object} [config] Path to the lambdas directory\n */\n\nexport const init = (cfg) => {\n  // Setup config\n  buildConfig(cfg)\n  // Load schema into router\n  loadSchema(config.schema)\n  // Initialize all routes from gateway schema\n  initRoutes()\n  // Starts service\n  service.listen(config.port, () => {\n    procLog('info', 'Service running', { port: config.port })\n  })\n}\n"
+    "content": "/*\n * Copyright (c) 2015 TechnologyAdvice\n */\n\n// Deps\nconst express = require('express')\nconst bodyParser = require('body-parser')\nconst fork = require('child_process').fork\nconst path = require('path')\nconst _ = require('lodash')\n\n// Setup logs\nexport const log = require('bristol')\nlog.addTarget('console').withFormatter('human')\n\n// Default path to lambda runner\nlet runner = path.resolve(__dirname, './runner')\n\n// Import router\nimport { loadSchema, initRoutes } from './router'\nimport { parseBodyParams } from './util'\n\n/**\n * Allows overriding default runner script\n * @param {String} runnerPath Path to the runner module\n */\nexport const setRunner = (runnerPath) => runner = path.resolve(runnerPath)\n\n// Express setup\nexport const service = express()\nservice.use(bodyParser.json())\n\n/**\n * Default config object\n * @property config\n * @attribute {String} lambdas The path to the lambdas directory\n * @attribute {String} schema The path to the Gateway YAML config\n * @attribute {Number} port The port for the HTTP service\n * @attribute {String} apiPath The request path for the api\n * @attribute {Boolean} log Show or repress console output\n */\nexport let config = {\n  lambdas: './lambdas',\n  schema: './gateway.yml',\n  port: 8181,\n  apiPath: '/api',\n  log: true\n}\n\n/**\n * Calls log output method\n * @param {String} type Type of log message to write\n * @param {String|Object} msg Message body of log\n */\nexport const procLog = (type, ...msg) => {\n  /* istanbul ignore if  */\n  if (config.log) log[type](msg[0], msg[1])\n}\n\n/**\n * Handles response from forked lambda runner procs\n * @param {Object} msg Message object from child proc\n * @param {Object} [res] Express response object\n */\nexport const procResponse = (msg, res) => {\n  switch (msg.type) {\n    case 'metric': procLog('info', 'Lambda Processed', msg.output); break\n    case 'success': res.status(200).send(msg.output); break\n    case 'error': res.status(500).send(msg.output); break\n    default: procLog('error', 'Missing response type')\n  }\n}\n\n/**\n * Parses the properties from the template and then calls `parseBodyParams`\n * to align variable properties with their template keys\n * @param {Object} reqBody The req.body from express request\n * @param {Object} template The gateway template\n * @returns {Object} the full event to be passed to the Lambda\n */\nexport const parseBody = (reqBody, template) => {\n  let tmpBody = {}\n  for (let prop in template) {\n    /* istanbul ignore else  */\n    if ({}.hasOwnProperty.call(template, prop)) {\n      tmpBody[prop] = parseBodyParams(template[prop], reqBody)\n    }\n  }\n  return tmpBody\n}\n\n/**\n * Builds the `event` payload with the request body and then forks a new \n * runner process to the requested lambda. Awaits messaging from the lambda\n * to return response payload and display log information\n * @param {String} lambda The lambda to run\n * @param {Object} template The gateway template\n * @param {Object} req Express req object\n * @param {Object} res Express res object\n */\nexport const runLambda = (lambda, template, req, res) => {\n  // Parse body against template\n  const body = parseBody(req.body, template)\n  // Build event by extending body with params\n  const event = JSON.stringify(_.extend(body, req.params))\n  // Execute lambda\n  fork(runner, [ lambda ], {\n    env: { lambdas: config.lambdas, event, HOME: process.env.HOME }\n  }).on('message', (msg) => procResponse(msg, res))\n}\n\n/**\n * Combines the default config with any passed to init and overrides (lastly)\n * if there are any environment variables set\n * @param {Object} [cfg] The config passed through init\n */\nexport const buildConfig = (cfg) => {\n  // Against defaults\n  _.extend(config, cfg)\n  // Against env vars\n  for (let prop in config) {\n    /* istanbul ignore else  */\n    if ({}.hasOwnProperty.call(config, prop)) {\n      let envVar = process.env['GL_' + prop.toUpperCase()]\n      if (envVar) config[prop] = envVar\n    }\n  }\n}\n\n/**\n * Initialize the service by building the config, loading the (YAML) Gateway\n * API configuration and then initializing routes on Express and finally \n * starting the service.\n * @param {Object} [config] The main service configuration\n */\n\nexport const init = (cfg) => {\n  // Setup config\n  buildConfig(cfg)\n  // Load schema into router\n  loadSchema(config.schema)\n  // Initialize all routes from gateway schema\n  initRoutes()\n  // Starts service\n  service.listen(config.port, () => {\n    procLog('info', 'Service running', { port: config.port })\n  })\n}\n"
   },
   {
     "kind": "variable",
@@ -214,11 +214,15 @@
     "importPath": "glambda/src/app.js",
     "importStyle": "{config}",
     "description": "Default config object",
-    "lineNumber": 41,
+    "lineNumber": 42,
     "unknown": [
       {
         "tagName": "@attribute",
         "tagValue": "{String} lambdas The path to the lambdas directory"
+      },
+      {
+        "tagName": "@attribute",
+        "tagValue": "{String} schema The path to the Gateway YAML config"
       },
       {
         "tagName": "@attribute",
@@ -263,7 +267,7 @@
     "importPath": "glambda/src/app.js",
     "importStyle": "{procLog}",
     "description": "Calls log output method",
-    "lineNumber": 54,
+    "lineNumber": 55,
     "params": [
       {
         "nullable": null,
@@ -305,7 +309,7 @@
     "importPath": "glambda/src/app.js",
     "importStyle": "{procResponse}",
     "description": "Handles response from forked lambda runner procs",
-    "lineNumber": 64,
+    "lineNumber": 65,
     "params": [
       {
         "nullable": null,
@@ -345,8 +349,8 @@
     "export": true,
     "importPath": "glambda/src/app.js",
     "importStyle": "{parseBody}",
-    "description": "Parses the template from gateway and merges in the req.body as it's\nintended property for the lambda",
-    "lineNumber": 80,
+    "description": "Parses the properties from the template and then calls `parseBodyParams`\nto align variable properties with their template keys",
+    "lineNumber": 81,
     "unknown": [
       {
         "tagName": "@returns",
@@ -400,8 +404,8 @@
     "export": true,
     "importPath": "glambda/src/app.js",
     "importStyle": "{runLambda}",
-    "description": "Builds the `event` payload with the request body and the method of the\ncall (`operation`). Forks a new runner process to the requested lambda\nthen awaits messaging from the lambda",
-    "lineNumber": 100,
+    "description": "Builds the `event` payload with the request body and then forks a new \nrunner process to the requested lambda. Awaits messaging from the lambda\nto return response payload and display log information",
+    "lineNumber": 101,
     "params": [
       {
         "nullable": null,
@@ -462,7 +466,7 @@
     "importPath": "glambda/src/app.js",
     "importStyle": "{buildConfig}",
     "description": "Combines the default config with any passed to init and overrides (lastly)\nif there are any environment variables set",
-    "lineNumber": 116,
+    "lineNumber": 117,
     "params": [
       {
         "nullable": null,
@@ -492,8 +496,8 @@
     "export": true,
     "importPath": "glambda/src/app.js",
     "importStyle": "{init}",
-    "description": "Initialize testing service, binds endpoints to apiPath, handles the action\n(runLambda) on calls and starts listener",
-    "lineNumber": 135,
+    "description": "Initialize the service by building the config, loading the (YAML) Gateway\nAPI configuration and then initializing routes on Express and finally \nstarting the service.",
+    "lineNumber": 137,
     "params": [
       {
         "nullable": null,
@@ -503,7 +507,7 @@
         "spread": false,
         "optional": true,
         "name": "config",
-        "description": "Path to the lambdas directory"
+        "description": "The main service configuration"
       }
     ],
     "type": {
@@ -522,7 +526,7 @@
     "access": null,
     "description": null,
     "lineNumber": 6,
-    "content": "/*\n * Copyright (c) 2015 TechnologyAdvice\n */\n\n/* eslint no-param-reassign: 0 */\nconst path = require('path')\nconst yaml = require('yamljs')\n\nimport { config, log, service, runLambda } from './app'\nimport { fileExists, parseRouteParams } from './util'\n\n/**\n * Placeholder for schema object\n * @parameter {Object} schema\n */\nexport let schema = null\n\n/**\n * Placeholder for routes array\n * @parameter {Array} routes\n */\nexport let routes = []\n\n\n/**\n * Loads the schema from specified file\n * @param {String} file The file path of the Gateway schema\n */\nexport const loadSchema = (file) => {\n  // No checks, YAML error automagically\n  schema = yaml.load(path.resolve(file))\n}\n\n/**\n * Walks schema to look for methods, when a method is found it creates a route\n * with the parent node key (the path), the current method, and the properties\n * of that method\n * @param {Object} node The node to traverse\n * @param {String} prevKey The key of the previous traversal for accessing parent/path\n */\nexport const walkSchema = (node = schema, prevKey = null) => {\n  // Methods indicate traversal stops\n  const methods = [ 'GET', 'POST', 'PUT', 'DELETE', 'HEAD', 'OPTIONS', 'PATCH' ]\n  for (let prop in node) {\n    // Ensure prop\n    if ({}.hasOwnProperty.call(node, prop)) {\n      if (methods.indexOf(prop) >= 0) {\n        // Node is a method, push to router\n        routes.push({ route: prevKey, method: prop, config: node[prop] })\n      } else {\n        // Route node, traverse\n        walkSchema(node[prop], prop)\n      }\n    }\n  }\n}\n\n/**\n * Maps template params to route params\n * @param {String} rte The route to modify\n * @param {Object} template The template object to match against\n * @returns {String} The formatted route\n */\nexport const mapTemplateParams = (route, template) => {\n  for (let prop in template) {\n    if ({}.hasOwnProperty.call(template, prop)) {\n      let param = parseRouteParams(template[prop], prop, route)\n      if (param) {\n        route = param\n        delete template[prop]\n      }\n    }\n  }\n  // Return modified route and template\n  return { route, template }\n}\n\n/**\n * Adds a route based on the mapped route passed\n * @param {Object} route The route to add\n */\nexport const addRoute = (route) => {\n  // Build ensure specified Lambda exists\n  fileExists(`${config.lambdas}/${route.config.lambda}/index.js`).then(() => {\n    // Add method route\n    service[route.method.toLowerCase()](config.apiPath + route.route, (req, res) => {\n      runLambda(route.config.lambda, route.config.templates['application/json'], req, res)\n    })\n  })\n  .catch(() => {\n    log.error('Missing Lambda', { name: route.config.lambda })\n  })\n}\n\n/**\n * Builds routes and adds to the express service by mapping template params to\n * the path/route then binding to runLambda method\n */\nconst buildRoutes = () => {\n  // Itterate over routes\n  routes.forEach((rte) => {\n    // Map template params\n    let mappedRoutes = mapTemplateParams(rte.route, rte.config.templates['application/json'])\n    rte.route = mappedRoutes.route\n    rte.config.templates['application/json'] = mappedRoutes.template\n    addRoute(rte)\n  })\n}\n\n/**\n * Initializes the routes\n */\nexport const initRoutes = () => {\n  // Walk the schema to build routes\n  walkSchema(schema)\n  // Map params and build express routes\n  buildRoutes()\n}\n"
+    "content": "/*\n * Copyright (c) 2015 TechnologyAdvice\n */\n\n/* eslint no-param-reassign: 0 */\nconst path = require('path')\nconst yaml = require('yamljs')\n\nimport { config, log, service, runLambda } from './app'\nimport { fileExists, parseRouteParams } from './util'\n\n/**\n * Placeholder for schema object\n * @parameter {Object} schema\n */\nexport let schema = null\n\n/**\n * Placeholder for routes array\n * @parameter {Array} routes\n */\nexport let routes = []\n\n\n/**\n * Loads the schema from specified file\n * @param {String} file The file path of the Gateway schema\n */\nexport const loadSchema = (file) => {\n  // No checks, YAML error automagically\n  schema = yaml.load(path.resolve(file))\n}\n\n/**\n * Walks schema to look for request methods (verbs), when a method is found it \n * creates a route with the parent node key (the path), the current method, \n * and the properties of that method (the template)\n * @param {Object} node The node to traverse\n * @param {String} prevKey The key of the previous traversal for accessing parent/path\n */\nexport const walkSchema = (node = schema, prevKey = null) => {\n  // Methods indicate traversal stops\n  const methods = [ 'GET', 'POST', 'PUT', 'DELETE', 'HEAD', 'OPTIONS', 'PATCH' ]\n  for (let prop in node) {\n    // Ensure prop\n    if ({}.hasOwnProperty.call(node, prop)) {\n      if (methods.indexOf(prop) >= 0) {\n        // Node is a method, push to router\n        routes.push({ route: prevKey, method: prop, config: node[prop] })\n      } else {\n        // Route node, traverse\n        walkSchema(node[prop], prop)\n      }\n    }\n  }\n}\n\n/**\n * Iterates over the properties of the template and calls `parseRouteParams` to\n * convert the bracket-delimited params with colon-lead (Express-style) route \n * params with the template-designated key/property name\n * @param {String} route The route to modify\n * @param {Object} template The template object to match against\n * @returns {String} The formatted route\n */\nexport const mapTemplateParams = (route, template) => {\n  for (let prop in template) {\n    if ({}.hasOwnProperty.call(template, prop)) {\n      let param = parseRouteParams(template[prop], prop, route)\n      if (param) {\n        route = param\n        delete template[prop]\n      }\n    }\n  }\n  // Return modified route and template\n  return { route, template }\n}\n\n/**\n * Ensures that the lambda exists (on init/load) then creates and Express \n * verb+route object for the specific request\n * @param {Object} route The route to add\n */\nexport const addRoute = (route) => {\n  // Build ensure specified Lambda exists\n  fileExists(`${config.lambdas}/${route.config.lambda}/index.js`).then(() => {\n    // Add method route\n    service[route.method.toLowerCase()](config.apiPath + route.route, (req, res) => {\n      runLambda(route.config.lambda, route.config.templates['application/json'], req, res)\n    })\n  })\n  .catch(() => {\n    log.error('Missing Lambda', { name: route.config.lambda })\n  })\n}\n\n/**\n * Itterates over the routes array to map template parameters, set the route \n * property, config > templates and call `addRoute`\n */\nconst buildRoutes = () => {\n  // Itterate over routes\n  routes.forEach((rte) => {\n    // Map template params\n    let mappedRoutes = mapTemplateParams(rte.route, rte.config.templates['application/json'])\n    rte.route = mappedRoutes.route\n    rte.config.templates['application/json'] = mappedRoutes.template\n    addRoute(rte)\n  })\n}\n\n/**\n * Initializes the routes by walking the Gateway schema then running `buildRoutes`\n * to load into Express object\n */\nexport const initRoutes = () => {\n  // Walk the schema to build routes\n  walkSchema(schema)\n  // Map params and build express routes\n  buildRoutes()\n}\n"
   },
   {
     "kind": "variable",
@@ -656,7 +660,7 @@
     "export": true,
     "importPath": "glambda/src/router.js",
     "importStyle": "{walkSchema}",
-    "description": "Walks schema to look for methods, when a method is found it creates a route\nwith the parent node key (the path), the current method, and the properties\nof that method",
+    "description": "Walks schema to look for request methods (verbs), when a method is found it \ncreates a route with the parent node key (the path), the current method, \nand the properties of that method (the template)",
     "lineNumber": 41,
     "params": [
       {
@@ -697,8 +701,8 @@
     "export": true,
     "importPath": "glambda/src/router.js",
     "importStyle": "{mapTemplateParams}",
-    "description": "Maps template params to route params",
-    "lineNumber": 64,
+    "description": "Iterates over the properties of the template and calls `parseRouteParams` to\nconvert the bracket-delimited params with colon-lead (Express-style) route \nparams with the template-designated key/property name",
+    "lineNumber": 66,
     "unknown": [
       {
         "tagName": "@returns",
@@ -713,7 +717,7 @@
         ],
         "spread": false,
         "optional": false,
-        "name": "rte",
+        "name": "route",
         "description": "The route to modify"
       },
       {
@@ -752,8 +756,8 @@
     "export": true,
     "importPath": "glambda/src/router.js",
     "importStyle": "{addRoute}",
-    "description": "Adds a route based on the mapped route passed",
-    "lineNumber": 82,
+    "description": "Ensures that the lambda exists (on init/load) then creates and Express \nverb+route object for the specific request",
+    "lineNumber": 85,
     "params": [
       {
         "nullable": null,
@@ -783,8 +787,8 @@
     "export": false,
     "importPath": "glambda/src/router.js",
     "importStyle": null,
-    "description": "Builds routes and adds to the express service by mapping template params to\nthe path/route then binding to runLambda method",
-    "lineNumber": 99,
+    "description": "Itterates over the routes array to map template parameters, set the route \nproperty, config > templates and call `addRoute`",
+    "lineNumber": 102,
     "type": {
       "types": [
         "*"
@@ -802,8 +806,8 @@
     "export": true,
     "importPath": "glambda/src/router.js",
     "importStyle": "{initRoutes}",
-    "description": "Initializes the routes",
-    "lineNumber": 113,
+    "description": "Initializes the routes by walking the Gateway schema then running `buildRoutes`\nto load into Express object",
+    "lineNumber": 117,
     "type": {
       "types": [
         "*"
@@ -922,8 +926,8 @@
     "longname": "src/util.js",
     "access": null,
     "description": null,
-    "lineNumber": 1,
-    "content": "const Promise = require('bluebird')\nconst path = require('path')\nconst fs = Promise.promisifyAll(require('fs'))\n\n/**\n * Checks if file exists\n * @param {String} file Path to file\n * @returns {Object} Promise\n */\nexport const fileExists = (file) => {\n  return fs.openAsync(path.resolve(file), 'r')\n}\n\n/**\n * Abstracts parsing of routes against template values\n * @param {String} value The value of the template element\n * @param {String} key The property name of the template element\n * @param {String} route The route to check/modify\n */\nexport const parseRouteParams = (value, key, route) => {\n  if (value.indexOf(`$input.params('`) >= 0) {\n    // Remove wrapper\n    let param = value.replace(`$input.params('`, '').replace(`')`, '')\n    // Replace any occurences with express-param version of template param name\n    return route.replace(`{${param}}`, `:${key}`)\n  }\n  return false\n}\n\n/**\n * Abstracts parsing of body against template values\n * @param {String} value The value of the template element\n * @param {Object} body The request body\n * @returns {String} The value of the body property requested by the template\n */\nexport const parseBodyParams = (value, body) => {\n  if (value.indexOf(`$input.json('$`) >= 0) {\n    // Get the name to check\n    let name = value.replace(`$input.json('$`, '').replace(`')`, '')\n    if (!name.length) {\n      // Return the entire body\n      return body\n    }\n    // Return the specific property of the body (or null if DNE)\n    name = name.replace(/^\\./, '') // Remove leading dot\n    return ({}.hasOwnProperty.call(body, name)) ? body[name] : null\n  }\n  // Custom value passed through\n  return value\n}\n"
+    "lineNumber": 5,
+    "content": "/*\n * Copyright (c) 2015 TechnologyAdvice\n */\n\nconst Promise = require('bluebird')\nconst path = require('path')\nconst fs = Promise.promisifyAll(require('fs'))\n\n/**\n * Checks if file exists\n * @param {String} file Path to file\n * @returns {Object} Promise\n */\nexport const fileExists = (file) => {\n  return fs.openAsync(path.resolve(file), 'r')\n}\n\n/**\n * Abstracts parsing of routes against template values\n * @param {String} value The value of the template element\n * @param {String} key The property name of the template element\n * @param {String} route The route to check/modify\n */\nexport const parseRouteParams = (value, key, route) => {\n  if (value.indexOf(`$input.params('`) >= 0) {\n    // Remove wrapper\n    let param = value.replace(`$input.params('`, '').replace(`')`, '')\n    // Replace any occurences with express-param version of template param name\n    return route.replace(`{${param}}`, `:${key}`)\n  }\n  return false\n}\n\n/**\n * Abstracts parsing of body against template values\n * @param {String} value The value of the template element\n * @param {Object} body The request body\n * @returns {String} The value of the body property requested by the template\n */\nexport const parseBodyParams = (value, body) => {\n  if (value.indexOf(`$input.json('$`) >= 0) {\n    // Get the name to check\n    let name = value.replace(`$input.json('$`, '').replace(`')`, '')\n    if (!name.length) {\n      // Return the entire body\n      return body\n    }\n    // Return the specific property of the body (or null if DNE)\n    name = name.replace(/^\\./, '') // Remove leading dot\n    return ({}.hasOwnProperty.call(body, name)) ? body[name] : null\n  }\n  // Custom value passed through\n  return value\n}\n"
   },
   {
     "kind": "variable",
@@ -937,7 +941,7 @@
     "importPath": "glambda/src/util.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 1,
+    "lineNumber": 5,
     "undocument": true,
     "type": {
       "types": [
@@ -957,7 +961,7 @@
     "importPath": "glambda/src/util.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 2,
+    "lineNumber": 6,
     "undocument": true,
     "type": {
       "types": [
@@ -977,7 +981,7 @@
     "importPath": "glambda/src/util.js",
     "importStyle": null,
     "description": null,
-    "lineNumber": 3,
+    "lineNumber": 7,
     "undocument": true,
     "type": {
       "types": [
@@ -997,7 +1001,7 @@
     "importPath": "glambda/src/util.js",
     "importStyle": "{fileExists}",
     "description": "Checks if file exists",
-    "lineNumber": 10,
+    "lineNumber": 14,
     "unknown": [
       {
         "tagName": "@returns",
@@ -1042,7 +1046,7 @@
     "importPath": "glambda/src/util.js",
     "importStyle": "{parseRouteParams}",
     "description": "Abstracts parsing of routes against template values",
-    "lineNumber": 20,
+    "lineNumber": 24,
     "params": [
       {
         "nullable": null,
@@ -1093,7 +1097,7 @@
     "importPath": "glambda/src/util.js",
     "importStyle": "{parseBodyParams}",
     "description": "Abstracts parsing of body against template values",
-    "lineNumber": 36,
+    "lineNumber": 40,
     "unknown": [
       {
         "tagName": "@returns",
