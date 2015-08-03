@@ -90,7 +90,7 @@ var mapTemplateParams = function mapTemplateParams(route, template) {
 
 /**
  * Adds a route based on the mapped route passed
- * @param {Object} route The route to build
+ * @param {Object} route The route to add
  */
 exports.mapTemplateParams = mapTemplateParams;
 var addRoute = function addRoute(route) {
