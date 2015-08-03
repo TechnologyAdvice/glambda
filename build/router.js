@@ -77,12 +77,9 @@ exports.walkSchema = walkSchema;
 var mapTemplateParams = function mapTemplateParams(route, template) {
   for (var prop in template) {
     if (({}).hasOwnProperty.call(template, prop)) {
-      if (template[prop].indexOf('$input.params(\'') >= 0) {
-        // Remove wrapper
-        var param = template[prop].replace('$input.params(\'', '').replace('\')', '');
-        // Replace any occurences with express-param version of template param name
-        route = route.replace('{' + param + '}', ':' + prop);
-        // Remove entry from template
+      var param = (0, _util.parseRouteParams)(template[prop], prop, route);
+      if (param) {
+        route = param;
         delete template[prop];
       }
     }

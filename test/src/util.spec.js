@@ -1,6 +1,6 @@
 /* global expect, request, describe, it, before, after */
 import '../setup'
-import { fileExists } from '../../src/util'
+import { fileExists, parseRouteParams } from '../../src/util'
 
 describe('util', () => {
 
@@ -11,6 +11,13 @@ describe('util', () => {
 
     it('resolves when the file exists', (done) => {
       fileExists('./test/gateway.yml').then(() => done())
+    })
+  })
+  
+  describe('parseRouteParams', () => {
+    it('returns a properly formatted route', () => {
+      let testCase = parseRouteParams(`$input.params('fooId')`, 'id', '/foo/{fooId}')
+      expect(testCase).to.equal('/foo/:id')
     })
   })
 
