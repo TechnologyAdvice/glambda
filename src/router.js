@@ -6,7 +6,8 @@
 const path = require('path')
 const yaml = require('yamljs')
 
-import { config, service, runLambda } from './app'
+import { config, log, service, runLambda } from './app'
+import { fileExists } from './util'
 
 /**
  * Placeholder for schema object
@@ -26,6 +27,7 @@ export let routes = []
  * @param {String} file The file path of the Gateway schema
  */
 export const loadSchema = (file) => {
+  // No checks, YAML error automagically
   schema = yaml.load(path.resolve(file))
 }
 
@@ -88,9 +90,14 @@ const buildRoutes = () => {
     let lambda = rte.config.lambda
     rte.route = mappedRoutes.route
     rte.config.templates['application/json'] = mappedRoutes.template
-    // Build service method
-    service[rte.method.toLowerCase()](config.apiPath + rte.route, (req, res) => {
-      runLambda(lambda, rte.config.templates['application/json'], req, res)
+    // Build ensure specified Lambda exists
+    fileExists(`${config.lambdas}/${lambda}/index.js`).then(() => {
+      // Add method route
+      service[rte.method.toLowerCase()](config.apiPath + rte.route, (req, res) => {
+        runLambda(lambda, rte.config.templates['application/json'], req, res)
+      })
+    }).catch(() => {
+      log.error('Missing Lambda', { name: lambda })
     })
   })
 }

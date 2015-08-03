@@ -1,3 +1,7 @@
+/*
+ * Copyright (c) 2015 TechnologyAdvice
+ */
+
 /* eslint no-param-reassign: 0 */
 'use strict';
 
