@@ -14,7 +14,7 @@ export const fileExists = (file) => {
 /**
  * Abstracts parsing of routes against template values
  * @param {String} value The value of the template element
- * @param {String} key The property name from the template element
+ * @param {String} key The property name of the template element
  * @param {String} route The route to check/modify
  */
 export const parseRouteParams = (value, key, route) => {
@@ -25,4 +25,28 @@ export const parseRouteParams = (value, key, route) => {
     return route.replace(`{${param}}`, `:${key}`)
   }
   return false
+}
+
+/**
+ * Abstracts parsing of body against template values
+ * @param {String} value The value of the template element
+ * @param {Object} body The request body
+ * @returns {String} The value of the body property requested by the template
+ */
+export const parseBodyParams = (value, body) => {
+  if (value.indexOf(`$input.json('$`) >= 0) {
+    // Get the name to check
+    let name = value.replace(`$input.json('$`, '').replace(`')`, '')
+    if (!name.length) {
+      // Return the entire body
+      return body
+    } else {
+      // Return the specific property of the body (or null if DNE)
+      name = name.replace(/^\./, '') // Remove leading dot
+      return ({}.hasOwnProperty.call(body, name)) ? body[name] : null
+    }
+  } else {
+    // Custom value passed through
+    return value
+  }
 }

@@ -19,7 +19,7 @@ var fileExists = function fileExists(file) {
 /**
  * Abstracts parsing of routes against template values
  * @param {String} value The value of the template element
- * @param {String} key The property name from the template element
+ * @param {String} key The property name of the template element
  * @param {String} route The route to check/modify
  */
 exports.fileExists = fileExists;
@@ -32,4 +32,29 @@ var parseRouteParams = function parseRouteParams(value, key, route) {
   }
   return false;
 };
+
+/**
+ * Abstracts parsing of body against template values
+ * @param {String} value The value of the template element
+ * @param {Object} body The request body
+ * @returns {String} The value of the body property requested by the template
+ */
 exports.parseRouteParams = parseRouteParams;
+var parseBodyParams = function parseBodyParams(value, body) {
+  if (value.indexOf('$input.json(\'$') >= 0) {
+    // Get the name to check
+    var _name = value.replace('$input.json(\'$', '').replace('\')', '');
+    if (!_name.length) {
+      // Return the entire body
+      return body;
+    } else {
+      // Return the specific property of the body (or null if DNE)
+      _name = _name.replace(/^\./, ''); // Remove leading dot
+      return ({}).hasOwnProperty.call(body, _name) ? body[_name] : null;
+    }
+  } else {
+    // Custom value passed through
+    return value;
+  }
+};
+exports.parseBodyParams = parseBodyParams;

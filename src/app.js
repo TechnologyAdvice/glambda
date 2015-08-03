@@ -18,6 +18,7 @@ let runner = path.resolve(__dirname, './runner')
 
 // Import router
 import { loadSchema, initRoutes } from './router'
+import { parseBodyParams } from './util'
 
 /**
  * Allows overriding default runner script
@@ -79,13 +80,7 @@ export const parseBody = (reqBody, template) => {
   let tmpBody = {}
   for (let prop in template) {
     if ({}.hasOwnProperty.call(template, prop)) {
-      if (template[prop] === `$input.json('$')`) {
-        // Replace prop with req.body
-        tmpBody[prop] = reqBody
-      } else {
-        // Custom pass-throughs
-        tmpBody[prop] = template[prop]
-      }
+      tmpBody[prop] = parseBodyParams(template[prop], reqBody)
     }
   }
   return tmpBody

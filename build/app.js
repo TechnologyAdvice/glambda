@@ -13,6 +13,8 @@ Object.defineProperty(exports, '__esModule', {
 
 var _router = require('./router');
 
+var _util = require('./util');
+
 /**
  * Allows overriding default runner script
  * @param {String} runnerPath Path to the runner module
@@ -96,13 +98,7 @@ var parseBody = function parseBody(reqBody, template) {
   var tmpBody = {};
   for (var prop in template) {
     if (({}).hasOwnProperty.call(template, prop)) {
-      if (template[prop] === '$input.json(\'$\')') {
-        // Replace prop with req.body
-        tmpBody[prop] = reqBody;
-      } else {
-        // Custom pass-throughs
-        tmpBody[prop] = template[prop];
-      }
+      tmpBody[prop] = (0, _util.parseBodyParams)(template[prop], reqBody);
     }
   }
   return tmpBody;
