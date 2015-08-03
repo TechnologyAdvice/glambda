@@ -1,6 +1,7 @@
-/* global expect, request, describe, it, before, after */
+/* global expect, sinon, request, describe, it, before, after */
 import '../setup'
-import { schema, loadSchema, walkSchema, routes, mapTemplateParams } from '../../src/router'
+import { schema, loadSchema, walkSchema, routes, addRoute, mapTemplateParams } from '../../src/router'
+import { service } from '../../src/app'
 
 const schemaPath = './test/gateway.yml'
 
@@ -35,6 +36,24 @@ describe('router', () => {
       expect(output).to.deep.equal({ route: '/foo/:id', template: { test: 'foo' } })
     })
 
+  })
+
+  describe('addRoute', () => {
+
+    it('fails if lambda file does not exist', (done) => {
+      let testMissingLambda = {
+        route: 'notExists',
+        method: 'get',
+        config: {
+          lambda: 'notExists',
+          templates: {
+            'application/json': {}
+          }
+        }
+      }
+      expect(addRoute(testMissingLambda)).to.throw
+      done()
+    })
   })
 
 })

@@ -79,6 +79,23 @@ export const mapTemplateParams = (route, template) => {
 }
 
 /**
+ * Adds a route based on the mapped route passed
+ * @param {Object} route The route to build
+ */
+export const addRoute = (route) => {
+  // Build ensure specified Lambda exists
+  fileExists(`${config.lambdas}/${route.config.lambda}/index.js`).then(() => {
+    // Add method route
+    service[route.method.toLowerCase()](config.apiPath + route.route, (req, res) => {
+      runLambda(route.config.lambda, route.config.templates['application/json'], req, res)
+    })
+  })
+  .catch(() => {
+    log.error('Missing Lambda', { name: route.config.lambda })
+  })
+}
+
+/**
  * Builds routes and adds to the express service by mapping template params to
  * the path/route then binding to runLambda method
  */
@@ -87,18 +104,9 @@ const buildRoutes = () => {
   routes.forEach((rte) => {
     // Map template params
     let mappedRoutes = mapTemplateParams(rte.route, rte.config.templates['application/json'])
-    let lambda = rte.config.lambda
     rte.route = mappedRoutes.route
     rte.config.templates['application/json'] = mappedRoutes.template
-    // Build ensure specified Lambda exists
-    fileExists(`${config.lambdas}/${lambda}/index.js`).then(() => {
-      // Add method route
-      service[rte.method.toLowerCase()](config.apiPath + rte.route, (req, res) => {
-        runLambda(lambda, rte.config.templates['application/json'], req, res)
-      })
-    }).catch(() => {
-      log.error('Missing Lambda', { name: lambda })
-    })
+    addRoute(rte)
   })
 }
 
