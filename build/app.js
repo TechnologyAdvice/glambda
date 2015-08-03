@@ -108,7 +108,7 @@ var parseBody = function parseBody(reqBody, template) {
 };
 
 /**
- * Builds the `event` payload with the request body and then forks a new 
+ * Builds the `event` payload with the request body and then forks a new
  * runner process to the requested lambda. Awaits messaging from the lambda
  * to return response payload and display log information
  * @param {String} lambda The lambda to run
@@ -151,7 +151,7 @@ var buildConfig = function buildConfig(cfg) {
 
 /**
  * Initialize the service by building the config, loading the (YAML) Gateway
- * API configuration and then initializing routes on Express and finally 
+ * API configuration and then initializing routes on Express and finally
  * starting the service.
  * @param {Object} [config] The main service configuration
  */

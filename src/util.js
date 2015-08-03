@@ -41,10 +41,8 @@ export const parseBodyParams = (value, body) => {
   if (value.indexOf(`$input.json('$`) >= 0) {
     // Get the name to check
     let name = value.replace(`$input.json('$`, '').replace(`')`, '')
-    if (!name.length) {
-      // Return the entire body
-      return body
-    }
+    // Return the entire body
+    if (!name.length) return body
     // Return the specific property of the body (or null if DNE)
     name = name.replace(/^\./, '') // Remove leading dot
     return ({}.hasOwnProperty.call(body, name)) ? body[name] : null

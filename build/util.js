@@ -48,10 +48,8 @@ var parseBodyParams = function parseBodyParams(value, body) {
   if (value.indexOf('$input.json(\'$') >= 0) {
     // Get the name to check
     var _name = value.replace('$input.json(\'$', '').replace('\')', '');
-    if (!_name.length) {
-      // Return the entire body
-      return body;
-    }
+    // Return the entire body
+    if (!_name.length) return body;
     // Return the specific property of the body (or null if DNE)
     _name = _name.replace(/^\./, ''); // Remove leading dot
     return ({}).hasOwnProperty.call(body, _name) ? body[_name] : null;

@@ -1320,10 +1320,10 @@
             "trailingComments": [
               {
                 "type": "Block",
-                "value": "*\n * Walks schema to look for request methods (verbs), when a method is found it \n * creates a route with the parent node key (the path), the current method, \n * and the properties of that method (the template)\n * @param {Object} node The node to traverse\n * @param {String} prevKey The key of the previous traversal for accessing parent/path\n ",
+                "value": "*\n * Walks schema to look for request methods (verbs), when a method is found it\n * creates a route with the parent node key (the path), the current method,\n * and the properties of that method (the template)\n * @param {Object} node The node to traverse\n * @param {String} prevKey The key of the previous traversal for accessing parent/path\n ",
                 "range": [
                   675,
-                  1023
+                  1021
                 ],
                 "loc": {
                   "start": {
@@ -1342,7 +1342,7 @@
         "kind": "const",
         "range": [
           559,
-          1024
+          1022
         ],
         "loc": {
           "start": {
@@ -1380,7 +1380,7 @@
       "source": null,
       "range": [
         552,
-        1024
+        1022
       ],
       "loc": {
         "start": {
@@ -1424,8 +1424,8 @@
               "type": "Identifier",
               "name": "walkSchema",
               "range": [
-                1037,
-                1047
+                1035,
+                1045
               ],
               "loc": {
                 "start": {
@@ -1448,8 +1448,8 @@
                     "type": "Identifier",
                     "name": "node",
                     "range": [
-                      1051,
-                      1055
+                      1049,
+                      1053
                     ],
                     "loc": {
                       "start": {
@@ -1466,8 +1466,8 @@
                     "type": "Identifier",
                     "name": "schema",
                     "range": [
-                      1058,
-                      1064
+                      1056,
+                      1062
                     ],
                     "loc": {
                       "start": {
@@ -1481,8 +1481,8 @@
                     }
                   },
                   "range": [
-                    1051,
-                    1064
+                    1049,
+                    1062
                   ],
                   "loc": {
                     "start": {
@@ -1501,8 +1501,8 @@
                     "type": "Identifier",
                     "name": "prevKey",
                     "range": [
-                      1066,
-                      1073
+                      1064,
+                      1071
                     ],
                     "loc": {
                       "start": {
@@ -1520,8 +1520,8 @@
                     "value": null,
                     "raw": "null",
                     "range": [
-                      1076,
-                      1080
+                      1074,
+                      1078
                     ],
                     "loc": {
                       "start": {
@@ -1535,8 +1535,8 @@
                     }
                   },
                   "range": [
-                    1066,
-                    1080
+                    1064,
+                    1078
                   ],
                   "loc": {
                     "start": {
@@ -1562,8 +1562,8 @@
                           "type": "Identifier",
                           "name": "methods",
                           "range": [
-                            1133,
-                            1140
+                            1131,
+                            1138
                           ],
                           "loc": {
                             "start": {
@@ -1584,8 +1584,8 @@
                               "value": "GET",
                               "raw": "'GET'",
                               "range": [
-                                1145,
-                                1150
+                                1143,
+                                1148
                               ],
                               "loc": {
                                 "start": {
@@ -1603,8 +1603,8 @@
                               "value": "POST",
                               "raw": "'POST'",
                               "range": [
-                                1152,
-                                1158
+                                1150,
+                                1156
                               ],
                               "loc": {
                                 "start": {
@@ -1622,8 +1622,8 @@
                               "value": "PUT",
                               "raw": "'PUT'",
                               "range": [
-                                1160,
-                                1165
+                                1158,
+                                1163
                               ],
                               "loc": {
                                 "start": {
@@ -1641,8 +1641,8 @@
                               "value": "DELETE",
                               "raw": "'DELETE'",
                               "range": [
-                                1167,
-                                1175
+                                1165,
+                                1173
                               ],
                               "loc": {
                                 "start": {
@@ -1660,8 +1660,8 @@
                               "value": "HEAD",
                               "raw": "'HEAD'",
                               "range": [
-                                1177,
-                                1183
+                                1175,
+                                1181
                               ],
                               "loc": {
                                 "start": {
@@ -1679,8 +1679,8 @@
                               "value": "OPTIONS",
                               "raw": "'OPTIONS'",
                               "range": [
-                                1185,
-                                1194
+                                1183,
+                                1192
                               ],
                               "loc": {
                                 "start": {
@@ -1698,8 +1698,8 @@
                               "value": "PATCH",
                               "raw": "'PATCH'",
                               "range": [
-                                1196,
-                                1203
+                                1194,
+                                1201
                               ],
                               "loc": {
                                 "start": {
@@ -1714,8 +1714,8 @@
                             }
                           ],
                           "range": [
-                            1143,
-                            1205
+                            1141,
+                            1203
                           ],
                           "loc": {
                             "start": {
@@ -1729,8 +1729,8 @@
                           }
                         },
                         "range": [
-                          1133,
-                          1205
+                          1131,
+                          1203
                         ],
                         "loc": {
                           "start": {
@@ -1746,8 +1746,8 @@
                     ],
                     "kind": "const",
                     "range": [
-                      1127,
-                      1208
+                      1125,
+                      1206
                     ],
                     "loc": {
                       "start": {
@@ -1764,8 +1764,8 @@
                         "type": "Line",
                         "value": " Methods indicate traversal stops",
                         "range": [
-                          1089,
-                          1124
+                          1087,
+                          1122
                         ],
                         "loc": {
                           "start": {
@@ -1791,8 +1791,8 @@
                             "type": "Identifier",
                             "name": "prop",
                             "range": [
-                              1217,
-                              1221
+                              1215,
+                              1219
                             ],
                             "loc": {
                               "start": {
@@ -1807,8 +1807,8 @@
                           },
                           "init": null,
                           "range": [
-                            1217,
-                            1221
+                            1215,
+                            1219
                           ],
                           "loc": {
                             "start": {
@@ -1824,8 +1824,8 @@
                       ],
                       "kind": "let",
                       "range": [
-                        1213,
-                        1221
+                        1211,
+                        1219
                       ],
                       "loc": {
                         "start": {
@@ -1842,8 +1842,8 @@
                       "type": "Identifier",
                       "name": "node",
                       "range": [
-                        1225,
-                        1229
+                        1223,
+                        1227
                       ],
                       "loc": {
                         "start": {
@@ -1873,8 +1873,8 @@
                                   "type": "ObjectExpression",
                                   "properties": [],
                                   "range": [
-                                    1260,
-                                    1262
+                                    1258,
+                                    1260
                                   ],
                                   "loc": {
                                     "start": {
@@ -1891,8 +1891,8 @@
                                   "type": "Identifier",
                                   "name": "hasOwnProperty",
                                   "range": [
-                                    1263,
-                                    1277
+                                    1261,
+                                    1275
                                   ],
                                   "loc": {
                                     "start": {
@@ -1906,8 +1906,8 @@
                                   }
                                 },
                                 "range": [
-                                  1260,
-                                  1277
+                                  1258,
+                                  1275
                                 ],
                                 "loc": {
                                   "start": {
@@ -1924,8 +1924,8 @@
                                 "type": "Identifier",
                                 "name": "call",
                                 "range": [
-                                  1278,
-                                  1282
+                                  1276,
+                                  1280
                                 ],
                                 "loc": {
                                   "start": {
@@ -1939,8 +1939,8 @@
                                 }
                               },
                               "range": [
-                                1260,
-                                1282
+                                1258,
+                                1280
                               ],
                               "loc": {
                                 "start": {
@@ -1958,8 +1958,8 @@
                                 "type": "Identifier",
                                 "name": "node",
                                 "range": [
-                                  1283,
-                                  1287
+                                  1281,
+                                  1285
                                 ],
                                 "loc": {
                                   "start": {
@@ -1976,8 +1976,8 @@
                                 "type": "Identifier",
                                 "name": "prop",
                                 "range": [
-                                  1289,
-                                  1293
+                                  1287,
+                                  1291
                                 ],
                                 "loc": {
                                   "start": {
@@ -1992,8 +1992,8 @@
                               }
                             ],
                             "range": [
-                              1260,
-                              1294
+                              1258,
+                              1292
                             ],
                             "loc": {
                               "start": {
@@ -2023,8 +2023,8 @@
                                         "type": "Identifier",
                                         "name": "methods",
                                         "range": [
-                                          1308,
-                                          1315
+                                          1306,
+                                          1313
                                         ],
                                         "loc": {
                                           "start": {
@@ -2041,8 +2041,8 @@
                                         "type": "Identifier",
                                         "name": "indexOf",
                                         "range": [
-                                          1316,
-                                          1323
+                                          1314,
+                                          1321
                                         ],
                                         "loc": {
                                           "start": {
@@ -2056,8 +2056,8 @@
                                         }
                                       },
                                       "range": [
-                                        1308,
-                                        1323
+                                        1306,
+                                        1321
                                       ],
                                       "loc": {
                                         "start": {
@@ -2075,8 +2075,8 @@
                                         "type": "Identifier",
                                         "name": "prop",
                                         "range": [
-                                          1324,
-                                          1328
+                                          1322,
+                                          1326
                                         ],
                                         "loc": {
                                           "start": {
@@ -2091,8 +2091,8 @@
                                       }
                                     ],
                                     "range": [
-                                      1308,
-                                      1329
+                                      1306,
+                                      1327
                                     ],
                                     "loc": {
                                       "start": {
@@ -2110,8 +2110,8 @@
                                     "value": 0,
                                     "raw": "0",
                                     "range": [
-                                      1333,
-                                      1334
+                                      1331,
+                                      1332
                                     ],
                                     "loc": {
                                       "start": {
@@ -2125,8 +2125,8 @@
                                     }
                                   },
                                   "range": [
-                                    1308,
-                                    1334
+                                    1306,
+                                    1332
                                   ],
                                   "loc": {
                                     "start": {
@@ -2153,8 +2153,8 @@
                                             "type": "Identifier",
                                             "name": "routes",
                                             "range": [
-                                              1390,
-                                              1396
+                                              1388,
+                                              1394
                                             ],
                                             "loc": {
                                               "start": {
@@ -2171,8 +2171,8 @@
                                             "type": "Identifier",
                                             "name": "push",
                                             "range": [
-                                              1397,
-                                              1401
+                                              1395,
+                                              1399
                                             ],
                                             "loc": {
                                               "start": {
@@ -2186,8 +2186,8 @@
                                             }
                                           },
                                           "range": [
-                                            1390,
-                                            1401
+                                            1388,
+                                            1399
                                           ],
                                           "loc": {
                                             "start": {
@@ -2210,8 +2210,8 @@
                                                   "type": "Identifier",
                                                   "name": "route",
                                                   "range": [
-                                                    1404,
-                                                    1409
+                                                    1402,
+                                                    1407
                                                   ],
                                                   "loc": {
                                                     "start": {
@@ -2228,8 +2228,8 @@
                                                   "type": "Identifier",
                                                   "name": "prevKey",
                                                   "range": [
-                                                    1411,
-                                                    1418
+                                                    1409,
+                                                    1416
                                                   ],
                                                   "loc": {
                                                     "start": {
@@ -2247,8 +2247,8 @@
                                                 "shorthand": false,
                                                 "computed": false,
                                                 "range": [
-                                                  1404,
-                                                  1418
+                                                  1402,
+                                                  1416
                                                 ],
                                                 "loc": {
                                                   "start": {
@@ -2267,8 +2267,8 @@
                                                   "type": "Identifier",
                                                   "name": "method",
                                                   "range": [
-                                                    1420,
-                                                    1426
+                                                    1418,
+                                                    1424
                                                   ],
                                                   "loc": {
                                                     "start": {
@@ -2285,8 +2285,8 @@
                                                   "type": "Identifier",
                                                   "name": "prop",
                                                   "range": [
-                                                    1428,
-                                                    1432
+                                                    1426,
+                                                    1430
                                                   ],
                                                   "loc": {
                                                     "start": {
@@ -2304,8 +2304,8 @@
                                                 "shorthand": false,
                                                 "computed": false,
                                                 "range": [
-                                                  1420,
-                                                  1432
+                                                  1418,
+                                                  1430
                                                 ],
                                                 "loc": {
                                                   "start": {
@@ -2324,8 +2324,8 @@
                                                   "type": "Identifier",
                                                   "name": "config",
                                                   "range": [
-                                                    1434,
-                                                    1440
+                                                    1432,
+                                                    1438
                                                   ],
                                                   "loc": {
                                                     "start": {
@@ -2345,8 +2345,8 @@
                                                     "type": "Identifier",
                                                     "name": "node",
                                                     "range": [
-                                                      1442,
-                                                      1446
+                                                      1440,
+                                                      1444
                                                     ],
                                                     "loc": {
                                                       "start": {
@@ -2363,8 +2363,8 @@
                                                     "type": "Identifier",
                                                     "name": "prop",
                                                     "range": [
-                                                      1447,
-                                                      1451
+                                                      1445,
+                                                      1449
                                                     ],
                                                     "loc": {
                                                       "start": {
@@ -2378,8 +2378,8 @@
                                                     }
                                                   },
                                                   "range": [
-                                                    1442,
-                                                    1452
+                                                    1440,
+                                                    1450
                                                   ],
                                                   "loc": {
                                                     "start": {
@@ -2397,8 +2397,8 @@
                                                 "shorthand": false,
                                                 "computed": false,
                                                 "range": [
-                                                  1434,
-                                                  1452
+                                                  1432,
+                                                  1450
                                                 ],
                                                 "loc": {
                                                   "start": {
@@ -2413,8 +2413,8 @@
                                               }
                                             ],
                                             "range": [
-                                              1402,
-                                              1454
+                                              1400,
+                                              1452
                                             ],
                                             "loc": {
                                               "start": {
@@ -2429,8 +2429,8 @@
                                           }
                                         ],
                                         "range": [
-                                          1390,
-                                          1455
+                                          1388,
+                                          1453
                                         ],
                                         "loc": {
                                           "start": {
@@ -2444,8 +2444,8 @@
                                         }
                                       },
                                       "range": [
-                                        1390,
-                                        1462
+                                        1388,
+                                        1460
                                       ],
                                       "loc": {
                                         "start": {
@@ -2462,8 +2462,8 @@
                                           "type": "Line",
                                           "value": " Node is a method, push to router",
                                           "range": [
-                                            1346,
-                                            1381
+                                            1344,
+                                            1379
                                           ],
                                           "loc": {
                                             "start": {
@@ -2480,8 +2480,8 @@
                                     }
                                   ],
                                   "range": [
-                                    1336,
-                                    1463
+                                    1334,
+                                    1461
                                   ],
                                   "loc": {
                                     "start": {
@@ -2505,8 +2505,8 @@
                                           "type": "Identifier",
                                           "name": "walkSchema",
                                           "range": [
-                                            1511,
-                                            1521
+                                            1509,
+                                            1519
                                           ],
                                           "loc": {
                                             "start": {
@@ -2527,8 +2527,8 @@
                                               "type": "Identifier",
                                               "name": "node",
                                               "range": [
-                                                1522,
-                                                1526
+                                                1520,
+                                                1524
                                               ],
                                               "loc": {
                                                 "start": {
@@ -2545,8 +2545,8 @@
                                               "type": "Identifier",
                                               "name": "prop",
                                               "range": [
-                                                1527,
-                                                1531
+                                                1525,
+                                                1529
                                               ],
                                               "loc": {
                                                 "start": {
@@ -2560,8 +2560,8 @@
                                               }
                                             },
                                             "range": [
-                                              1522,
-                                              1532
+                                              1520,
+                                              1530
                                             ],
                                             "loc": {
                                               "start": {
@@ -2578,8 +2578,8 @@
                                             "type": "Identifier",
                                             "name": "prop",
                                             "range": [
-                                              1534,
-                                              1538
+                                              1532,
+                                              1536
                                             ],
                                             "loc": {
                                               "start": {
@@ -2594,8 +2594,8 @@
                                           }
                                         ],
                                         "range": [
-                                          1511,
-                                          1539
+                                          1509,
+                                          1537
                                         ],
                                         "loc": {
                                           "start": {
@@ -2609,8 +2609,8 @@
                                         }
                                       },
                                       "range": [
-                                        1511,
-                                        1546
+                                        1509,
+                                        1544
                                       ],
                                       "loc": {
                                         "start": {
@@ -2627,8 +2627,8 @@
                                           "type": "Line",
                                           "value": " Route node, traverse",
                                           "range": [
-                                            1479,
-                                            1502
+                                            1477,
+                                            1500
                                           ],
                                           "loc": {
                                             "start": {
@@ -2645,8 +2645,8 @@
                                     }
                                   ],
                                   "range": [
-                                    1469,
-                                    1547
+                                    1467,
+                                    1545
                                   ],
                                   "loc": {
                                     "start": {
@@ -2660,8 +2660,8 @@
                                   }
                                 },
                                 "range": [
-                                  1304,
-                                  1547
+                                  1302,
+                                  1545
                                 ],
                                 "loc": {
                                   "start": {
@@ -2676,8 +2676,8 @@
                               }
                             ],
                             "range": [
-                              1296,
-                              1553
+                              1294,
+                              1551
                             ],
                             "loc": {
                               "start": {
@@ -2692,8 +2692,8 @@
                           },
                           "alternate": null,
                           "range": [
-                            1256,
-                            1553
+                            1254,
+                            1551
                           ],
                           "loc": {
                             "start": {
@@ -2710,8 +2710,8 @@
                               "type": "Line",
                               "value": " Ensure prop",
                               "range": [
-                                1237,
-                                1251
+                                1235,
+                                1249
                               ],
                               "loc": {
                                 "start": {
@@ -2728,8 +2728,8 @@
                         }
                       ],
                       "range": [
-                        1231,
-                        1557
+                        1229,
+                        1555
                       ],
                       "loc": {
                         "start": {
@@ -2744,8 +2744,8 @@
                     },
                     "each": false,
                     "range": [
-                      1208,
-                      1557
+                      1206,
+                      1555
                     ],
                     "loc": {
                       "start": {
@@ -2760,8 +2760,8 @@
                   }
                 ],
                 "range": [
-                  1085,
-                  1559
+                  1083,
+                  1557
                 ],
                 "loc": {
                   "start": {
@@ -2777,8 +2777,8 @@
               "generator": false,
               "expression": false,
               "range": [
-                1050,
-                1559
+                1048,
+                1557
               ],
               "loc": {
                 "start": {
@@ -2792,8 +2792,8 @@
               }
             },
             "range": [
-              1037,
-              1559
+              1035,
+              1557
             ],
             "loc": {
               "start": {
@@ -2808,10 +2808,10 @@
             "trailingComments": [
               {
                 "type": "Block",
-                "value": "*\n * Iterates over the properties of the template and calls `parseRouteParams` to\n * convert the bracket-delimited params with colon-lead (Express-style) route \n * params with the template-designated key/property name\n * @param {String} route The route to modify\n * @param {Object} template The template object to match against\n * @returns {String} The formatted route\n ",
+                "value": "*\n * Iterates over the properties of the template and calls `parseRouteParams` to\n * convert the bracket-delimited params with colon-lead (Express-style) route\n * params with the template-designated key/property name\n * @param {String} route The route to modify\n * @param {Object} template The template object to match against\n * @returns {String} The formatted route\n ",
                 "range": [
-                  1561,
-                  1935
+                  1559,
+                  1932
                 ],
                 "loc": {
                   "start": {
@@ -2829,8 +2829,8 @@
         ],
         "kind": "const",
         "range": [
-          1031,
-          1936
+          1029,
+          1933
         ],
         "loc": {
           "start": {
@@ -2845,10 +2845,10 @@
         "leadingComments": [
           {
             "type": "Block",
-            "value": "*\n * Walks schema to look for request methods (verbs), when a method is found it \n * creates a route with the parent node key (the path), the current method, \n * and the properties of that method (the template)\n * @param {Object} node The node to traverse\n * @param {String} prevKey The key of the previous traversal for accessing parent/path\n ",
+            "value": "*\n * Walks schema to look for request methods (verbs), when a method is found it\n * creates a route with the parent node key (the path), the current method,\n * and the properties of that method (the template)\n * @param {Object} node The node to traverse\n * @param {String} prevKey The key of the previous traversal for accessing parent/path\n ",
             "range": [
               675,
-              1023
+              1021
             ],
             "loc": {
               "start": {
@@ -2867,8 +2867,8 @@
       "specifiers": [],
       "source": null,
       "range": [
-        1024,
-        1936
+        1022,
+        1933
       ],
       "loc": {
         "start": {
@@ -2883,10 +2883,10 @@
       "leadingComments": [
         {
           "type": "Block",
-          "value": "*\n * Walks schema to look for request methods (verbs), when a method is found it \n * creates a route with the parent node key (the path), the current method, \n * and the properties of that method (the template)\n * @param {Object} node The node to traverse\n * @param {String} prevKey The key of the previous traversal for accessing parent/path\n ",
+          "value": "*\n * Walks schema to look for request methods (verbs), when a method is found it\n * creates a route with the parent node key (the path), the current method,\n * and the properties of that method (the template)\n * @param {Object} node The node to traverse\n * @param {String} prevKey The key of the previous traversal for accessing parent/path\n ",
           "range": [
             675,
-            1023
+            1021
           ],
           "loc": {
             "start": {
@@ -2912,8 +2912,8 @@
               "type": "Identifier",
               "name": "mapTemplateParams",
               "range": [
-                1949,
-                1966
+                1946,
+                1963
               ],
               "loc": {
                 "start": {
@@ -2934,8 +2934,8 @@
                   "type": "Identifier",
                   "name": "route",
                   "range": [
-                    1970,
-                    1975
+                    1967,
+                    1972
                   ],
                   "loc": {
                     "start": {
@@ -2952,8 +2952,8 @@
                   "type": "Identifier",
                   "name": "template",
                   "range": [
-                    1977,
-                    1985
+                    1974,
+                    1982
                   ],
                   "loc": {
                     "start": {
@@ -2981,8 +2981,8 @@
                             "type": "Identifier",
                             "name": "prop",
                             "range": [
-                              2003,
-                              2007
+                              2000,
+                              2004
                             ],
                             "loc": {
                               "start": {
@@ -2997,8 +2997,8 @@
                           },
                           "init": null,
                           "range": [
-                            2003,
-                            2007
+                            2000,
+                            2004
                           ],
                           "loc": {
                             "start": {
@@ -3014,8 +3014,8 @@
                       ],
                       "kind": "let",
                       "range": [
-                        1999,
-                        2007
+                        1996,
+                        2004
                       ],
                       "loc": {
                         "start": {
@@ -3032,8 +3032,8 @@
                       "type": "Identifier",
                       "name": "template",
                       "range": [
-                        2011,
-                        2019
+                        2008,
+                        2016
                       ],
                       "loc": {
                         "start": {
@@ -3063,8 +3063,8 @@
                                   "type": "ObjectExpression",
                                   "properties": [],
                                   "range": [
-                                    2031,
-                                    2033
+                                    2028,
+                                    2030
                                   ],
                                   "loc": {
                                     "start": {
@@ -3081,8 +3081,8 @@
                                   "type": "Identifier",
                                   "name": "hasOwnProperty",
                                   "range": [
-                                    2034,
-                                    2048
+                                    2031,
+                                    2045
                                   ],
                                   "loc": {
                                     "start": {
@@ -3096,8 +3096,8 @@
                                   }
                                 },
                                 "range": [
-                                  2031,
-                                  2048
+                                  2028,
+                                  2045
                                 ],
                                 "loc": {
                                   "start": {
@@ -3114,8 +3114,8 @@
                                 "type": "Identifier",
                                 "name": "call",
                                 "range": [
-                                  2049,
-                                  2053
+                                  2046,
+                                  2050
                                 ],
                                 "loc": {
                                   "start": {
@@ -3129,8 +3129,8 @@
                                 }
                               },
                               "range": [
-                                2031,
-                                2053
+                                2028,
+                                2050
                               ],
                               "loc": {
                                 "start": {
@@ -3148,8 +3148,8 @@
                                 "type": "Identifier",
                                 "name": "template",
                                 "range": [
-                                  2054,
-                                  2062
+                                  2051,
+                                  2059
                                 ],
                                 "loc": {
                                   "start": {
@@ -3166,8 +3166,8 @@
                                 "type": "Identifier",
                                 "name": "prop",
                                 "range": [
-                                  2064,
-                                  2068
+                                  2061,
+                                  2065
                                 ],
                                 "loc": {
                                   "start": {
@@ -3182,8 +3182,8 @@
                               }
                             ],
                             "range": [
-                              2031,
-                              2069
+                              2028,
+                              2066
                             ],
                             "loc": {
                               "start": {
@@ -3208,8 +3208,8 @@
                                       "type": "Identifier",
                                       "name": "param",
                                       "range": [
-                                        2083,
-                                        2088
+                                        2080,
+                                        2085
                                       ],
                                       "loc": {
                                         "start": {
@@ -3228,8 +3228,8 @@
                                         "type": "Identifier",
                                         "name": "parseRouteParams",
                                         "range": [
-                                          2091,
-                                          2107
+                                          2088,
+                                          2104
                                         ],
                                         "loc": {
                                           "start": {
@@ -3250,8 +3250,8 @@
                                             "type": "Identifier",
                                             "name": "template",
                                             "range": [
-                                              2108,
-                                              2116
+                                              2105,
+                                              2113
                                             ],
                                             "loc": {
                                               "start": {
@@ -3268,8 +3268,8 @@
                                             "type": "Identifier",
                                             "name": "prop",
                                             "range": [
-                                              2117,
-                                              2121
+                                              2114,
+                                              2118
                                             ],
                                             "loc": {
                                               "start": {
@@ -3283,8 +3283,8 @@
                                             }
                                           },
                                           "range": [
-                                            2108,
-                                            2122
+                                            2105,
+                                            2119
                                           ],
                                           "loc": {
                                             "start": {
@@ -3301,8 +3301,8 @@
                                           "type": "Identifier",
                                           "name": "prop",
                                           "range": [
-                                            2124,
-                                            2128
+                                            2121,
+                                            2125
                                           ],
                                           "loc": {
                                             "start": {
@@ -3319,8 +3319,8 @@
                                           "type": "Identifier",
                                           "name": "route",
                                           "range": [
-                                            2130,
-                                            2135
+                                            2127,
+                                            2132
                                           ],
                                           "loc": {
                                             "start": {
@@ -3335,8 +3335,8 @@
                                         }
                                       ],
                                       "range": [
-                                        2091,
-                                        2136
+                                        2088,
+                                        2133
                                       ],
                                       "loc": {
                                         "start": {
@@ -3350,8 +3350,8 @@
                                       }
                                     },
                                     "range": [
-                                      2083,
-                                      2136
+                                      2080,
+                                      2133
                                     ],
                                     "loc": {
                                       "start": {
@@ -3367,8 +3367,8 @@
                                 ],
                                 "kind": "let",
                                 "range": [
-                                  2079,
-                                  2143
+                                  2076,
+                                  2140
                                 ],
                                 "loc": {
                                   "start": {
@@ -3387,8 +3387,8 @@
                                   "type": "Identifier",
                                   "name": "param",
                                   "range": [
-                                    2147,
-                                    2152
+                                    2144,
+                                    2149
                                   ],
                                   "loc": {
                                     "start": {
@@ -3413,8 +3413,8 @@
                                           "type": "Identifier",
                                           "name": "route",
                                           "range": [
-                                            2164,
-                                            2169
+                                            2161,
+                                            2166
                                           ],
                                           "loc": {
                                             "start": {
@@ -3431,8 +3431,8 @@
                                           "type": "Identifier",
                                           "name": "param",
                                           "range": [
-                                            2172,
-                                            2177
+                                            2169,
+                                            2174
                                           ],
                                           "loc": {
                                             "start": {
@@ -3446,8 +3446,8 @@
                                           }
                                         },
                                         "range": [
-                                          2164,
-                                          2177
+                                          2161,
+                                          2174
                                         ],
                                         "loc": {
                                           "start": {
@@ -3461,8 +3461,8 @@
                                         }
                                       },
                                       "range": [
-                                        2164,
-                                        2186
+                                        2161,
+                                        2183
                                       ],
                                       "loc": {
                                         "start": {
@@ -3487,8 +3487,8 @@
                                             "type": "Identifier",
                                             "name": "template",
                                             "range": [
-                                              2193,
-                                              2201
+                                              2190,
+                                              2198
                                             ],
                                             "loc": {
                                               "start": {
@@ -3505,8 +3505,8 @@
                                             "type": "Identifier",
                                             "name": "prop",
                                             "range": [
-                                              2202,
-                                              2206
+                                              2199,
+                                              2203
                                             ],
                                             "loc": {
                                               "start": {
@@ -3520,8 +3520,8 @@
                                             }
                                           },
                                           "range": [
-                                            2193,
-                                            2207
+                                            2190,
+                                            2204
                                           ],
                                           "loc": {
                                             "start": {
@@ -3536,8 +3536,8 @@
                                         },
                                         "prefix": true,
                                         "range": [
-                                          2186,
-                                          2207
+                                          2183,
+                                          2204
                                         ],
                                         "loc": {
                                           "start": {
@@ -3551,8 +3551,8 @@
                                         }
                                       },
                                       "range": [
-                                        2186,
-                                        2214
+                                        2183,
+                                        2211
                                       ],
                                       "loc": {
                                         "start": {
@@ -3567,8 +3567,8 @@
                                     }
                                   ],
                                   "range": [
-                                    2154,
-                                    2215
+                                    2151,
+                                    2212
                                   ],
                                   "loc": {
                                     "start": {
@@ -3583,8 +3583,8 @@
                                 },
                                 "alternate": null,
                                 "range": [
-                                  2143,
-                                  2215
+                                  2140,
+                                  2212
                                 ],
                                 "loc": {
                                   "start": {
@@ -3599,8 +3599,8 @@
                               }
                             ],
                             "range": [
-                              2071,
-                              2221
+                              2068,
+                              2218
                             ],
                             "loc": {
                               "start": {
@@ -3615,8 +3615,8 @@
                           },
                           "alternate": null,
                           "range": [
-                            2027,
-                            2221
+                            2024,
+                            2218
                           ],
                           "loc": {
                             "start": {
@@ -3631,8 +3631,8 @@
                         }
                       ],
                       "range": [
-                        2021,
-                        2225
+                        2018,
+                        2222
                       ],
                       "loc": {
                         "start": {
@@ -3647,8 +3647,8 @@
                     },
                     "each": false,
                     "range": [
-                      1994,
-                      2225
+                      1991,
+                      2222
                     ],
                     "loc": {
                       "start": {
@@ -3665,8 +3665,8 @@
                         "type": "Line",
                         "value": " Return modified route and template",
                         "range": [
-                          2228,
-                          2265
+                          2225,
+                          2262
                         ],
                         "loc": {
                           "start": {
@@ -3692,8 +3692,8 @@
                             "type": "Identifier",
                             "name": "route",
                             "range": [
-                              2277,
-                              2282
+                              2274,
+                              2279
                             ],
                             "loc": {
                               "start": {
@@ -3710,8 +3710,8 @@
                             "type": "Identifier",
                             "name": "route",
                             "range": [
-                              2277,
-                              2282
+                              2274,
+                              2279
                             ],
                             "loc": {
                               "start": {
@@ -3729,8 +3729,8 @@
                           "shorthand": true,
                           "computed": false,
                           "range": [
-                            2277,
-                            2282
+                            2274,
+                            2279
                           ],
                           "loc": {
                             "start": {
@@ -3749,8 +3749,8 @@
                             "type": "Identifier",
                             "name": "template",
                             "range": [
-                              2284,
-                              2292
+                              2281,
+                              2289
                             ],
                             "loc": {
                               "start": {
@@ -3767,8 +3767,8 @@
                             "type": "Identifier",
                             "name": "template",
                             "range": [
-                              2284,
-                              2292
+                              2281,
+                              2289
                             ],
                             "loc": {
                               "start": {
@@ -3786,8 +3786,8 @@
                           "shorthand": true,
                           "computed": false,
                           "range": [
-                            2284,
-                            2292
+                            2281,
+                            2289
                           ],
                           "loc": {
                             "start": {
@@ -3802,8 +3802,8 @@
                         }
                       ],
                       "range": [
-                        2275,
-                        2294
+                        2272,
+                        2291
                       ],
                       "loc": {
                         "start": {
@@ -3817,8 +3817,8 @@
                       }
                     },
                     "range": [
-                      2268,
-                      2295
+                      2265,
+                      2292
                     ],
                     "loc": {
                       "start": {
@@ -3835,8 +3835,8 @@
                         "type": "Line",
                         "value": " Return modified route and template",
                         "range": [
-                          2228,
-                          2265
+                          2225,
+                          2262
                         ],
                         "loc": {
                           "start": {
@@ -3853,8 +3853,8 @@
                   }
                 ],
                 "range": [
-                  1990,
-                  2296
+                  1987,
+                  2293
                 ],
                 "loc": {
                   "start": {
@@ -3870,8 +3870,8 @@
               "generator": false,
               "expression": false,
               "range": [
-                1969,
-                2296
+                1966,
+                2293
               ],
               "loc": {
                 "start": {
@@ -3885,8 +3885,8 @@
               }
             },
             "range": [
-              1949,
-              2296
+              1946,
+              2293
             ],
             "loc": {
               "start": {
@@ -3901,10 +3901,10 @@
             "trailingComments": [
               {
                 "type": "Block",
-                "value": "*\n * Ensures that the lambda exists (on init/load) then creates and Express \n * verb+route object for the specific request\n * @param {Object} route The route to add\n ",
+                "value": "*\n * Ensures that the lambda exists (on init/load) then creates and Express\n * verb+route object for the specific request\n * @param {Object} route The route to add\n ",
                 "range": [
-                  2298,
-                  2468
+                  2295,
+                  2464
                 ],
                 "loc": {
                   "start": {
@@ -3922,8 +3922,8 @@
         ],
         "kind": "const",
         "range": [
-          1943,
-          2469
+          1940,
+          2465
         ],
         "loc": {
           "start": {
@@ -3938,10 +3938,10 @@
         "leadingComments": [
           {
             "type": "Block",
-            "value": "*\n * Iterates over the properties of the template and calls `parseRouteParams` to\n * convert the bracket-delimited params with colon-lead (Express-style) route \n * params with the template-designated key/property name\n * @param {String} route The route to modify\n * @param {Object} template The template object to match against\n * @returns {String} The formatted route\n ",
+            "value": "*\n * Iterates over the properties of the template and calls `parseRouteParams` to\n * convert the bracket-delimited params with colon-lead (Express-style) route\n * params with the template-designated key/property name\n * @param {String} route The route to modify\n * @param {Object} template The template object to match against\n * @returns {String} The formatted route\n ",
             "range": [
-              1561,
-              1935
+              1559,
+              1932
             ],
             "loc": {
               "start": {
@@ -3960,8 +3960,8 @@
       "specifiers": [],
       "source": null,
       "range": [
-        1936,
-        2469
+        1933,
+        2465
       ],
       "loc": {
         "start": {
@@ -3976,10 +3976,10 @@
       "leadingComments": [
         {
           "type": "Block",
-          "value": "*\n * Iterates over the properties of the template and calls `parseRouteParams` to\n * convert the bracket-delimited params with colon-lead (Express-style) route \n * params with the template-designated key/property name\n * @param {String} route The route to modify\n * @param {Object} template The template object to match against\n * @returns {String} The formatted route\n ",
+          "value": "*\n * Iterates over the properties of the template and calls `parseRouteParams` to\n * convert the bracket-delimited params with colon-lead (Express-style) route\n * params with the template-designated key/property name\n * @param {String} route The route to modify\n * @param {Object} template The template object to match against\n * @returns {String} The formatted route\n ",
           "range": [
-            1561,
-            1935
+            1559,
+            1932
           ],
           "loc": {
             "start": {
@@ -4005,8 +4005,8 @@
               "type": "Identifier",
               "name": "addRoute",
               "range": [
-                2482,
-                2490
+                2478,
+                2486
               ],
               "loc": {
                 "start": {
@@ -4027,8 +4027,8 @@
                   "type": "Identifier",
                   "name": "route",
                   "range": [
-                    2494,
-                    2499
+                    2490,
+                    2495
                   ],
                   "loc": {
                     "start": {
@@ -4063,8 +4063,8 @@
                                 "type": "Identifier",
                                 "name": "fileExists",
                                 "range": [
-                                  2550,
-                                  2560
+                                  2546,
+                                  2556
                                 ],
                                 "loc": {
                                   "start": {
@@ -4089,8 +4089,8 @@
                                       },
                                       "tail": false,
                                       "range": [
-                                        2561,
-                                        2564
+                                        2557,
+                                        2560
                                       ],
                                       "loc": {
                                         "start": {
@@ -4111,8 +4111,8 @@
                                       },
                                       "tail": false,
                                       "range": [
-                                        2578,
-                                        2582
+                                        2574,
+                                        2578
                                       ],
                                       "loc": {
                                         "start": {
@@ -4133,8 +4133,8 @@
                                       },
                                       "tail": true,
                                       "range": [
-                                        2601,
-                                        2612
+                                        2597,
+                                        2608
                                       ],
                                       "loc": {
                                         "start": {
@@ -4156,8 +4156,8 @@
                                         "type": "Identifier",
                                         "name": "config",
                                         "range": [
-                                          2564,
-                                          2570
+                                          2560,
+                                          2566
                                         ],
                                         "loc": {
                                           "start": {
@@ -4174,8 +4174,8 @@
                                         "type": "Identifier",
                                         "name": "lambdas",
                                         "range": [
-                                          2571,
-                                          2578
+                                          2567,
+                                          2574
                                         ],
                                         "loc": {
                                           "start": {
@@ -4189,8 +4189,8 @@
                                         }
                                       },
                                       "range": [
-                                        2564,
-                                        2578
+                                        2560,
+                                        2574
                                       ],
                                       "loc": {
                                         "start": {
@@ -4213,8 +4213,8 @@
                                           "type": "Identifier",
                                           "name": "route",
                                           "range": [
-                                            2582,
-                                            2587
+                                            2578,
+                                            2583
                                           ],
                                           "loc": {
                                             "start": {
@@ -4231,8 +4231,8 @@
                                           "type": "Identifier",
                                           "name": "config",
                                           "range": [
-                                            2588,
-                                            2594
+                                            2584,
+                                            2590
                                           ],
                                           "loc": {
                                             "start": {
@@ -4246,8 +4246,8 @@
                                           }
                                         },
                                         "range": [
-                                          2582,
-                                          2594
+                                          2578,
+                                          2590
                                         ],
                                         "loc": {
                                           "start": {
@@ -4264,8 +4264,8 @@
                                         "type": "Identifier",
                                         "name": "lambda",
                                         "range": [
-                                          2595,
-                                          2601
+                                          2591,
+                                          2597
                                         ],
                                         "loc": {
                                           "start": {
@@ -4279,8 +4279,8 @@
                                         }
                                       },
                                       "range": [
-                                        2582,
-                                        2601
+                                        2578,
+                                        2597
                                       ],
                                       "loc": {
                                         "start": {
@@ -4295,8 +4295,8 @@
                                     }
                                   ],
                                   "range": [
-                                    2561,
-                                    2612
+                                    2557,
+                                    2608
                                   ],
                                   "loc": {
                                     "start": {
@@ -4311,8 +4311,8 @@
                                 }
                               ],
                               "range": [
-                                2550,
-                                2613
+                                2546,
+                                2609
                               ],
                               "loc": {
                                 "start": {
@@ -4329,8 +4329,8 @@
                               "type": "Identifier",
                               "name": "then",
                               "range": [
-                                2614,
-                                2618
+                                2610,
+                                2614
                               ],
                               "loc": {
                                 "start": {
@@ -4344,8 +4344,8 @@
                               }
                             },
                             "range": [
-                              2550,
-                              2618
+                              2546,
+                              2614
                             ],
                             "loc": {
                               "start": {
@@ -4377,8 +4377,8 @@
                                           "type": "Identifier",
                                           "name": "service",
                                           "range": [
-                                            2655,
-                                            2662
+                                            2651,
+                                            2658
                                           ],
                                           "loc": {
                                             "start": {
@@ -4403,8 +4403,8 @@
                                                 "type": "Identifier",
                                                 "name": "route",
                                                 "range": [
-                                                  2663,
-                                                  2668
+                                                  2659,
+                                                  2664
                                                 ],
                                                 "loc": {
                                                   "start": {
@@ -4421,8 +4421,8 @@
                                                 "type": "Identifier",
                                                 "name": "method",
                                                 "range": [
-                                                  2669,
-                                                  2675
+                                                  2665,
+                                                  2671
                                                 ],
                                                 "loc": {
                                                   "start": {
@@ -4436,8 +4436,8 @@
                                                 }
                                               },
                                               "range": [
-                                                2663,
-                                                2675
+                                                2659,
+                                                2671
                                               ],
                                               "loc": {
                                                 "start": {
@@ -4454,8 +4454,8 @@
                                               "type": "Identifier",
                                               "name": "toLowerCase",
                                               "range": [
-                                                2676,
-                                                2687
+                                                2672,
+                                                2683
                                               ],
                                               "loc": {
                                                 "start": {
@@ -4469,8 +4469,8 @@
                                               }
                                             },
                                             "range": [
-                                              2663,
-                                              2687
+                                              2659,
+                                              2683
                                             ],
                                             "loc": {
                                               "start": {
@@ -4485,8 +4485,8 @@
                                           },
                                           "arguments": [],
                                           "range": [
-                                            2663,
-                                            2689
+                                            2659,
+                                            2685
                                           ],
                                           "loc": {
                                             "start": {
@@ -4500,8 +4500,8 @@
                                           }
                                         },
                                         "range": [
-                                          2655,
-                                          2690
+                                          2651,
+                                          2686
                                         ],
                                         "loc": {
                                           "start": {
@@ -4525,8 +4525,8 @@
                                               "type": "Identifier",
                                               "name": "config",
                                               "range": [
-                                                2691,
-                                                2697
+                                                2687,
+                                                2693
                                               ],
                                               "loc": {
                                                 "start": {
@@ -4543,8 +4543,8 @@
                                               "type": "Identifier",
                                               "name": "apiPath",
                                               "range": [
-                                                2698,
-                                                2705
+                                                2694,
+                                                2701
                                               ],
                                               "loc": {
                                                 "start": {
@@ -4558,8 +4558,8 @@
                                               }
                                             },
                                             "range": [
-                                              2691,
-                                              2705
+                                              2687,
+                                              2701
                                             ],
                                             "loc": {
                                               "start": {
@@ -4579,8 +4579,8 @@
                                               "type": "Identifier",
                                               "name": "route",
                                               "range": [
-                                                2708,
-                                                2713
+                                                2704,
+                                                2709
                                               ],
                                               "loc": {
                                                 "start": {
@@ -4597,8 +4597,8 @@
                                               "type": "Identifier",
                                               "name": "route",
                                               "range": [
-                                                2714,
-                                                2719
+                                                2710,
+                                                2715
                                               ],
                                               "loc": {
                                                 "start": {
@@ -4612,8 +4612,8 @@
                                               }
                                             },
                                             "range": [
-                                              2708,
-                                              2719
+                                              2704,
+                                              2715
                                             ],
                                             "loc": {
                                               "start": {
@@ -4627,8 +4627,8 @@
                                             }
                                           },
                                           "range": [
-                                            2691,
-                                            2719
+                                            2687,
+                                            2715
                                           ],
                                           "loc": {
                                             "start": {
@@ -4649,8 +4649,8 @@
                                               "type": "Identifier",
                                               "name": "req",
                                               "range": [
-                                                2722,
-                                                2725
+                                                2718,
+                                                2721
                                               ],
                                               "loc": {
                                                 "start": {
@@ -4667,8 +4667,8 @@
                                               "type": "Identifier",
                                               "name": "res",
                                               "range": [
-                                                2727,
-                                                2730
+                                                2723,
+                                                2726
                                               ],
                                               "loc": {
                                                 "start": {
@@ -4693,8 +4693,8 @@
                                                     "type": "Identifier",
                                                     "name": "runLambda",
                                                     "range": [
-                                                      2743,
-                                                      2752
+                                                      2739,
+                                                      2748
                                                     ],
                                                     "loc": {
                                                       "start": {
@@ -4718,8 +4718,8 @@
                                                           "type": "Identifier",
                                                           "name": "route",
                                                           "range": [
-                                                            2753,
-                                                            2758
+                                                            2749,
+                                                            2754
                                                           ],
                                                           "loc": {
                                                             "start": {
@@ -4736,8 +4736,8 @@
                                                           "type": "Identifier",
                                                           "name": "config",
                                                           "range": [
-                                                            2759,
-                                                            2765
+                                                            2755,
+                                                            2761
                                                           ],
                                                           "loc": {
                                                             "start": {
@@ -4751,8 +4751,8 @@
                                                           }
                                                         },
                                                         "range": [
-                                                          2753,
-                                                          2765
+                                                          2749,
+                                                          2761
                                                         ],
                                                         "loc": {
                                                           "start": {
@@ -4769,8 +4769,8 @@
                                                         "type": "Identifier",
                                                         "name": "lambda",
                                                         "range": [
-                                                          2766,
-                                                          2772
+                                                          2762,
+                                                          2768
                                                         ],
                                                         "loc": {
                                                           "start": {
@@ -4784,8 +4784,8 @@
                                                         }
                                                       },
                                                       "range": [
-                                                        2753,
-                                                        2772
+                                                        2749,
+                                                        2768
                                                       ],
                                                       "loc": {
                                                         "start": {
@@ -4811,8 +4811,8 @@
                                                             "type": "Identifier",
                                                             "name": "route",
                                                             "range": [
-                                                              2774,
-                                                              2779
+                                                              2770,
+                                                              2775
                                                             ],
                                                             "loc": {
                                                               "start": {
@@ -4829,8 +4829,8 @@
                                                             "type": "Identifier",
                                                             "name": "config",
                                                             "range": [
-                                                              2780,
-                                                              2786
+                                                              2776,
+                                                              2782
                                                             ],
                                                             "loc": {
                                                               "start": {
@@ -4844,8 +4844,8 @@
                                                             }
                                                           },
                                                           "range": [
-                                                            2774,
-                                                            2786
+                                                            2770,
+                                                            2782
                                                           ],
                                                           "loc": {
                                                             "start": {
@@ -4862,8 +4862,8 @@
                                                           "type": "Identifier",
                                                           "name": "templates",
                                                           "range": [
-                                                            2787,
-                                                            2796
+                                                            2783,
+                                                            2792
                                                           ],
                                                           "loc": {
                                                             "start": {
@@ -4877,8 +4877,8 @@
                                                           }
                                                         },
                                                         "range": [
-                                                          2774,
-                                                          2796
+                                                          2770,
+                                                          2792
                                                         ],
                                                         "loc": {
                                                           "start": {
@@ -4896,8 +4896,8 @@
                                                         "value": "application/json",
                                                         "raw": "'application/json'",
                                                         "range": [
-                                                          2797,
-                                                          2815
+                                                          2793,
+                                                          2811
                                                         ],
                                                         "loc": {
                                                           "start": {
@@ -4911,8 +4911,8 @@
                                                         }
                                                       },
                                                       "range": [
-                                                        2774,
-                                                        2816
+                                                        2770,
+                                                        2812
                                                       ],
                                                       "loc": {
                                                         "start": {
@@ -4929,8 +4929,8 @@
                                                       "type": "Identifier",
                                                       "name": "req",
                                                       "range": [
-                                                        2818,
-                                                        2821
+                                                        2814,
+                                                        2817
                                                       ],
                                                       "loc": {
                                                         "start": {
@@ -4947,8 +4947,8 @@
                                                       "type": "Identifier",
                                                       "name": "res",
                                                       "range": [
-                                                        2823,
-                                                        2826
+                                                        2819,
+                                                        2822
                                                       ],
                                                       "loc": {
                                                         "start": {
@@ -4963,8 +4963,8 @@
                                                     }
                                                   ],
                                                   "range": [
-                                                    2743,
-                                                    2827
+                                                    2739,
+                                                    2823
                                                   ],
                                                   "loc": {
                                                     "start": {
@@ -4978,8 +4978,8 @@
                                                   }
                                                 },
                                                 "range": [
-                                                  2743,
-                                                  2832
+                                                  2739,
+                                                  2828
                                                 ],
                                                 "loc": {
                                                   "start": {
@@ -4994,8 +4994,8 @@
                                               }
                                             ],
                                             "range": [
-                                              2735,
-                                              2833
+                                              2731,
+                                              2829
                                             ],
                                             "loc": {
                                               "start": {
@@ -5011,8 +5011,8 @@
                                           "generator": false,
                                           "expression": false,
                                           "range": [
-                                            2721,
-                                            2833
+                                            2717,
+                                            2829
                                           ],
                                           "loc": {
                                             "start": {
@@ -5027,8 +5027,8 @@
                                         }
                                       ],
                                       "range": [
-                                        2655,
-                                        2834
+                                        2651,
+                                        2830
                                       ],
                                       "loc": {
                                         "start": {
@@ -5042,8 +5042,8 @@
                                       }
                                     },
                                     "range": [
-                                      2655,
-                                      2837
+                                      2651,
+                                      2833
                                     ],
                                     "loc": {
                                       "start": {
@@ -5060,8 +5060,8 @@
                                         "type": "Line",
                                         "value": " Add method route",
                                         "range": [
-                                          2631,
-                                          2650
+                                          2627,
+                                          2646
                                         ],
                                         "loc": {
                                           "start": {
@@ -5078,8 +5078,8 @@
                                   }
                                 ],
                                 "range": [
-                                  2625,
-                                  2838
+                                  2621,
+                                  2834
                                 ],
                                 "loc": {
                                   "start": {
@@ -5095,8 +5095,8 @@
                               "generator": false,
                               "expression": false,
                               "range": [
-                                2619,
-                                2838
+                                2615,
+                                2834
                               ],
                               "loc": {
                                 "start": {
@@ -5111,8 +5111,8 @@
                             }
                           ],
                           "range": [
-                            2550,
-                            2839
+                            2546,
+                            2835
                           ],
                           "loc": {
                             "start": {
@@ -5129,8 +5129,8 @@
                           "type": "Identifier",
                           "name": "catch",
                           "range": [
-                            2843,
-                            2848
+                            2839,
+                            2844
                           ],
                           "loc": {
                             "start": {
@@ -5144,8 +5144,8 @@
                           }
                         },
                         "range": [
-                          2550,
-                          2848
+                          2546,
+                          2844
                         ],
                         "loc": {
                           "start": {
@@ -5177,8 +5177,8 @@
                                       "type": "Identifier",
                                       "name": "log",
                                       "range": [
-                                        2861,
-                                        2864
+                                        2857,
+                                        2860
                                       ],
                                       "loc": {
                                         "start": {
@@ -5195,8 +5195,8 @@
                                       "type": "Identifier",
                                       "name": "error",
                                       "range": [
-                                        2865,
-                                        2870
+                                        2861,
+                                        2866
                                       ],
                                       "loc": {
                                         "start": {
@@ -5210,8 +5210,8 @@
                                       }
                                     },
                                     "range": [
-                                      2861,
-                                      2870
+                                      2857,
+                                      2866
                                     ],
                                     "loc": {
                                       "start": {
@@ -5230,8 +5230,8 @@
                                       "value": "Missing Lambda",
                                       "raw": "'Missing Lambda'",
                                       "range": [
-                                        2871,
-                                        2887
+                                        2867,
+                                        2883
                                       ],
                                       "loc": {
                                         "start": {
@@ -5253,8 +5253,8 @@
                                             "type": "Identifier",
                                             "name": "name",
                                             "range": [
-                                              2891,
-                                              2895
+                                              2887,
+                                              2891
                                             ],
                                             "loc": {
                                               "start": {
@@ -5277,8 +5277,8 @@
                                                 "type": "Identifier",
                                                 "name": "route",
                                                 "range": [
-                                                  2897,
-                                                  2902
+                                                  2893,
+                                                  2898
                                                 ],
                                                 "loc": {
                                                   "start": {
@@ -5295,8 +5295,8 @@
                                                 "type": "Identifier",
                                                 "name": "config",
                                                 "range": [
-                                                  2903,
-                                                  2909
+                                                  2899,
+                                                  2905
                                                 ],
                                                 "loc": {
                                                   "start": {
@@ -5310,8 +5310,8 @@
                                                 }
                                               },
                                               "range": [
-                                                2897,
-                                                2909
+                                                2893,
+                                                2905
                                               ],
                                               "loc": {
                                                 "start": {
@@ -5328,8 +5328,8 @@
                                               "type": "Identifier",
                                               "name": "lambda",
                                               "range": [
-                                                2910,
-                                                2916
+                                                2906,
+                                                2912
                                               ],
                                               "loc": {
                                                 "start": {
@@ -5343,8 +5343,8 @@
                                               }
                                             },
                                             "range": [
-                                              2897,
-                                              2916
+                                              2893,
+                                              2912
                                             ],
                                             "loc": {
                                               "start": {
@@ -5362,8 +5362,8 @@
                                           "shorthand": false,
                                           "computed": false,
                                           "range": [
-                                            2891,
-                                            2916
+                                            2887,
+                                            2912
                                           ],
                                           "loc": {
                                             "start": {
@@ -5378,8 +5378,8 @@
                                         }
                                       ],
                                       "range": [
-                                        2889,
-                                        2918
+                                        2885,
+                                        2914
                                       ],
                                       "loc": {
                                         "start": {
@@ -5394,8 +5394,8 @@
                                     }
                                   ],
                                   "range": [
-                                    2861,
-                                    2919
+                                    2857,
+                                    2915
                                   ],
                                   "loc": {
                                     "start": {
@@ -5409,8 +5409,8 @@
                                   }
                                 },
                                 "range": [
-                                  2861,
-                                  2922
+                                  2857,
+                                  2918
                                 ],
                                 "loc": {
                                   "start": {
@@ -5425,8 +5425,8 @@
                               }
                             ],
                             "range": [
-                              2855,
-                              2923
+                              2851,
+                              2919
                             ],
                             "loc": {
                               "start": {
@@ -5442,8 +5442,8 @@
                           "generator": false,
                           "expression": false,
                           "range": [
-                            2849,
-                            2923
+                            2845,
+                            2919
                           ],
                           "loc": {
                             "start": {
@@ -5458,8 +5458,8 @@
                         }
                       ],
                       "range": [
-                        2550,
-                        2924
+                        2546,
+                        2920
                       ],
                       "loc": {
                         "start": {
@@ -5473,8 +5473,8 @@
                       }
                     },
                     "range": [
-                      2550,
-                      2925
+                      2546,
+                      2921
                     ],
                     "loc": {
                       "start": {
@@ -5491,8 +5491,8 @@
                         "type": "Line",
                         "value": " Build ensure specified Lambda exists",
                         "range": [
-                          2508,
-                          2547
+                          2504,
+                          2543
                         ],
                         "loc": {
                           "start": {
@@ -5509,8 +5509,8 @@
                   }
                 ],
                 "range": [
-                  2504,
-                  2926
+                  2500,
+                  2922
                 ],
                 "loc": {
                   "start": {
@@ -5526,8 +5526,8 @@
               "generator": false,
               "expression": false,
               "range": [
-                2493,
-                2926
+                2489,
+                2922
               ],
               "loc": {
                 "start": {
@@ -5541,8 +5541,8 @@
               }
             },
             "range": [
-              2482,
-              2926
+              2478,
+              2922
             ],
             "loc": {
               "start": {
@@ -5557,10 +5557,10 @@
             "trailingComments": [
               {
                 "type": "Block",
-                "value": "*\n * Itterates over the routes array to map template parameters, set the route \n * property, config > templates and call `addRoute`\n ",
+                "value": "*\n * Itterates over the routes array to map template parameters, set the route\n * property, config > templates and call `addRoute`\n ",
                 "range": [
-                  2928,
-                  3065
+                  2924,
+                  3060
                 ],
                 "loc": {
                   "start": {
@@ -5578,8 +5578,8 @@
         ],
         "kind": "const",
         "range": [
-          2476,
-          3066
+          2472,
+          3061
         ],
         "loc": {
           "start": {
@@ -5594,10 +5594,10 @@
         "leadingComments": [
           {
             "type": "Block",
-            "value": "*\n * Ensures that the lambda exists (on init/load) then creates and Express \n * verb+route object for the specific request\n * @param {Object} route The route to add\n ",
+            "value": "*\n * Ensures that the lambda exists (on init/load) then creates and Express\n * verb+route object for the specific request\n * @param {Object} route The route to add\n ",
             "range": [
-              2298,
-              2468
+              2295,
+              2464
             ],
             "loc": {
               "start": {
@@ -5616,8 +5616,8 @@
       "specifiers": [],
       "source": null,
       "range": [
-        2469,
-        3066
+        2465,
+        3061
       ],
       "loc": {
         "start": {
@@ -5632,10 +5632,10 @@
       "leadingComments": [
         {
           "type": "Block",
-          "value": "*\n * Ensures that the lambda exists (on init/load) then creates and Express \n * verb+route object for the specific request\n * @param {Object} route The route to add\n ",
+          "value": "*\n * Ensures that the lambda exists (on init/load) then creates and Express\n * verb+route object for the specific request\n * @param {Object} route The route to add\n ",
           "range": [
-            2298,
-            2468
+            2295,
+            2464
           ],
           "loc": {
             "start": {
@@ -5659,8 +5659,8 @@
             "type": "Identifier",
             "name": "buildRoutes",
             "range": [
-              3072,
-              3083
+              3067,
+              3078
             ],
             "loc": {
               "start": {
@@ -5691,8 +5691,8 @@
                         "type": "Identifier",
                         "name": "routes",
                         "range": [
-                          3122,
-                          3128
+                          3117,
+                          3123
                         ],
                         "loc": {
                           "start": {
@@ -5709,8 +5709,8 @@
                         "type": "Identifier",
                         "name": "forEach",
                         "range": [
-                          3129,
-                          3136
+                          3124,
+                          3131
                         ],
                         "loc": {
                           "start": {
@@ -5724,8 +5724,8 @@
                         }
                       },
                       "range": [
-                        3122,
-                        3136
+                        3117,
+                        3131
                       ],
                       "loc": {
                         "start": {
@@ -5747,8 +5747,8 @@
                             "type": "Identifier",
                             "name": "rte",
                             "range": [
-                              3138,
-                              3141
+                              3133,
+                              3136
                             ],
                             "loc": {
                               "start": {
@@ -5774,8 +5774,8 @@
                                     "type": "Identifier",
                                     "name": "mappedRoutes",
                                     "range": [
-                                      3183,
-                                      3195
+                                      3178,
+                                      3190
                                     ],
                                     "loc": {
                                       "start": {
@@ -5794,8 +5794,8 @@
                                       "type": "Identifier",
                                       "name": "mapTemplateParams",
                                       "range": [
-                                        3198,
-                                        3215
+                                        3193,
+                                        3210
                                       ],
                                       "loc": {
                                         "start": {
@@ -5816,8 +5816,8 @@
                                           "type": "Identifier",
                                           "name": "rte",
                                           "range": [
-                                            3216,
-                                            3219
+                                            3211,
+                                            3214
                                           ],
                                           "loc": {
                                             "start": {
@@ -5834,8 +5834,8 @@
                                           "type": "Identifier",
                                           "name": "route",
                                           "range": [
-                                            3220,
-                                            3225
+                                            3215,
+                                            3220
                                           ],
                                           "loc": {
                                             "start": {
@@ -5849,8 +5849,8 @@
                                           }
                                         },
                                         "range": [
-                                          3216,
-                                          3225
+                                          3211,
+                                          3220
                                         ],
                                         "loc": {
                                           "start": {
@@ -5876,8 +5876,8 @@
                                               "type": "Identifier",
                                               "name": "rte",
                                               "range": [
-                                                3227,
-                                                3230
+                                                3222,
+                                                3225
                                               ],
                                               "loc": {
                                                 "start": {
@@ -5894,8 +5894,8 @@
                                               "type": "Identifier",
                                               "name": "config",
                                               "range": [
-                                                3231,
-                                                3237
+                                                3226,
+                                                3232
                                               ],
                                               "loc": {
                                                 "start": {
@@ -5909,8 +5909,8 @@
                                               }
                                             },
                                             "range": [
-                                              3227,
-                                              3237
+                                              3222,
+                                              3232
                                             ],
                                             "loc": {
                                               "start": {
@@ -5927,8 +5927,8 @@
                                             "type": "Identifier",
                                             "name": "templates",
                                             "range": [
-                                              3238,
-                                              3247
+                                              3233,
+                                              3242
                                             ],
                                             "loc": {
                                               "start": {
@@ -5942,8 +5942,8 @@
                                             }
                                           },
                                           "range": [
-                                            3227,
-                                            3247
+                                            3222,
+                                            3242
                                           ],
                                           "loc": {
                                             "start": {
@@ -5961,8 +5961,8 @@
                                           "value": "application/json",
                                           "raw": "'application/json'",
                                           "range": [
-                                            3248,
-                                            3266
+                                            3243,
+                                            3261
                                           ],
                                           "loc": {
                                             "start": {
@@ -5976,8 +5976,8 @@
                                           }
                                         },
                                         "range": [
-                                          3227,
-                                          3267
+                                          3222,
+                                          3262
                                         ],
                                         "loc": {
                                           "start": {
@@ -5992,8 +5992,8 @@
                                       }
                                     ],
                                     "range": [
-                                      3198,
-                                      3268
+                                      3193,
+                                      3263
                                     ],
                                     "loc": {
                                       "start": {
@@ -6007,8 +6007,8 @@
                                     }
                                   },
                                   "range": [
-                                    3183,
-                                    3268
+                                    3178,
+                                    3263
                                   ],
                                   "loc": {
                                     "start": {
@@ -6024,8 +6024,8 @@
                               ],
                               "kind": "let",
                               "range": [
-                                3179,
-                                3273
+                                3174,
+                                3268
                               ],
                               "loc": {
                                 "start": {
@@ -6042,8 +6042,8 @@
                                   "type": "Line",
                                   "value": " Map template params",
                                   "range": [
-                                    3152,
-                                    3174
+                                    3147,
+                                    3169
                                   ],
                                   "loc": {
                                     "start": {
@@ -6070,8 +6070,8 @@
                                     "type": "Identifier",
                                     "name": "rte",
                                     "range": [
-                                      3273,
-                                      3276
+                                      3268,
+                                      3271
                                     ],
                                     "loc": {
                                       "start": {
@@ -6088,8 +6088,8 @@
                                     "type": "Identifier",
                                     "name": "route",
                                     "range": [
-                                      3277,
-                                      3282
+                                      3272,
+                                      3277
                                     ],
                                     "loc": {
                                       "start": {
@@ -6103,8 +6103,8 @@
                                     }
                                   },
                                   "range": [
-                                    3273,
-                                    3282
+                                    3268,
+                                    3277
                                   ],
                                   "loc": {
                                     "start": {
@@ -6124,8 +6124,8 @@
                                     "type": "Identifier",
                                     "name": "mappedRoutes",
                                     "range": [
-                                      3285,
-                                      3297
+                                      3280,
+                                      3292
                                     ],
                                     "loc": {
                                       "start": {
@@ -6142,8 +6142,8 @@
                                     "type": "Identifier",
                                     "name": "route",
                                     "range": [
-                                      3298,
-                                      3303
+                                      3293,
+                                      3298
                                     ],
                                     "loc": {
                                       "start": {
@@ -6157,8 +6157,8 @@
                                     }
                                   },
                                   "range": [
-                                    3285,
-                                    3303
+                                    3280,
+                                    3298
                                   ],
                                   "loc": {
                                     "start": {
@@ -6172,8 +6172,8 @@
                                   }
                                 },
                                 "range": [
-                                  3273,
-                                  3303
+                                  3268,
+                                  3298
                                 ],
                                 "loc": {
                                   "start": {
@@ -6187,8 +6187,8 @@
                                 }
                               },
                               "range": [
-                                3273,
-                                3308
+                                3268,
+                                3303
                               ],
                               "loc": {
                                 "start": {
@@ -6219,8 +6219,8 @@
                                         "type": "Identifier",
                                         "name": "rte",
                                         "range": [
-                                          3308,
-                                          3311
+                                          3303,
+                                          3306
                                         ],
                                         "loc": {
                                           "start": {
@@ -6237,8 +6237,8 @@
                                         "type": "Identifier",
                                         "name": "config",
                                         "range": [
-                                          3312,
-                                          3318
+                                          3307,
+                                          3313
                                         ],
                                         "loc": {
                                           "start": {
@@ -6252,8 +6252,8 @@
                                         }
                                       },
                                       "range": [
-                                        3308,
-                                        3318
+                                        3303,
+                                        3313
                                       ],
                                       "loc": {
                                         "start": {
@@ -6270,8 +6270,8 @@
                                       "type": "Identifier",
                                       "name": "templates",
                                       "range": [
-                                        3319,
-                                        3328
+                                        3314,
+                                        3323
                                       ],
                                       "loc": {
                                         "start": {
@@ -6285,8 +6285,8 @@
                                       }
                                     },
                                     "range": [
-                                      3308,
-                                      3328
+                                      3303,
+                                      3323
                                     ],
                                     "loc": {
                                       "start": {
@@ -6304,8 +6304,8 @@
                                     "value": "application/json",
                                     "raw": "'application/json'",
                                     "range": [
-                                      3329,
-                                      3347
+                                      3324,
+                                      3342
                                     ],
                                     "loc": {
                                       "start": {
@@ -6319,8 +6319,8 @@
                                     }
                                   },
                                   "range": [
-                                    3308,
-                                    3348
+                                    3303,
+                                    3343
                                   ],
                                   "loc": {
                                     "start": {
@@ -6340,8 +6340,8 @@
                                     "type": "Identifier",
                                     "name": "mappedRoutes",
                                     "range": [
-                                      3351,
-                                      3363
+                                      3346,
+                                      3358
                                     ],
                                     "loc": {
                                       "start": {
@@ -6358,8 +6358,8 @@
                                     "type": "Identifier",
                                     "name": "template",
                                     "range": [
-                                      3364,
-                                      3372
+                                      3359,
+                                      3367
                                     ],
                                     "loc": {
                                       "start": {
@@ -6373,8 +6373,8 @@
                                     }
                                   },
                                   "range": [
-                                    3351,
-                                    3372
+                                    3346,
+                                    3367
                                   ],
                                   "loc": {
                                     "start": {
@@ -6388,8 +6388,8 @@
                                   }
                                 },
                                 "range": [
-                                  3308,
-                                  3372
+                                  3303,
+                                  3367
                                 ],
                                 "loc": {
                                   "start": {
@@ -6403,8 +6403,8 @@
                                 }
                               },
                               "range": [
-                                3308,
-                                3377
+                                3303,
+                                3372
                               ],
                               "loc": {
                                 "start": {
@@ -6425,8 +6425,8 @@
                                   "type": "Identifier",
                                   "name": "addRoute",
                                   "range": [
-                                    3377,
-                                    3385
+                                    3372,
+                                    3380
                                   ],
                                   "loc": {
                                     "start": {
@@ -6444,8 +6444,8 @@
                                     "type": "Identifier",
                                     "name": "rte",
                                     "range": [
-                                      3386,
-                                      3389
+                                      3381,
+                                      3384
                                     ],
                                     "loc": {
                                       "start": {
@@ -6460,8 +6460,8 @@
                                   }
                                 ],
                                 "range": [
-                                  3377,
-                                  3390
+                                  3372,
+                                  3385
                                 ],
                                 "loc": {
                                   "start": {
@@ -6475,8 +6475,8 @@
                                 }
                               },
                               "range": [
-                                3377,
-                                3393
+                                3372,
+                                3388
                               ],
                               "loc": {
                                 "start": {
@@ -6491,8 +6491,8 @@
                             }
                           ],
                           "range": [
-                            3146,
-                            3394
+                            3141,
+                            3389
                           ],
                           "loc": {
                             "start": {
@@ -6508,8 +6508,8 @@
                         "generator": false,
                         "expression": false,
                         "range": [
-                          3137,
-                          3394
+                          3132,
+                          3389
                         ],
                         "loc": {
                           "start": {
@@ -6524,8 +6524,8 @@
                       }
                     ],
                     "range": [
-                      3122,
-                      3395
+                      3117,
+                      3390
                     ],
                     "loc": {
                       "start": {
@@ -6539,8 +6539,8 @@
                     }
                   },
                   "range": [
-                    3122,
-                    3396
+                    3117,
+                    3391
                   ],
                   "loc": {
                     "start": {
@@ -6557,8 +6557,8 @@
                       "type": "Line",
                       "value": " Itterate over routes",
                       "range": [
-                        3096,
-                        3119
+                        3091,
+                        3114
                       ],
                       "loc": {
                         "start": {
@@ -6575,8 +6575,8 @@
                 }
               ],
               "range": [
-                3092,
-                3397
+                3087,
+                3392
               ],
               "loc": {
                 "start": {
@@ -6592,8 +6592,8 @@
             "generator": false,
             "expression": false,
             "range": [
-              3086,
-              3397
+              3081,
+              3392
             ],
             "loc": {
               "start": {
@@ -6607,8 +6607,8 @@
             }
           },
           "range": [
-            3072,
-            3397
+            3067,
+            3392
           ],
           "loc": {
             "start": {
@@ -6625,8 +6625,8 @@
               "type": "Block",
               "value": "*\n * Initializes the routes by walking the Gateway schema then running `buildRoutes`\n * to load into Express object\n ",
               "range": [
-                3399,
-                3520
+                3394,
+                3515
               ],
               "loc": {
                 "start": {
@@ -6644,8 +6644,8 @@
       ],
       "kind": "const",
       "range": [
-        3066,
-        3521
+        3061,
+        3516
       ],
       "loc": {
         "start": {
@@ -6660,10 +6660,10 @@
       "leadingComments": [
         {
           "type": "Block",
-          "value": "*\n * Itterates over the routes array to map template parameters, set the route \n * property, config > templates and call `addRoute`\n ",
+          "value": "*\n * Itterates over the routes array to map template parameters, set the route\n * property, config > templates and call `addRoute`\n ",
           "range": [
-            2928,
-            3065
+            2924,
+            3060
           ],
           "loc": {
             "start": {
@@ -6689,8 +6689,8 @@
               "type": "Identifier",
               "name": "initRoutes",
               "range": [
-                3534,
-                3544
+                3529,
+                3539
               ],
               "loc": {
                 "start": {
@@ -6718,8 +6718,8 @@
                         "type": "Identifier",
                         "name": "walkSchema",
                         "range": [
-                          3594,
-                          3604
+                          3589,
+                          3599
                         ],
                         "loc": {
                           "start": {
@@ -6737,8 +6737,8 @@
                           "type": "Identifier",
                           "name": "schema",
                           "range": [
-                            3605,
-                            3611
+                            3600,
+                            3606
                           ],
                           "loc": {
                             "start": {
@@ -6753,8 +6753,8 @@
                         }
                       ],
                       "range": [
-                        3594,
-                        3612
+                        3589,
+                        3607
                       ],
                       "loc": {
                         "start": {
@@ -6771,8 +6771,8 @@
                           "type": "Line",
                           "value": " Map params and build express routes",
                           "range": [
-                            3615,
-                            3653
+                            3610,
+                            3648
                           ],
                           "loc": {
                             "start": {
@@ -6788,8 +6788,8 @@
                       ]
                     },
                     "range": [
-                      3594,
-                      3656
+                      3589,
+                      3651
                     ],
                     "loc": {
                       "start": {
@@ -6806,8 +6806,8 @@
                         "type": "Line",
                         "value": " Walk the schema to build routes",
                         "range": [
-                          3557,
-                          3591
+                          3552,
+                          3586
                         ],
                         "loc": {
                           "start": {
@@ -6830,8 +6830,8 @@
                         "type": "Identifier",
                         "name": "buildRoutes",
                         "range": [
-                          3656,
-                          3667
+                          3651,
+                          3662
                         ],
                         "loc": {
                           "start": {
@@ -6846,8 +6846,8 @@
                       },
                       "arguments": [],
                       "range": [
-                        3656,
-                        3669
+                        3651,
+                        3664
                       ],
                       "loc": {
                         "start": {
@@ -6861,8 +6861,8 @@
                       }
                     },
                     "range": [
-                      3656,
-                      3670
+                      3651,
+                      3665
                     ],
                     "loc": {
                       "start": {
@@ -6879,8 +6879,8 @@
                         "type": "Line",
                         "value": " Map params and build express routes",
                         "range": [
-                          3615,
-                          3653
+                          3610,
+                          3648
                         ],
                         "loc": {
                           "start": {
@@ -6897,8 +6897,8 @@
                   }
                 ],
                 "range": [
-                  3553,
-                  3671
+                  3548,
+                  3666
                 ],
                 "loc": {
                   "start": {
@@ -6914,8 +6914,8 @@
               "generator": false,
               "expression": false,
               "range": [
-                3547,
-                3671
+                3542,
+                3666
               ],
               "loc": {
                 "start": {
@@ -6929,8 +6929,8 @@
               }
             },
             "range": [
-              3534,
-              3671
+              3529,
+              3666
             ],
             "loc": {
               "start": {
@@ -6946,8 +6946,8 @@
         ],
         "kind": "const",
         "range": [
-          3528,
-          3672
+          3523,
+          3667
         ],
         "loc": {
           "start": {
@@ -6964,8 +6964,8 @@
             "type": "Block",
             "value": "*\n * Initializes the routes by walking the Gateway schema then running `buildRoutes`\n * to load into Express object\n ",
             "range": [
-              3399,
-              3520
+              3394,
+              3515
             ],
             "loc": {
               "start": {
@@ -6984,8 +6984,8 @@
       "specifiers": [],
       "source": null,
       "range": [
-        3521,
-        3672
+        3516,
+        3667
       ],
       "loc": {
         "start": {
@@ -7002,8 +7002,8 @@
           "type": "Block",
           "value": "*\n * Initializes the routes by walking the Gateway schema then running `buildRoutes`\n * to load into Express object\n ",
           "range": [
-            3399,
-            3520
+            3394,
+            3515
           ],
           "loc": {
             "start": {
@@ -7022,7 +7022,7 @@
   "sourceType": "module",
   "range": [
     81,
-    3672
+    3667
   ],
   "loc": {
     "start": {
@@ -7145,10 +7145,10 @@
     },
     {
       "type": "Block",
-      "value": "*\n * Walks schema to look for request methods (verbs), when a method is found it \n * creates a route with the parent node key (the path), the current method, \n * and the properties of that method (the template)\n * @param {Object} node The node to traverse\n * @param {String} prevKey The key of the previous traversal for accessing parent/path\n ",
+      "value": "*\n * Walks schema to look for request methods (verbs), when a method is found it\n * creates a route with the parent node key (the path), the current method,\n * and the properties of that method (the template)\n * @param {Object} node The node to traverse\n * @param {String} prevKey The key of the previous traversal for accessing parent/path\n ",
       "range": [
         675,
-        1023
+        1021
       ],
       "loc": {
         "start": {
@@ -7165,8 +7165,8 @@
       "type": "Line",
       "value": " Methods indicate traversal stops",
       "range": [
-        1089,
-        1124
+        1087,
+        1122
       ],
       "loc": {
         "start": {
@@ -7183,8 +7183,8 @@
       "type": "Line",
       "value": " Ensure prop",
       "range": [
-        1237,
-        1251
+        1235,
+        1249
       ],
       "loc": {
         "start": {
@@ -7201,8 +7201,8 @@
       "type": "Line",
       "value": " Node is a method, push to router",
       "range": [
-        1346,
-        1381
+        1344,
+        1379
       ],
       "loc": {
         "start": {
@@ -7219,8 +7219,8 @@
       "type": "Line",
       "value": " Route node, traverse",
       "range": [
-        1479,
-        1502
+        1477,
+        1500
       ],
       "loc": {
         "start": {
@@ -7235,10 +7235,10 @@
     },
     {
       "type": "Block",
-      "value": "*\n * Iterates over the properties of the template and calls `parseRouteParams` to\n * convert the bracket-delimited params with colon-lead (Express-style) route \n * params with the template-designated key/property name\n * @param {String} route The route to modify\n * @param {Object} template The template object to match against\n * @returns {String} The formatted route\n ",
+      "value": "*\n * Iterates over the properties of the template and calls `parseRouteParams` to\n * convert the bracket-delimited params with colon-lead (Express-style) route\n * params with the template-designated key/property name\n * @param {String} route The route to modify\n * @param {Object} template The template object to match against\n * @returns {String} The formatted route\n ",
       "range": [
-        1561,
-        1935
+        1559,
+        1932
       ],
       "loc": {
         "start": {
@@ -7255,8 +7255,8 @@
       "type": "Line",
       "value": " Return modified route and template",
       "range": [
-        2228,
-        2265
+        2225,
+        2262
       ],
       "loc": {
         "start": {
@@ -7271,10 +7271,10 @@
     },
     {
       "type": "Block",
-      "value": "*\n * Ensures that the lambda exists (on init/load) then creates and Express \n * verb+route object for the specific request\n * @param {Object} route The route to add\n ",
+      "value": "*\n * Ensures that the lambda exists (on init/load) then creates and Express\n * verb+route object for the specific request\n * @param {Object} route The route to add\n ",
       "range": [
-        2298,
-        2468
+        2295,
+        2464
       ],
       "loc": {
         "start": {
@@ -7291,8 +7291,8 @@
       "type": "Line",
       "value": " Build ensure specified Lambda exists",
       "range": [
-        2508,
-        2547
+        2504,
+        2543
       ],
       "loc": {
         "start": {
@@ -7309,8 +7309,8 @@
       "type": "Line",
       "value": " Add method route",
       "range": [
-        2631,
-        2650
+        2627,
+        2646
       ],
       "loc": {
         "start": {
@@ -7325,10 +7325,10 @@
     },
     {
       "type": "Block",
-      "value": "*\n * Itterates over the routes array to map template parameters, set the route \n * property, config > templates and call `addRoute`\n ",
+      "value": "*\n * Itterates over the routes array to map template parameters, set the route\n * property, config > templates and call `addRoute`\n ",
       "range": [
-        2928,
-        3065
+        2924,
+        3060
       ],
       "loc": {
         "start": {
@@ -7345,8 +7345,8 @@
       "type": "Line",
       "value": " Itterate over routes",
       "range": [
-        3096,
-        3119
+        3091,
+        3114
       ],
       "loc": {
         "start": {
@@ -7363,8 +7363,8 @@
       "type": "Line",
       "value": " Map template params",
       "range": [
-        3152,
-        3174
+        3147,
+        3169
       ],
       "loc": {
         "start": {
@@ -7381,8 +7381,8 @@
       "type": "Block",
       "value": "*\n * Initializes the routes by walking the Gateway schema then running `buildRoutes`\n * to load into Express object\n ",
       "range": [
-        3399,
-        3520
+        3394,
+        3515
       ],
       "loc": {
         "start": {
@@ -7399,8 +7399,8 @@
       "type": "Line",
       "value": " Walk the schema to build routes",
       "range": [
-        3557,
-        3591
+        3552,
+        3586
       ],
       "loc": {
         "start": {
@@ -7417,8 +7417,8 @@
       "type": "Line",
       "value": " Map params and build express routes",
       "range": [
-        3615,
-        3653
+        3610,
+        3648
       ],
       "loc": {
         "start": {

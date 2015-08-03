@@ -40,8 +40,8 @@ var loadSchema = function loadSchema(file) {
 };
 
 /**
- * Walks schema to look for request methods (verbs), when a method is found it 
- * creates a route with the parent node key (the path), the current method, 
+ * Walks schema to look for request methods (verbs), when a method is found it
+ * creates a route with the parent node key (the path), the current method,
  * and the properties of that method (the template)
  * @param {Object} node The node to traverse
  * @param {String} prevKey The key of the previous traversal for accessing parent/path
@@ -69,7 +69,7 @@ var walkSchema = function walkSchema() {
 
 /**
  * Iterates over the properties of the template and calls `parseRouteParams` to
- * convert the bracket-delimited params with colon-lead (Express-style) route 
+ * convert the bracket-delimited params with colon-lead (Express-style) route
  * params with the template-designated key/property name
  * @param {String} route The route to modify
  * @param {Object} template The template object to match against
@@ -91,7 +91,7 @@ var mapTemplateParams = function mapTemplateParams(route, template) {
 };
 
 /**
- * Ensures that the lambda exists (on init/load) then creates and Express 
+ * Ensures that the lambda exists (on init/load) then creates and Express
  * verb+route object for the specific request
  * @param {Object} route The route to add
  */
@@ -109,7 +109,7 @@ var addRoute = function addRoute(route) {
 };
 
 /**
- * Itterates over the routes array to map template parameters, set the route 
+ * Itterates over the routes array to map template parameters, set the route
  * property, config > templates and call `addRoute`
  */
 exports.addRoute = addRoute;

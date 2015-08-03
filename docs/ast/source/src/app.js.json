@@ -4989,10 +4989,10 @@
             "trailingComments": [
               {
                 "type": "Block",
-                "value": "*\n * Builds the `event` payload with the request body and then forks a new \n * runner process to the requested lambda. Awaits messaging from the lambda\n * to return response payload and display log information\n * @param {String} lambda The lambda to run\n * @param {Object} template The gateway template\n * @param {Object} req Express req object\n * @param {Object} res Express res object\n ",
+                "value": "*\n * Builds the `event` payload with the request body and then forks a new\n * runner process to the requested lambda. Awaits messaging from the lambda\n * to return response payload and display log information\n * @param {String} lambda The lambda to run\n * @param {Object} template The gateway template\n * @param {Object} req Express req object\n * @param {Object} res Express res object\n ",
                 "range": [
                   2601,
-                  2993
+                  2992
                 ],
                 "loc": {
                   "start": {
@@ -5011,7 +5011,7 @@
         "kind": "const",
         "range": [
           2333,
-          2994
+          2993
         ],
         "loc": {
           "start": {
@@ -5049,7 +5049,7 @@
       "source": null,
       "range": [
         2326,
-        2994
+        2993
       ],
       "loc": {
         "start": {
@@ -5093,8 +5093,8 @@
               "type": "Identifier",
               "name": "runLambda",
               "range": [
-                3007,
-                3016
+                3006,
+                3015
               ],
               "loc": {
                 "start": {
@@ -5115,8 +5115,8 @@
                   "type": "Identifier",
                   "name": "lambda",
                   "range": [
-                    3020,
-                    3026
+                    3019,
+                    3025
                   ],
                   "loc": {
                     "start": {
@@ -5133,8 +5133,8 @@
                   "type": "Identifier",
                   "name": "template",
                   "range": [
-                    3028,
-                    3036
+                    3027,
+                    3035
                   ],
                   "loc": {
                     "start": {
@@ -5151,8 +5151,8 @@
                   "type": "Identifier",
                   "name": "req",
                   "range": [
-                    3038,
-                    3041
+                    3037,
+                    3040
                   ],
                   "loc": {
                     "start": {
@@ -5169,8 +5169,8 @@
                   "type": "Identifier",
                   "name": "res",
                   "range": [
-                    3043,
-                    3046
+                    3042,
+                    3045
                   ],
                   "loc": {
                     "start": {
@@ -5196,8 +5196,8 @@
                           "type": "Identifier",
                           "name": "body",
                           "range": [
-                            3094,
-                            3098
+                            3093,
+                            3097
                           ],
                           "loc": {
                             "start": {
@@ -5216,8 +5216,8 @@
                             "type": "Identifier",
                             "name": "parseBody",
                             "range": [
-                              3101,
-                              3110
+                              3100,
+                              3109
                             ],
                             "loc": {
                               "start": {
@@ -5238,8 +5238,8 @@
                                 "type": "Identifier",
                                 "name": "req",
                                 "range": [
-                                  3111,
-                                  3114
+                                  3110,
+                                  3113
                                 ],
                                 "loc": {
                                   "start": {
@@ -5256,8 +5256,8 @@
                                 "type": "Identifier",
                                 "name": "body",
                                 "range": [
-                                  3115,
-                                  3119
+                                  3114,
+                                  3118
                                 ],
                                 "loc": {
                                   "start": {
@@ -5271,8 +5271,8 @@
                                 }
                               },
                               "range": [
-                                3111,
-                                3119
+                                3110,
+                                3118
                               ],
                               "loc": {
                                 "start": {
@@ -5289,8 +5289,8 @@
                               "type": "Identifier",
                               "name": "template",
                               "range": [
-                                3121,
-                                3129
+                                3120,
+                                3128
                               ],
                               "loc": {
                                 "start": {
@@ -5305,8 +5305,8 @@
                             }
                           ],
                           "range": [
-                            3101,
-                            3130
+                            3100,
+                            3129
                           ],
                           "loc": {
                             "start": {
@@ -5320,8 +5320,8 @@
                           }
                         },
                         "range": [
-                          3094,
-                          3130
+                          3093,
+                          3129
                         ],
                         "loc": {
                           "start": {
@@ -5338,8 +5338,8 @@
                             "type": "Line",
                             "value": " Build event by extending body with params",
                             "range": [
-                              3133,
-                              3177
+                              3132,
+                              3176
                             ],
                             "loc": {
                               "start": {
@@ -5357,8 +5357,8 @@
                     ],
                     "kind": "const",
                     "range": [
-                      3088,
-                      3180
+                      3087,
+                      3179
                     ],
                     "loc": {
                       "start": {
@@ -5375,8 +5375,8 @@
                         "type": "Line",
                         "value": " Parse body against template",
                         "range": [
-                          3055,
-                          3085
+                          3054,
+                          3084
                         ],
                         "loc": {
                           "start": {
@@ -5400,8 +5400,8 @@
                           "type": "Identifier",
                           "name": "event",
                           "range": [
-                            3186,
-                            3191
+                            3185,
+                            3190
                           ],
                           "loc": {
                             "start": {
@@ -5423,8 +5423,8 @@
                               "type": "Identifier",
                               "name": "JSON",
                               "range": [
-                                3194,
-                                3198
+                                3193,
+                                3197
                               ],
                               "loc": {
                                 "start": {
@@ -5441,8 +5441,8 @@
                               "type": "Identifier",
                               "name": "stringify",
                               "range": [
-                                3199,
-                                3208
+                                3198,
+                                3207
                               ],
                               "loc": {
                                 "start": {
@@ -5456,8 +5456,8 @@
                               }
                             },
                             "range": [
-                              3194,
-                              3208
+                              3193,
+                              3207
                             ],
                             "loc": {
                               "start": {
@@ -5480,8 +5480,8 @@
                                   "type": "Identifier",
                                   "name": "_",
                                   "range": [
-                                    3209,
-                                    3210
+                                    3208,
+                                    3209
                                   ],
                                   "loc": {
                                     "start": {
@@ -5498,8 +5498,8 @@
                                   "type": "Identifier",
                                   "name": "extend",
                                   "range": [
-                                    3211,
-                                    3217
+                                    3210,
+                                    3216
                                   ],
                                   "loc": {
                                     "start": {
@@ -5513,8 +5513,8 @@
                                   }
                                 },
                                 "range": [
-                                  3209,
-                                  3217
+                                  3208,
+                                  3216
                                 ],
                                 "loc": {
                                   "start": {
@@ -5532,8 +5532,8 @@
                                   "type": "Identifier",
                                   "name": "body",
                                   "range": [
-                                    3218,
-                                    3222
+                                    3217,
+                                    3221
                                   ],
                                   "loc": {
                                     "start": {
@@ -5553,8 +5553,8 @@
                                     "type": "Identifier",
                                     "name": "req",
                                     "range": [
-                                      3224,
-                                      3227
+                                      3223,
+                                      3226
                                     ],
                                     "loc": {
                                       "start": {
@@ -5571,8 +5571,8 @@
                                     "type": "Identifier",
                                     "name": "params",
                                     "range": [
-                                      3228,
-                                      3234
+                                      3227,
+                                      3233
                                     ],
                                     "loc": {
                                       "start": {
@@ -5586,8 +5586,8 @@
                                     }
                                   },
                                   "range": [
-                                    3224,
-                                    3234
+                                    3223,
+                                    3233
                                   ],
                                   "loc": {
                                     "start": {
@@ -5602,8 +5602,8 @@
                                 }
                               ],
                               "range": [
-                                3209,
-                                3235
+                                3208,
+                                3234
                               ],
                               "loc": {
                                 "start": {
@@ -5618,8 +5618,8 @@
                             }
                           ],
                           "range": [
-                            3194,
-                            3236
+                            3193,
+                            3235
                           ],
                           "loc": {
                             "start": {
@@ -5633,8 +5633,8 @@
                           }
                         },
                         "range": [
-                          3186,
-                          3236
+                          3185,
+                          3235
                         ],
                         "loc": {
                           "start": {
@@ -5651,8 +5651,8 @@
                             "type": "Line",
                             "value": " Execute lambda",
                             "range": [
-                              3239,
-                              3256
+                              3238,
+                              3255
                             ],
                             "loc": {
                               "start": {
@@ -5670,8 +5670,8 @@
                     ],
                     "kind": "const",
                     "range": [
-                      3180,
-                      3259
+                      3179,
+                      3258
                     ],
                     "loc": {
                       "start": {
@@ -5688,8 +5688,8 @@
                         "type": "Line",
                         "value": " Build event by extending body with params",
                         "range": [
-                          3133,
-                          3177
+                          3132,
+                          3176
                         ],
                         "loc": {
                           "start": {
@@ -5717,8 +5717,8 @@
                             "type": "Identifier",
                             "name": "fork",
                             "range": [
-                              3259,
-                              3263
+                              3258,
+                              3262
                             ],
                             "loc": {
                               "start": {
@@ -5736,8 +5736,8 @@
                               "type": "Identifier",
                               "name": "runner",
                               "range": [
-                                3264,
-                                3270
+                                3263,
+                                3269
                               ],
                               "loc": {
                                 "start": {
@@ -5757,8 +5757,8 @@
                                   "type": "Identifier",
                                   "name": "lambda",
                                   "range": [
-                                    3274,
-                                    3280
+                                    3273,
+                                    3279
                                   ],
                                   "loc": {
                                     "start": {
@@ -5773,8 +5773,8 @@
                                 }
                               ],
                               "range": [
-                                3272,
-                                3282
+                                3271,
+                                3281
                               ],
                               "loc": {
                                 "start": {
@@ -5796,8 +5796,8 @@
                                     "type": "Identifier",
                                     "name": "env",
                                     "range": [
-                                      3290,
-                                      3293
+                                      3289,
+                                      3292
                                     ],
                                     "loc": {
                                       "start": {
@@ -5819,8 +5819,8 @@
                                           "type": "Identifier",
                                           "name": "lambdas",
                                           "range": [
-                                            3297,
-                                            3304
+                                            3296,
+                                            3303
                                           ],
                                           "loc": {
                                             "start": {
@@ -5840,8 +5840,8 @@
                                             "type": "Identifier",
                                             "name": "config",
                                             "range": [
-                                              3306,
-                                              3312
+                                              3305,
+                                              3311
                                             ],
                                             "loc": {
                                               "start": {
@@ -5858,8 +5858,8 @@
                                             "type": "Identifier",
                                             "name": "lambdas",
                                             "range": [
-                                              3313,
-                                              3320
+                                              3312,
+                                              3319
                                             ],
                                             "loc": {
                                               "start": {
@@ -5873,8 +5873,8 @@
                                             }
                                           },
                                           "range": [
-                                            3306,
-                                            3320
+                                            3305,
+                                            3319
                                           ],
                                           "loc": {
                                             "start": {
@@ -5892,8 +5892,8 @@
                                         "shorthand": false,
                                         "computed": false,
                                         "range": [
-                                          3297,
-                                          3320
+                                          3296,
+                                          3319
                                         ],
                                         "loc": {
                                           "start": {
@@ -5912,8 +5912,8 @@
                                           "type": "Identifier",
                                           "name": "event",
                                           "range": [
-                                            3322,
-                                            3327
+                                            3321,
+                                            3326
                                           ],
                                           "loc": {
                                             "start": {
@@ -5930,8 +5930,8 @@
                                           "type": "Identifier",
                                           "name": "event",
                                           "range": [
-                                            3322,
-                                            3327
+                                            3321,
+                                            3326
                                           ],
                                           "loc": {
                                             "start": {
@@ -5949,8 +5949,8 @@
                                         "shorthand": true,
                                         "computed": false,
                                         "range": [
-                                          3322,
-                                          3327
+                                          3321,
+                                          3326
                                         ],
                                         "loc": {
                                           "start": {
@@ -5969,8 +5969,8 @@
                                           "type": "Identifier",
                                           "name": "HOME",
                                           "range": [
-                                            3329,
-                                            3333
+                                            3328,
+                                            3332
                                           ],
                                           "loc": {
                                             "start": {
@@ -5993,8 +5993,8 @@
                                               "type": "Identifier",
                                               "name": "process",
                                               "range": [
-                                                3335,
-                                                3342
+                                                3334,
+                                                3341
                                               ],
                                               "loc": {
                                                 "start": {
@@ -6011,8 +6011,8 @@
                                               "type": "Identifier",
                                               "name": "env",
                                               "range": [
-                                                3343,
-                                                3346
+                                                3342,
+                                                3345
                                               ],
                                               "loc": {
                                                 "start": {
@@ -6026,8 +6026,8 @@
                                               }
                                             },
                                             "range": [
-                                              3335,
-                                              3346
+                                              3334,
+                                              3345
                                             ],
                                             "loc": {
                                               "start": {
@@ -6044,8 +6044,8 @@
                                             "type": "Identifier",
                                             "name": "HOME",
                                             "range": [
-                                              3347,
-                                              3351
+                                              3346,
+                                              3350
                                             ],
                                             "loc": {
                                               "start": {
@@ -6059,8 +6059,8 @@
                                             }
                                           },
                                           "range": [
-                                            3335,
-                                            3351
+                                            3334,
+                                            3350
                                           ],
                                           "loc": {
                                             "start": {
@@ -6078,8 +6078,8 @@
                                         "shorthand": false,
                                         "computed": false,
                                         "range": [
-                                          3329,
-                                          3351
+                                          3328,
+                                          3350
                                         ],
                                         "loc": {
                                           "start": {
@@ -6094,8 +6094,8 @@
                                       }
                                     ],
                                     "range": [
-                                      3295,
-                                      3353
+                                      3294,
+                                      3352
                                     ],
                                     "loc": {
                                       "start": {
@@ -6113,8 +6113,8 @@
                                   "shorthand": false,
                                   "computed": false,
                                   "range": [
-                                    3290,
-                                    3353
+                                    3289,
+                                    3352
                                   ],
                                   "loc": {
                                     "start": {
@@ -6129,8 +6129,8 @@
                                 }
                               ],
                               "range": [
-                                3284,
-                                3357
+                                3283,
+                                3356
                               ],
                               "loc": {
                                 "start": {
@@ -6145,8 +6145,8 @@
                             }
                           ],
                           "range": [
-                            3259,
-                            3358
+                            3258,
+                            3357
                           ],
                           "loc": {
                             "start": {
@@ -6163,8 +6163,8 @@
                           "type": "Identifier",
                           "name": "on",
                           "range": [
-                            3359,
-                            3361
+                            3358,
+                            3360
                           ],
                           "loc": {
                             "start": {
@@ -6178,8 +6178,8 @@
                           }
                         },
                         "range": [
-                          3259,
-                          3361
+                          3258,
+                          3360
                         ],
                         "loc": {
                           "start": {
@@ -6198,8 +6198,8 @@
                           "value": "message",
                           "raw": "'message'",
                           "range": [
-                            3362,
-                            3371
+                            3361,
+                            3370
                           ],
                           "loc": {
                             "start": {
@@ -6220,8 +6220,8 @@
                               "type": "Identifier",
                               "name": "msg",
                               "range": [
-                                3374,
-                                3377
+                                3373,
+                                3376
                               ],
                               "loc": {
                                 "start": {
@@ -6241,8 +6241,8 @@
                               "type": "Identifier",
                               "name": "procResponse",
                               "range": [
-                                3382,
-                                3394
+                                3381,
+                                3393
                               ],
                               "loc": {
                                 "start": {
@@ -6260,8 +6260,8 @@
                                 "type": "Identifier",
                                 "name": "msg",
                                 "range": [
-                                  3395,
-                                  3398
+                                  3394,
+                                  3397
                                 ],
                                 "loc": {
                                   "start": {
@@ -6278,8 +6278,8 @@
                                 "type": "Identifier",
                                 "name": "res",
                                 "range": [
-                                  3400,
-                                  3403
+                                  3399,
+                                  3402
                                 ],
                                 "loc": {
                                   "start": {
@@ -6294,8 +6294,8 @@
                               }
                             ],
                             "range": [
-                              3382,
-                              3404
+                              3381,
+                              3403
                             ],
                             "loc": {
                               "start": {
@@ -6311,8 +6311,8 @@
                           "generator": false,
                           "expression": true,
                           "range": [
-                            3373,
-                            3404
+                            3372,
+                            3403
                           ],
                           "loc": {
                             "start": {
@@ -6327,8 +6327,8 @@
                         }
                       ],
                       "range": [
-                        3259,
-                        3405
+                        3258,
+                        3404
                       ],
                       "loc": {
                         "start": {
@@ -6342,8 +6342,8 @@
                       }
                     },
                     "range": [
-                      3259,
-                      3406
+                      3258,
+                      3405
                     ],
                     "loc": {
                       "start": {
@@ -6360,8 +6360,8 @@
                         "type": "Line",
                         "value": " Execute lambda",
                         "range": [
-                          3239,
-                          3256
+                          3238,
+                          3255
                         ],
                         "loc": {
                           "start": {
@@ -6378,8 +6378,8 @@
                   }
                 ],
                 "range": [
-                  3051,
-                  3407
+                  3050,
+                  3406
                 ],
                 "loc": {
                   "start": {
@@ -6395,8 +6395,8 @@
               "generator": false,
               "expression": false,
               "range": [
-                3019,
-                3407
+                3018,
+                3406
               ],
               "loc": {
                 "start": {
@@ -6410,8 +6410,8 @@
               }
             },
             "range": [
-              3007,
-              3407
+              3006,
+              3406
             ],
             "loc": {
               "start": {
@@ -6428,8 +6428,8 @@
                 "type": "Block",
                 "value": "*\n * Combines the default config with any passed to init and overrides (lastly)\n * if there are any environment variables set\n * @param {Object} [cfg] The config passed through init\n ",
                 "range": [
-                  3409,
-                  3596
+                  3408,
+                  3595
                 ],
                 "loc": {
                   "start": {
@@ -6447,8 +6447,8 @@
         ],
         "kind": "const",
         "range": [
-          3001,
-          3597
+          3000,
+          3596
         ],
         "loc": {
           "start": {
@@ -6463,10 +6463,10 @@
         "leadingComments": [
           {
             "type": "Block",
-            "value": "*\n * Builds the `event` payload with the request body and then forks a new \n * runner process to the requested lambda. Awaits messaging from the lambda\n * to return response payload and display log information\n * @param {String} lambda The lambda to run\n * @param {Object} template The gateway template\n * @param {Object} req Express req object\n * @param {Object} res Express res object\n ",
+            "value": "*\n * Builds the `event` payload with the request body and then forks a new\n * runner process to the requested lambda. Awaits messaging from the lambda\n * to return response payload and display log information\n * @param {String} lambda The lambda to run\n * @param {Object} template The gateway template\n * @param {Object} req Express req object\n * @param {Object} res Express res object\n ",
             "range": [
               2601,
-              2993
+              2992
             ],
             "loc": {
               "start": {
@@ -6485,8 +6485,8 @@
       "specifiers": [],
       "source": null,
       "range": [
-        2994,
-        3597
+        2993,
+        3596
       ],
       "loc": {
         "start": {
@@ -6501,10 +6501,10 @@
       "leadingComments": [
         {
           "type": "Block",
-          "value": "*\n * Builds the `event` payload with the request body and then forks a new \n * runner process to the requested lambda. Awaits messaging from the lambda\n * to return response payload and display log information\n * @param {String} lambda The lambda to run\n * @param {Object} template The gateway template\n * @param {Object} req Express req object\n * @param {Object} res Express res object\n ",
+          "value": "*\n * Builds the `event` payload with the request body and then forks a new\n * runner process to the requested lambda. Awaits messaging from the lambda\n * to return response payload and display log information\n * @param {String} lambda The lambda to run\n * @param {Object} template The gateway template\n * @param {Object} req Express req object\n * @param {Object} res Express res object\n ",
           "range": [
             2601,
-            2993
+            2992
           ],
           "loc": {
             "start": {
@@ -6530,8 +6530,8 @@
               "type": "Identifier",
               "name": "buildConfig",
               "range": [
-                3610,
-                3621
+                3609,
+                3620
               ],
               "loc": {
                 "start": {
@@ -6552,8 +6552,8 @@
                   "type": "Identifier",
                   "name": "cfg",
                   "range": [
-                    3625,
-                    3628
+                    3624,
+                    3627
                   ],
                   "loc": {
                     "start": {
@@ -6581,8 +6581,8 @@
                           "type": "Identifier",
                           "name": "_",
                           "range": [
-                            3659,
-                            3660
+                            3658,
+                            3659
                           ],
                           "loc": {
                             "start": {
@@ -6599,8 +6599,8 @@
                           "type": "Identifier",
                           "name": "extend",
                           "range": [
-                            3661,
-                            3667
+                            3660,
+                            3666
                           ],
                           "loc": {
                             "start": {
@@ -6614,8 +6614,8 @@
                           }
                         },
                         "range": [
-                          3659,
-                          3667
+                          3658,
+                          3666
                         ],
                         "loc": {
                           "start": {
@@ -6633,8 +6633,8 @@
                           "type": "Identifier",
                           "name": "config",
                           "range": [
-                            3668,
-                            3674
+                            3667,
+                            3673
                           ],
                           "loc": {
                             "start": {
@@ -6651,8 +6651,8 @@
                           "type": "Identifier",
                           "name": "cfg",
                           "range": [
-                            3676,
-                            3679
+                            3675,
+                            3678
                           ],
                           "loc": {
                             "start": {
@@ -6667,8 +6667,8 @@
                         }
                       ],
                       "range": [
-                        3659,
-                        3680
+                        3658,
+                        3679
                       ],
                       "loc": {
                         "start": {
@@ -6685,8 +6685,8 @@
                           "type": "Line",
                           "value": " Against env vars",
                           "range": [
-                            3683,
-                            3702
+                            3682,
+                            3701
                           ],
                           "loc": {
                             "start": {
@@ -6702,8 +6702,8 @@
                       ]
                     },
                     "range": [
-                      3659,
-                      3705
+                      3658,
+                      3704
                     ],
                     "loc": {
                       "start": {
@@ -6720,8 +6720,8 @@
                         "type": "Line",
                         "value": " Against defaults",
                         "range": [
-                          3637,
-                          3656
+                          3636,
+                          3655
                         ],
                         "loc": {
                           "start": {
@@ -6747,8 +6747,8 @@
                             "type": "Identifier",
                             "name": "prop",
                             "range": [
-                              3714,
-                              3718
+                              3713,
+                              3717
                             ],
                             "loc": {
                               "start": {
@@ -6763,8 +6763,8 @@
                           },
                           "init": null,
                           "range": [
-                            3714,
-                            3718
+                            3713,
+                            3717
                           ],
                           "loc": {
                             "start": {
@@ -6780,8 +6780,8 @@
                       ],
                       "kind": "let",
                       "range": [
-                        3710,
-                        3718
+                        3709,
+                        3717
                       ],
                       "loc": {
                         "start": {
@@ -6798,8 +6798,8 @@
                       "type": "Identifier",
                       "name": "config",
                       "range": [
-                        3722,
-                        3728
+                        3721,
+                        3727
                       ],
                       "loc": {
                         "start": {
@@ -6829,8 +6829,8 @@
                                   "type": "ObjectExpression",
                                   "properties": [],
                                   "range": [
-                                    3772,
-                                    3774
+                                    3771,
+                                    3773
                                   ],
                                   "loc": {
                                     "start": {
@@ -6847,8 +6847,8 @@
                                   "type": "Identifier",
                                   "name": "hasOwnProperty",
                                   "range": [
-                                    3775,
-                                    3789
+                                    3774,
+                                    3788
                                   ],
                                   "loc": {
                                     "start": {
@@ -6862,8 +6862,8 @@
                                   }
                                 },
                                 "range": [
-                                  3772,
-                                  3789
+                                  3771,
+                                  3788
                                 ],
                                 "loc": {
                                   "start": {
@@ -6880,8 +6880,8 @@
                                 "type": "Identifier",
                                 "name": "call",
                                 "range": [
-                                  3790,
-                                  3794
+                                  3789,
+                                  3793
                                 ],
                                 "loc": {
                                   "start": {
@@ -6895,8 +6895,8 @@
                                 }
                               },
                               "range": [
-                                3772,
-                                3794
+                                3771,
+                                3793
                               ],
                               "loc": {
                                 "start": {
@@ -6914,8 +6914,8 @@
                                 "type": "Identifier",
                                 "name": "config",
                                 "range": [
-                                  3795,
-                                  3801
+                                  3794,
+                                  3800
                                 ],
                                 "loc": {
                                   "start": {
@@ -6932,8 +6932,8 @@
                                 "type": "Identifier",
                                 "name": "prop",
                                 "range": [
-                                  3803,
-                                  3807
+                                  3802,
+                                  3806
                                 ],
                                 "loc": {
                                   "start": {
@@ -6948,8 +6948,8 @@
                               }
                             ],
                             "range": [
-                              3772,
-                              3808
+                              3771,
+                              3807
                             ],
                             "loc": {
                               "start": {
@@ -6974,8 +6974,8 @@
                                       "type": "Identifier",
                                       "name": "envVar",
                                       "range": [
-                                        3822,
-                                        3828
+                                        3821,
+                                        3827
                                       ],
                                       "loc": {
                                         "start": {
@@ -6998,8 +6998,8 @@
                                           "type": "Identifier",
                                           "name": "process",
                                           "range": [
-                                            3831,
-                                            3838
+                                            3830,
+                                            3837
                                           ],
                                           "loc": {
                                             "start": {
@@ -7016,8 +7016,8 @@
                                           "type": "Identifier",
                                           "name": "env",
                                           "range": [
-                                            3839,
-                                            3842
+                                            3838,
+                                            3841
                                           ],
                                           "loc": {
                                             "start": {
@@ -7031,8 +7031,8 @@
                                           }
                                         },
                                         "range": [
-                                          3831,
-                                          3842
+                                          3830,
+                                          3841
                                         ],
                                         "loc": {
                                           "start": {
@@ -7053,8 +7053,8 @@
                                           "value": "GL_",
                                           "raw": "'GL_'",
                                           "range": [
-                                            3843,
-                                            3848
+                                            3842,
+                                            3847
                                           ],
                                           "loc": {
                                             "start": {
@@ -7076,8 +7076,8 @@
                                               "type": "Identifier",
                                               "name": "prop",
                                               "range": [
-                                                3851,
-                                                3855
+                                                3850,
+                                                3854
                                               ],
                                               "loc": {
                                                 "start": {
@@ -7094,8 +7094,8 @@
                                               "type": "Identifier",
                                               "name": "toUpperCase",
                                               "range": [
-                                                3856,
-                                                3867
+                                                3855,
+                                                3866
                                               ],
                                               "loc": {
                                                 "start": {
@@ -7109,8 +7109,8 @@
                                               }
                                             },
                                             "range": [
-                                              3851,
-                                              3867
+                                              3850,
+                                              3866
                                             ],
                                             "loc": {
                                               "start": {
@@ -7125,8 +7125,8 @@
                                           },
                                           "arguments": [],
                                           "range": [
-                                            3851,
-                                            3869
+                                            3850,
+                                            3868
                                           ],
                                           "loc": {
                                             "start": {
@@ -7140,8 +7140,8 @@
                                           }
                                         },
                                         "range": [
-                                          3843,
-                                          3869
+                                          3842,
+                                          3868
                                         ],
                                         "loc": {
                                           "start": {
@@ -7155,8 +7155,8 @@
                                         }
                                       },
                                       "range": [
-                                        3831,
-                                        3870
+                                        3830,
+                                        3869
                                       ],
                                       "loc": {
                                         "start": {
@@ -7170,8 +7170,8 @@
                                       }
                                     },
                                     "range": [
-                                      3822,
-                                      3870
+                                      3821,
+                                      3869
                                     ],
                                     "loc": {
                                       "start": {
@@ -7187,8 +7187,8 @@
                                 ],
                                 "kind": "let",
                                 "range": [
-                                  3818,
-                                  3877
+                                  3817,
+                                  3876
                                 ],
                                 "loc": {
                                   "start": {
@@ -7207,8 +7207,8 @@
                                   "type": "Identifier",
                                   "name": "envVar",
                                   "range": [
-                                    3881,
-                                    3887
+                                    3880,
+                                    3886
                                   ],
                                   "loc": {
                                     "start": {
@@ -7233,8 +7233,8 @@
                                         "type": "Identifier",
                                         "name": "config",
                                         "range": [
-                                          3889,
-                                          3895
+                                          3888,
+                                          3894
                                         ],
                                         "loc": {
                                           "start": {
@@ -7251,8 +7251,8 @@
                                         "type": "Identifier",
                                         "name": "prop",
                                         "range": [
-                                          3896,
-                                          3900
+                                          3895,
+                                          3899
                                         ],
                                         "loc": {
                                           "start": {
@@ -7266,8 +7266,8 @@
                                         }
                                       },
                                       "range": [
-                                        3889,
-                                        3901
+                                        3888,
+                                        3900
                                       ],
                                       "loc": {
                                         "start": {
@@ -7284,8 +7284,8 @@
                                       "type": "Identifier",
                                       "name": "envVar",
                                       "range": [
-                                        3904,
-                                        3910
+                                        3903,
+                                        3909
                                       ],
                                       "loc": {
                                         "start": {
@@ -7299,8 +7299,8 @@
                                       }
                                     },
                                     "range": [
-                                      3889,
-                                      3910
+                                      3888,
+                                      3909
                                     ],
                                     "loc": {
                                       "start": {
@@ -7314,8 +7314,8 @@
                                     }
                                   },
                                   "range": [
-                                    3889,
-                                    3915
+                                    3888,
+                                    3914
                                   ],
                                   "loc": {
                                     "start": {
@@ -7330,8 +7330,8 @@
                                 },
                                 "alternate": null,
                                 "range": [
-                                  3877,
-                                  3915
+                                  3876,
+                                  3914
                                 ],
                                 "loc": {
                                   "start": {
@@ -7346,8 +7346,8 @@
                               }
                             ],
                             "range": [
-                              3810,
-                              3916
+                              3809,
+                              3915
                             ],
                             "loc": {
                               "start": {
@@ -7362,8 +7362,8 @@
                           },
                           "alternate": null,
                           "range": [
-                            3768,
-                            3916
+                            3767,
+                            3915
                           ],
                           "loc": {
                             "start": {
@@ -7380,8 +7380,8 @@
                               "type": "Block",
                               "value": " istanbul ignore else  ",
                               "range": [
-                                3736,
-                                3763
+                                3735,
+                                3762
                               ],
                               "loc": {
                                 "start": {
@@ -7398,8 +7398,8 @@
                         }
                       ],
                       "range": [
-                        3730,
-                        3920
+                        3729,
+                        3919
                       ],
                       "loc": {
                         "start": {
@@ -7414,8 +7414,8 @@
                     },
                     "each": false,
                     "range": [
-                      3705,
-                      3920
+                      3704,
+                      3919
                     ],
                     "loc": {
                       "start": {
@@ -7432,8 +7432,8 @@
                         "type": "Line",
                         "value": " Against env vars",
                         "range": [
-                          3683,
-                          3702
+                          3682,
+                          3701
                         ],
                         "loc": {
                           "start": {
@@ -7450,8 +7450,8 @@
                   }
                 ],
                 "range": [
-                  3633,
-                  3922
+                  3632,
+                  3921
                 ],
                 "loc": {
                   "start": {
@@ -7467,8 +7467,8 @@
               "generator": false,
               "expression": false,
               "range": [
-                3624,
-                3922
+                3623,
+                3921
               ],
               "loc": {
                 "start": {
@@ -7482,8 +7482,8 @@
               }
             },
             "range": [
-              3610,
-              3922
+              3609,
+              3921
             ],
             "loc": {
               "start": {
@@ -7498,10 +7498,10 @@
             "trailingComments": [
               {
                 "type": "Block",
-                "value": "*\n * Initialize the service by building the config, loading the (YAML) Gateway\n * API configuration and then initializing routes on Express and finally \n * starting the service.\n * @param {Object} [config] The main service configuration\n ",
+                "value": "*\n * Initialize the service by building the config, loading the (YAML) Gateway\n * API configuration and then initializing routes on Express and finally\n * starting the service.\n * @param {Object} [config] The main service configuration\n ",
                 "range": [
-                  3924,
-                  4166
+                  3923,
+                  4164
                 ],
                 "loc": {
                   "start": {
@@ -7519,8 +7519,8 @@
         ],
         "kind": "const",
         "range": [
-          3604,
-          4168
+          3603,
+          4166
         ],
         "loc": {
           "start": {
@@ -7537,8 +7537,8 @@
             "type": "Block",
             "value": "*\n * Combines the default config with any passed to init and overrides (lastly)\n * if there are any environment variables set\n * @param {Object} [cfg] The config passed through init\n ",
             "range": [
-              3409,
-              3596
+              3408,
+              3595
             ],
             "loc": {
               "start": {
@@ -7557,8 +7557,8 @@
       "specifiers": [],
       "source": null,
       "range": [
-        3597,
-        4168
+        3596,
+        4166
       ],
       "loc": {
         "start": {
@@ -7575,8 +7575,8 @@
           "type": "Block",
           "value": "*\n * Combines the default config with any passed to init and overrides (lastly)\n * if there are any environment variables set\n * @param {Object} [cfg] The config passed through init\n ",
           "range": [
-            3409,
-            3596
+            3408,
+            3595
           ],
           "loc": {
             "start": {
@@ -7602,8 +7602,8 @@
               "type": "Identifier",
               "name": "init",
               "range": [
-                4181,
-                4185
+                4179,
+                4183
               ],
               "loc": {
                 "start": {
@@ -7624,8 +7624,8 @@
                   "type": "Identifier",
                   "name": "cfg",
                   "range": [
-                    4189,
-                    4192
+                    4187,
+                    4190
                   ],
                   "loc": {
                     "start": {
@@ -7650,8 +7650,8 @@
                         "type": "Identifier",
                         "name": "buildConfig",
                         "range": [
-                          4219,
-                          4230
+                          4217,
+                          4228
                         ],
                         "loc": {
                           "start": {
@@ -7669,8 +7669,8 @@
                           "type": "Identifier",
                           "name": "cfg",
                           "range": [
-                            4231,
-                            4234
+                            4229,
+                            4232
                           ],
                           "loc": {
                             "start": {
@@ -7685,8 +7685,8 @@
                         }
                       ],
                       "range": [
-                        4219,
-                        4235
+                        4217,
+                        4233
                       ],
                       "loc": {
                         "start": {
@@ -7703,8 +7703,8 @@
                           "type": "Line",
                           "value": " Load schema into router",
                           "range": [
-                            4238,
-                            4264
+                            4236,
+                            4262
                           ],
                           "loc": {
                             "start": {
@@ -7720,8 +7720,8 @@
                       ]
                     },
                     "range": [
-                      4219,
-                      4267
+                      4217,
+                      4265
                     ],
                     "loc": {
                       "start": {
@@ -7738,8 +7738,8 @@
                         "type": "Line",
                         "value": " Setup config",
                         "range": [
-                          4201,
-                          4216
+                          4199,
+                          4214
                         ],
                         "loc": {
                           "start": {
@@ -7762,8 +7762,8 @@
                         "type": "Identifier",
                         "name": "loadSchema",
                         "range": [
-                          4267,
-                          4277
+                          4265,
+                          4275
                         ],
                         "loc": {
                           "start": {
@@ -7784,8 +7784,8 @@
                             "type": "Identifier",
                             "name": "config",
                             "range": [
-                              4278,
-                              4284
+                              4276,
+                              4282
                             ],
                             "loc": {
                               "start": {
@@ -7802,8 +7802,8 @@
                             "type": "Identifier",
                             "name": "schema",
                             "range": [
-                              4285,
-                              4291
+                              4283,
+                              4289
                             ],
                             "loc": {
                               "start": {
@@ -7817,8 +7817,8 @@
                             }
                           },
                           "range": [
-                            4278,
-                            4291
+                            4276,
+                            4289
                           ],
                           "loc": {
                             "start": {
@@ -7833,8 +7833,8 @@
                         }
                       ],
                       "range": [
-                        4267,
-                        4292
+                        4265,
+                        4290
                       ],
                       "loc": {
                         "start": {
@@ -7851,8 +7851,8 @@
                           "type": "Line",
                           "value": " Initialize all routes from gateway schema",
                           "range": [
-                            4295,
-                            4339
+                            4293,
+                            4337
                           ],
                           "loc": {
                             "start": {
@@ -7868,8 +7868,8 @@
                       ]
                     },
                     "range": [
-                      4267,
-                      4342
+                      4265,
+                      4340
                     ],
                     "loc": {
                       "start": {
@@ -7886,8 +7886,8 @@
                         "type": "Line",
                         "value": " Load schema into router",
                         "range": [
-                          4238,
-                          4264
+                          4236,
+                          4262
                         ],
                         "loc": {
                           "start": {
@@ -7910,8 +7910,8 @@
                         "type": "Identifier",
                         "name": "initRoutes",
                         "range": [
-                          4342,
-                          4352
+                          4340,
+                          4350
                         ],
                         "loc": {
                           "start": {
@@ -7926,8 +7926,8 @@
                       },
                       "arguments": [],
                       "range": [
-                        4342,
-                        4354
+                        4340,
+                        4352
                       ],
                       "loc": {
                         "start": {
@@ -7944,8 +7944,8 @@
                           "type": "Line",
                           "value": " Starts service",
                           "range": [
-                            4357,
-                            4374
+                            4355,
+                            4372
                           ],
                           "loc": {
                             "start": {
@@ -7961,8 +7961,8 @@
                       ]
                     },
                     "range": [
-                      4342,
-                      4377
+                      4340,
+                      4375
                     ],
                     "loc": {
                       "start": {
@@ -7979,8 +7979,8 @@
                         "type": "Line",
                         "value": " Initialize all routes from gateway schema",
                         "range": [
-                          4295,
-                          4339
+                          4293,
+                          4337
                         ],
                         "loc": {
                           "start": {
@@ -8006,8 +8006,8 @@
                           "type": "Identifier",
                           "name": "service",
                           "range": [
-                            4377,
-                            4384
+                            4375,
+                            4382
                           ],
                           "loc": {
                             "start": {
@@ -8024,8 +8024,8 @@
                           "type": "Identifier",
                           "name": "listen",
                           "range": [
-                            4385,
-                            4391
+                            4383,
+                            4389
                           ],
                           "loc": {
                             "start": {
@@ -8039,8 +8039,8 @@
                           }
                         },
                         "range": [
-                          4377,
-                          4391
+                          4375,
+                          4389
                         ],
                         "loc": {
                           "start": {
@@ -8061,8 +8061,8 @@
                             "type": "Identifier",
                             "name": "config",
                             "range": [
-                              4392,
-                              4398
+                              4390,
+                              4396
                             ],
                             "loc": {
                               "start": {
@@ -8079,8 +8079,8 @@
                             "type": "Identifier",
                             "name": "port",
                             "range": [
-                              4399,
-                              4403
+                              4397,
+                              4401
                             ],
                             "loc": {
                               "start": {
@@ -8094,8 +8094,8 @@
                             }
                           },
                           "range": [
-                            4392,
-                            4403
+                            4390,
+                            4401
                           ],
                           "loc": {
                             "start": {
@@ -8123,8 +8123,8 @@
                                     "type": "Identifier",
                                     "name": "procLog",
                                     "range": [
-                                      4417,
-                                      4424
+                                      4415,
+                                      4422
                                     ],
                                     "loc": {
                                       "start": {
@@ -8143,8 +8143,8 @@
                                       "value": "info",
                                       "raw": "'info'",
                                       "range": [
-                                        4425,
-                                        4431
+                                        4423,
+                                        4429
                                       ],
                                       "loc": {
                                         "start": {
@@ -8162,8 +8162,8 @@
                                       "value": "Service running",
                                       "raw": "'Service running'",
                                       "range": [
-                                        4433,
-                                        4450
+                                        4431,
+                                        4448
                                       ],
                                       "loc": {
                                         "start": {
@@ -8185,8 +8185,8 @@
                                             "type": "Identifier",
                                             "name": "port",
                                             "range": [
-                                              4454,
-                                              4458
+                                              4452,
+                                              4456
                                             ],
                                             "loc": {
                                               "start": {
@@ -8206,8 +8206,8 @@
                                               "type": "Identifier",
                                               "name": "config",
                                               "range": [
-                                                4460,
-                                                4466
+                                                4458,
+                                                4464
                                               ],
                                               "loc": {
                                                 "start": {
@@ -8224,8 +8224,8 @@
                                               "type": "Identifier",
                                               "name": "port",
                                               "range": [
-                                                4467,
-                                                4471
+                                                4465,
+                                                4469
                                               ],
                                               "loc": {
                                                 "start": {
@@ -8239,8 +8239,8 @@
                                               }
                                             },
                                             "range": [
-                                              4460,
-                                              4471
+                                              4458,
+                                              4469
                                             ],
                                             "loc": {
                                               "start": {
@@ -8258,8 +8258,8 @@
                                           "shorthand": false,
                                           "computed": false,
                                           "range": [
-                                            4454,
-                                            4471
+                                            4452,
+                                            4469
                                           ],
                                           "loc": {
                                             "start": {
@@ -8274,8 +8274,8 @@
                                         }
                                       ],
                                       "range": [
-                                        4452,
-                                        4473
+                                        4450,
+                                        4471
                                       ],
                                       "loc": {
                                         "start": {
@@ -8290,8 +8290,8 @@
                                     }
                                   ],
                                   "range": [
-                                    4417,
-                                    4474
+                                    4415,
+                                    4472
                                   ],
                                   "loc": {
                                     "start": {
@@ -8305,8 +8305,8 @@
                                   }
                                 },
                                 "range": [
-                                  4417,
-                                  4477
+                                  4415,
+                                  4475
                                 ],
                                 "loc": {
                                   "start": {
@@ -8321,8 +8321,8 @@
                               }
                             ],
                             "range": [
-                              4411,
-                              4478
+                              4409,
+                              4476
                             ],
                             "loc": {
                               "start": {
@@ -8338,8 +8338,8 @@
                           "generator": false,
                           "expression": false,
                           "range": [
-                            4405,
-                            4478
+                            4403,
+                            4476
                           ],
                           "loc": {
                             "start": {
@@ -8354,8 +8354,8 @@
                         }
                       ],
                       "range": [
-                        4377,
-                        4479
+                        4375,
+                        4477
                       ],
                       "loc": {
                         "start": {
@@ -8369,8 +8369,8 @@
                       }
                     },
                     "range": [
-                      4377,
-                      4480
+                      4375,
+                      4478
                     ],
                     "loc": {
                       "start": {
@@ -8387,8 +8387,8 @@
                         "type": "Line",
                         "value": " Starts service",
                         "range": [
-                          4357,
-                          4374
+                          4355,
+                          4372
                         ],
                         "loc": {
                           "start": {
@@ -8405,8 +8405,8 @@
                   }
                 ],
                 "range": [
-                  4197,
-                  4481
+                  4195,
+                  4479
                 ],
                 "loc": {
                   "start": {
@@ -8422,8 +8422,8 @@
               "generator": false,
               "expression": false,
               "range": [
-                4188,
-                4481
+                4186,
+                4479
               ],
               "loc": {
                 "start": {
@@ -8437,8 +8437,8 @@
               }
             },
             "range": [
-              4181,
-              4481
+              4179,
+              4479
             ],
             "loc": {
               "start": {
@@ -8454,8 +8454,8 @@
         ],
         "kind": "const",
         "range": [
-          4175,
-          4482
+          4173,
+          4480
         ],
         "loc": {
           "start": {
@@ -8470,10 +8470,10 @@
         "leadingComments": [
           {
             "type": "Block",
-            "value": "*\n * Initialize the service by building the config, loading the (YAML) Gateway\n * API configuration and then initializing routes on Express and finally \n * starting the service.\n * @param {Object} [config] The main service configuration\n ",
+            "value": "*\n * Initialize the service by building the config, loading the (YAML) Gateway\n * API configuration and then initializing routes on Express and finally\n * starting the service.\n * @param {Object} [config] The main service configuration\n ",
             "range": [
-              3924,
-              4166
+              3923,
+              4164
             ],
             "loc": {
               "start": {
@@ -8492,8 +8492,8 @@
       "specifiers": [],
       "source": null,
       "range": [
-        4168,
-        4482
+        4166,
+        4480
       ],
       "loc": {
         "start": {
@@ -8508,10 +8508,10 @@
       "leadingComments": [
         {
           "type": "Block",
-          "value": "*\n * Initialize the service by building the config, loading the (YAML) Gateway\n * API configuration and then initializing routes on Express and finally \n * starting the service.\n * @param {Object} [config] The main service configuration\n ",
+          "value": "*\n * Initialize the service by building the config, loading the (YAML) Gateway\n * API configuration and then initializing routes on Express and finally\n * starting the service.\n * @param {Object} [config] The main service configuration\n ",
           "range": [
-            3924,
-            4166
+            3923,
+            4164
           ],
           "loc": {
             "start": {
@@ -8530,7 +8530,7 @@
   "sourceType": "module",
   "range": [
     55,
-    4482
+    4480
   ],
   "loc": {
     "start": {
@@ -8779,10 +8779,10 @@
     },
     {
       "type": "Block",
-      "value": "*\n * Builds the `event` payload with the request body and then forks a new \n * runner process to the requested lambda. Awaits messaging from the lambda\n * to return response payload and display log information\n * @param {String} lambda The lambda to run\n * @param {Object} template The gateway template\n * @param {Object} req Express req object\n * @param {Object} res Express res object\n ",
+      "value": "*\n * Builds the `event` payload with the request body and then forks a new\n * runner process to the requested lambda. Awaits messaging from the lambda\n * to return response payload and display log information\n * @param {String} lambda The lambda to run\n * @param {Object} template The gateway template\n * @param {Object} req Express req object\n * @param {Object} res Express res object\n ",
       "range": [
         2601,
-        2993
+        2992
       ],
       "loc": {
         "start": {
@@ -8799,8 +8799,8 @@
       "type": "Line",
       "value": " Parse body against template",
       "range": [
-        3055,
-        3085
+        3054,
+        3084
       ],
       "loc": {
         "start": {
@@ -8817,8 +8817,8 @@
       "type": "Line",
       "value": " Build event by extending body with params",
       "range": [
-        3133,
-        3177
+        3132,
+        3176
       ],
       "loc": {
         "start": {
@@ -8835,8 +8835,8 @@
       "type": "Line",
       "value": " Execute lambda",
       "range": [
-        3239,
-        3256
+        3238,
+        3255
       ],
       "loc": {
         "start": {
@@ -8853,8 +8853,8 @@
       "type": "Block",
       "value": "*\n * Combines the default config with any passed to init and overrides (lastly)\n * if there are any environment variables set\n * @param {Object} [cfg] The config passed through init\n ",
       "range": [
-        3409,
-        3596
+        3408,
+        3595
       ],
       "loc": {
         "start": {
@@ -8871,8 +8871,8 @@
       "type": "Line",
       "value": " Against defaults",
       "range": [
-        3637,
-        3656
+        3636,
+        3655
       ],
       "loc": {
         "start": {
@@ -8889,8 +8889,8 @@
       "type": "Line",
       "value": " Against env vars",
       "range": [
-        3683,
-        3702
+        3682,
+        3701
       ],
       "loc": {
         "start": {
@@ -8907,8 +8907,8 @@
       "type": "Block",
       "value": " istanbul ignore else  ",
       "range": [
-        3736,
-        3763
+        3735,
+        3762
       ],
       "loc": {
         "start": {
@@ -8923,10 +8923,10 @@
     },
     {
       "type": "Block",
-      "value": "*\n * Initialize the service by building the config, loading the (YAML) Gateway\n * API configuration and then initializing routes on Express and finally \n * starting the service.\n * @param {Object} [config] The main service configuration\n ",
+      "value": "*\n * Initialize the service by building the config, loading the (YAML) Gateway\n * API configuration and then initializing routes on Express and finally\n * starting the service.\n * @param {Object} [config] The main service configuration\n ",
       "range": [
-        3924,
-        4166
+        3923,
+        4164
       ],
       "loc": {
         "start": {
@@ -8943,8 +8943,8 @@
       "type": "Line",
       "value": " Setup config",
       "range": [
-        4201,
-        4216
+        4199,
+        4214
       ],
       "loc": {
         "start": {
@@ -8961,8 +8961,8 @@
       "type": "Line",
       "value": " Load schema into router",
       "range": [
-        4238,
-        4264
+        4236,
+        4262
       ],
       "loc": {
         "start": {
@@ -8979,8 +8979,8 @@
       "type": "Line",
       "value": " Initialize all routes from gateway schema",
       "range": [
-        4295,
-        4339
+        4293,
+        4337
       ],
       "loc": {
         "start": {
@@ -8997,8 +8997,8 @@
       "type": "Line",
       "value": " Starts service",
       "range": [
-        4357,
-        4374
+        4355,
+        4372
       ],
       "loc": {
         "start": {
