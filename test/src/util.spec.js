@@ -6,15 +6,11 @@ describe('util', () => {
 
   describe('fileExists', () => {
     it('rejects when the file does not exist', (done) => {
-      fileExists('./test/dne.txt').catch(() => {
-        done()
-      })
+      fileExists('./test/dne.txt').catch(() => done())
     })
-    
+
     it('resolves when the file exists', (done) => {
-      fileExists('./test/gateway.yml').then(() => {
-        done()
-      })
+      fileExists('./test/gateway.yml').then(() => done())
     })
   })
 
