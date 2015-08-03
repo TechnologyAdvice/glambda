@@ -40,13 +40,11 @@ export const parseBodyParams = (value, body) => {
     if (!name.length) {
       // Return the entire body
       return body
-    } else {
-      // Return the specific property of the body (or null if DNE)
-      name = name.replace(/^\./, '') // Remove leading dot
-      return ({}.hasOwnProperty.call(body, name)) ? body[name] : null
     }
-  } else {
-    // Custom value passed through
-    return value
+    // Return the specific property of the body (or null if DNE)
+    name = name.replace(/^\./, '') // Remove leading dot
+    return ({}.hasOwnProperty.call(body, name)) ? body[name] : null
   }
+  // Custom value passed through
+  return value
 }

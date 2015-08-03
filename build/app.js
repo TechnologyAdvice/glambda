@@ -64,6 +64,7 @@ var config = {
  */
 exports.config = config;
 var procLog = function procLog(type) {
+  /* istanbul ignore if  */
   if (config.log) log[type](arguments[1], arguments[2]);
 };
 
@@ -97,6 +98,7 @@ exports.procResponse = procResponse;
 var parseBody = function parseBody(reqBody, template) {
   var tmpBody = {};
   for (var prop in template) {
+    /* istanbul ignore else  */
     if (({}).hasOwnProperty.call(template, prop)) {
       tmpBody[prop] = (0, _util.parseBodyParams)(template[prop], reqBody);
     }
@@ -138,6 +140,7 @@ var buildConfig = function buildConfig(cfg) {
   _.extend(config, cfg);
   // Against env vars
   for (var prop in config) {
+    /* istanbul ignore else  */
     if (({}).hasOwnProperty.call(config, prop)) {
       var envVar = process.env['GL_' + prop.toUpperCase()];
       if (envVar) config[prop] = envVar;

@@ -1,5 +1,11 @@
 window.esdocSearchIndex = [
   [
+    "glambda/src/router.js~addroute",
+    "variable/index.html#static-variable-addRoute",
+    "<span>addRoute</span> <span class=\"search-result-import-path\">glambda/src/router.js</span>",
+    "variable"
+  ],
+  [
     "glambda/src/app.js~buildconfig",
     "variable/index.html#static-variable-buildConfig",
     "<span>buildConfig</span> <span class=\"search-result-import-path\">glambda/src/app.js</span>",
@@ -9,6 +15,12 @@ window.esdocSearchIndex = [
     "glambda/src/app.js~config",
     "variable/index.html#static-variable-config",
     "<span>config</span> <span class=\"search-result-import-path\">glambda/src/app.js</span>",
+    "variable"
+  ],
+  [
+    "glambda/src/util.js~fileexists",
+    "variable/index.html#static-variable-fileExists",
+    "<span>fileExists</span> <span class=\"search-result-import-path\">glambda/src/util.js</span>",
     "variable"
   ],
   [
@@ -45,6 +57,18 @@ window.esdocSearchIndex = [
     "glambda/src/app.js~parsebody",
     "variable/index.html#static-variable-parseBody",
     "<span>parseBody</span> <span class=\"search-result-import-path\">glambda/src/app.js</span>",
+    "variable"
+  ],
+  [
+    "glambda/src/util.js~parsebodyparams",
+    "variable/index.html#static-variable-parseBodyParams",
+    "<span>parseBodyParams</span> <span class=\"search-result-import-path\">glambda/src/util.js</span>",
+    "variable"
+  ],
+  [
+    "glambda/src/util.js~parserouteparams",
+    "variable/index.html#static-variable-parseRouteParams",
+    "<span>parseRouteParams</span> <span class=\"search-result-import-path\">glambda/src/util.js</span>",
     "variable"
   ],
   [
@@ -435,6 +459,12 @@ window.esdocSearchIndex = [
     "src/runner.js",
     "file/src/runner.js.html",
     "src/runner.js",
+    "file"
+  ],
+  [
+    "src/util.js",
+    "file/src/util.js.html",
+    "src/util.js",
     "file"
   ]
 ]

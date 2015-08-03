@@ -37,14 +37,18 @@
   <h2><a href="variable/">Variable</a></h2>
   <ul>
     
-  <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-buildConfig">buildConfig</a></span></li>
+  <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-addRoute">addRoute</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-buildConfig">buildConfig</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-config">config</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-fileExists">fileExists</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-init">init</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-initRoutes">initRoutes</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-loadSchema">loadSchema</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-log">log</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-mapTemplateParams">mapTemplateParams</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-parseBody">parseBody</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-parseBodyParams">parseBodyParams</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-parseRouteParams">parseRouteParams</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-procLog">procLog</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-procResponse">procResponse</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-routes">routes</a></span></li>
@@ -67,6 +71,32 @@
   <tbody>
   
   <tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+           <span data-ice="name"><span><a href="variable/index.html#static-variable-addRoute">addRoute</a></span></span><span data-ice="signature">(route: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>): <span>*</span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Adds a route based on the mapped route passed</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
     <td>
       <span class="access" data-ice="access">public</span>
       
@@ -110,6 +140,32 @@
         
         
         <div data-ice="description"><p>Default config object</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+           <span data-ice="name"><span><a href="variable/index.html#static-variable-fileExists">fileExists</a></span></span><span data-ice="signature">(file: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>: <span>*</span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Checks if file exists</p>
 </div>
       </div>
     </td>
@@ -266,6 +322,58 @@
         
         <div data-ice="description"><p>Parses the template from gateway and merges in the req.body as it&apos;s
 </p></div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+           <span data-ice="name"><span><a href="variable/index.html#static-variable-parseBodyParams">parseBodyParams</a></span></span><span data-ice="signature">(value: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>, body: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>: <span>*</span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Abstracts parsing of body against template values</p>
+</div>
+      </div>
+    </td>
+    <td>
+      
+      
+    </td>
+  </tr>
+<tr data-ice="target">
+    <td>
+      <span class="access" data-ice="access">public</span>
+      
+      
+      
+      <span class="override" data-ice="override"></span>
+    </td>
+    <td>
+      <div>
+        <p>
+           <span data-ice="name"><span><a href="variable/index.html#static-variable-parseRouteParams">parseRouteParams</a></span></span><span data-ice="signature">(value: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>, key: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>, route: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>): <span>*</span></span>
+        </p>
+      </div>
+      <div>
+        
+        
+        <div data-ice="description"><p>Abstracts parsing of routes against template values</p>
+</div>
       </div>
     </td>
     <td>
@@ -486,6 +594,47 @@
 <div data-ice="details"><h2 data-ice="title">Static Public </h2>
 
 <div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="static-variable-addRoute">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    <span data-ice="name">addRoute</span><span data-ice="signature">(route: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>): <span>*</span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/router.js.html#lineNumber82">source</a></span></span>
+    </span>
+  </h3>
+
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {addRoute} from &apos;<span><a href="file/src/router.js.html#lineNumber82">glambda/src/router.js</a></span>&apos;</code></pre></div>
+  
+  
+  <div data-ice="description"><p>Adds a route based on the mapped route passed</p>
+</div>
+
+  
+
+  <div data-ice="properties">
+</div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
   <h3 data-ice="anchor" id="static-variable-buildConfig">
     <span class="access" data-ice="access">public</span>
     
@@ -496,11 +645,11 @@
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/app.js.html#lineNumber119">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/app.js.html#lineNumber116">source</a></span></span>
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {buildConfig} from &apos;<span><a href="file/src/app.js.html#lineNumber119">glambda/src/app.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {buildConfig} from &apos;<span><a href="file/src/app.js.html#lineNumber116">glambda/src/app.js</a></span>&apos;</code></pre></div>
   
   
   <div data-ice="description"><p>Combines the default config with any passed to init and overrides (lastly)
@@ -538,11 +687,11 @@ if there are any environment variables set</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/app.js.html#lineNumber40">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/app.js.html#lineNumber41">source</a></span></span>
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {config} from &apos;<span><a href="file/src/app.js.html#lineNumber40">glambda/src/app.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {config} from &apos;<span><a href="file/src/app.js.html#lineNumber41">glambda/src/app.js</a></span>&apos;</code></pre></div>
   
   
   <div data-ice="description"><p>Default config object</p>
@@ -585,6 +734,58 @@ if there are any environment variables set</p>
   
 </div>
 <div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="static-variable-fileExists">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    <span data-ice="name">fileExists</span><span data-ice="signature">(file: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>: <span>*</span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/util.js.html#lineNumber10">source</a></span></span>
+    </span>
+  </h3>
+
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {fileExists} from &apos;<span><a href="file/src/util.js.html#lineNumber10">glambda/src/util.js</a></span>&apos;</code></pre></div>
+  
+  
+  <div data-ice="description"><p>Checks if file exists</p>
+</div>
+
+  
+
+  <div data-ice="properties">
+</div>
+
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tr>
+        <td class="return-type" data-ice="returnType"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span></td>
+        <td class="return-desc" data-ice="returnDescription"><p>Promise</p>
+</td>
+      </tr>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
   <h3 data-ice="anchor" id="static-variable-init">
     <span class="access" data-ice="access">public</span>
     
@@ -595,11 +796,11 @@ if there are any environment variables set</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/app.js.html#lineNumber137">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/app.js.html#lineNumber135">source</a></span></span>
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {init} from &apos;<span><a href="file/src/app.js.html#lineNumber137">glambda/src/app.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {init} from &apos;<span><a href="file/src/app.js.html#lineNumber135">glambda/src/app.js</a></span>&apos;</code></pre></div>
   
   
   <div data-ice="description"><p>Initialize testing service, binds endpoints to apiPath, handles the action
@@ -637,11 +838,11 @@ if there are any environment variables set</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/router.js.html#lineNumber97">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/router.js.html#lineNumber113">source</a></span></span>
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {initRoutes} from &apos;<span><a href="file/src/router.js.html#lineNumber97">glambda/src/router.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {initRoutes} from &apos;<span><a href="file/src/router.js.html#lineNumber113">glambda/src/router.js</a></span>&apos;</code></pre></div>
   
   
   <div data-ice="description"><p>Initializes the routes</p>
@@ -678,11 +879,11 @@ if there are any environment variables set</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/router.js.html#lineNumber24">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/router.js.html#lineNumber29">source</a></span></span>
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {loadSchema} from &apos;<span><a href="file/src/router.js.html#lineNumber24">glambda/src/router.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {loadSchema} from &apos;<span><a href="file/src/router.js.html#lineNumber29">glambda/src/router.js</a></span>&apos;</code></pre></div>
   
   
   <div data-ice="description"><p>Loads the schema from specified file</p>
@@ -759,11 +960,11 @@ if there are any environment variables set</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/router.js.html#lineNumber58">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/router.js.html#lineNumber64">source</a></span></span>
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {mapTemplateParams} from &apos;<span><a href="file/src/router.js.html#lineNumber58">glambda/src/router.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {mapTemplateParams} from &apos;<span><a href="file/src/router.js.html#lineNumber64">glambda/src/router.js</a></span>&apos;</code></pre></div>
   
   
   <div data-ice="description"><p>Maps template params to route params</p>
@@ -811,11 +1012,11 @@ if there are any environment variables set</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/app.js.html#lineNumber78">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/app.js.html#lineNumber80">source</a></span></span>
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {parseBody} from &apos;<span><a href="file/src/app.js.html#lineNumber78">glambda/src/app.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {parseBody} from &apos;<span><a href="file/src/app.js.html#lineNumber80">glambda/src/app.js</a></span>&apos;</code></pre></div>
   
   
   <div data-ice="description"><p>Parses the template from gateway and merges in the req.body as it&apos;s
@@ -854,6 +1055,99 @@ intended property for the lambda</p>
   
 </div>
 <div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="static-variable-parseBodyParams">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    <span data-ice="name">parseBodyParams</span><span data-ice="signature">(value: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>, body: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object">Object</a></span>): <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>: <span>*</span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/util.js.html#lineNumber36">source</a></span></span>
+    </span>
+  </h3>
+
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {parseBodyParams} from &apos;<span><a href="file/src/util.js.html#lineNumber36">glambda/src/util.js</a></span>&apos;</code></pre></div>
+  
+  
+  <div data-ice="description"><p>Abstracts parsing of body against template values</p>
+</div>
+
+  
+
+  <div data-ice="properties">
+</div>
+
+  <div class="return-params" data-ice="returnParams">
+    <h4>Return:</h4>
+    <table>
+      <tr>
+        <td class="return-type" data-ice="returnType"><span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span></td>
+        <td class="return-desc" data-ice="returnDescription"><p>The value of the body property requested by the template</p>
+</td>
+      </tr>
+    </table>
+    <div data-ice="returnProperties">
+</div>
+  </div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
+  <h3 data-ice="anchor" id="static-variable-parseRouteParams">
+    <span class="access" data-ice="access">public</span>
+    
+    
+    
+    
+    <span data-ice="name">parseRouteParams</span><span data-ice="signature">(value: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>, key: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>, route: <span><a href="https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String">String</a></span>): <span>*</span></span>
+    <span class="right-info">
+      
+      
+      <span data-ice="source"><span><a href="file/src/util.js.html#lineNumber20">source</a></span></span>
+    </span>
+  </h3>
+
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {parseRouteParams} from &apos;<span><a href="file/src/util.js.html#lineNumber20">glambda/src/util.js</a></span>&apos;</code></pre></div>
+  
+  
+  <div data-ice="description"><p>Abstracts parsing of routes against template values</p>
+</div>
+
+  
+
+  <div data-ice="properties">
+</div>
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+</div>
+<div class="detail" data-ice="detail">
   <h3 data-ice="anchor" id="static-variable-procLog">
     <span class="access" data-ice="access">public</span>
     
@@ -864,11 +1158,11 @@ intended property for the lambda</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/app.js.html#lineNumber53">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/app.js.html#lineNumber54">source</a></span></span>
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {procLog} from &apos;<span><a href="file/src/app.js.html#lineNumber53">glambda/src/app.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {procLog} from &apos;<span><a href="file/src/app.js.html#lineNumber54">glambda/src/app.js</a></span>&apos;</code></pre></div>
   
   
   <div data-ice="description"><p>Calls log output method</p>
@@ -905,11 +1199,11 @@ intended property for the lambda</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/app.js.html#lineNumber62">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/app.js.html#lineNumber64">source</a></span></span>
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {procResponse} from &apos;<span><a href="file/src/app.js.html#lineNumber62">glambda/src/app.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {procResponse} from &apos;<span><a href="file/src/app.js.html#lineNumber64">glambda/src/app.js</a></span>&apos;</code></pre></div>
   
   
   <div data-ice="description"><p>Handles response from forked lambda runner procs</p>
@@ -946,11 +1240,11 @@ intended property for the lambda</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/router.js.html#lineNumber17">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/router.js.html#lineNumber22">source</a></span></span>
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {routes} from &apos;<span><a href="file/src/router.js.html#lineNumber17">glambda/src/router.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {routes} from &apos;<span><a href="file/src/router.js.html#lineNumber22">glambda/src/router.js</a></span>&apos;</code></pre></div>
   
   
   <div data-ice="description"><p>Placeholder for routes array</p>
@@ -987,11 +1281,11 @@ intended property for the lambda</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/app.js.html#lineNumber103">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/app.js.html#lineNumber100">source</a></span></span>
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {runLambda} from &apos;<span><a href="file/src/app.js.html#lineNumber103">glambda/src/app.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {runLambda} from &apos;<span><a href="file/src/app.js.html#lineNumber100">glambda/src/app.js</a></span>&apos;</code></pre></div>
   
   
   <div data-ice="description"><p>Builds the <code>event</code> payload with the request body and the method of the
@@ -1030,11 +1324,11 @@ then awaits messaging from the lambda</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/router.js.html#lineNumber11">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/router.js.html#lineNumber16">source</a></span></span>
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {schema} from &apos;<span><a href="file/src/router.js.html#lineNumber11">glambda/src/router.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {schema} from &apos;<span><a href="file/src/router.js.html#lineNumber16">glambda/src/router.js</a></span>&apos;</code></pre></div>
   
   
   <div data-ice="description"><p>Placeholder for schema object</p>
@@ -1071,11 +1365,11 @@ then awaits messaging from the lambda</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/app.js.html#lineNumber29">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/app.js.html#lineNumber30">source</a></span></span>
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {service} from &apos;<span><a href="file/src/app.js.html#lineNumber29">glambda/src/app.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {service} from &apos;<span><a href="file/src/app.js.html#lineNumber30">glambda/src/app.js</a></span>&apos;</code></pre></div>
   
   
   
@@ -1111,11 +1405,11 @@ then awaits messaging from the lambda</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/app.js.html#lineNumber26">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/app.js.html#lineNumber27">source</a></span></span>
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {setRunner} from &apos;<span><a href="file/src/app.js.html#lineNumber26">glambda/src/app.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {setRunner} from &apos;<span><a href="file/src/app.js.html#lineNumber27">glambda/src/app.js</a></span>&apos;</code></pre></div>
   
   
   <div data-ice="description"><p>Allows overriding default runner script</p>
@@ -1152,11 +1446,11 @@ then awaits messaging from the lambda</p>
     <span class="right-info">
       
       
-      <span data-ice="source"><span><a href="file/src/router.js.html#lineNumber35">source</a></span></span>
+      <span data-ice="source"><span><a href="file/src/router.js.html#lineNumber41">source</a></span></span>
     </span>
   </h3>
 
-  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {walkSchema} from &apos;<span><a href="file/src/router.js.html#lineNumber35">glambda/src/router.js</a></span>&apos;</code></pre></div>
+  <div data-ice="importPath" class="import-path"><pre class="prettyprint"><code data-ice="importPathCode">import {walkSchema} from &apos;<span><a href="file/src/router.js.html#lineNumber41">glambda/src/router.js</a></span>&apos;</code></pre></div>
   
   
   <div data-ice="description"><p>Walks schema to look for methods, when a method is found it creates a route

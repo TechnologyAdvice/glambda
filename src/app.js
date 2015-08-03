@@ -52,6 +52,7 @@ export let config = {
  * @param {String|Object} msg Message body of log
  */
 export const procLog = (type, ...msg) => {
+  /* istanbul ignore if  */
   if (config.log) log[type](msg[0], msg[1])
 }
 
@@ -79,6 +80,7 @@ export const procResponse = (msg, res) => {
 export const parseBody = (reqBody, template) => {
   let tmpBody = {}
   for (let prop in template) {
+    /* istanbul ignore else  */
     if ({}.hasOwnProperty.call(template, prop)) {
       tmpBody[prop] = parseBodyParams(template[prop], reqBody)
     }
@@ -116,6 +118,7 @@ export const buildConfig = (cfg) => {
   _.extend(config, cfg)
   // Against env vars
   for (let prop in config) {
+    /* istanbul ignore else  */
     if ({}.hasOwnProperty.call(config, prop)) {
       let envVar = process.env['GL_' + prop.toUpperCase()]
       if (envVar) config[prop] = envVar

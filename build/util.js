@@ -47,14 +47,12 @@ var parseBodyParams = function parseBodyParams(value, body) {
     if (!_name.length) {
       // Return the entire body
       return body;
-    } else {
-      // Return the specific property of the body (or null if DNE)
-      _name = _name.replace(/^\./, ''); // Remove leading dot
-      return ({}).hasOwnProperty.call(body, _name) ? body[_name] : null;
     }
-  } else {
-    // Custom value passed through
-    return value;
+    // Return the specific property of the body (or null if DNE)
+    _name = _name.replace(/^\./, ''); // Remove leading dot
+    return ({}).hasOwnProperty.call(body, _name) ? body[_name] : null;
   }
+  // Custom value passed through
+  return value;
 };
 exports.parseBodyParams = parseBodyParams;

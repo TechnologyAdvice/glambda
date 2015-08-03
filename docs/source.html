@@ -37,14 +37,18 @@
   <h2><a href="variable/">Variable</a></h2>
   <ul>
     
-  <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-buildConfig">buildConfig</a></span></li>
+  <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-addRoute">addRoute</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-buildConfig">buildConfig</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-config">config</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-fileExists">fileExists</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-init">init</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-initRoutes">initRoutes</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-loadSchema">loadSchema</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-log">log</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-mapTemplateParams">mapTemplateParams</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-parseBody">parseBody</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-parseBodyParams">parseBodyParams</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-parseRouteParams">parseRouteParams</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-procLog">procLog</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-procResponse">procResponse</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-routes">routes</a></span></li>
@@ -62,8 +66,8 @@
 </nav>
 
 <div class="content" data-ice="content"><h1>Source <span class="esdoc-coverage" data-ice="coverageBadge"><a href="https://esdoc.org" class="esdoc-coverage-wrap">
-    <span class="esdoc-coverage-label">document</span><span class="esdoc-coverage-ratio esdoc-coverage-middle">87%</span>
-    </a></span><span data-ice="totalCoverageCount" class="total-coverage-count">14/16</span></h1>
+    <span class="esdoc-coverage-label">document</span><span class="esdoc-coverage-ratio esdoc-coverage-high">90%</span>
+    </a></span><span data-ice="totalCoverageCount" class="total-coverage-count">18/20</span></h1>
 
 <table class="files-summary" data-ice="files" data-use-coverage="true">
   <thead>
@@ -91,30 +95,41 @@
 <span><a href="variable/index.html#static-variable-service">service</a></span>
 <span><a href="variable/index.html#static-variable-setRunner">setRunner</a></span></td>
       <td class="coverage"><span data-ice="coverage">80 %</span><span data-ice="coverageCount" class="coverage-count">8/10</span></td>
-      <td style="display: none;" data-ice="size">4325 byte</td>
-      <td style="display: none;" data-ice="lines">148</td>
-      <td style="display: none;" data-ice="updated">2015-08-01 18:13:36 (UTC)</td>
+      <td style="display: none;" data-ice="size">4316 byte</td>
+      <td style="display: none;" data-ice="lines">146</td>
+      <td style="display: none;" data-ice="updated">2015-08-02 21:51:19 (UTC)</td>
     </tr>
 <tr data-ice="file">
       <td data-ice="filePath"><span><a href="file/src/router.js.html">src/router.js</a></span></td>
-      <td data-ice="identifier" class="identifiers"><span><a href="variable/index.html#static-variable-initRoutes">initRoutes</a></span>
+      <td data-ice="identifier" class="identifiers"><span><a href="variable/index.html#static-variable-addRoute">addRoute</a></span>
+<span><a href="variable/index.html#static-variable-initRoutes">initRoutes</a></span>
 <span><a href="variable/index.html#static-variable-loadSchema">loadSchema</a></span>
 <span><a href="variable/index.html#static-variable-mapTemplateParams">mapTemplateParams</a></span>
 <span><a href="variable/index.html#static-variable-routes">routes</a></span>
 <span><a href="variable/index.html#static-variable-schema">schema</a></span>
 <span><a href="variable/index.html#static-variable-walkSchema">walkSchema</a></span></td>
-      <td class="coverage"><span data-ice="coverage">100 %</span><span data-ice="coverageCount" class="coverage-count">6/6</span></td>
-      <td style="display: none;" data-ice="size">3049 byte</td>
-      <td style="display: none;" data-ice="lines">102</td>
-      <td style="display: none;" data-ice="updated">2015-08-07 16:50:59 (UTC)</td>
+      <td class="coverage"><span data-ice="coverage">100 %</span><span data-ice="coverageCount" class="coverage-count">7/7</span></td>
+      <td style="display: none;" data-ice="size">3301 byte</td>
+      <td style="display: none;" data-ice="lines">118</td>
+      <td style="display: none;" data-ice="updated">2015-08-02 20:17:44 (UTC)</td>
     </tr>
 <tr data-ice="file">
       <td data-ice="filePath"><span><a href="file/src/runner.js.html">src/runner.js</a></span></td>
       <td data-ice="identifier" class="identifiers">-</td>
       <td class="coverage"><span data-ice="coverage">-</span></td>
-      <td style="display: none;" data-ice="size">1251 byte</td>
-      <td style="display: none;" data-ice="lines">47</td>
-      <td style="display: none;" data-ice="updated">2015-08-01 18:14:11 (UTC)</td>
+      <td style="display: none;" data-ice="size">1188 byte</td>
+      <td style="display: none;" data-ice="lines">49</td>
+      <td style="display: none;" data-ice="updated">2015-08-02 17:03:26 (UTC)</td>
+    </tr>
+<tr data-ice="file">
+      <td data-ice="filePath"><span><a href="file/src/util.js.html">src/util.js</a></span></td>
+      <td data-ice="identifier" class="identifiers"><span><a href="variable/index.html#static-variable-fileExists">fileExists</a></span>
+<span><a href="variable/index.html#static-variable-parseBodyParams">parseBodyParams</a></span>
+<span><a href="variable/index.html#static-variable-parseRouteParams">parseRouteParams</a></span></td>
+      <td class="coverage"><span data-ice="coverage">100 %</span><span data-ice="coverageCount" class="coverage-count">3/3</span></td>
+      <td style="display: none;" data-ice="size">1644 byte</td>
+      <td style="display: none;" data-ice="lines">50</td>
+      <td style="display: none;" data-ice="updated">2015-08-02 21:56:18 (UTC)</td>
     </tr>
 </tbody>
 </table>
