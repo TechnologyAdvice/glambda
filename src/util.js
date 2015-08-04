@@ -51,7 +51,7 @@ export const parseRequestParams = (value, req) => {
     return ({}.hasOwnProperty.call(req.body, name)) ? req.body[name] : null
   }
   // Param (querystring or header)
-  if (value.indexOf(`$input.param('`) >= 0) {
+  if (value.indexOf(`$input.params('`) >= 0) {
     /// Remove wrapper
     let param = value.replace(`$input.params('`, '').replace(`')`, '')
     // Return if matching querysting
