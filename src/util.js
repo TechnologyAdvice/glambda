@@ -25,8 +25,10 @@ export const parseRouteParams = (value, key, route) => {
   if (value.indexOf(`$input.params('`) >= 0) {
     // Remove wrapper
     let param = value.replace(`$input.params('`, '').replace(`')`, '')
-    // Replace any occurences with express-param version of template param name
-    return route.replace(`{${param}}`, `:${key}`)
+    // Ensure route contains match, replace
+    if (route.indexOf(`{${param}}`) >= 0) return route.replace(`{${param}}`, `:${key}`)
+    // Not matched
+    return false
   }
   return false
 }

@@ -19,6 +19,11 @@ describe('util', () => {
       const testCase = parseRouteParams(`$input.params('fooId')`, 'id', '/foo/{fooId}')
       expect(testCase).to.equal('/foo/:id')
     })
+    
+    it('returns false if param is not in route', () => {
+      const testCase = parseRouteParams(`$input.params('notInRoute')`, 'id', '/foo/{fooId}')
+      expect(testCase).to.be.false
+    })
   })
 
   describe('parseBodyParams', () => {
