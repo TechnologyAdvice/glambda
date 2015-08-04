@@ -124,6 +124,22 @@ describe('app', () => {
         })
     })
 
+    it('responds with correct header values', (done) => {
+      request(url)
+        .get('foo')
+        .set('Content-Type', 'application/json')
+        .expect(200)
+        .end((err, res) => {
+          if (err) {
+            done(err)
+            return
+          }
+          res.body.should.have.property('contentType')
+          res.body.contentType.should.equal('application/json')
+          done()
+        })
+    })
+
     it('responds with correct event property values', (done) => {
       request(url)
         .put('foo/someId')
