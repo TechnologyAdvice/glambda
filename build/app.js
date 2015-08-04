@@ -89,19 +89,19 @@ var procResponse = function procResponse(msg, res) {
 };
 
 /**
- * Parses the properties from the template and then calls `parseBodyParams`
+ * Parses the properties from the template and then calls `parseRequestParams`
  * to align variable properties with their template keys
- * @param {Object} reqBody The req.body from express request
+ * @param {Object} req The request object
  * @param {Object} template The gateway template
  * @returns {Object} the full event to be passed to the Lambda
  */
 exports.procResponse = procResponse;
-var parseBody = function parseBody(reqBody, template) {
+var parseRequest = function parseRequest(req, template) {
   var tmpBody = {};
   for (var prop in template) {
     /* istanbul ignore else  */
     if (({}).hasOwnProperty.call(template, prop)) {
-      tmpBody[prop] = (0, _util.parseBodyParams)(template[prop], reqBody);
+      tmpBody[prop] = (0, _util.parseRequestParams)(template[prop], req);
     }
   }
   return tmpBody;
@@ -116,10 +116,10 @@ var parseBody = function parseBody(reqBody, template) {
  * @param {Object} req Express req object
  * @param {Object} res Express res object
  */
-exports.parseBody = parseBody;
+exports.parseRequest = parseRequest;
 var runLambda = function runLambda(lambda, template, req, res) {
   // Parse body against template
-  var body = parseBody(req.body, template);
+  var body = parseRequest(req, template);
   // Build event by extending body with params
   var event = JSON.stringify(_.extend(body, req.params));
   // Execute lambda

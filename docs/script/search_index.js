@@ -54,15 +54,15 @@ window.esdocSearchIndex = [
     "variable"
   ],
   [
-    "glambda/src/app.js~parsebody",
-    "variable/index.html#static-variable-parseBody",
-    "<span>parseBody</span> <span class=\"search-result-import-path\">glambda/src/app.js</span>",
+    "glambda/src/app.js~parserequest",
+    "variable/index.html#static-variable-parseRequest",
+    "<span>parseRequest</span> <span class=\"search-result-import-path\">glambda/src/app.js</span>",
     "variable"
   ],
   [
-    "glambda/src/util.js~parsebodyparams",
-    "variable/index.html#static-variable-parseBodyParams",
-    "<span>parseBodyParams</span> <span class=\"search-result-import-path\">glambda/src/util.js</span>",
+    "glambda/src/util.js~parserequestparams",
+    "variable/index.html#static-variable-parseRequestParams",
+    "<span>parseRequestParams</span> <span class=\"search-result-import-path\">glambda/src/util.js</span>",
     "variable"
   ],
   [

@@ -18,7 +18,7 @@ let runner = path.resolve(__dirname, './runner')
 
 // Import router
 import { loadSchema, initRoutes } from './router'
-import { parseBodyParams } from './util'
+import { parseRequestParams } from './util'
 
 /**
  * Allows overriding default runner script
@@ -72,18 +72,18 @@ export const procResponse = (msg, res) => {
 }
 
 /**
- * Parses the properties from the template and then calls `parseBodyParams`
+ * Parses the properties from the template and then calls `parseRequestParams`
  * to align variable properties with their template keys
- * @param {Object} reqBody The req.body from express request
+ * @param {Object} req The request object
  * @param {Object} template The gateway template
  * @returns {Object} the full event to be passed to the Lambda
  */
-export const parseBody = (reqBody, template) => {
+export const parseRequest = (req, template) => {
   let tmpBody = {}
   for (let prop in template) {
     /* istanbul ignore else  */
     if ({}.hasOwnProperty.call(template, prop)) {
-      tmpBody[prop] = parseBodyParams(template[prop], reqBody)
+      tmpBody[prop] = parseRequestParams(template[prop], req)
     }
   }
   return tmpBody
@@ -100,7 +100,7 @@ export const parseBody = (reqBody, template) => {
  */
 export const runLambda = (lambda, template, req, res) => {
   // Parse body against template
-  const body = parseBody(req.body, template)
+  const body = parseRequest(req, template)
   // Build event by extending body with params
   const event = JSON.stringify(_.extend(body, req.params))
   // Execute lambda

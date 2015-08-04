@@ -6,6 +6,8 @@
           templates:
             application/json:
               method: "get"
+              contentType: "$input.params('Content-Type')"
+              queryTest: "$input.params('querytest')"
       POST:
           lambda: "foo"
           templates:

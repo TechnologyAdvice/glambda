@@ -25,8 +25,10 @@ export const parseRouteParams = (value, key, route) => {
   if (value.indexOf(`$input.params('`) >= 0) {
     // Remove wrapper
     let param = value.replace(`$input.params('`, '').replace(`')`, '')
-    // Replace any occurences with express-param version of template param name
-    return route.replace(`{${param}}`, `:${key}`)
+    // Ensure route contains match, replace
+    if (route.indexOf(`{${param}}`) >= 0) return route.replace(`{${param}}`, `:${key}`)
+    // Not matched
+    return false
   }
   return false
 }
@@ -34,18 +36,28 @@ export const parseRouteParams = (value, key, route) => {
 /**
  * Abstracts parsing of body against template values
  * @param {String} value The value of the template element
- * @param {Object} body The request body
+ * @param {Object} req The request object
  * @returns {String} The value of the body property requested by the template
  */
-export const parseBodyParams = (value, body) => {
+export const parseRequestParams = (value, req) => {
+  // Body
   if (value.indexOf(`$input.json('$`) >= 0) {
     // Get the name to check
     let name = value.replace(`$input.json('$`, '').replace(`')`, '')
     // Return the entire body
-    if (!name.length) return body
+    if (!name.length) return req.body
     // Return the specific property of the body (or null if DNE)
     name = name.replace(/^\./, '') // Remove leading dot
-    return ({}.hasOwnProperty.call(body, name)) ? body[name] : null
+    return (req.body && req.body[name]) ? req.body[name] : null
+  }
+  // Param (querystring or header)
+  if (value.indexOf(`$input.params('`) >= 0) {
+    // Remove wrapper
+    let param = value.replace(`$input.params('`, '').replace(`')`, '')
+    // Return if matching querysting
+    if (req.query && req.query[param]) return req.query[param]
+    // Retrun if matching header (or undefined)
+    return req.get(param)
   }
   // Custom value passed through
   return value

@@ -1,6 +1,6 @@
 /* global sinon, expect, request, describe, it, before, after */
 import '../setup'
-import { init, config, log, procResponse, buildConfig, setRunner, parseBody } from '../../src/app'
+import { init, config, log, procResponse, buildConfig, setRunner, parseRequest } from '../../src/app'
 
 const url = 'http://localhost:8181/api/'
 
@@ -55,7 +55,7 @@ describe('app', () => {
         }
       }
     }
-    
+
     let responseSpy = sinon.spy(resStub, 'status')
 
     it('logs info on metrics case', () => {
@@ -83,9 +83,9 @@ describe('app', () => {
   describe('parseBody', () => {
 
     it('combines custom params and req.body to create event object', () => {
-      const reqBody = { foo: 'bar' }
+      const req = { body: { foo: 'bar' } }
       const template = { baz: 'quz', body: `$input.json('$')` }
-      const event = parseBody(reqBody, template)
+      const event = parseRequest(req, template)
       const shouldBe = { baz: 'quz', body: { foo: 'bar' } }
       expect(event).to.deep.equal(shouldBe)
     })
@@ -120,6 +120,37 @@ describe('app', () => {
           res.body.method.should.equal('get')
           res.body.should.have.property('id')
           res.body.id.should.equal('someId')
+          done()
+        })
+    })
+
+    it('responds with correct header values', (done) => {
+      request(url)
+        .get('foo')
+        .set('Content-Type', 'application/json')
+        .expect(200)
+        .end((err, res) => {
+          if (err) {
+            done(err)
+            return
+          }
+          res.body.should.have.property('contentType')
+          res.body.contentType.should.equal('application/json')
+          done()
+        })
+    })
+
+    it('responds with the correct querystring values', (done) => {
+      request(url)
+        .get('foo?querytest=bar')
+        .expect(200)
+        .end((err, res) => {
+          if (err) {
+            done(err)
+            return
+          }
+          res.body.should.have.property('queryTest')
+          res.body.queryTest.should.equal('bar')
           done()
         })
     })
