@@ -74,7 +74,7 @@ export const procResponse = (msg, res) => {
 /**
  * Parses the properties from the template and then calls `parseRequestParams`
  * to align variable properties with their template keys
- * @param {Object} reqBody The req.body from express request
+ * @param {Object} req The request object
  * @param {Object} template The gateway template
  * @returns {Object} the full event to be passed to the Lambda
  */

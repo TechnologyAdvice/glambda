@@ -42,7 +42,7 @@ var parseRouteParams = function parseRouteParams(value, key, route) {
 /**
  * Abstracts parsing of body against template values
  * @param {String} value The value of the template element
- * @param {Object} body The request body
+ * @param {Object} req The request object
  * @returns {String} The value of the body property requested by the template
  */
 exports.parseRouteParams = parseRouteParams;

@@ -46,8 +46,8 @@
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-loadSchema">loadSchema</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-log">log</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-mapTemplateParams">mapTemplateParams</a></span></li>
-<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-parseBody">parseBody</a></span></li>
-<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-parseBodyParams">parseBodyParams</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-parseRequest">parseRequest</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-parseRequestParams">parseRequestParams</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-parseRouteParams">parseRouteParams</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-procLog">procLog</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-procResponse">procResponse</a></span></li>
@@ -69,13 +69,16 @@
 <a href="https://codeclimate.com/github/TechnologyAdvice/glambda"><img src="https://codeclimate.com/github/TechnologyAdvice/glambda/badges/gpa.svg" alt="Code Climate"></a>
 <a href="https://codeclimate.com/github/TechnologyAdvice/glambda/coverage"><img src="https://codeclimate.com/github/TechnologyAdvice/glambda/badges/coverage.svg" alt="Test Coverage"></a>
 <a href="https://www.versioneye.com/user/projects/55bd0f716537620017001fa2"><img src="https://www.versioneye.com/user/projects/55bd0f716537620017001fa2/badge.svg?style=flat" alt="Dependency Status"></a></p>
+<p><a href="https://www.npmjs.com/package/glambda"><img src="https://nodei.co/npm/glambda.png" alt="NPM"></a></p>
 <h1 id="glambda">GLambda</h1>
 <h3 id="aws-gateway-lambda-testing-module">AWS Gateway + Lambda Testing Module</h3>
 <p>A module for mocking and testing AWS <a href="http://aws.amazon.com/api-gateway/">API Gateway</a>
 in conjunction with <a href="http://aws.amazon.com/lambda/">Lambda</a> functions.</p>
 <h2 id="introduction">Introduction</h2>
 <h2 id="setup">Setup</h2>
-<p>To see a fully functional demo, see the <a href="/test"><code>/test</code></a> directory. The <code>index.js</code>
+<p>Install the module:</p>
+<pre><code><pre class="source-code"><code class="prettyprint">npm install glambda --save-dev</code></pre>
+</code></pre><p>To see a fully functional demo, see the <a href="/test"><code>/test</code></a> directory. The <code>index.js</code>
 file is setup to run using the <a href="/test/lambdas"><code>lambdas</code></a> and the <a href="/test/gateway.yml"><code>gateway.yml</code></a>
 file. The tests run against this configuration as well.</p>
 <p>After installing the npm module simply include it in a file where it will run and
@@ -197,7 +200,7 @@ of the Lambda-specific log output is below:</p>
 </code></pre><h2 id="notes">Notes</h2>
 <h3 id="gateway-templates">Gateway Templates</h3>
 <p>Currently Glambda only supports a single template which must be <code>application/json</code>.
-The plan is to expand on this, see [Support Multiple Templates)(<a href="https://github.com/TechnologyAdvice/glambda/issues/2">https://github.com/TechnologyAdvice/glambda/issues/2</a>)
+The plan is to expand on this, see <a href="https://github.com/TechnologyAdvice/glambda/issues/2">Support Multiple Templates</a>
 issue for more information.</p>
 <h2 id="makefile-and-scripts">Makefile and Scripts</h2>
 <p>A <code>Makefile</code> is included for managing build and install tasks. The commands are
