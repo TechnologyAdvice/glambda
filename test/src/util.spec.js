@@ -19,7 +19,7 @@ describe('util', () => {
       const testCase = parseRouteParams(`$input.params('fooId')`, 'id', '/foo/{fooId}')
       expect(testCase).to.equal('/foo/:id')
     })
-    
+
     it('returns false if param is not in route', () => {
       const testCase = parseRouteParams(`$input.params('notInRoute')`, 'id', '/foo/{fooId}')
       expect(testCase).to.be.false
@@ -41,7 +41,7 @@ describe('util', () => {
       const testCase = parseBodyParams(`$input.json('$.foo')`, testBody)
       expect(testCase).to.equal(testBody.foo)
     })
-    
+
     it('returns the value if no parameters matched', () => {
       const testCase = parseBodyParams('fizz', testBody)
       expect(testCase).to.equal('fizz')

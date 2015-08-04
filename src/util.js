@@ -39,15 +39,20 @@ export const parseRouteParams = (value, key, route) => {
  * @param {Object} body The request body
  * @returns {String} The value of the body property requested by the template
  */
-export const parseBodyParams = (value, body) => {
+export const parseRequestParams = (value, req) => {
+  // Body
   if (value.indexOf(`$input.json('$`) >= 0) {
     // Get the name to check
     let name = value.replace(`$input.json('$`, '').replace(`')`, '')
     // Return the entire body
-    if (!name.length) return body
+    if (!name.length) return req.body
     // Return the specific property of the body (or null if DNE)
     name = name.replace(/^\./, '') // Remove leading dot
-    return ({}.hasOwnProperty.call(body, name)) ? body[name] : null
+    return ({}.hasOwnProperty.call(req.body, name)) ? req.body[name] : null
+  }
+  // Param (querystring or header)
+  if (value.indexOf(`$input.param('`) >= 0) {
+    // @TODO handle param parsing...
   }
   // Custom value passed through
   return value
