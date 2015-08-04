@@ -3,6 +3,8 @@
 [![Test Coverage](https://codeclimate.com/github/TechnologyAdvice/glambda/badges/coverage.svg)](https://codeclimate.com/github/TechnologyAdvice/glambda/coverage)
 [![Dependency Status](https://www.versioneye.com/user/projects/55bd0f716537620017001fa2/badge.svg?style=flat)](https://www.versioneye.com/user/projects/55bd0f716537620017001fa2)
 
+[![NPM](https://nodei.co/npm/glambda.png)](https://www.npmjs.com/package/glambda)
+
 # GLambda
 
 ### AWS Gateway + Lambda Testing Module
@@ -13,6 +15,12 @@ in conjunction with [Lambda](http://aws.amazon.com/lambda/) functions.
 ## Introduction
 
 ## Setup
+
+Install the module:
+
+```
+npm install glambda --save-dev
+```
 
 To see a fully functional demo, see the [`/test`](/test) directory. The `index.js`
 file is setup to run using the [`lambdas`](/test/lambdas) and the [`gateway.yml`](/test/gateway.yml)
@@ -121,7 +129,7 @@ of the Lambda-specific log output is below:
 ### Gateway Templates
 
 Currently Glambda only supports a single template which must be `application/json`.
-The plan is to expand on this, see [Support Multiple Templates)(https://github.com/TechnologyAdvice/glambda/issues/2)
+The plan is to expand on this, see [Support Multiple Templates](https://github.com/TechnologyAdvice/glambda/issues/2)
 issue for more information.
 
 ## Makefile and Scripts
