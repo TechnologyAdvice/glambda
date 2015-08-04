@@ -40,6 +40,12 @@ describe('util', () => {
       }
     }
 
+    const testHeader = {
+      get: (name) => {
+        return 'buzz'
+      }
+    }
+
     it('returns the full body when input.json($) is requested', () => {
       const testCase = parseRequestParams(`$input.json('$')`, testBody)
       expect(testCase).to.deep.equal(testBody.body)
@@ -50,9 +56,14 @@ describe('util', () => {
       expect(testCase).to.equal(testBody.body.foo)
     })
 
-    it('returns the querystring value when input.params(PROP) is requested', () => {
+    it('returns the querystring value when input.params(PROP) is in the query', () => {
       const testCase = parseRequestParams(`$input.params('baz')`, testQuery)
       expect(testCase).to.equal('quz')
+    })
+
+    it('returns the header value when input.params(PROP) is in the header', () => {
+      const testCase = parseRequestParams(`$input.params('some-header')`, testHeader)
+      expect(testCase).to.equal('buzz')
     })
 
     it('returns the value if no parameters matched', () => {

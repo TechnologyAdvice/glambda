@@ -48,14 +48,16 @@ export const parseRequestParams = (value, req) => {
     if (!name.length) return req.body
     // Return the specific property of the body (or null if DNE)
     name = name.replace(/^\./, '') // Remove leading dot
-    return ({}.hasOwnProperty.call(req.body, name)) ? req.body[name] : null
+    return (req.body && req.body[name]) ? req.body[name] : null
   }
   // Param (querystring or header)
   if (value.indexOf(`$input.params('`) >= 0) {
     /// Remove wrapper
     let param = value.replace(`$input.params('`, '').replace(`')`, '')
     // Return if matching querysting
-    if ({}.hasOwnProperty.call(req.query, param)) return req.query[param]
+    if (req.query && req.query[param]) return req.query[param]
+    // Retrun if matching header (or undefined)
+    return req.get(param)
   }
   // Custom value passed through
   return value
