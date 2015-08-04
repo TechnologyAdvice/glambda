@@ -1,6 +1,6 @@
 /* global expect, request, describe, it, before, after */
 import '../setup'
-import { fileExists, parseRouteParams, parseBodyParams } from '../../src/util'
+import { fileExists, parseRouteParams, parseRequestParams } from '../../src/util'
 
 describe('util', () => {
 
@@ -26,24 +26,30 @@ describe('util', () => {
     })
   })
 
-  describe('parseBodyParams', () => {
+  describe('parseRequestParams', () => {
 
     const testBody = {
-      foo: 'bar'
+      body: {
+        foo: 'bar'
+      }
     }
 
     it('returns the full body when input.json($) is requested', () => {
-      const testCase = parseBodyParams(`$input.json('$')`, testBody)
-      expect(testCase).to.deep.equal(testBody)
+      const testCase = parseRequestParams(`$input.json('$')`, testBody)
+      expect(testCase).to.deep.equal(testBody.body)
     })
 
-    it('returns the specific property when input.json($.PROP) is requested', () => {
-      const testCase = parseBodyParams(`$input.json('$.foo')`, testBody)
-      expect(testCase).to.equal(testBody.foo)
+    it('returns the specific body property when input.json($.PROP) is requested', () => {
+      const testCase = parseRequestParams(`$input.json('$.foo')`, testBody)
+      expect(testCase).to.equal(testBody.body.foo)
     })
+
+    /*it('returns the querystring value when input.param(PROP) is requested', () => {
+      const testCase =
+    })*/
 
     it('returns the value if no parameters matched', () => {
-      const testCase = parseBodyParams('fizz', testBody)
+      const testCase = parseRequestParams('fizz', testBody)
       expect(testCase).to.equal('fizz')
     })
   })
