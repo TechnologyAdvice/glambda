@@ -1,5 +1,5 @@
 [![Build Status](https://travis-ci.org/TechnologyAdvice/glambda.svg?branch=master)](https://travis-ci.org/TechnologyAdvice/glambda)
-[![codecov.io](http://codecov.io/github/TechnologyAdvice/glambda/coverage.svg?branch=master)](http://codecov.io/github/TechnologyAdvice/glambda?branch=master)
+[![Code Climate](https://codeclimate.com/github/TechnologyAdvice/glambda/badges/gpa.svg)](https://codeclimate.com/github/TechnologyAdvice/glambda)
 [![Dependency Status](https://www.versioneye.com/user/projects/55bd0f716537620017001fa2/badge.svg?style=flat)](https://www.versioneye.com/user/projects/55bd0f716537620017001fa2)
 
 # GLambda
@@ -47,8 +47,8 @@ and return its results.
 
 **Environment Variables**
 
-The system runs a configuration load process which uses the default values, 
-overrides with any initialized (passed) config properties and (lastly) checks 
+The system runs a configuration load process which uses the default values,
+overrides with any initialized (passed) config properties and (lastly) checks
 for environment variables following the convention `GL_{PROPERTY}`.
 
 ## The Gateway YAML Configuration
