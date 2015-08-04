@@ -31,8 +31,10 @@ var parseRouteParams = function parseRouteParams(value, key, route) {
   if (value.indexOf('$input.params(\'') >= 0) {
     // Remove wrapper
     var param = value.replace('$input.params(\'', '').replace('\')', '');
-    // Replace any occurences with express-param version of template param name
-    return route.replace('{' + param + '}', ':' + key);
+    // Ensure route contains match, replace
+    if (route.indexOf('{' + param + '}') >= 0) return route.replace('{' + param + '}', ':' + key);
+    // Not matched
+    return false;
   }
   return false;
 };
@@ -44,17 +46,27 @@ var parseRouteParams = function parseRouteParams(value, key, route) {
  * @returns {String} The value of the body property requested by the template
  */
 exports.parseRouteParams = parseRouteParams;
-var parseBodyParams = function parseBodyParams(value, body) {
+var parseRequestParams = function parseRequestParams(value, req) {
+  // Body
   if (value.indexOf('$input.json(\'$') >= 0) {
     // Get the name to check
     var _name = value.replace('$input.json(\'$', '').replace('\')', '');
     // Return the entire body
-    if (!_name.length) return body;
+    if (!_name.length) return req.body;
     // Return the specific property of the body (or null if DNE)
     _name = _name.replace(/^\./, ''); // Remove leading dot
-    return ({}).hasOwnProperty.call(body, _name) ? body[_name] : null;
+    return req.body && req.body[_name] ? req.body[_name] : null;
+  }
+  // Param (querystring or header)
+  if (value.indexOf('$input.params(\'') >= 0) {
+    // Remove wrapper
+    var param = value.replace('$input.params(\'', '').replace('\')', '');
+    // Return if matching querysting
+    if (req.query && req.query[param]) return req.query[param];
+    // Retrun if matching header (or undefined)
+    return req.get(param);
   }
   // Custom value passed through
   return value;
 };
-exports.parseBodyParams = parseBodyParams;
+exports.parseRequestParams = parseRequestParams;

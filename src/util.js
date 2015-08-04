@@ -52,7 +52,7 @@ export const parseRequestParams = (value, req) => {
   }
   // Param (querystring or header)
   if (value.indexOf(`$input.params('`) >= 0) {
-    /// Remove wrapper
+    // Remove wrapper
     let param = value.replace(`$input.params('`, '').replace(`')`, '')
     // Return if matching querysting
     if (req.query && req.query[param]) return req.query[param]
