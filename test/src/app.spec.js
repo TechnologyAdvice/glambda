@@ -140,6 +140,21 @@ describe('app', () => {
         })
     })
 
+    it('responds with the correct querystring values', (done) => {
+      request(url)
+        .get('foo?querytest=bar')
+        .expect(200)
+        .end((err, res) => {
+          if (err) {
+            done(err)
+            return
+          }
+          res.body.should.have.property('queryTest')
+          res.body.queryTest.should.equal('bar')
+          done()
+        })
+    })
+
     it('responds with correct event property values', (done) => {
       request(url)
         .put('foo/someId')
