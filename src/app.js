@@ -133,7 +133,6 @@ export const buildConfig = (cfg) => {
  * starting the service.
  * @param {Object} [config] The main service configuration
  */
-
 export const init = (cfg) => {
   // Setup config
   buildConfig(cfg)
