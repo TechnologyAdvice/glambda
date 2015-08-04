@@ -1,5 +1,6 @@
 [![Build Status](https://travis-ci.org/TechnologyAdvice/glambda.svg?branch=master)](https://travis-ci.org/TechnologyAdvice/glambda)
 [![Code Climate](https://codeclimate.com/github/TechnologyAdvice/glambda/badges/gpa.svg)](https://codeclimate.com/github/TechnologyAdvice/glambda)
+[![Test Coverage](https://codeclimate.com/github/TechnologyAdvice/glambda/badges/coverage.svg)](https://codeclimate.com/github/TechnologyAdvice/glambda/coverage)
 [![Dependency Status](https://www.versioneye.com/user/projects/55bd0f716537620017001fa2/badge.svg?style=flat)](https://www.versioneye.com/user/projects/55bd0f716537620017001fa2)
 
 # GLambda
