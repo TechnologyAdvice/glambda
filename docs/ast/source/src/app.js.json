@@ -7520,7 +7520,7 @@
         "kind": "const",
         "range": [
           3603,
-          4166
+          4165
         ],
         "loc": {
           "start": {
@@ -7528,7 +7528,7 @@
             "column": 7
           },
           "end": {
-            "line": 137,
+            "line": 136,
             "column": 0
           }
         },
@@ -7558,7 +7558,7 @@
       "source": null,
       "range": [
         3596,
-        4166
+        4165
       ],
       "loc": {
         "start": {
@@ -7566,7 +7566,7 @@
           "column": 0
         },
         "end": {
-          "line": 137,
+          "line": 136,
           "column": 0
         }
       },
@@ -7602,16 +7602,16 @@
               "type": "Identifier",
               "name": "init",
               "range": [
-                4179,
-                4183
+                4178,
+                4182
               ],
               "loc": {
                 "start": {
-                  "line": 137,
+                  "line": 136,
                   "column": 13
                 },
                 "end": {
-                  "line": 137,
+                  "line": 136,
                   "column": 17
                 }
               }
@@ -7624,16 +7624,16 @@
                   "type": "Identifier",
                   "name": "cfg",
                   "range": [
-                    4187,
-                    4190
+                    4186,
+                    4189
                   ],
                   "loc": {
                     "start": {
-                      "line": 137,
+                      "line": 136,
                       "column": 21
                     },
                     "end": {
-                      "line": 137,
+                      "line": 136,
                       "column": 24
                     }
                   }
@@ -7650,16 +7650,16 @@
                         "type": "Identifier",
                         "name": "buildConfig",
                         "range": [
-                          4217,
-                          4228
+                          4216,
+                          4227
                         ],
                         "loc": {
                           "start": {
-                            "line": 139,
+                            "line": 138,
                             "column": 2
                           },
                           "end": {
-                            "line": 139,
+                            "line": 138,
                             "column": 13
                           }
                         }
@@ -7669,32 +7669,32 @@
                           "type": "Identifier",
                           "name": "cfg",
                           "range": [
-                            4229,
-                            4232
+                            4228,
+                            4231
                           ],
                           "loc": {
                             "start": {
-                              "line": 139,
+                              "line": 138,
                               "column": 14
                             },
                             "end": {
-                              "line": 139,
+                              "line": 138,
                               "column": 17
                             }
                           }
                         }
                       ],
                       "range": [
-                        4217,
-                        4233
+                        4216,
+                        4232
                       ],
                       "loc": {
                         "start": {
-                          "line": 139,
+                          "line": 138,
                           "column": 2
                         },
                         "end": {
-                          "line": 139,
+                          "line": 138,
                           "column": 18
                         }
                       },
@@ -7703,16 +7703,16 @@
                           "type": "Line",
                           "value": " Load schema into router",
                           "range": [
-                            4236,
-                            4262
+                            4235,
+                            4261
                           ],
                           "loc": {
                             "start": {
-                              "line": 140,
+                              "line": 139,
                               "column": 2
                             },
                             "end": {
-                              "line": 140,
+                              "line": 139,
                               "column": 28
                             }
                           }
@@ -7720,16 +7720,16 @@
                       ]
                     },
                     "range": [
-                      4217,
-                      4265
+                      4216,
+                      4264
                     ],
                     "loc": {
                       "start": {
-                        "line": 139,
+                        "line": 138,
                         "column": 2
                       },
                       "end": {
-                        "line": 141,
+                        "line": 140,
                         "column": 2
                       }
                     },
@@ -7738,16 +7738,16 @@
                         "type": "Line",
                         "value": " Setup config",
                         "range": [
-                          4199,
-                          4214
+                          4198,
+                          4213
                         ],
                         "loc": {
                           "start": {
-                            "line": 138,
+                            "line": 137,
                             "column": 2
                           },
                           "end": {
-                            "line": 138,
+                            "line": 137,
                             "column": 17
                           }
                         }
@@ -7762,16 +7762,16 @@
                         "type": "Identifier",
                         "name": "loadSchema",
                         "range": [
-                          4265,
-                          4275
+                          4264,
+                          4274
                         ],
                         "loc": {
                           "start": {
-                            "line": 141,
+                            "line": 140,
                             "column": 2
                           },
                           "end": {
-                            "line": 141,
+                            "line": 140,
                             "column": 12
                           }
                         }
@@ -7784,16 +7784,16 @@
                             "type": "Identifier",
                             "name": "config",
                             "range": [
-                              4276,
-                              4282
+                              4275,
+                              4281
                             ],
                             "loc": {
                               "start": {
-                                "line": 141,
+                                "line": 140,
                                 "column": 13
                               },
                               "end": {
-                                "line": 141,
+                                "line": 140,
                                 "column": 19
                               }
                             }
@@ -7802,47 +7802,47 @@
                             "type": "Identifier",
                             "name": "schema",
                             "range": [
-                              4283,
-                              4289
+                              4282,
+                              4288
                             ],
                             "loc": {
                               "start": {
-                                "line": 141,
+                                "line": 140,
                                 "column": 20
                               },
                               "end": {
-                                "line": 141,
+                                "line": 140,
                                 "column": 26
                               }
                             }
                           },
                           "range": [
-                            4276,
-                            4289
+                            4275,
+                            4288
                           ],
                           "loc": {
                             "start": {
-                              "line": 141,
+                              "line": 140,
                               "column": 13
                             },
                             "end": {
-                              "line": 141,
+                              "line": 140,
                               "column": 26
                             }
                           }
                         }
                       ],
                       "range": [
-                        4265,
-                        4290
+                        4264,
+                        4289
                       ],
                       "loc": {
                         "start": {
-                          "line": 141,
+                          "line": 140,
                           "column": 2
                         },
                         "end": {
-                          "line": 141,
+                          "line": 140,
                           "column": 27
                         }
                       },
@@ -7851,16 +7851,16 @@
                           "type": "Line",
                           "value": " Initialize all routes from gateway schema",
                           "range": [
-                            4293,
-                            4337
+                            4292,
+                            4336
                           ],
                           "loc": {
                             "start": {
-                              "line": 142,
+                              "line": 141,
                               "column": 2
                             },
                             "end": {
-                              "line": 142,
+                              "line": 141,
                               "column": 46
                             }
                           }
@@ -7868,16 +7868,16 @@
                       ]
                     },
                     "range": [
-                      4265,
-                      4340
+                      4264,
+                      4339
                     ],
                     "loc": {
                       "start": {
-                        "line": 141,
+                        "line": 140,
                         "column": 2
                       },
                       "end": {
-                        "line": 143,
+                        "line": 142,
                         "column": 2
                       }
                     },
@@ -7886,16 +7886,16 @@
                         "type": "Line",
                         "value": " Load schema into router",
                         "range": [
-                          4236,
-                          4262
+                          4235,
+                          4261
                         ],
                         "loc": {
                           "start": {
-                            "line": 140,
+                            "line": 139,
                             "column": 2
                           },
                           "end": {
-                            "line": 140,
+                            "line": 139,
                             "column": 28
                           }
                         }
@@ -7910,32 +7910,32 @@
                         "type": "Identifier",
                         "name": "initRoutes",
                         "range": [
-                          4340,
-                          4350
+                          4339,
+                          4349
                         ],
                         "loc": {
                           "start": {
-                            "line": 143,
+                            "line": 142,
                             "column": 2
                           },
                           "end": {
-                            "line": 143,
+                            "line": 142,
                             "column": 12
                           }
                         }
                       },
                       "arguments": [],
                       "range": [
-                        4340,
-                        4352
+                        4339,
+                        4351
                       ],
                       "loc": {
                         "start": {
-                          "line": 143,
+                          "line": 142,
                           "column": 2
                         },
                         "end": {
-                          "line": 143,
+                          "line": 142,
                           "column": 14
                         }
                       },
@@ -7944,16 +7944,16 @@
                           "type": "Line",
                           "value": " Starts service",
                           "range": [
-                            4355,
-                            4372
+                            4354,
+                            4371
                           ],
                           "loc": {
                             "start": {
-                              "line": 144,
+                              "line": 143,
                               "column": 2
                             },
                             "end": {
-                              "line": 144,
+                              "line": 143,
                               "column": 19
                             }
                           }
@@ -7961,16 +7961,16 @@
                       ]
                     },
                     "range": [
-                      4340,
-                      4375
+                      4339,
+                      4374
                     ],
                     "loc": {
                       "start": {
-                        "line": 143,
+                        "line": 142,
                         "column": 2
                       },
                       "end": {
-                        "line": 145,
+                        "line": 144,
                         "column": 2
                       }
                     },
@@ -7979,16 +7979,16 @@
                         "type": "Line",
                         "value": " Initialize all routes from gateway schema",
                         "range": [
-                          4293,
-                          4337
+                          4292,
+                          4336
                         ],
                         "loc": {
                           "start": {
-                            "line": 142,
+                            "line": 141,
                             "column": 2
                           },
                           "end": {
-                            "line": 142,
+                            "line": 141,
                             "column": 46
                           }
                         }
@@ -8006,16 +8006,16 @@
                           "type": "Identifier",
                           "name": "service",
                           "range": [
-                            4375,
-                            4382
+                            4374,
+                            4381
                           ],
                           "loc": {
                             "start": {
-                              "line": 145,
+                              "line": 144,
                               "column": 2
                             },
                             "end": {
-                              "line": 145,
+                              "line": 144,
                               "column": 9
                             }
                           }
@@ -8024,31 +8024,31 @@
                           "type": "Identifier",
                           "name": "listen",
                           "range": [
-                            4383,
-                            4389
+                            4382,
+                            4388
                           ],
                           "loc": {
                             "start": {
-                              "line": 145,
+                              "line": 144,
                               "column": 10
                             },
                             "end": {
-                              "line": 145,
+                              "line": 144,
                               "column": 16
                             }
                           }
                         },
                         "range": [
-                          4375,
-                          4389
+                          4374,
+                          4388
                         ],
                         "loc": {
                           "start": {
-                            "line": 145,
+                            "line": 144,
                             "column": 2
                           },
                           "end": {
-                            "line": 145,
+                            "line": 144,
                             "column": 16
                           }
                         }
@@ -8061,16 +8061,16 @@
                             "type": "Identifier",
                             "name": "config",
                             "range": [
-                              4390,
-                              4396
+                              4389,
+                              4395
                             ],
                             "loc": {
                               "start": {
-                                "line": 145,
+                                "line": 144,
                                 "column": 17
                               },
                               "end": {
-                                "line": 145,
+                                "line": 144,
                                 "column": 23
                               }
                             }
@@ -8079,31 +8079,31 @@
                             "type": "Identifier",
                             "name": "port",
                             "range": [
-                              4397,
-                              4401
+                              4396,
+                              4400
                             ],
                             "loc": {
                               "start": {
-                                "line": 145,
+                                "line": 144,
                                 "column": 24
                               },
                               "end": {
-                                "line": 145,
+                                "line": 144,
                                 "column": 28
                               }
                             }
                           },
                           "range": [
-                            4390,
-                            4401
+                            4389,
+                            4400
                           ],
                           "loc": {
                             "start": {
-                              "line": 145,
+                              "line": 144,
                               "column": 17
                             },
                             "end": {
-                              "line": 145,
+                              "line": 144,
                               "column": 28
                             }
                           }
@@ -8123,16 +8123,16 @@
                                     "type": "Identifier",
                                     "name": "procLog",
                                     "range": [
-                                      4415,
-                                      4422
+                                      4414,
+                                      4421
                                     ],
                                     "loc": {
                                       "start": {
-                                        "line": 146,
+                                        "line": 145,
                                         "column": 4
                                       },
                                       "end": {
-                                        "line": 146,
+                                        "line": 145,
                                         "column": 11
                                       }
                                     }
@@ -8143,16 +8143,16 @@
                                       "value": "info",
                                       "raw": "'info'",
                                       "range": [
-                                        4423,
-                                        4429
+                                        4422,
+                                        4428
                                       ],
                                       "loc": {
                                         "start": {
-                                          "line": 146,
+                                          "line": 145,
                                           "column": 12
                                         },
                                         "end": {
-                                          "line": 146,
+                                          "line": 145,
                                           "column": 18
                                         }
                                       }
@@ -8162,16 +8162,16 @@
                                       "value": "Service running",
                                       "raw": "'Service running'",
                                       "range": [
-                                        4431,
-                                        4448
+                                        4430,
+                                        4447
                                       ],
                                       "loc": {
                                         "start": {
-                                          "line": 146,
+                                          "line": 145,
                                           "column": 20
                                         },
                                         "end": {
-                                          "line": 146,
+                                          "line": 145,
                                           "column": 37
                                         }
                                       }
@@ -8185,16 +8185,16 @@
                                             "type": "Identifier",
                                             "name": "port",
                                             "range": [
-                                              4452,
-                                              4456
+                                              4451,
+                                              4455
                                             ],
                                             "loc": {
                                               "start": {
-                                                "line": 146,
+                                                "line": 145,
                                                 "column": 41
                                               },
                                               "end": {
-                                                "line": 146,
+                                                "line": 145,
                                                 "column": 45
                                               }
                                             }
@@ -8206,16 +8206,16 @@
                                               "type": "Identifier",
                                               "name": "config",
                                               "range": [
-                                                4458,
-                                                4464
+                                                4457,
+                                                4463
                                               ],
                                               "loc": {
                                                 "start": {
-                                                  "line": 146,
+                                                  "line": 145,
                                                   "column": 47
                                                 },
                                                 "end": {
-                                                  "line": 146,
+                                                  "line": 145,
                                                   "column": 53
                                                 }
                                               }
@@ -8224,31 +8224,31 @@
                                               "type": "Identifier",
                                               "name": "port",
                                               "range": [
-                                                4465,
-                                                4469
+                                                4464,
+                                                4468
                                               ],
                                               "loc": {
                                                 "start": {
-                                                  "line": 146,
+                                                  "line": 145,
                                                   "column": 54
                                                 },
                                                 "end": {
-                                                  "line": 146,
+                                                  "line": 145,
                                                   "column": 58
                                                 }
                                               }
                                             },
                                             "range": [
-                                              4458,
-                                              4469
+                                              4457,
+                                              4468
                                             ],
                                             "loc": {
                                               "start": {
-                                                "line": 146,
+                                                "line": 145,
                                                 "column": 47
                                               },
                                               "end": {
-                                                "line": 146,
+                                                "line": 145,
                                                 "column": 58
                                               }
                                             }
@@ -8258,79 +8258,79 @@
                                           "shorthand": false,
                                           "computed": false,
                                           "range": [
-                                            4452,
-                                            4469
+                                            4451,
+                                            4468
                                           ],
                                           "loc": {
                                             "start": {
-                                              "line": 146,
+                                              "line": 145,
                                               "column": 41
                                             },
                                             "end": {
-                                              "line": 146,
+                                              "line": 145,
                                               "column": 58
                                             }
                                           }
                                         }
                                       ],
                                       "range": [
-                                        4450,
-                                        4471
+                                        4449,
+                                        4470
                                       ],
                                       "loc": {
                                         "start": {
-                                          "line": 146,
+                                          "line": 145,
                                           "column": 39
                                         },
                                         "end": {
-                                          "line": 146,
+                                          "line": 145,
                                           "column": 60
                                         }
                                       }
                                     }
                                   ],
                                   "range": [
-                                    4415,
-                                    4472
+                                    4414,
+                                    4471
                                   ],
                                   "loc": {
                                     "start": {
-                                      "line": 146,
+                                      "line": 145,
                                       "column": 4
                                     },
                                     "end": {
-                                      "line": 146,
+                                      "line": 145,
                                       "column": 61
                                     }
                                   }
                                 },
                                 "range": [
-                                  4415,
-                                  4475
+                                  4414,
+                                  4474
                                 ],
                                 "loc": {
                                   "start": {
-                                    "line": 146,
+                                    "line": 145,
                                     "column": 4
                                   },
                                   "end": {
-                                    "line": 147,
+                                    "line": 146,
                                     "column": 2
                                   }
                                 }
                               }
                             ],
                             "range": [
-                              4409,
-                              4476
+                              4408,
+                              4475
                             ],
                             "loc": {
                               "start": {
-                                "line": 145,
+                                "line": 144,
                                 "column": 36
                               },
                               "end": {
-                                "line": 147,
+                                "line": 146,
                                 "column": 3
                               }
                             }
@@ -8338,47 +8338,47 @@
                           "generator": false,
                           "expression": false,
                           "range": [
-                            4403,
-                            4476
+                            4402,
+                            4475
                           ],
                           "loc": {
                             "start": {
-                              "line": 145,
+                              "line": 144,
                               "column": 30
                             },
                             "end": {
-                              "line": 147,
+                              "line": 146,
                               "column": 3
                             }
                           }
                         }
                       ],
                       "range": [
-                        4375,
-                        4477
+                        4374,
+                        4476
                       ],
                       "loc": {
                         "start": {
-                          "line": 145,
+                          "line": 144,
                           "column": 2
                         },
                         "end": {
-                          "line": 147,
+                          "line": 146,
                           "column": 4
                         }
                       }
                     },
                     "range": [
-                      4375,
-                      4478
+                      4374,
+                      4477
                     ],
                     "loc": {
                       "start": {
-                        "line": 145,
+                        "line": 144,
                         "column": 2
                       },
                       "end": {
-                        "line": 148,
+                        "line": 147,
                         "column": 0
                       }
                     },
@@ -8387,16 +8387,16 @@
                         "type": "Line",
                         "value": " Starts service",
                         "range": [
-                          4355,
-                          4372
+                          4354,
+                          4371
                         ],
                         "loc": {
                           "start": {
-                            "line": 144,
+                            "line": 143,
                             "column": 2
                           },
                           "end": {
-                            "line": 144,
+                            "line": 143,
                             "column": 19
                           }
                         }
@@ -8405,16 +8405,16 @@
                   }
                 ],
                 "range": [
-                  4195,
-                  4479
+                  4194,
+                  4478
                 ],
                 "loc": {
                   "start": {
-                    "line": 137,
+                    "line": 136,
                     "column": 29
                   },
                   "end": {
-                    "line": 148,
+                    "line": 147,
                     "column": 1
                   }
                 }
@@ -8422,31 +8422,31 @@
               "generator": false,
               "expression": false,
               "range": [
-                4186,
-                4479
+                4185,
+                4478
               ],
               "loc": {
                 "start": {
-                  "line": 137,
+                  "line": 136,
                   "column": 20
                 },
                 "end": {
-                  "line": 148,
+                  "line": 147,
                   "column": 1
                 }
               }
             },
             "range": [
-              4179,
-              4479
+              4178,
+              4478
             ],
             "loc": {
               "start": {
-                "line": 137,
+                "line": 136,
                 "column": 13
               },
               "end": {
-                "line": 148,
+                "line": 147,
                 "column": 1
               }
             }
@@ -8454,16 +8454,16 @@
         ],
         "kind": "const",
         "range": [
-          4173,
-          4480
+          4172,
+          4479
         ],
         "loc": {
           "start": {
-            "line": 137,
+            "line": 136,
             "column": 7
           },
           "end": {
-            "line": 149,
+            "line": 148,
             "column": 0
           }
         },
@@ -8492,16 +8492,16 @@
       "specifiers": [],
       "source": null,
       "range": [
-        4166,
-        4480
+        4165,
+        4479
       ],
       "loc": {
         "start": {
-          "line": 137,
+          "line": 136,
           "column": 0
         },
         "end": {
-          "line": 149,
+          "line": 148,
           "column": 0
         }
       },
@@ -8530,7 +8530,7 @@
   "sourceType": "module",
   "range": [
     55,
-    4480
+    4479
   ],
   "loc": {
     "start": {
@@ -8538,7 +8538,7 @@
       "column": 0
     },
     "end": {
-      "line": 149,
+      "line": 148,
       "column": 0
     }
   },
@@ -8943,16 +8943,16 @@
       "type": "Line",
       "value": " Setup config",
       "range": [
-        4199,
-        4214
+        4198,
+        4213
       ],
       "loc": {
         "start": {
-          "line": 138,
+          "line": 137,
           "column": 2
         },
         "end": {
-          "line": 138,
+          "line": 137,
           "column": 17
         }
       }
@@ -8961,16 +8961,16 @@
       "type": "Line",
       "value": " Load schema into router",
       "range": [
-        4236,
-        4262
+        4235,
+        4261
       ],
       "loc": {
         "start": {
-          "line": 140,
+          "line": 139,
           "column": 2
         },
         "end": {
-          "line": 140,
+          "line": 139,
           "column": 28
         }
       }
@@ -8979,16 +8979,16 @@
       "type": "Line",
       "value": " Initialize all routes from gateway schema",
       "range": [
-        4293,
-        4337
+        4292,
+        4336
       ],
       "loc": {
         "start": {
-          "line": 142,
+          "line": 141,
           "column": 2
         },
         "end": {
-          "line": 142,
+          "line": 141,
           "column": 46
         }
       }
@@ -8997,16 +8997,16 @@
       "type": "Line",
       "value": " Starts service",
       "range": [
-        4355,
-        4372
+        4354,
+        4371
       ],
       "loc": {
         "start": {
-          "line": 144,
+          "line": 143,
           "column": 2
         },
         "end": {
-          "line": 144,
+          "line": 143,
           "column": 19
         }
       }

@@ -155,7 +155,6 @@ var buildConfig = function buildConfig(cfg) {
  * starting the service.
  * @param {Object} [config] The main service configuration
  */
-
 exports.buildConfig = buildConfig;
 var init = function init(cfg) {
   // Setup config

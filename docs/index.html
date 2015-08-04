@@ -66,7 +66,8 @@
 </nav>
 
 <div class="content" data-ice="content"><div data-ice="index"><p><a href="https://travis-ci.org/TechnologyAdvice/glambda"><img src="https://travis-ci.org/TechnologyAdvice/glambda.svg?branch=master" alt="Build Status"></a>
-<a href="http://codecov.io/github/TechnologyAdvice/glambda?branch=master"><img src="http://codecov.io/github/TechnologyAdvice/glambda/coverage.svg?branch=master" alt="codecov.io"></a>
+<a href="https://codeclimate.com/github/TechnologyAdvice/glambda"><img src="https://codeclimate.com/github/TechnologyAdvice/glambda/badges/gpa.svg" alt="Code Climate"></a>
+<a href="https://codeclimate.com/github/TechnologyAdvice/glambda/coverage"><img src="https://codeclimate.com/github/TechnologyAdvice/glambda/badges/coverage.svg" alt="Test Coverage"></a>
 <a href="https://www.versioneye.com/user/projects/55bd0f716537620017001fa2"><img src="https://www.versioneye.com/user/projects/55bd0f716537620017001fa2/badge.svg?style=flat" alt="Dependency Status"></a></p>
 <h1 id="glambda">GLambda</h1>
 <h3 id="aws-gateway-lambda-testing-module">AWS Gateway + Lambda Testing Module</h3>
@@ -102,8 +103,8 @@ glambda.init({
 the endpoints via the corresponding lambda name will spawn the Lambda function
 and return its results.</p>
 <p><strong>Environment Variables</strong></p>
-<p>The system runs a configuration load process which uses the default values, 
-overrides with any initialized (passed) config properties and (lastly) checks 
+<p>The system runs a configuration load process which uses the default values,
+overrides with any initialized (passed) config properties and (lastly) checks
 for environment variables following the convention <code>GL_{PROPERTY}</code>.</p>
 <h2 id="the-gateway-yaml-configuration">The Gateway YAML Configuration</h2>
 <p>The <a href="/test/gateway.yml"><code>gateway.yml</code></a> format was designed to closely match the
