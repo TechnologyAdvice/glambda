@@ -6,4 +6,5 @@ node_js:
 script:
   - npm run cover
 after_success:
-  - cat ./coverage/lcov.info | ./node_modules/.bin/codecov
+  - npm install -g codeclimate-test-reporter
+  - codeclimate < coverage/lcov.info
