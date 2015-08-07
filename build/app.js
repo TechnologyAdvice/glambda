@@ -122,10 +122,10 @@ var runLambda = function runLambda(lambda, template, req, res) {
   var body = parseRequest(req, template);
   // Build event by extending body with params
   var event = JSON.stringify(_.extend(body, req.params));
+  // Build env to match current envirnment, add lambdas and event
+  var env = _.extend({ lambdas: config.lambdas, event: event }, process.env);
   // Execute lambda
-  fork(runner, [lambda], {
-    env: { lambdas: config.lambdas, event: event, HOME: process.env.HOME }
-  }).on('message', function (msg) {
+  fork(runner, [lambda], { env: env }).on('message', function (msg) {
     return procResponse(msg, res);
   });
 };
