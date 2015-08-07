@@ -103,10 +103,10 @@ export const runLambda = (lambda, template, req, res) => {
   const body = parseRequest(req, template)
   // Build event by extending body with params
   const event = JSON.stringify(_.extend(body, req.params))
+  // Build env to match current envirnment, add lambdas and event
+  const env = _.extend({ lambdas: config.lambdas, event }, process.env)
   // Execute lambda
-  fork(runner, [ lambda ], {
-    env: { lambdas: config.lambdas, event, HOME: process.env.HOME }
-  }).on('message', (msg) => procResponse(msg, res))
+  fork(runner, [ lambda ], { env }).on('message', (msg) => procResponse(msg, res))
 }
 
 /**
