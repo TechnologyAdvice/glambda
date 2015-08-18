@@ -22,23 +22,24 @@ var yaml = require('yamljs');
 
 var schema = null;
 
+exports.schema = schema;
 /**
  * Placeholder for routes array
  * @parameter {Array} routes
  */
-exports.schema = schema;
 var routes = [];
 
+exports.routes = routes;
 /**
  * Loads the schema from specified file
  * @param {String} file The file path of the Gateway schema
  */
-exports.routes = routes;
 var loadSchema = function loadSchema(file) {
   // No checks, YAML error automagically
   exports.schema = schema = yaml.load(path.resolve(file));
 };
 
+exports.loadSchema = loadSchema;
 /**
  * Walks schema to look for request methods (verbs), when a method is found it
  * creates a route with the parent node key (the path), the current method,
@@ -46,7 +47,6 @@ var loadSchema = function loadSchema(file) {
  * @param {Object} node The node to traverse
  * @param {String} prevKey The key of the previous traversal for accessing parent/path
  */
-exports.loadSchema = loadSchema;
 var walkSchema = function walkSchema() {
   var node = arguments.length <= 0 || arguments[0] === undefined ? schema : arguments[0];
   var prevKey = arguments.length <= 1 || arguments[1] === undefined ? null : arguments[1];
@@ -67,6 +67,7 @@ var walkSchema = function walkSchema() {
   }
 };
 
+exports.walkSchema = walkSchema;
 /**
  * Iterates over the properties of the template and calls `parseRouteParams` to
  * convert the bracket-delimited params with colon-lead (Express-style) route
@@ -75,7 +76,6 @@ var walkSchema = function walkSchema() {
  * @param {Object} template The template object to match against
  * @returns {String} The formatted route
  */
-exports.walkSchema = walkSchema;
 var mapTemplateParams = function mapTemplateParams(route, template) {
   for (var prop in template) {
     if (({}).hasOwnProperty.call(template, prop)) {
@@ -90,12 +90,12 @@ var mapTemplateParams = function mapTemplateParams(route, template) {
   return { route: route, template: template };
 };
 
+exports.mapTemplateParams = mapTemplateParams;
 /**
  * Ensures that the lambda exists (on init/load) then creates and Express
  * verb+route object for the specific request
  * @param {Object} route The route to add
  */
-exports.mapTemplateParams = mapTemplateParams;
 var addRoute = function addRoute(route) {
   // Build ensure specified Lambda exists
   (0, _util.fileExists)(_app.config.lambdas + '/' + route.config.lambda + '/index.js').then(function () {
@@ -108,11 +108,11 @@ var addRoute = function addRoute(route) {
   });
 };
 
+exports.addRoute = addRoute;
 /**
  * Itterates over the routes array to map template parameters, set the route
  * property, config > templates and call `addRoute`
  */
-exports.addRoute = addRoute;
 var buildRoutes = function buildRoutes() {
   // Itterate over routes
   routes.forEach(function (rte) {

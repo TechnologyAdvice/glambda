@@ -35,10 +35,22 @@ var runner = path.resolve(__dirname, './runner');var setRunner = function setRun
   return runner = path.resolve(runnerPath);
 };
 
-// Express setup
 exports.setRunner = setRunner;
+// Express setup
 var service = express();
 exports.service = service;
+// CORS
+service.use(function (req, res, next) {
+  res.header('Access-Control-Allow-Origin', '*');
+  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
+  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
+  if (req.method === 'OPTIONS') {
+    res.send(200);
+  } else {
+    next();
+  }
+});
+// Body parser
 service.use(bodyParser.json());
 
 /**
@@ -58,23 +70,23 @@ var config = {
   log: true
 };
 
+exports.config = config;
 /**
  * Calls log output method
  * @param {String} type Type of log message to write
  * @param {String|Object} msg Message body of log
  */
-exports.config = config;
 var procLog = function procLog(type) {
   /* istanbul ignore if  */
   if (config.log) log[type](arguments[1], arguments[2]);
 };
 
+exports.procLog = procLog;
 /**
  * Handles response from forked lambda runner procs
  * @param {Object} msg Message object from child proc
  * @param {Object} [res] Express response object
  */
-exports.procLog = procLog;
 var procResponse = function procResponse(msg, res) {
   switch (msg.type) {
     case 'metric':
@@ -88,6 +100,7 @@ var procResponse = function procResponse(msg, res) {
   }
 };
 
+exports.procResponse = procResponse;
 /**
  * Parses the properties from the template and then calls `parseRequestParams`
  * to align variable properties with their template keys
@@ -95,7 +108,6 @@ var procResponse = function procResponse(msg, res) {
  * @param {Object} template The gateway template
  * @returns {Object} the full event to be passed to the Lambda
  */
-exports.procResponse = procResponse;
 var parseRequest = function parseRequest(req, template) {
   var tmpBody = {};
   for (var prop in template) {
@@ -107,6 +119,7 @@ var parseRequest = function parseRequest(req, template) {
   return tmpBody;
 };
 
+exports.parseRequest = parseRequest;
 /**
  * Builds the `event` payload with the request body and then forks a new
  * runner process to the requested lambda. Awaits messaging from the lambda
@@ -116,7 +129,6 @@ var parseRequest = function parseRequest(req, template) {
  * @param {Object} req Express req object
  * @param {Object} res Express res object
  */
-exports.parseRequest = parseRequest;
 var runLambda = function runLambda(lambda, template, req, res) {
   // Parse body against template
   var body = parseRequest(req, template);
@@ -130,12 +142,12 @@ var runLambda = function runLambda(lambda, template, req, res) {
   });
 };
 
+exports.runLambda = runLambda;
 /**
  * Combines the default config with any passed to init and overrides (lastly)
  * if there are any environment variables set
  * @param {Object} [cfg] The config passed through init
  */
-exports.runLambda = runLambda;
 var buildConfig = function buildConfig(cfg) {
   // Against defaults
   _.extend(config, cfg);
@@ -149,13 +161,13 @@ var buildConfig = function buildConfig(cfg) {
   }
 };
 
+exports.buildConfig = buildConfig;
 /**
  * Initialize the service by building the config, loading the (YAML) Gateway
  * API configuration and then initializing routes on Express and finally
  * starting the service.
  * @param {Object} [config] The main service configuration
  */
-exports.buildConfig = buildConfig;
 var init = function init(cfg) {
   // Setup config
   buildConfig(cfg);

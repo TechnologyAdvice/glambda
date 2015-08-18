@@ -96,6 +96,18 @@ export const setRunner = (runnerPath) =&gt; runner = path.resolve(runnerPath)
 
 // Express setup
 export const service = express()
+// CORS
+service.use((req, res, next) =&gt; {
+  res.header(&apos;Access-Control-Allow-Origin&apos;, &apos;*&apos;)
+  res.header(&apos;Access-Control-Allow-Methods&apos;, &apos;GET,PUT,POST,DELETE,OPTIONS&apos;)
+  res.header(&apos;Access-Control-Allow-Headers&apos;, &apos;Content-Type, Authorization, Content-Length, X-Requested-With&apos;)
+  if (req.method === &apos;OPTIONS&apos;) {
+    res.send(200)
+  } else {
+    next()
+  }
+})
+// Body parser
 service.use(bodyParser.json())
 
 /**

@@ -20,13 +20,13 @@ var fileExists = function fileExists(file) {
   return fs.openAsync(path.resolve(file), 'r');
 };
 
+exports.fileExists = fileExists;
 /**
  * Abstracts parsing of routes against template values
  * @param {String} value The value of the template element
  * @param {String} key The property name of the template element
  * @param {String} route The route to check/modify
  */
-exports.fileExists = fileExists;
 var parseRouteParams = function parseRouteParams(value, key, route) {
   if (value.indexOf('$input.params(\'') >= 0) {
     // Remove wrapper
@@ -39,13 +39,13 @@ var parseRouteParams = function parseRouteParams(value, key, route) {
   return false;
 };
 
+exports.parseRouteParams = parseRouteParams;
 /**
  * Abstracts parsing of body against template values
  * @param {String} value The value of the template element
  * @param {Object} req The request object
  * @returns {String} The value of the body property requested by the template
  */
-exports.parseRouteParams = parseRouteParams;
 var parseRequestParams = function parseRequestParams(value, req) {
   // Body
   if (value.indexOf('$input.json(\'$') >= 0) {
