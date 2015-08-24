@@ -36,23 +36,6 @@ var runner = path.resolve(__dirname, './runner');var setRunner = function setRun
 };
 
 exports.setRunner = setRunner;
-// Express setup
-var service = express();
-exports.service = service;
-// CORS
-service.use(function (req, res, next) {
-  res.header('Access-Control-Allow-Origin', '*');
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS');
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With');
-  if (req.method === 'OPTIONS') {
-    res.send(200);
-  } else {
-    next();
-  }
-});
-// Body parser
-service.use(bodyParser.json());
-
 /**
  * Default config object
  * @property config
@@ -67,10 +50,37 @@ var config = {
   schema: './gateway.yml',
   port: 8181,
   apiPath: '/api',
-  log: true
+  log: true,
+  cors: {
+    origin: '*',
+    methods: 'GET,PUT,POST,DELETE,OPTIONS',
+    headers: 'Content-Type, Authorization, Content-Length, X-Requested-With'
+  }
 };
 
 exports.config = config;
+// Express setup
+var service = express();
+
+exports.service = service;
+// CORS
+var setCORS = function setCORS() {
+  service.use(function (req, res, next) {
+    res.header('Access-Control-Allow-Origin', config.cors.origin);
+    res.header('Access-Control-Allow-Methods', config.cors.methods);
+    res.header('Access-Control-Allow-Headers', config.cors.headers);
+    if (req.method === 'OPTIONS') {
+      res.send(200);
+    } else {
+      next();
+    }
+  });
+};
+
+exports.setCORS = setCORS;
+// Body parser
+service.use(bodyParser.json());
+
 /**
  * Calls log output method
  * @param {String} type Type of log message to write
@@ -159,6 +169,8 @@ var buildConfig = function buildConfig(cfg) {
       if (envVar) config[prop] = envVar;
     }
   }
+  // Apply config to CORS
+  setCORS();
 };
 
 exports.buildConfig = buildConfig;

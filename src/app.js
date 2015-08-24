@@ -52,7 +52,7 @@ export let config = {
 export const service = express()
 
 // CORS
-export const setCORS = () =>  {
+export const setCORS = () => {
   service.use((req, res, next) => {
     res.header('Access-Control-Allow-Origin', config.cors.origin)
     res.header('Access-Control-Allow-Methods', config.cors.methods)
@@ -62,7 +62,7 @@ export const setCORS = () =>  {
     } else {
       next()
     }
-  });
+  })
 }
 
 // Body parser
@@ -147,7 +147,7 @@ export const buildConfig = (cfg) => {
     }
   }
   // Apply config to CORS
-  setCORS();
+  setCORS()
 }
 
 /**

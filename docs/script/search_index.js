@@ -108,6 +108,12 @@ window.esdocSearchIndex = [
     "variable"
   ],
   [
+    "glambda/src/app.js~setcors",
+    "variable/index.html#static-variable-setCORS",
+    "<span>setCORS</span> <span class=\"search-result-import-path\">glambda/src/app.js</span>",
+    "variable"
+  ],
+  [
     "glambda/src/app.js~setrunner",
     "variable/index.html#static-variable-setRunner",
     "<span>setRunner</span> <span class=\"search-result-import-path\">glambda/src/app.js</span>",

@@ -55,6 +55,7 @@
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-runLambda">runLambda</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-schema">schema</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-service">service</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-setCORS">setCORS</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-setRunner">setRunner</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-walkSchema">walkSchema</a></span></li>
 </ul>
@@ -94,22 +95,6 @@ import { parseRequestParams } from &apos;./util&apos;
  */
 export const setRunner = (runnerPath) =&gt; runner = path.resolve(runnerPath)
 
-// Express setup
-export const service = express()
-// CORS
-service.use((req, res, next) =&gt; {
-  res.header(&apos;Access-Control-Allow-Origin&apos;, &apos;*&apos;)
-  res.header(&apos;Access-Control-Allow-Methods&apos;, &apos;GET,PUT,POST,DELETE,OPTIONS&apos;)
-  res.header(&apos;Access-Control-Allow-Headers&apos;, &apos;Content-Type, Authorization, Content-Length, X-Requested-With&apos;)
-  if (req.method === &apos;OPTIONS&apos;) {
-    res.send(200)
-  } else {
-    next()
-  }
-})
-// Body parser
-service.use(bodyParser.json())
-
 /**
  * Default config object
  * @property config
@@ -124,8 +109,33 @@ export let config = {
   schema: &apos;./gateway.yml&apos;,
   port: 8181,
   apiPath: &apos;/api&apos;,
-  log: true
+  log: true,
+  cors: {
+    origin: &apos;*&apos;,
+    methods: &apos;GET,PUT,POST,DELETE,OPTIONS&apos;,
+    headers: &apos;Content-Type, Authorization, Content-Length, X-Requested-With&apos;
+  }
 }
+
+// Express setup
+export const service = express()
+
+// CORS
+export const setCORS = () =&gt; {
+  service.use((req, res, next) =&gt; {
+    res.header(&apos;Access-Control-Allow-Origin&apos;, config.cors.origin)
+    res.header(&apos;Access-Control-Allow-Methods&apos;, config.cors.methods)
+    res.header(&apos;Access-Control-Allow-Headers&apos;, config.cors.headers)
+    if (req.method === &apos;OPTIONS&apos;) {
+      res.send(200)
+    } else {
+      next()
+    }
+  })
+}
+
+// Body parser
+service.use(bodyParser.json())
 
 /**
  * Calls log output method
@@ -205,6 +215,8 @@ export const buildConfig = (cfg) =&gt; {
       if (envVar) config[prop] = envVar
     }
   }
+  // Apply config to CORS
+  setCORS()
 }
 
 /**
