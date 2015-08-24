@@ -58,9 +58,6 @@ describe('app', () => {
     it('sets CORS properties on the service object', () => {
       config.cors.methods = 'GET,PUT,POST,DELETE,OPTIONS,SCAN'
       setCORS();
-      service.get('test', (req, res) => {
-        console.log(arguments);
-      })
     })
   })
 
