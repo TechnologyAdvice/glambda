@@ -26,22 +26,6 @@ import { parseRequestParams } from './util'
  */
 export const setRunner = (runnerPath) => runner = path.resolve(runnerPath)
 
-// Express setup
-export const service = express()
-// CORS
-service.use((req, res, next) => {
-  res.header('Access-Control-Allow-Origin', '*')
-  res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE,OPTIONS')
-  res.header('Access-Control-Allow-Headers', 'Content-Type, Authorization, Content-Length, X-Requested-With')
-  if (req.method === 'OPTIONS') {
-    res.send(200)
-  } else {
-    next()
-  }
-})
-// Body parser
-service.use(bodyParser.json())
-
 /**
  * Default config object
  * @property config
@@ -56,8 +40,33 @@ export let config = {
   schema: './gateway.yml',
   port: 8181,
   apiPath: '/api',
-  log: true
+  log: true,
+  cors: {
+    origin: '*',
+    methods: 'GET,PUT,POST,DELETE,OPTIONS',
+    headers: 'Content-Type, Authorization, Content-Length, X-Requested-With'
+  }
 }
+
+// Express setup
+export const service = express()
+
+// CORS
+export const setCORS = () =>  {
+  service.use((req, res, next) => {
+    res.header('Access-Control-Allow-Origin', config.cors.origin)
+    res.header('Access-Control-Allow-Methods', config.cors.methods)
+    res.header('Access-Control-Allow-Headers', config.cors.headers)
+    if (req.method === 'OPTIONS') {
+      res.send(200)
+    } else {
+      next()
+    }
+  });
+}
+
+// Body parser
+service.use(bodyParser.json())
 
 /**
  * Calls log output method
@@ -137,6 +146,8 @@ export const buildConfig = (cfg) => {
       if (envVar) config[prop] = envVar
     }
   }
+  // Apply config to CORS
+  setCORS();
 }
 
 /**

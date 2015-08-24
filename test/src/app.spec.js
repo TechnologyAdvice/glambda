@@ -1,6 +1,6 @@
 /* global sinon, expect, request, describe, it, before, after */
 import '../setup'
-import { init, config, log, procResponse, buildConfig, setRunner, parseRequest } from '../../src/app'
+import { init, config, log, service, setCORS, procResponse, buildConfig, setRunner, parseRequest } from '../../src/app'
 
 const url = 'http://localhost:8181/api/'
 
@@ -14,7 +14,12 @@ describe('app', () => {
         schema: 'gateway-override',
         port: 1111,
         apiPath: '/test-override',
-        log: false
+        log: false,
+        cors: {
+          origin: '*',
+          methods: 'GET,PUT,POST,DELETE,OPTIONS',
+          headers: 'Content-Type, Authorization, Content-Length, X-Requested-With'
+        }
       }
       buildConfig(testConfig)
       expect(config).to.deep.equal(testConfig)
@@ -31,7 +36,12 @@ describe('app', () => {
         schema: 'gateway-env',
         port: '2222',
         apiPath: '/test-env',
-        log: false
+        log: false,
+        cors: {
+          origin: '*',
+          methods: 'GET,PUT,POST,DELETE,OPTIONS',
+          headers: 'Content-Type, Authorization, Content-Length, X-Requested-With'
+        }
       })
     })
 
@@ -42,6 +52,16 @@ describe('app', () => {
       delete process.env.GL_APIPATH
     })
 
+  })
+
+  describe('setCORS', () => {
+    it('sets CORS properties on the service object', () => {
+      config.cors.methods = 'GET,PUT,POST,DELETE,OPTIONS,SCAN'
+      setCORS();
+      service.get('test', (req, res) => {
+        console.log(arguments);
+      })
+    })
   })
 
   describe('procResponse', () => {

@@ -38,7 +38,12 @@ glambda.init({
   schema: './gateway.yml',
   port: 8181,
   apiPath: '/api',
-  log: true
+  log: true,
+  cors: {
+    origin: '*',
+    methods: 'GET,PUT,POST,DELETE,OPTIONS',
+    headers: 'Content-Type, Authorization, Content-Length, X-Requested-With'
+  }
 })
 ```
 
@@ -59,6 +64,8 @@ and return its results.
 The system runs a configuration load process which uses the default values,
 overrides with any initialized (passed) config properties and (lastly) checks
 for environment variables following the convention `GL_{PROPERTY}`.
+
+*Note: CORS settings don't currently support environment variables*
 
 ## The Gateway YAML Configuration
 
