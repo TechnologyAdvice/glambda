@@ -8,6 +8,21 @@
 var util = require('util');
 var path = require('path');
 
+// Override console.log to send messages back through proc emit
+console.log = console.info = console.warn = console.error = console.debug = function () {
+  for (var _len = arguments.length, args = Array(_len), _key = 0; _key < _len; _key++) {
+    args[_key] = arguments[_key];
+  }
+
+  process.send({
+    type: 'debug',
+    output: {
+      lambda: process.argv[2],
+      data: args
+    }
+  });
+};
+
 // Sets the lambda from its path
 var lambda = require(path.resolve(process.env.lambdas + '/' + process.argv[2] + '/index'));
 

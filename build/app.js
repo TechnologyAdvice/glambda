@@ -101,6 +101,8 @@ var procResponse = function procResponse(msg, res) {
   switch (msg.type) {
     case 'metric':
       procLog('info', 'Lambda Processed', msg.output);break;
+    case 'debug':
+      procLog('info', 'Lambda Debug', msg.output);break;
     case 'success':
       res.status(200).send(msg.output);break;
     case 'error':

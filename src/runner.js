@@ -6,6 +6,17 @@
 const util = require('util')
 const path = require('path')
 
+// Override console.log to send messages back through proc emit
+console.log = console.info = console.warn = console.error = console.debug = (...args) => {
+  process.send({
+    type: 'debug',
+    output: {
+      lambda: process.argv[2],
+      data: args
+    }
+  })
+}
+
 // Sets the lambda from its path
 const lambda = require(path.resolve(`${process.env.lambdas}/${process.argv[2]}/index`))
 
