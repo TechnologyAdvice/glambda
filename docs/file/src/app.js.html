@@ -155,6 +155,7 @@ export const procLog = (type, ...msg) =&gt; {
 export const procResponse = (msg, res) =&gt; {
   switch (msg.type) {
     case &apos;metric&apos;: procLog(&apos;info&apos;, &apos;Lambda Processed&apos;, msg.output); break
+    case &apos;debug&apos;: procLog(&apos;info&apos;, &apos;Lambda Debug&apos;, msg.output); break
     case &apos;success&apos;: res.status(200).send(msg.output); break
     case &apos;error&apos;: res.status(500).send(msg.output); break
     default: procLog(&apos;error&apos;, &apos;Missing response type&apos;)
