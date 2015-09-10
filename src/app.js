@@ -11,7 +11,12 @@ const _ = require('lodash')
 
 // Setup logs
 export const log = require('bristol')
-log.addTarget('console').withFormatter('human')
+log.addTarget('console').withFormatter('commonInfoModel')
+log.addTransform((elem) => {
+  delete elem.file
+  delete elem.line
+  return elem
+})
 
 // Default path to lambda runner
 let runner = path.resolve(__dirname, './runner')

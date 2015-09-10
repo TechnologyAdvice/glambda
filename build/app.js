@@ -28,7 +28,12 @@ var _ = require('lodash');
 // Setup logs
 var log = require('bristol');
 exports.log = log;
-log.addTarget('console').withFormatter('human');
+log.addTarget('console').withFormatter('commonInfoModel');
+log.addTransform(function (elem) {
+  delete elem.file;
+  delete elem.line;
+  return elem;
+});
 
 // Default path to lambda runner
 var runner = path.resolve(__dirname, './runner');var setRunner = function setRunner(runnerPath) {

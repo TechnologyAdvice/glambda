@@ -80,7 +80,12 @@ const _ = require(&apos;lodash&apos;)
 
 // Setup logs
 export const log = require(&apos;bristol&apos;)
-log.addTarget(&apos;console&apos;).withFormatter(&apos;human&apos;)
+log.addTarget(&apos;console&apos;).withFormatter(&apos;commonInfoModel&apos;)
+log.addTransform((elem) =&gt; {
+  delete elem.file
+  delete elem.line
+  return elem
+})
 
 // Default path to lambda runner
 let runner = path.resolve(__dirname, &apos;./runner&apos;)
