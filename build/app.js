@@ -98,6 +98,29 @@ var procLog = function procLog(type) {
 
 exports.procLog = procLog;
 /**
+ * Parses response body for error code
+ * @param {String} output Output from context.fail
+ */
+var parseErrorCode = function parseErrorCode(output) {
+  var code = output.toString().replace(/^Error: ([1-5]\d\d).+$/, function (i, match) {
+    return match;
+  });
+  if (code > 100 && code < 600) {
+    // Return specific code with stripped message
+    return {
+      code: parseInt(code, 10),
+      output: output.replace('Error: ' + code, '').trim()
+    };
+  }
+  // Return generic 500 with original message
+  return {
+    code: 500,
+    output: code
+  };
+};
+
+exports.parseErrorCode = parseErrorCode;
+/**
  * Handles response from forked lambda runner procs
  * @param {Object} msg Message object from child proc
  * @param {Object} [res] Express response object
@@ -111,7 +134,9 @@ var procResponse = function procResponse(msg, res) {
     case 'success':
       res.status(200).send(msg.output);break;
     case 'error':
-      res.status(500).send(msg.output);break;
+      var err = parseErrorCode(msg.output);
+      res.status(err.code).send(err.output);
+      break;
     default:
       procLog('error', 'Missing response type');
   }

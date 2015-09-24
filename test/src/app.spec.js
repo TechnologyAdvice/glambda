@@ -1,6 +1,6 @@
 /* global sinon, expect, request, describe, it, before, after */
 import '../setup'
-import { init, config, log, service, setCORS, procResponse, buildConfig, setRunner, parseRequest } from '../../src/app'
+import { init, config, log, service, setCORS, parseErrorCode, procResponse, buildConfig, setRunner, parseRequest } from '../../src/app'
 
 const url = 'http://localhost:8181/api/'
 
@@ -60,6 +60,17 @@ describe('app', () => {
       setCORS();
     })
   })
+  
+  describe('parseErrorCode', () => {
+    it('returns a specific code when matched in context.fail response', () => {
+      const response = parseErrorCode('Error: 300 This is broken');
+      expect(response.code).to.equal(300)
+    });
+    it('returns a 500 when no match on context.fail response', () => {
+      const response = parseErrorCode('Blah blah blah');
+      expect(response.code).to.equal(500);
+    })
+  });
 
   describe('procResponse', () => {
 
