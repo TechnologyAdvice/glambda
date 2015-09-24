@@ -110,14 +110,14 @@ export const parseErrorCode = (output) => {
  */
 export const procResponse = (msg, res) => {
   switch (msg.type) {
-    case 'metric': procLog('info', 'Lambda Processed', msg.output); break
-    case 'debug': procLog('info', 'Lambda Debug', msg.output); break
-    case 'success': res.status(200).send(msg.output); break
-    case 'error':
-      const err = parseErrorCode(msg.output)
-      res.status(err.code).send(err.output)
+  case 'metric': procLog('info', 'Lambda Processed', msg.output); break
+  case 'debug': procLog('info', 'Lambda Debug', msg.output); break
+  case 'success': res.status(200).send(msg.output); break
+  case 'error':
+    const err = parseErrorCode(msg.output)
+    res.status(err.code).send(err.output)
     break
-    default: procLog('error', 'Missing response type')
+  default: procLog('error', 'Missing response type')
   }
 }
 

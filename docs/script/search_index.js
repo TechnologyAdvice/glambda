@@ -54,6 +54,12 @@ window.esdocSearchIndex = [
     "variable"
   ],
   [
+    "glambda/src/app.js~parseerrorcode",
+    "variable/index.html#static-variable-parseErrorCode",
+    "<span>parseErrorCode</span> <span class=\"search-result-import-path\">glambda/src/app.js</span>",
+    "variable"
+  ],
+  [
     "glambda/src/app.js~parserequest",
     "variable/index.html#static-variable-parseRequest",
     "<span>parseRequest</span> <span class=\"search-result-import-path\">glambda/src/app.js</span>",

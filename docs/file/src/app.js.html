@@ -46,6 +46,7 @@
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-loadSchema">loadSchema</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-log">log</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-mapTemplateParams">mapTemplateParams</a></span></li>
+<li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-parseErrorCode">parseErrorCode</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-parseRequest">parseRequest</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-parseRequestParams">parseRequestParams</a></span></li>
 <li data-ice="variableDoc"><span><a href="variable/index.html#static-variable-parseRouteParams">parseRouteParams</a></span></li>
@@ -153,17 +154,40 @@ export const procLog = (type, ...msg) =&gt; {
 }
 
 /**
+ * Parses response body for error code
+ * @param {String} output Output from context.fail
+ */
+export const parseErrorCode = (output) =&gt; {
+  const code = output.toString().replace(/^Error: ([1-5]\d\d).+$/, (i, match) =&gt; match)
+  if (code &gt; 100 &amp;&amp; code &lt; 600) {
+    // Return specific code with stripped message
+    return {
+      code: parseInt(code, 10),
+      output: output.replace(`Error: ${code}`, &apos;&apos;).trim()
+    }
+  }
+  // Return generic 500 with original message
+  return {
+    code: 500,
+    output: code
+  }
+}
+
+/**
  * Handles response from forked lambda runner procs
  * @param {Object} msg Message object from child proc
  * @param {Object} [res] Express response object
  */
 export const procResponse = (msg, res) =&gt; {
   switch (msg.type) {
-    case &apos;metric&apos;: procLog(&apos;info&apos;, &apos;Lambda Processed&apos;, msg.output); break
-    case &apos;debug&apos;: procLog(&apos;info&apos;, &apos;Lambda Debug&apos;, msg.output); break
-    case &apos;success&apos;: res.status(200).send(msg.output); break
-    case &apos;error&apos;: res.status(500).send(msg.output); break
-    default: procLog(&apos;error&apos;, &apos;Missing response type&apos;)
+  case &apos;metric&apos;: procLog(&apos;info&apos;, &apos;Lambda Processed&apos;, msg.output); break
+  case &apos;debug&apos;: procLog(&apos;info&apos;, &apos;Lambda Debug&apos;, msg.output); break
+  case &apos;success&apos;: res.status(200).send(msg.output); break
+  case &apos;error&apos;:
+    const err = parseErrorCode(msg.output)
+    res.status(err.code).send(err.output)
+    break
+  default: procLog(&apos;error&apos;, &apos;Missing response type&apos;)
   }
 }
 
