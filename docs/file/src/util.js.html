@@ -111,6 +111,17 @@ export const parseRouteParams = (value, key, route) =&gt; {
  */
 export const parseRequestParams = (value, req) =&gt; {
   // Body
+  if (value.indexOf(&apos;querystring&apos;) &gt;= 0) {
+    let returnArray = []
+    for (let obj in req.query) {
+      if (req.query.hasOwnProperty(obj)) {
+        const str = obj + &apos;=&apos; + req.query[obj]
+        returnArray.push(str)
+      }
+    }
+    const returnObject = &apos;{&apos; + returnArray.join(&apos;,&apos;) + &apos;}&apos;
+    return returnObject
+  }
   if (value.indexOf(`$input.json(&apos;$`) &gt;= 0) {
     // Get the name to check
     let name = value.replace(`$input.json(&apos;$`, &apos;&apos;).replace(`&apos;)`, &apos;&apos;)
