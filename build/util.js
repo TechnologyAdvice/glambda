@@ -48,6 +48,17 @@ exports.parseRouteParams = parseRouteParams;
  */
 var parseRequestParams = function parseRequestParams(value, req) {
   // Body
+  if (value.indexOf('querystring') >= 0) {
+    var returnArray = [];
+    for (var obj in req.query) {
+      if (req.query.hasOwnProperty(obj)) {
+        var str = obj + '=' + req.query[obj];
+        returnArray.push(str);
+      }
+    }
+    var returnObject = '{' + returnArray.join(',') + '}';
+    return returnObject;
+  }
   if (value.indexOf('$input.json(\'$') >= 0) {
     // Get the name to check
     var _name = value.replace('$input.json(\'$', '').replace('\')', '');
