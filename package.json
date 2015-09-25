@@ -1,6 +1,6 @@
 {
   "name": "glambda",
-  "version": "1.3.1",
+  "version": "1.3.2",
   "description": "A module for mocking and testing AWS API Gateway in conjunction with Lambda functions.",
   "main": "build/app.js",
   "repository": {
