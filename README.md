@@ -7,6 +7,8 @@
 
 # GLambda
 
+[![Greenkeeper badge](https://badges.greenkeeper.io/TechnologyAdvice/glambda.svg)](https://greenkeeper.io/)
+
 ### AWS Gateway + Lambda Testing Module
 
 A module for mocking and testing AWS [API Gateway](http://aws.amazon.com/api-gateway/)
